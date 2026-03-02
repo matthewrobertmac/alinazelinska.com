@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: alina-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminpassword
+      MONGO_INITDB_DATABASE: alina_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    networks:
+      - alina-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Web Application (Frontend + Backend)
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alina-webapp
+    restart: unless-stopped
+    ports:
+      - "3000:3000"  # Frontend
+      - "8001:8001"  # Backend API
+    environment:
+      - NODE_ENV=production
+      - MONGO_URL=mongodb://admin:adminpassword@mongodb:27017/alina_db?authSource=admin
+      - DB_NAME=alina_db
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:8001
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - alina-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/api/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  mongodb_data:
+    driver: local
+  mongodb_config:
+    driver: local
+
+networks:
+  alina-network:
+    driver: bridge

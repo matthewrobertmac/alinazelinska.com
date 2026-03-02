@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "testimonials": "Testimonials",
+    "tiktok": "TikTok",
+    "booking": "Book a Lesson",
+    "contact": "Contact"
+  },
+  "home": {
+    "greeting": "I'm Alina Zelinska",
+    "tagline": "I love helping people learn",
+    "description": "Professional Language Tutor | Ukrainian-English-Russian Translator | Writer | Songwriter | Poet | Creator",
+    "viewTestimonials": "View Testimonials",
+    "getInTouch": "Get In Touch",
+    "floatingWordsHint": "✨ Click on any word to pause and highlight it ✨"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "A bit about myself",
+    "experience": "Experience",
+    "skills": "Language Skills",
+    "services": "Services I Offer"
+  },
+  "testimonials": {
+    "title": "Student Testimonials",
+    "subtitle": "What my students say about their learning experience"
+  },
+  "booking": {
+    "title": "Book a Lesson",
+    "subtitle": "Choose the perfect lesson package for your language learning journey",
+    "selectPackage": "Select Your Package",
+    "paymentMethods": "We accept card payments and cryptocurrency (Bitcoin/USDC)",
+    "features": "What's included:",
+    "bookNow": "Book Now",
+    "perLesson": "per lesson",
+    "processing": "Processing...",
+    "success": "Payment Successful!",
+    "successMessage": "Thank you for booking! You will receive a confirmation email shortly with details on how to schedule your lesson.",
+    "backToHome": "Back to Home",
+    "error": "Payment Error",
+    "tryAgain": "Try Again",
+    "packages": {
+      "trial": {
+        "name": "Trial Lesson",
+        "duration": "30 minutes",
+        "description": "Perfect for first-time students",
+        "features": ["Introduction session", "Learning style assessment", "Personalized study plan"]
+      },
+      "standard": {
+        "name": "Standard Lesson",
+        "duration": "60 minutes",
+        "description": "Most popular choice",
+        "features": ["Full lesson session", "Homework assignments", "Progress tracking", "Chat support"]
+      },
+      "intensive": {
+        "name": "Intensive Pack",
+        "duration": "5 x 60 minutes",
+        "description": "For serious learners",
+        "features": ["5 full lessons", "Custom curriculum", "Priority scheduling", "Unlimited chat support", "Learning materials included"]
+      }
+    }
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Ready to start your language learning journey?",
+    "name": "Your Name",
+    "email": "Your Email",
+    "message": "Your Message",
+    "send": "Send Message",
+    "info": "Contact Information",
+    "followMe": "Follow Me"
+  },
+  "tiktok": {
+    "title": "Learn on TikTok",
+    "subtitle": "Bite-sized language lessons for Ukrainian, Russian & English learners",
+    "followersInfo": "Over 1.5M followers learning through practical examples, cultural insights, and fun comparisons between languages!",
+    "watchAll": "Watch All Videos on TikTok",
+    "followHint": "Follow for bite-sized language lessons and study motivation",
+    "whatYouLearn": "What You'll Learn",
+    "ukrainian": {
+      "title": "Ukrainian Lessons",
+      "description": "Alphabet, phrases, grammar hacks, and cultural tips. Compare with Russian to learn faster!"
+    },
+    "russian": {
+      "title": "Russian Made Easy",
+      "description": "Pronunciation guides, daily conversations, idioms, and slang from a native speaker"
+    },
+    "english": {
+      "title": "English for Slavic Speakers",
+      "description": "Fix common errors, master prepositions & articles, understand phrasal verbs"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  },
+  "language": {
+    "en": "English",
+    "uk": "Українська",
+    "ru": "Русский"
+  }
+}
