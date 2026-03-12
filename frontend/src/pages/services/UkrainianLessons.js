@@ -66,6 +66,23 @@ const UkrainianLessons = () => {
 
   return (
     <div className="page-transition pt-24 pb-16">
+      <SEOHead
+        title="Ukrainian Language Lessons | Native Speaker | Alina Zelinska | 5.0★"
+        description="Learn Ukrainian online with Alina, a native speaker from Ukraine. 500+ students, 3,500+ lessons, perfect 5.0 rating. Beginner to advanced, personalized 1-on-1 lessons."
+        keywords="Ukrainian lessons, learn Ukrainian online, Ukrainian tutor, native Ukrainian teacher, Ukrainian language course"
+        schema={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            ukrainianCourseSchema,
+            breadcrumbSchema([
+              { name: 'Home', url: 'https://alinazelinska.com' },
+              { name: 'Services', url: 'https://alinazelinska.com/special-projects' },
+              { name: 'Ukrainian Lessons', url: 'https://alinazelinska.com/services/ukrainian-lessons' }
+            ])
+          ]
+        }}
+      />
+      
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-b from-transparent to-[var(--color-bg-secondary)]">
         <div className="max-w-6xl mx-auto">
