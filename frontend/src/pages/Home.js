@@ -9,6 +9,7 @@ import { FiArrowRight } from 'react-icons/fi';
 import { FaTiktok } from 'react-icons/fa';
 
 const Home = () => {
+  const { t } = useTranslation();
   const [showHeart, setShowHeart] = useState(false);
   const navigate = useNavigate();
 
@@ -104,7 +105,7 @@ const Home = () => {
                 data-testid="view-testimonials-btn"
                 className="btn-outline text-center flex items-center justify-center gap-2"
               >
-                View Testimonials
+                {t('home.viewTestimonials')}
                 <FiArrowRight className="w-5 h-5" />
               </Link>
               <Link
@@ -112,7 +113,7 @@ const Home = () => {
                 data-testid="contact-me-btn"
                 className="btn-outline text-center flex items-center justify-center gap-2"
               >
-                Get In Touch
+                {t('home.getInTouch')}
                 <FiArrowRight className="w-5 h-5" />
               </Link>
             </div>
@@ -152,28 +153,28 @@ const Home = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
-              What I Offer
+              {t('home.whatIOffer.title')}
             </h2>
             <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              Passionate about languages and creative expression
+              {t('home.whatIOffer.subtitle')}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                title: 'Language Tutoring',
-                description: 'Ukrainian, Russian & English lessons tailored to your needs',
+                title: t('home.whatIOffer.languageTutoring.title'),
+                description: t('home.whatIOffer.languageTutoring.description'),
                 icon: '🗣️',
               },
               {
-                title: 'Poetry Translation',
-                description: 'Preserving the beauty and essence of poetry across languages',
-                icon: '📝',
+                title: t('home.whatIOffer.poetryTranslation.title'),
+                description: t('home.whatIOffer.poetryTranslation.description'),
+                icon: '🌙',
               },
               {
-                title: 'Creative Writing',
-                description: 'Crafting compelling content and multilingual poetry',
+                title: t('home.whatIOffer.creativeWriting.title'),
+                description: t('home.whatIOffer.creativeWriting.description'),
                 icon: '✨',
               },
             ].map((service, index) => (
@@ -205,9 +206,50 @@ const Home = () => {
             className="text-center mt-12"
           >
             <Link to="/about" className="btn-outline" data-testid="learn-more-btn">
-              Learn More About Me
+              {t('home.whatIOffer.learnMore')}
             </Link>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Who I Teach Section */}
+      <section className="relative py-16 px-6 bg-[var(--color-bg)] border-t border-[var(--color-border)] z-10">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
+              {t('home.whoITeach.title')}
+            </h2>
+            <p className="text-lg text-[var(--color-text-secondary)] max-w-3xl mx-auto">
+              {t('home.whoITeach.subtitle')}
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {whoITeach.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="card hover-lift text-center p-8"
+              >
+                <div className="text-5xl mb-4">{item.icon}</div>
+                <h3 className="text-xl font-serif font-semibold mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-[var(--color-text-secondary)]">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -224,11 +266,11 @@ const Home = () => {
             <div className="flex items-center justify-center gap-3 mb-6">
               <FaTiktok className="w-10 h-10 text-[var(--color-accent)]" />
               <h2 className="text-4xl md:text-5xl font-serif font-bold">
-                Learn on TikTok
+                {t('home.tiktok.title')}
               </h2>
             </div>
             <p className="text-lg text-[var(--color-text-secondary)] mb-8 max-w-2xl mx-auto">
-              Join me on TikTok for quick language lessons, study tips, and fun educational content
+              {t('home.tiktok.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
@@ -237,7 +279,7 @@ const Home = () => {
                 data-testid="tiktok-gallery-btn"
               >
                 <FaTiktok className="w-5 h-5" />
-                View TikTok Videos
+                {t('home.tiktok.viewVideos')}
                 <FiArrowRight className="w-5 h-5" />
               </Link>
               <a
@@ -247,7 +289,7 @@ const Home = () => {
                 className="btn-outline flex items-center gap-2"
                 data-testid="follow-tiktok-btn"
               >
-                Follow @movalina.study
+                {t('home.tiktok.follow')}
                 <FiArrowRight className="w-5 h-5" />
               </a>
             </div>
