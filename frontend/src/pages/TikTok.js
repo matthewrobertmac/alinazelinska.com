@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { FaTiktok } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
 import { meta } from '../data/content';
+import Breadcrumb from '../components/Breadcrumb';
+import SEOHead from '../components/SEOHead';
 
 // Optimized TikTok Embed Component with Lazy Loading
 const TikTokEmbed = ({ videoId }) => {
@@ -104,9 +106,17 @@ const TikTok = () => {
 
   return (
     <div className="page-transition pt-24 pb-16">
+      <SEOHead
+        title="Learn Languages on TikTok | @movalina.study | Alina Zelinska"
+        description="Follow @movalina.study for bite-sized Ukrainian, Russian & English lessons on TikTok. Quick language tips, cultural insights, and fun educational content from Alina Zelinska."
+        keywords="Ukrainian TikTok, language learning TikTok, @movalina.study, Ukrainian lessons, Russian lessons TikTok"
+      />
+      
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-b from-transparent to-[var(--color-bg-secondary)]">
         <div className="max-w-6xl mx-auto">
+          <Breadcrumb items={[{ name: 'TikTok' }]} />
+          
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
