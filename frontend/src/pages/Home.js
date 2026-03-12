@@ -7,7 +7,9 @@ import FloatingWords from '../components/FloatingWords';
 import QuizWidget from '../components/QuizWidget';
 import TrustBadges from '../components/TrustBadges';
 import LazyImage from '../components/LazyImage';
+import SEOHead from '../components/SEOHead';
 import { introdata, meta, whoITeach } from '../data/content';
+import { personSchema, organizationSchema, aggregateRatingSchema } from '../utils/schemas';
 import { FiArrowRight } from 'react-icons/fi';
 import { FaTiktok } from 'react-icons/fa';
 
@@ -30,6 +32,22 @@ const Home = () => {
 
   return (
     <div className="relative min-h-screen page-transition">
+      <SEOHead
+        title="Alina Zelinska | Ukrainian Tutor Online from Malta | 5.0★ Rating"
+        description="Learn Ukrainian with Alina Zelinska, a native Ukrainian tutor based in Malta. 500+ students, 5.0★ rating, 3,500+ lessons. Book your first lesson today."
+        keywords="Ukrainian tutor, learn Ukrainian online, Ukrainian lessons, native Ukrainian teacher, Ukrainian language, Ukrainian course"
+        schema={{
+          \"@context\": \"https://schema.org\",
+          \"@graph\": [personSchema, organizationSchema, aggregateRatingSchema]
+        }}
+        hreflang={[
+          { lang: 'en', url: 'https://alinazelinska.com/' },
+          { lang: 'uk', url: 'https://alinazelinska.com/?lang=uk' },
+          { lang: 'ru', url: 'https://alinazelinska.com/?lang=ru' },
+          { lang: 'x-default', url: 'https://alinazelinska.com/' }
+        ]}
+      />
+      
       {/* Floating Words Background */}
       <FloatingWords />
 
