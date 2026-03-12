@@ -298,6 +298,11 @@ export const whoITeach = [
     title: "Intermediate & Beyond",
     description: "You've got the basics. Now let's make you actually fluent — and confident.",
   },
+  {
+    icon: "💼",
+    title: "Professionals & Travellers",
+    description: "Need Ukrainian or Russian for work, relocation, or travel? I'll teach you the practical, real-world language that textbooks skip - from business emails to ordering coffee like a local.",
+  },
 ];
 
 // Testimonials stats
