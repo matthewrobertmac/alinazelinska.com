@@ -127,7 +127,8 @@
   },
   "contact": {
     "title": "Say Hello — I'd love to hear from you! 👋",
-    "subtitle": "Lessons, translations, creative collabs, or just a friendly \"Привіт!\" — whatever brings you here, my inbox is always open 💌",
+    "subtitle": "Whether you want to book a lesson, commission a translation, collaborate on something creative, or just say 'Привіт!' — I respond to every message. (My response rate is literally 100%.)",
+    "responseTime": "I typically respond within a few hours. My italki response rate is 100% — and I hold myself to the same standard here.",
     "name": "Your Name",
     "email": "Your Email",
     "message": "Your Message",
@@ -151,7 +152,7 @@
       "languageLessons": {
         "icon": "📚",
         "title": "Language Lessons",
-        "description": "One-on-one lessons in Ukrainian, Russian, or English — shaped around you, your pace, and what you actually want to achieve. No boring drills. I promise."
+        "description": "One-on-one lessons in Ukrainian, Russian, or English — shaped around you, your pace, and your goals. I've delivered 3,500+ lessons across 30+ countries. Whether you're a total beginner, heritage speaker, or advanced learner — there's a lesson here for you."
       },
       "translation": {
         "icon": "📝",
@@ -166,7 +167,7 @@
       "consulting": {
         "icon": "💻",
         "title": "Consulting",
-        "description": "Building something in the language-learning space and want a real educator's perspective? Yes please — let's talk."
+        "description": "Building a language learning app, ed-tech platform, or content product? I bring 4 years of teaching experience and 3,500+ student interactions to the table. I can advise on curriculum design, user experience, content strategy, and what actually works for language learners."
       }
     },
     "bottomCta": "So — what are we building together? 🌸"
