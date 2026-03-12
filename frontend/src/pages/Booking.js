@@ -185,6 +185,11 @@ const Booking = () => {
             <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto mb-4">
               {t('booking.subtitle')}
             </p>
+
+            {/* Reassurance Line */}
+            <p className="text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto mb-6">
+              {t('booking.reassurance')}
+            </p>
             
             {/* Currency Selector */}
             <div className="flex items-center justify-center gap-4 mb-6">
@@ -197,6 +202,45 @@ const Booking = () => {
               <FaPaypal className="w-5 h-5 text-[#0070ba]" />
               <FiCreditCard className="w-5 h-5" />
               <span>Pay with PayPal or Card</span>
+            </div>
+          </motion.div>
+
+          {/* What to Expect Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="max-w-4xl mx-auto mb-16"
+          >
+            <h2 className="text-3xl font-serif font-bold text-center mb-8">
+              {t('booking.whatToExpect.title')}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  icon: t('booking.whatToExpect.step1.icon'),
+                  title: t('booking.whatToExpect.step1.title'),
+                  description: t('booking.whatToExpect.step1.description'),
+                },
+                {
+                  icon: t('booking.whatToExpect.step2.icon'),
+                  title: t('booking.whatToExpect.step2.title'),
+                  description: t('booking.whatToExpect.step2.description'),
+                },
+                {
+                  icon: t('booking.whatToExpect.step3.icon'),
+                  title: t('booking.whatToExpect.step3.title'),
+                  description: t('booking.whatToExpect.step3.description'),
+                },
+              ].map((step, index) => (
+                <div key={index} className="card p-6 text-center">
+                  <div className="text-4xl mb-3">{step.icon}</div>
+                  <h3 className="font-semibold mb-2">{step.title}</h3>
+                  <p className="text-sm text-[var(--color-text-secondary)]">
+                    {step.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </motion.div>
 
@@ -227,7 +271,7 @@ const Booking = () => {
               >
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[var(--color-accent)] text-white px-4 py-1 rounded-full text-sm font-medium">
-                    Most Popular
+                    Most Popular ⭐
                   </div>
                 )}
 
