@@ -19,17 +19,17 @@
     "whatIOffer": {
       "title": "What's In My World",
       "subtitle": "Languages are my love language — let me share them with you ✨",
-      "languageTutoring": {
-        "title": "Language Tutoring",
-        "description": "Whether you're starting from zero or polishing fluency, my 1-on-1 lessons are built around your life, your goals, and the way you actually learn best. Over 3,500 lessons and counting — and every single one is personalised."
+      "conversationalUkrainian": {
+        "title": "Conversational Ukrainian",
+        "description": "Master everyday speaking with real dialogues, pronunciation perfection, and confidence in social situations. Learn colloquial phrases, idioms, and the rhythm of natural speech. Perfect for travelers, new residents, and anyone who wants to actually *sound* Ukrainian. Lessons adapt to your interests — whether that's food, culture, history, or just surviving small talk."
       },
-      "poetryTranslation": {
-        "title": "Poetry Translation",
-        "description": "I translate poetry between Ukrainian, Russian, and English — carrying not just the words but the rhythm, the feeling, and the soul of what was written. Because a poem that doesn't move you isn't a poem anymore."
+      "professionalUkrainian": {
+        "title": "Professional & Business Ukrainian",
+        "description": "From formal emails to business meetings, pitch your ideas in Ukrainian with polish and precision. Ideal for professionals relocating to Ukraine, expats working with Ukrainian colleagues, or anyone building a career connection to Ukrainian-speaking markets. We cover terminology, etiquette, and the unwritten rules of professional Ukrainian culture."
       },
-      "creativeWriting": {
-        "title": "Creative Writing",
-        "description": "From brand copy to original poetry, from social media content to song lyrics — if it involves words, I'm in. I write in three languages and bring a multilingual ear to everything I create."
+      "examPrep": {
+        "title": "Exam Prep & Structured Learning",
+        "description": "Preparing for TRKI exams, moving to Ukraine, or need a formal curriculum? I design structured lessons with clear milestones, grammar foundations, and certified progression. Every lesson builds on the last. You'll receive homework, progress tracking, and the confidence to sit any Ukrainian language exam."
       },
       "learnMore": "Get to Know Me →"
     },
