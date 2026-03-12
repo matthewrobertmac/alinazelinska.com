@@ -36,7 +36,6 @@ function AppRouter({ theme, toggleTheme }) {
   return (
     <>
       <Header theme={theme} toggleTheme={toggleTheme} />
-      <LeadMagnetPopup />
       <FloatingBookButton />
       <AccessibilityMenu />
       <Routes>
