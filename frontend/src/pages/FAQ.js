@@ -149,10 +149,26 @@ const FAQ = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  // Flatten all FAQs for schema
+  const allFAQs = faqs.flatMap(section => section.questions);
+
   return (
     <div className="page-transition pt-24 pb-16">
+      <SEOHead
+        title="FAQ | Ukrainian Lessons with Alina Zelinska | All Your Questions Answered"
+        description="Common questions about learning Ukrainian, Russian, and English with Alina Zelinska. Booking, pricing, lesson format, and more. 100% response rate."
+        keywords="Ukrainian lessons FAQ, Ukrainian tutor questions, learn Ukrainian online, Russian lessons questions"
+        schema={generateFAQSchema(allFAQs)}
+        hreflang={[
+          { lang: 'en', url: 'https://alinazelinska.com/faq' },
+          { lang: 'x-default', url: 'https://alinazelinska.com/faq' }
+        ]}
+      />
+      
       <section className="section-padding">
         <div className="max-w-4xl mx-auto">
+          <Breadcrumb items={[{ name: 'FAQ' }]} />
+          
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
