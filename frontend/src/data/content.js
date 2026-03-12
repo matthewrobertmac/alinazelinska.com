@@ -214,7 +214,7 @@ export const funFacts = [
   },
   {
     icon: "🌶️",
-    text: "I'm learning Spanish because I simply couldn't help myself",
+    text: "I'm learning Spanish and German because I simply couldn't help myself",
   },
   {
     icon: "🎵",
@@ -231,6 +231,14 @@ export const funFacts = [
   {
     icon: "💡",
     text: "I believe you can fall in love with a language before you even speak it",
+  },
+  {
+    icon: "🗣️",
+    text: "I also speak German (yes, I'm collecting languages like some people collect stamps)",
+  },
+  {
+    icon: "🏝️",
+    text: "I live in Malta now — teaching students worldwide from a Mediterranean island with great coffee",
   },
 ];
 
@@ -296,17 +304,22 @@ export const whoITeach = [
 export const testimonialStats = [
   {
     icon: "🎓",
-    number: "300+",
+    number: "500+",
     label: "students taught one-on-one",
   },
   {
     icon: "⭐",
-    number: "5-star",
-    label: "rated across 200+ reviews",
+    number: "Perfect 5.0",
+    label: "across 3,500+ lessons",
   },
   {
     icon: "🌍",
     number: "30+",
     label: "countries",
+  },
+  {
+    icon: "✅",
+    number: "100%",
+    label: "attendance rate",
   },
 ];
