@@ -23,15 +23,21 @@ export const introdata = {
 
 export const dataabout = {
   title: "Hi, I'm Alina — and I'm a little obsessed with language 💕",
-  aboutme: `Language has been my thing for as long as I can remember. I'm a teacher, translator, poet, and general word nerd — fluent in Ukrainian, Russian, and English, with Spanish slowly joining the party 🌶️. I've spent years not just teaching language, but falling deeper in love with it — writing poems, translating them across languages, and finding the magic that lives in the spaces between words.
+  aboutme: `Language has been my world for as long as I can remember. I'm a teacher, translator, poet, songwriter, and - let's be honest - a total word nerd.
 
-My lessons aren't just about grammar rules (though we absolutely cover those!). I bring culture, stories, and real-life context into every class — because language is alive, and learning it should feel that way.
+I'm originally from Ukraine, currently living in sunny Sliema, Malta. I speak Ukrainian and Russian natively, English fluently, and I'm working on Spanish and German because apparently four languages weren't enough for me.
 
-Outside of lessons, you'll find me writing poems that I immediately want to share with everyone. There's something almost magical about putting emotions into words — in *any* language — and I genuinely never get tired of it.
+Since April 2022, I've completed over 3,500 one-on-one lessons with more than 500 students from 30+ countries on italki - and I've maintained a perfect 5.0 rating with 100% attendance the entire time. Teaching isn't just what I do; it's what I genuinely love doing.
 
-I'm always chasing the next creative challenge — whether that's writing something completely new or giving someone else's words a second life through translation. Honestly? I'd do this even if it weren't my job.
+My lessons aren't lectures. They're conversations. I bring culture, stories, humour, and real-life context into every session because language is alive and learning it should feel that way. Whether you're a complete beginner or polishing your fluency, I build every lesson around you - your pace, your interests, your goals.
 
-Got a project that needs a creative, multilingual touch? Let's collab! Whether it's writing content for your brand, translating something precious, or creating posts that actually sound like a real human wrote them — I'm here for it. Drop me a message and let's make something great together 🌟`,
+Outside of teaching, I write poetry in Ukrainian, Russian, and English - sometimes all in the same evening. I translate poems across languages, trying to carry not just the meaning but the feeling. I write songs. I create content. Words are genuinely my entire personality.
+
+Before teaching, I co-founded an eco-friendly haircare brand (Eco.April.Shampoo) and a craft games platform (CraftGames.ua). I love building things from scratch - whether that's a business, a lesson plan, or a poem.
+
+I also consult for language learning apps, bringing a real educator's perspective to product teams who want their tools to actually work for learners.
+
+If you're looking for a teacher who cares about your progress as much as you do - or a creative collaborator who lives and breathes words - I'd love to hear from you.`,
 };
 
 export const worktimeline = [
@@ -39,7 +45,7 @@ export const worktimeline = [
     jobtitle: "Language Tutor",
     where: "italki",
     date: "Apr 2022 - Present",
-    description: "Teaching Ukrainian, Russian & English to students all over the world — one conversation at a time.",
+    description: "3,500+ personalised lessons delivered to 500+ students across 30+ countries. Perfect 5.0 rating with 100% attendance rate. Teaching Ukrainian, Russian & English - one real conversation at a time.",
   },
   {
     jobtitle: "Founder and Entrepreneur",
@@ -56,10 +62,11 @@ export const worktimeline = [
 ];
 
 export const skills = [
-  { name: "Ukrainian", value: 100 },
-  { name: "Russian", value: 100 },
-  { name: "English", value: 100 },
-  { name: "Spanish", value: 85 },
+  { name: "Ukrainian", value: 100, level: "Native" },
+  { name: "Russian", value: 100, level: "Native" },
+  { name: "English", value: 100, level: "Fluent" },
+  { name: "Spanish", value: 65, level: "Learning" },
+  { name: "German", value: 40, level: "Learning" },
   { name: "Translation", value: 95 },
   { name: "Poetry Translation", value: 100 },
 ];
