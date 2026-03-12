@@ -46,7 +46,7 @@ const FAQ = () => {
         },
         {
           q: "What time zones do you work with?",
-          a: "I work with students all over the world! I'm based in Poland (CET/CEST), but I'm flexible with scheduling to accommodate different time zones. Just let me know where you are, and we'll figure it out."
+          a: "I work with students all over the world! I'm based in Sliema, Malta (CET/CEST) — but I teach students worldwide online, so your timezone is never a problem. I'm flexible with scheduling to accommodate different time zones. Just let me know where you are, and we'll figure it out."
         },
         {
           q: "Can I book a trial lesson first?",
