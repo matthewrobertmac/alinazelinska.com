@@ -10,26 +10,26 @@
   "home": {
     "greeting": "I'm Alina Zelinska",
     "tagline": "I love helping people learn",
-    "description": "Ukrainian & Russian Tutor ✦ Translator ✦ Songwriter ✦ Poet ✦ forever learning Spanish 🌻",
-    "socialProof": "Loved by students in 30+ countries 🌍",
-    "seoTagline": "Online Ukrainian & Russian lessons for English speakers — personalised, 1-on-1, and actually fun.",
+    "description": "Native Ukrainian & Russian Tutor ✦ Poetry Translator ✦ Songwriter ✦ Poet ✦ Living in Malta ✦ Learning Spanish & German 🌻",
+    "socialProof": "500+ students in 30+ countries | 3,500+ lessons | Perfect 5.0 rating",
+    "seoTagline": "Online Ukrainian & Russian lessons from a native speaker with 3,500+ lessons and a perfect 5.0 rating — personalised, 1-on-1, and actually fun.",
     "viewTestimonials": "See What Students Say →",
     "getInTouch": "Say Hello →",
-    "floatingWordsHint": "✨ Click on any word to pause and highlight it ✨",
+    "floatingWordsHint": "✨ Click on any word to freeze it and turn it gold ✨",
     "whatIOffer": {
       "title": "What's In My World",
       "subtitle": "Languages are my love language — let me share them with you ✨",
       "languageTutoring": {
         "title": "Language Tutoring",
-        "description": "Real conversations, real progress — lessons that actually feel good 🗣️"
+        "description": "Whether you're starting from zero or polishing fluency, my 1-on-1 lessons are built around your life, your goals, and the way you actually learn best. Over 3,500 lessons and counting — and every single one is personalised."
       },
       "poetryTranslation": {
         "title": "Poetry Translation",
-        "description": "Because a poem should still give you chills in any language 🌙"
+        "description": "I translate poetry between Ukrainian, Russian, and English — carrying not just the words but the rhythm, the feeling, and the soul of what was written. Because a poem that doesn't move you isn't a poem anymore."
       },
       "creativeWriting": {
         "title": "Creative Writing",
-        "description": "Words that stick, stories that sparkle, poetry that moves people ✨"
+        "description": "From brand copy to original poetry, from social media content to song lyrics — if it involves words, I'm in. I write in three languages and bring a multilingual ear to everything I create."
       },
       "learnMore": "Get to Know Me →"
     },
@@ -39,7 +39,7 @@
     },
     "tiktok": {
       "title": "Come Learn With Me on TikTok 🎵",
-      "subtitle": "I post bite-sized Ukrainian, Russian & English lessons that are genuinely fun to watch. Come join the community!",
+      "subtitle": "I post bite-sized Ukrainian, Russian & English lessons that make learning feel like scrolling your favourite feed. Over 30+ countries already learning with me!",
       "viewVideos": "Watch My Videos →",
       "follow": "Follow @movalina.study →"
     }
