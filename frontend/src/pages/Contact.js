@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { FiMail, FiLinkedin, FiInstagram } from 'react-icons/fi';
 import { contactInfo, meta } from '../data/content';
 
 const Contact = () => {
+  const { t } = useTranslation();
+  
   useEffect(() => {
     document.title = `Contact | ${meta.title}`;
     window.scrollTo(0, 0);
@@ -12,24 +15,24 @@ const Contact = () => {
   const contactMethods = [
     {
       icon: <FiMail className="w-8 h-8" />,
-      title: 'Email',
+      title: t('contact.emailCard.label'),
       value: contactInfo.email,
       link: `mailto:${contactInfo.email}`,
-      description: 'Send me an email',
+      description: t('contact.emailCard.hint'),
     },
     {
       icon: <FiLinkedin className="w-8 h-8" />,
-      title: 'LinkedIn',
+      title: t('contact.linkedinCard.label'),
       value: 'Connect with me',
       link: contactInfo.linkedin,
-      description: 'Professional network',
+      description: t('contact.linkedinCard.hint'),
     },
     {
       icon: <FiInstagram className="w-8 h-8" />,
-      title: 'Instagram',
+      title: t('contact.instagramCard.label'),
       value: '@alin.a.zelinska',
       link: contactInfo.instagram,
-      description: 'Follow my journey',
+      description: t('contact.instagramCard.hint'),
     },
   ];
 
@@ -48,12 +51,11 @@ const Contact = () => {
               className="text-5xl md:text-6xl font-serif font-bold mb-6"
               data-testid="contact-title"
             >
-              Let's Connect
+              {t('contact.title')}
             </h1>
             <div className="w-24 h-1 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] mx-auto rounded-full mb-6"></div>
             <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              Whether you're interested in language lessons, poetry translation, creative writing,
-              or just want to say hello, I'd love to hear from you!
+              {t('contact.subtitle')}
             </p>
           </motion.div>
 
@@ -95,43 +97,39 @@ const Contact = () => {
             className="card p-8 md:p-12 text-center bg-gradient-to-br from-[var(--color-bg-secondary)] to-[var(--color-bg)]"
           >
             <h2 className="text-3xl font-serif font-bold mb-6">
-              What to Expect
+              {t('contact.whatToExpect.title')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
               <div>
                 <h3 className="text-xl font-semibold text-[var(--color-accent)] mb-3">
-                  📚 Language Lessons
+                  {t('contact.whatToExpect.languageLessons.icon')} {t('contact.whatToExpect.languageLessons.title')}
                 </h3>
                 <p className="text-[var(--color-text-secondary)]">
-                  Personalized tutoring in Ukrainian, Russian, and English. Interactive
-                  and engaging lessons tailored to your learning style and goals.
+                  {t('contact.whatToExpect.languageLessons.description')}
                 </p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-[var(--color-accent)] mb-3">
-                  📝 Translation Services
+                  {t('contact.whatToExpect.translation.icon')} {t('contact.whatToExpect.translation.title')}
                 </h3>
                 <p className="text-[var(--color-text-secondary)]">
-                  Specialized in poetry translation with a deep understanding of linguistic
-                  nuances and cultural context.
+                  {t('contact.whatToExpect.translation.description')}
                 </p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-[var(--color-accent)] mb-3">
-                  ✨ Creative Writing
+                  {t('contact.whatToExpect.creativeWriting.icon')} {t('contact.whatToExpect.creativeWriting.title')}
                 </h3>
                 <p className="text-[var(--color-text-secondary)]">
-                  From social media content to creative projects, I bring words to life
-                  with passion and expertise.
+                  {t('contact.whatToExpect.creativeWriting.description')}
                 </p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-[var(--color-accent)] mb-3">
-                  💻 Consulting
+                  {t('contact.whatToExpect.consulting.icon')} {t('contact.whatToExpect.consulting.title')}
                 </h3>
                 <p className="text-[var(--color-text-secondary)]">
-                  Available for language learning app consulting and educational
-                  technology projects.
+                  {t('contact.whatToExpect.consulting.description')}
                 </p>
               </div>
             </div>
@@ -145,14 +143,14 @@ const Contact = () => {
             className="text-center mt-12"
           >
             <p className="text-lg text-[var(--color-text-secondary)] mb-6">
-              Ready to start your language learning journey or collaborate on a project?
+              {t('contact.bottomCta')}
             </p>
             <a
               href={`mailto:${contactInfo.email}`}
               data-testid="email-cta-btn"
               className="btn-primary inline-block"
             >
-              Send me an email
+              {t('contact.send')} →
             </a>
           </motion.div>
         </div>
