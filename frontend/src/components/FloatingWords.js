@@ -6,7 +6,8 @@ const FloatingWords = () => {
   const containerRef = useRef(null);
   const animationFrameRef = useRef(null);
   const wordsRef = useRef([]);
-  const [pausedWords, setPausedWords] = useState(new Set());
+  const pausedWordsRef = useRef(new Set()); // Use ref instead of state for animation loop
+  const [pausedWordsState, setPausedWordsState] = useState(new Set()); // Keep state for re-renders
 
   const getRandomWord = useCallback(() => {
     return floatingWords[Math.floor(Math.random() * floatingWords.length)];
@@ -18,35 +19,31 @@ const FloatingWords = () => {
       text: getRandomWord(),
       x: Math.random() * 100,
       y: Math.random() * 100,
-      vx: (Math.random() - 0.5) * 0.05, // Increased from 0.03 to 0.05 for faster movement
-      vy: (Math.random() - 0.5) * 0.05, // Increased from 0.03 to 0.05
-      opacity: Math.random() * 0.3 + 0.25, // Slightly more visible
+      vx: (Math.random() - 0.5) * 0.05,
+      vy: (Math.random() - 0.5) * 0.05,
+      opacity: Math.random() * 0.3 + 0.25,
       baseSize: Math.random() * 14 + 16,
       scale: 1,
-      scaleDirection: Math.random() > 0.5 ? 1 : -1,
-      scaleSpeed: Math.random() * 0.003 + 0.002, // Increased for more noticeable pulse
-      rotation: (Math.random() - 0.5) * 60, // -30 to +30 degrees
-      rotationSpeed: (Math.random() - 0.5) * 0.15, // Slightly faster rotation
-      pulsePhase: Math.random() * Math.PI * 2, // For smooth sinusoidal pulsing
+      rotation: (Math.random() - 0.5) * 60,
+      rotationSpeed: (Math.random() - 0.5) * 0.15,
+      pulsePhase: Math.random() * Math.PI * 2,
     };
   }, [getRandomWord]);
 
   const handleWordClick = useCallback((wordId, event) => {
-    // Prevent default touch behavior
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    // Prevent default behavior and stop propagation
+    event.preventDefault();
+    event.stopPropagation();
     
-    setPausedWords((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(wordId)) {
-        newSet.delete(wordId);
-      } else {
-        newSet.add(wordId);
-      }
-      return newSet;
-    });
+    // Update both ref and state
+    const newSet = new Set(pausedWordsRef.current);
+    if (newSet.has(wordId)) {
+      newSet.delete(wordId);
+    } else {
+      newSet.add(wordId);
+    }
+    pausedWordsRef.current = newSet;
+    setPausedWordsState(new Set(newSet));
   }, []);
 
   useEffect(() => {
@@ -62,8 +59,8 @@ const FloatingWords = () => {
         wordsRef.current = [...wordsRef.current, newWord];
         setWords([...wordsRef.current]);
       } else {
-        // Remove oldest word and add new one
-        const oldestNonPaused = wordsRef.current.find((w) => !pausedWords.has(w.id));
+        // Remove oldest word that isn't paused and add new one
+        const oldestNonPaused = wordsRef.current.find((w) => !pausedWordsRef.current.has(w.id));
         if (oldestNonPaused) {
           wordsRef.current = wordsRef.current.filter((w) => w.id !== oldestNonPaused.id);
           wordsRef.current = [...wordsRef.current, createWord()];
@@ -75,8 +72,8 @@ const FloatingWords = () => {
     // Animation loop
     const animate = () => {
       wordsRef.current = wordsRef.current.map((word) => {
-        // Skip animation if word is paused
-        if (pausedWords.has(word.id)) {
+        // Skip animation if word is paused (frozen)
+        if (pausedWordsRef.current.has(word.id)) {
           return word;
         }
 
@@ -88,21 +85,20 @@ const FloatingWords = () => {
 
         // Smooth bounce off edges with damping
         if (x <= 0 || x >= 100) {
-          vx = -vx * 0.98; // Slight damping for smoother bounce
+          vx = -vx * 0.98;
           x = Math.max(0, Math.min(100, x));
         }
         if (y <= 0 || y >= 100) {
-          vy = -vy * 0.98; // Slight damping
+          vy = -vy * 0.98;
           y = Math.max(0, Math.min(100, y));
         }
 
-        // Smooth sinusoidal pulsing effect (more natural than linear)
-        pulsePhase += 0.02; // Controls pulse speed
-        scale = 1 + Math.sin(pulsePhase) * 0.15; // Oscillates between 0.85 and 1.15
+        // Smooth sinusoidal pulsing effect
+        pulsePhase += 0.02;
+        scale = 1 + Math.sin(pulsePhase) * 0.15;
 
-        // Update rotation - constrained to -30 to +30 degrees
+        // Update rotation
         rotation += rotationSpeed;
-        // Bounce back when reaching limits (keeps words upright)
         if (rotation >= 30 || rotation <= -30) {
           rotationSpeed = -rotationSpeed;
           rotation = Math.max(-30, Math.min(30, rotation));
@@ -123,7 +119,7 @@ const FloatingWords = () => {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [createWord, pausedWords]);
+  }, [createWord]); // Remove pausedWords from dependencies
 
   return (
     <div
