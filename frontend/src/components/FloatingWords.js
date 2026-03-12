@@ -146,22 +146,23 @@ const FloatingWords = () => {
               left: `${word.x}%`,
               top: `${word.y}%`,
               fontSize: `${word.baseSize}px`,
-              opacity: isPaused ? word.opacity : word.opacity,
-              transform: `translate(-50%, -50%) scale(${isPaused ? 1.5 : word.scale}) rotate(${word.rotation}deg)`,
-              color: isPaused ? '#FFD700' : 'var(--color-accent)',
+              opacity: word.opacity, // Always use word's natural opacity
+              transform: `translate(-50%, -50%) scale(${isPaused ? 1.5 : word.scale}) rotate(${word.rotation}deg)`, // Keep rotation when paused
+              color: isPaused ? '#FFB800' : 'var(--color-accent)', // Warmer gold to match pink intensity
               willChange: isPaused ? 'none' : 'transform',
               textShadow: isPaused
-                ? '0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2)'
+                ? '0 0 15px rgba(255, 184, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2)' // Subtle glow matching pink intensity
                 : '0 2px 10px rgba(255, 145, 164, 0.3)',
               fontWeight: isPaused ? '700' : '500',
               zIndex: isPaused ? 100 : 50,
-              filter: isPaused ? 'brightness(1.2)' : 'none',
+              pointerEvents: 'auto',
+              filter: isPaused ? 'brightness(1.1)' : 'none', // Subtle brightness boost
               WebkitTapHighlightColor: 'transparent',
               userSelect: 'none',
               WebkitUserSelect: 'none',
               MozUserSelect: 'none',
               transition: isPaused 
-                ? 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)' 
+                ? 'color 0.3s ease-out, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' 
                 : 'opacity 0.1s ease-out',
               position: 'absolute',
             }}
