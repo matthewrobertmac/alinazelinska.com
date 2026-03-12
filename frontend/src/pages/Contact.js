@@ -3,12 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { FiMail, FiLinkedin, FiInstagram } from 'react-icons/fi';
 import { contactInfo, meta } from '../data/content';
+import Breadcrumb from '../components/Breadcrumb';
+import SEOHead from '../components/SEOHead';
 
 const Contact = () => {
   const { t } = useTranslation();
   
   useEffect(() => {
-    document.title = `Contact | ${meta.title}`;
     window.scrollTo(0, 0);
   }, []);
 
@@ -38,9 +39,23 @@ const Contact = () => {
 
   return (
     <div className="page-transition pt-24 pb-16">
+      <SEOHead
+        title="Contact Alina Zelinska | Ukrainian Tutor | 100% Response Rate"
+        description="Get in touch with Alina Zelinska for Ukrainian, Russian, or English lessons. Based in Malta, teaching worldwide. 100% response rate within hours."
+        keywords="contact Ukrainian tutor, book Ukrainian lessons, Alina Zelinska contact"
+        hreflang={[
+          { lang: 'en', url: 'https://alinazelinska.com/contact' },
+          { lang: 'uk', url: 'https://alinazelinska.com/contact?lang=uk' },
+          { lang: 'ru', url: 'https://alinazelinska.com/contact?lang=ru' },
+          { lang: 'x-default', url: 'https://alinazelinska.com/contact' }
+        ]}
+      />
+      
       {/* Hero Section */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto">
+          <Breadcrumb items={[{ name: 'Say Hello' }]} />
+          
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
