@@ -43,9 +43,22 @@ const About = () => {
 
   return (
     <div className="page-transition pt-24 pb-16">
+      <SEOHead
+        title="About Alina Zelinska | Ukrainian Tutor from Malta | 5.0★ Rating"
+        description="Meet Alina Zelinska: Native Ukrainian & Russian tutor based in Sliema, Malta. 500+ students, 3,500+ lessons, perfect 5.0 rating, 100% attendance."
+        keywords="Alina Zelinska, Ukrainian tutor Malta, language teacher, native Ukrainian speaker"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ProfilePage",
+          "mainEntity": personSchema
+        }}
+      />
+      
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-b from-transparent to-[var(--color-bg-secondary)]">
         <div className="max-w-6xl mx-auto">
+          <Breadcrumb items={[{ name: 'About Me' }]} />
+          
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
