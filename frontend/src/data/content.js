@@ -12,12 +12,12 @@ export const introdata = {
     "I turn grammar into something you actually enjoy",
     "I write poems in three languages (and counting!)",
     "I make Russian click — even for total beginners",
-    "I'm building something beautiful, one word at a time",
+    "I've taught 3,500+ lessons to students in 30+ countries",
     "I consult on language learning apps ✨",
   ],
-  description: `Ukrainian & Russian Tutor ✦ Translator ✦ Songwriter ✦ Poet ✦ forever learning Spanish 🌻`,
-  socialProof: `Loved by students in 30+ countries 🌍`,
-  seoTagline: `Online Ukrainian & Russian lessons for English speakers — personalised, 1-on-1, and actually fun.`,
+  description: `Native Ukrainian & Russian Tutor ✦ Poetry Translator ✦ Songwriter ✦ Poet ✦ Living in Malta ✦ Learning Spanish & German 🌻`,
+  socialProof: `500+ students in 30+ countries | 3,500+ lessons | Perfect 5.0 rating`,
+  seoTagline: `Online Ukrainian & Russian lessons from a native speaker with 3,500+ lessons and a perfect 5.0 rating — personalised, 1-on-1, and actually fun.`,
   image: "https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/n9i5tibv_lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit.%20lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit%20%281%29.png",
 };
 
