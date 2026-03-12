@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import FloatingWords from '../components/FloatingWords';
 import QuizWidget from '../components/QuizWidget';
 import TrustBadges from '../components/TrustBadges';
+import LazyImage from '../components/LazyImage';
 import { introdata, meta, whoITeach } from '../data/content';
 import { FiArrowRight } from 'react-icons/fi';
 import { FaTiktok } from 'react-icons/fa';
@@ -130,7 +131,7 @@ const Home = () => {
           >
             <div className="relative w-full max-w-md lg:max-w-lg">
               <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-hover)] rounded-full blur-3xl opacity-20 animate-pulse"></div>
-              <img
+              <LazyImage
                 src={introdata.image}
                 alt="Alina Zelinska"
                 data-testid="hero-image"
