@@ -37,8 +37,8 @@ const Home = () => {
         description="Learn Ukrainian with Alina Zelinska, a native Ukrainian tutor based in Malta. 500+ students, 5.0★ rating, 3,500+ lessons. Book your first lesson today."
         keywords="Ukrainian tutor, learn Ukrainian online, Ukrainian lessons, native Ukrainian teacher, Ukrainian language, Ukrainian course"
         schema={{
-          \"@context\": \"https://schema.org\",
-          \"@graph\": [personSchema, organizationSchema, aggregateRatingSchema]
+          '@context': 'https://schema.org',
+          '@graph': [personSchema, organizationSchema, aggregateRatingSchema]
         }}
         hreflang={[
           { lang: 'en', url: 'https://alinazelinska.com/' },
