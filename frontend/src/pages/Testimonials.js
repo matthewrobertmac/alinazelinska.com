@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { testimonials, meta } from '../data/content';
+import { testimonials, meta, testimonialStats } from '../data/content';
 import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
 
 const Testimonials = () => {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(0);
   const testimonialsPerPage = 6;
   const totalPages = Math.ceil(testimonials.length / testimonialsPerPage);
@@ -71,12 +74,35 @@ const Testimonials = () => {
               className="text-5xl md:text-6xl font-serif font-bold mb-6"
               data-testid="testimonials-title"
             >
-              Student Testimonials
+              {t('testimonials.title')}
             </h1>
             <div className="w-24 h-1 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] mx-auto rounded-full mb-6"></div>
             <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              What my students say about their learning experience
+              {t('testimonials.subtitle')}
             </p>
+          </motion.div>
+
+          {/* Stats Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto"
+          >
+            {testimonialStats.map((stat, index) => (
+              <div
+                key={index}
+                className="card text-center p-6"
+              >
+                <div className="text-4xl mb-2">{stat.icon}</div>
+                <div className="text-3xl font-bold text-[var(--color-accent)] mb-1">
+                  {stat.number}
+                </div>
+                <div className="text-sm text-[var(--color-text-secondary)]">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </motion.div>
 
           {/* Testimonials Grid */}
@@ -184,6 +210,28 @@ const Testimonials = () => {
               </button>
             </motion.div>
           )}
+
+          {/* Bottom CTA Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-16 text-center"
+          >
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
+              {t('testimonials.cta.title')}
+            </h2>
+            <p className="text-lg text-[var(--color-text-secondary)] mb-8 max-w-2xl mx-auto">
+              {t('testimonials.cta.subtitle')}
+            </p>
+            <Link
+              to="/booking"
+              className="btn-primary inline-flex items-center gap-2"
+            >
+              {t('testimonials.cta.button')}
+            </Link>
+          </motion.div>
         </div>
       </section>
     </div>
