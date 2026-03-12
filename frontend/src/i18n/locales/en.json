@@ -72,7 +72,7 @@
   },
   "booking": {
     "title": "Let's Make It Official 📅",
-    "subtitle": "Find the option that fits your vibe — and let's start learning together!",
+    "subtitle": "Choose the format that works for you — every option comes with the same personalised attention that's earned me a 5.0 rating across 3,500+ lessons.",
     "reassurance": "Not sure which to pick? The Trial Lesson is the perfect no-pressure place to start. I'd love to meet you! 🌸",
     "selectPackage": "Select Your Package",
     "paymentMethods": "We accept card payments and cryptocurrency (Bitcoin/USDC)",
@@ -85,6 +85,7 @@
     "backToHome": "Back to Home",
     "error": "Payment Error",
     "tryAgain": "Try Again",
+    "trustLine": "Trusted by 500+ students | 3,500+ lessons completed | Perfect 5.0 rating | 100% attendance rate",
     "whatToExpect": {
       "title": "Here's What to Expect",
       "step1": {
@@ -107,19 +108,19 @@
       "trial": {
         "name": "Trial Lesson",
         "duration": "30 minutes",
-        "description": "Never had a lesson with me? Let's meet and see if we click! 🤝",
+        "description": "Your first step into a whole new language world. This relaxed 30-minute session is about getting to know each other — I'll learn about your goals, your background, and how you learn best. You'll leave with a clear, personalised learning plan and (hopefully!) a lot of excitement about what's ahead. Over 500 students have started exactly here.",
         "features": ["A relaxed getting-to-know-you session", "We figure out how you learn best", "You leave with a clear, personalised plan"]
       },
       "standard": {
         "name": "Standard Lesson",
         "duration": "60 minutes",
-        "description": "The fan favourite — and honestly, my favourite too. This is where the real progress happens.",
+        "description": "This is where the magic happens — and where most of my 3,500+ lessons have taken place. A full 60-minute immersive session tailored entirely to you. We'll work through conversation, grammar, vocabulary, and cultural context in a way that feels natural, not forced. You'll get homework that actually helps (I promise), regular progress check-ins, and you can message me between lessons anytime. This is the package my students keep coming back to, week after week.",
         "features": ["A full, immersive lesson session", "Homework that actually helps (I promise)", "Regular check-ins on your progress", "Message me between lessons anytime"]
       },
       "intensive": {
         "name": "Intensive Pack",
         "duration": "5 x 60 minutes",
-        "description": "For when you're *really* ready to go 🚀",
+        "description": "For students who are serious about making fast, visible progress. Five dedicated 60-minute sessions with a curriculum built entirely around your goals — whether that's preparing for a trip, getting work-ready, or reaching the next level. You get priority booking (you always come first), unlimited messaging between sessions, and all learning materials included. This is the closest thing to having a personal language coach on call.",
         "features": ["5 full, dedicated lessons", "A curriculum built entirely around you", "Priority booking — you come first", "Unlimited messaging between lessons", "All learning materials included — no extras needed"]
       }
     }
