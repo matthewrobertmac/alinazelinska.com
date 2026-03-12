@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { FiPlay, FiPause, FiVolume2, FiVolumeX } from 'react-icons/fi';
-import { dataabout, meta, worktimeline, skills, services } from '../data/content';
+import { dataabout, meta, worktimeline, skills, services, funFacts, favouriteWords } from '../data/content';
 
 const VIDEO_URL = 'https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/kodpfas7_copy_F5503918-139B-4C1A-89CB-371F6DF38D88%20%281%29.mp4';
 
 const About = () => {
+  const { t, i18n } = useTranslation();
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -102,7 +104,7 @@ const About = () => {
             className="mt-16"
           >
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-8">
-              Meet Alina
+              {t('about.videoHeading')}
             </h2>
             <div className="max-w-2xl mx-auto">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
@@ -153,8 +155,79 @@ const About = () => {
                 )}
               </div>
               <p className="text-center text-[var(--color-text-secondary)] mt-4 text-sm">
-                Click to play • A personal introduction from Alina
+                {t('about.videoCaption')}
               </p>
+            </div>
+          </motion.div>
+
+          {/* Fun Facts Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-8">
+              {t('about.funFacts.title')}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+              {funFacts.map((fact, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="card p-6 flex items-start gap-4"
+                >
+                  <span className="text-3xl flex-shrink-0">{fact.icon}</span>
+                  <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                    {fact.text}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Favourite Words Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-4">
+              {t('about.favouriteWords.title')}
+            </h2>
+            <p className="text-lg text-[var(--color-text-secondary)] text-center mb-8 max-w-2xl mx-auto">
+              {t('about.favouriteWords.subtitle')}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {favouriteWords.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="card p-6 text-center hover-lift"
+                >
+                  <h3 className="text-3xl font-serif font-bold text-[var(--color-accent)] mb-2">
+                    {item.word}
+                  </h3>
+                  <p className="text-sm text-[var(--color-text-secondary)] italic mb-1">
+                    {item.transliteration}
+                  </p>
+                  <p className="text-lg font-semibold mb-3">
+                    {item.translation}
+                  </p>
+                  <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                    {item.explanation}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -171,7 +244,7 @@ const About = () => {
             className="text-4xl md:text-5xl font-serif font-bold text-center mb-12"
             data-testid="work-timeline-title"
           >
-            Work Timeline
+            {t('about.experience')}
           </motion.h2>
 
           <div className="space-y-8">
@@ -182,18 +255,25 @@ const About = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="card hover-lift flex flex-col md:flex-row md:items-center md:justify-between"
+                className="card hover-lift"
                 data-testid={`work-item-${index}`}
               >
-                <div className="mb-4 md:mb-0">
-                  <h3 className="text-2xl font-serif font-semibold text-[var(--color-accent)] mb-2">
-                    {work.jobtitle}
-                  </h3>
-                  <p className="text-lg text-[var(--color-text)]">{work.where}</p>
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                  <div className="mb-2 md:mb-0">
+                    <h3 className="text-2xl font-serif font-semibold text-[var(--color-accent)] mb-2">
+                      {work.jobtitle}
+                    </h3>
+                    <p className="text-lg text-[var(--color-text)]">{work.where}</p>
+                  </div>
+                  <div className="text-[var(--color-text-secondary)] font-medium">
+                    {work.date}
+                  </div>
                 </div>
-                <div className="text-[var(--color-text-secondary)] font-medium">
-                  {work.date}
-                </div>
+                {work.description && (
+                  <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                    {work.description}
+                  </p>
+                )}
               </motion.div>
             ))}
           </div>
@@ -211,7 +291,7 @@ const About = () => {
             className="text-4xl md:text-5xl font-serif font-bold text-center mb-12"
             data-testid="skills-title"
           >
-            Language Skills
+            {t('about.skills')}
           </motion.h2>
 
           <div className="space-y-6">
@@ -257,7 +337,7 @@ const About = () => {
             className="text-4xl md:text-5xl font-serif font-bold text-center mb-12"
             data-testid="services-title"
           >
-            Services I Offer
+            {t('about.services')}
           </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
