@@ -39,16 +39,19 @@ export const worktimeline = [
     jobtitle: "Language Tutor",
     where: "italki",
     date: "Apr 2022 - Present",
+    description: "Teaching Ukrainian, Russian & English to students all over the world — one conversation at a time.",
   },
   {
     jobtitle: "Founder and Entrepreneur",
     where: "Eco.April.Shampoo",
     date: "Apr 2021 - Feb 2022",
+    description: "Built an eco-friendly haircare brand from scratch. Yes, I really did that. Creativity takes many forms! 🧴",
   },
   {
     jobtitle: "Co-founder and Entrepreneur",
     where: "CraftGames.ua",
     date: "Jul 2020 - Feb 2022",
+    description: "Co-founded a craft games platform — because play and creativity go hand in hand. 🎮",
   },
 ];
 
@@ -64,23 +67,23 @@ export const skills = [
 export const services = [
   {
     title: "Language Tutoring",
-    description: "Available in Russian, Ukrainian, or English.",
+    description: "Pick your language — Ukrainian, Russian, or English — and let's get to work! 🗣️",
   },
   {
     title: "Mobile App Consulting",
-    description: "Available for consulting for language learning machine learning applications.",
+    description: "Building a language learning app and want a real educator's brain in the room? I'd love to nerd out on this with you.",
   },
   {
     title: "Social Media Ghostwriting",
-    description: "Are you trying to reach a new audience? Reach out!",
+    description: "Want content that sounds authentic and actually connects with people? Let's write something your audience will remember 💬",
   },
   {
     title: "Poetry Translation",
-    description: "Available for translating poetry to and from Russian, Ukrainian, and English.",
+    description: "I'll carry your poem gently across languages — so it still sounds like *poetry* on the other side 🌙",
   },
   {
     title: "Creative Writing",
-    description: "Available for creative writing projects.",
+    description: "Need a story told, a brand voice found, or a poem written from the heart? This is my favourite thing. Let's create. ✨",
   },
 ];
 
