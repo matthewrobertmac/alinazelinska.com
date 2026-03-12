@@ -125,16 +125,6 @@ const Home = () => {
             </div>
           </motion.div>
 
-          {/* Trust Badges */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-12"
-          >
-            <TrustBadges variant="compact" />
-          </motion.div>
-
           {/* Right Column - Image */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
@@ -156,6 +146,16 @@ const Home = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Trust Badges - Below the hero grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="max-w-7xl mx-auto mt-16 z-10"
+        >
+          <TrustBadges variant="compact" />
+        </motion.div>
       </section>
 
       {/* Quick Services Section */}
