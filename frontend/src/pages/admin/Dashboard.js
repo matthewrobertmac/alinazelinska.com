@@ -56,15 +56,16 @@ const AdminDashboard = () => {
   const fetchBookings = async () => {
     try {
       const url = filter === 'all' 
-        ? `${BACKEND_URL}/api/admin/bookings`
-        : `${BACKEND_URL}/api/admin/bookings?status=${filter}`;
+        ? `${BACKEND_URL}/api/admin/bookings?limit=100`
+        : `${BACKEND_URL}/api/admin/bookings?status=${filter}&limit=100`;
       
       const response = await fetch(url, {
         credentials: 'include',
       });
       if (response.ok) {
         const data = await response.json();
-        setBookings(data);
+        // Handle new paginated format
+        setBookings(data.bookings || data);
       }
     } catch (error) {
       console.error('Error fetching bookings:', error);
