@@ -14,6 +14,7 @@ import TikTok from './pages/TikTok';
 import Booking from './pages/Booking';
 import FAQ from './pages/FAQ';
 import SuccessStories from './pages/SuccessStories';
+import SpecialProjects from './pages/SpecialProjects';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import AuthCallback from './pages/AuthCallback';
@@ -43,6 +44,7 @@ function AppRouter({ theme, toggleTheme }) {
         <Route path="/about" element={<About />} />
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/success-stories" element={<SuccessStories />} />
+        <Route path="/special-projects" element={<SpecialProjects />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/tiktok" element={<TikTok />} />
         <Route path="/booking" element={<Booking />} />
