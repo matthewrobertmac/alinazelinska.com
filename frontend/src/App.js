@@ -4,6 +4,8 @@ import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import LeadMagnetPopup from './components/LeadMagnetPopup';
+import FloatingBookButton from './components/FloatingBookButton';
+import AccessibilityMenu from './components/AccessibilityMenu';
 import Home from './pages/Home';
 import About from './pages/About';
 import Testimonials from './pages/Testimonials';
@@ -35,6 +37,8 @@ function AppRouter({ theme, toggleTheme }) {
     <>
       <Header theme={theme} toggleTheme={toggleTheme} />
       <LeadMagnetPopup />
+      <FloatingBookButton />
+      <AccessibilityMenu />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
