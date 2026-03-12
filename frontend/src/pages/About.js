@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { FiPlay, FiPause, FiVolume2, FiVolumeX } from 'react-icons/fi';
+import { FiPlay, FiPause, FiVolume2, FiVolumeX, FiArrowRight } from 'react-icons/fi';
 import { dataabout, meta, worktimeline, skills, services, funFacts, favouriteWords } from '../data/content';
 import TrustBadges from '../components/TrustBadges';
 
@@ -372,6 +373,33 @@ const About = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Special Projects Callout */}
+      <section className="section-padding bg-gradient-to-br from-[var(--color-accent)]/5 to-transparent">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="card p-8 md:p-12 text-center border-2 border-[var(--color-accent)]/20"
+          >
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
+              Beyond Teaching ✨
+            </h2>
+            <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto mb-8">
+              I also work on book translations, songwriting projects, and language learning app consulting. Want to see what I've been working on?
+            </p>
+            <Link
+              to="/special-projects"
+              className="btn-primary inline-flex items-center gap-2"
+            >
+              View Special Projects & Collaborations
+              <FiArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
         </div>
       </section>
     </div>
