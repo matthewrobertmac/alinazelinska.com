@@ -5,6 +5,8 @@ import Typewriter from 'typewriter-effect';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloatingWords from '../components/FloatingWords';
 import QuizWidget from '../components/QuizWidget';
+import TrustBadges from '../components/TrustBadges';
+import UrgencyBanner from '../components/UrgencyBanner';
 import { introdata, meta, whoITeach } from '../data/content';
 import { FiArrowRight } from 'react-icons/fi';
 import { FaTiktok } from 'react-icons/fa';
@@ -30,6 +32,9 @@ const Home = () => {
     <div className="relative min-h-screen page-transition">
       {/* Floating Words Background */}
       <FloatingWords />
+
+      {/* Urgency Banner */}
+      <UrgencyBanner />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-6 py-20">
@@ -118,6 +123,16 @@ const Home = () => {
                 <FiArrowRight className="w-5 h-5" />
               </Link>
             </div>
+          </motion.div>
+
+          {/* Trust Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-12"
+          >
+            <TrustBadges variant="compact" />
           </motion.div>
 
           {/* Right Column - Image */}
