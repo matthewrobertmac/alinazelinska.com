@@ -13,6 +13,7 @@ const Footer = () => {
     { path: '/about', label: t('nav.about') },
     { path: '/testimonials', label: t('nav.testimonials') },
     { path: '/success-stories', label: 'Success Stories' },
+    { path: '/special-projects', label: 'Special Projects' },
     { path: '/faq', label: 'FAQ' },
     { path: '/tiktok', label: t('nav.tiktok') },
     { path: '/booking', label: t('nav.booking') },
