@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { testimonials, meta, testimonialStats } from '../data/content';
 import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
+import Breadcrumb from '../components/Breadcrumb';
+import SEOHead from '../components/SEOHead';
+import { aggregateRatingSchema } from '../utils/schemas';
 
 const Testimonials = () => {
   const { t } = useTranslation();
@@ -61,9 +64,24 @@ const Testimonials = () => {
 
   return (
     <div className="page-transition pt-24 pb-16">
+      <SEOHead
+        title="Student Testimonials | Alina Zelinska | 500+ Students, Perfect 5.0 Rating"
+        description="Read reviews from 500+ students who've learned Ukrainian, Russian, and English with Alina Zelinska. Perfect 5.0 rating across 3,500+ lessons delivered."
+        keywords="Alina Zelinska reviews, Ukrainian tutor testimonials, student reviews, 5 star tutor"
+        schema={aggregateRatingSchema}
+        hreflang={[
+          { lang: 'en', url: 'https://alinazelinska.com/testimonials' },
+          { lang: 'uk', url: 'https://alinazelinska.com/testimonials?lang=uk' },
+          { lang: 'ru', url: 'https://alinazelinska.com/testimonials?lang=ru' },
+          { lang: 'x-default', url: 'https://alinazelinska.com/testimonials' }
+        ]}
+      />
+      
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-b from-transparent to-[var(--color-bg-secondary)]">
         <div className="max-w-6xl mx-auto">
+          <Breadcrumb items={[{ name: 'Student Love' }]} />
+          
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
