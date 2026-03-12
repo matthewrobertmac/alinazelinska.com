@@ -172,16 +172,31 @@ async def update_booking(booking_id: str, update: BookingUpdateRequest, request:
 
 
 @router.get("/users")
-async def get_all_users(request: Request):
-    """Get all users (admin only)"""
+async def get_all_users(
+    request: Request,
+    limit: int = 100,  # Default limit
+    skip: int = 0      # Pagination offset
+):
+    """Get all users with pagination (admin only)"""
     await require_admin(request)
+    
+    # Limit maximum results to 100 for performance
+    limit = min(limit, 100)
     
     users = await db.users.find(
         {},
         {"_id": 0, "password_hash": 0}
-    ).sort("created_at", -1).to_list(500)
+    ).sort("created_at", -1).skip(skip).limit(limit).to_list(limit)
     
-    return users
+    # Get total count for pagination
+    total_count = await db.users.count_documents({})
+    
+    return {
+        "users": users,
+        "total": total_count,
+        "limit": limit,
+        "skip": skip
+    }
 
 
 @router.get("/users/{user_id}")
