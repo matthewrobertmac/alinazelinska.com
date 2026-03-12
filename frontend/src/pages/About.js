@@ -6,6 +6,9 @@ import { FiPlay, FiPause, FiVolume2, FiVolumeX, FiArrowRight } from 'react-icons
 import { dataabout, meta, worktimeline, skills, services, funFacts, favouriteWords } from '../data/content';
 import TrustBadges from '../components/TrustBadges';
 import LazyImage from '../components/LazyImage';
+import Breadcrumb from '../components/Breadcrumb';
+import SEOHead from '../components/SEOHead';
+import { personSchema } from '../utils/schemas';
 
 const VIDEO_URL = 'https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/kodpfas7_copy_F5503918-139B-4C1A-89CB-371F6DF38D88%20%281%29.mp4';
 
