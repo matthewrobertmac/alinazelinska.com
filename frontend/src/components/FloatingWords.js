@@ -128,37 +128,46 @@ const FloatingWords = () => {
       style={{ opacity: 0.7 }}
     >
       {words.map((word) => {
-        const isPaused = pausedWords.has(word.id);
+        const isPaused = pausedWordsState.has(word.id);
         return (
           <div
             key={word.id}
             onClick={(e) => handleWordClick(word.id, e)}
             onTouchStart={(e) => handleWordClick(word.id, e)}
-            className={`absolute font-sans select-none cursor-pointer touch-manipulation ${
-              isPaused ? '' : 'transition-transform duration-100 ease-out'
-            }`}
+            className="absolute font-sans select-none cursor-pointer touch-manipulation"
             style={{
               left: `${word.x}%`,
               top: `${word.y}%`,
               fontSize: `${word.baseSize}px`,
               opacity: isPaused ? 1 : word.opacity,
-              transform: `translate(-50%, -50%) scale(${isPaused ? 1.4 : word.scale}) rotate(${word.rotation}deg)`,
+              transform: `translate(-50%, -50%) scale(${isPaused ? 1.5 : word.scale}) rotate(${isPaused ? 0 : word.rotation}deg)`,
               color: isPaused ? '#FFD700' : 'var(--color-accent)',
               willChange: isPaused ? 'none' : 'transform',
               textShadow: isPaused
-                ? '0 0 20px rgba(255, 215, 0, 0.9), 0 0 40px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3)'
+                ? '0 0 25px rgba(255, 215, 0, 1), 0 0 50px rgba(255, 215, 0, 0.7), 0 0 75px rgba(255, 215, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.4)'
                 : '0 2px 10px rgba(255, 145, 164, 0.3)',
               fontWeight: isPaused ? '800' : '500',
-              zIndex: isPaused ? 20 : 1,
+              zIndex: isPaused ? 30 : 1,
               pointerEvents: 'auto',
-              filter: isPaused ? 'brightness(1.3) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))' : 'none',
+              filter: isPaused ? 'brightness(1.5) drop-shadow(0 0 15px rgba(255, 215, 0, 0.9))' : 'none',
               WebkitTapHighlightColor: 'transparent',
               userSelect: 'none',
               WebkitUserSelect: 'none',
               MozUserSelect: 'none',
               transition: isPaused 
-                ? 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' // Bouncy transition when paused
+                ? 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)' 
                 : 'opacity 0.1s ease-out',
+              position: 'absolute',
+            }}
+            onMouseEnter={(e) => {
+              if (!isPaused) {
+                e.currentTarget.style.transform = `translate(-50%, -50%) scale(${word.scale * 1.1}) rotate(${word.rotation}deg)`;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isPaused) {
+                e.currentTarget.style.transform = `translate(-50%, -50%) scale(${word.scale}) rotate(${word.rotation}deg)`;
+              }
             }}
           >
             {word.text}
@@ -166,7 +175,7 @@ const FloatingWords = () => {
         );
       })}
       
-      {/* Instruction hint - fades out after 8 seconds */}
+      {/* Instruction hint */}
       <div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center pointer-events-none"
         style={{
@@ -175,7 +184,7 @@ const FloatingWords = () => {
         }}
       >
         <p className="text-sm text-[var(--color-accent)] font-medium">
-          ✨ Click on any word to pause and highlight it ✨
+          ✨ Click on any word to freeze it and turn it gold ✨
         </p>
       </div>
       
