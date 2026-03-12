@@ -3,12 +3,15 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import LeadMagnetPopup from './components/LeadMagnetPopup';
 import Home from './pages/Home';
 import About from './pages/About';
 import Testimonials from './pages/Testimonials';
 import Contact from './pages/Contact';
 import TikTok from './pages/TikTok';
 import Booking from './pages/Booking';
+import FAQ from './pages/FAQ';
+import SuccessStories from './pages/SuccessStories';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import AuthCallback from './pages/AuthCallback';
@@ -31,10 +34,13 @@ function AppRouter({ theme, toggleTheme }) {
   return (
     <>
       <Header theme={theme} toggleTheme={toggleTheme} />
+      <LeadMagnetPopup />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/success-stories" element={<SuccessStories />} />
+        <Route path="/faq" element={<FAQ />} />
         <Route path="/tiktok" element={<TikTok />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/contact" element={<Contact />} />
