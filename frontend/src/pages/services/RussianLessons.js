@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiCheck } from 'react-icons/fi';
 import { meta, testimonials } from '../../data/content';
+import Breadcrumb from '../../components/Breadcrumb';
+import SEOHead from '../../components/SEOHead';
+import { russianCourseSchema, breadcrumbSchema } from '../../utils/schemas';
 
 const RussianLessons = () => {
   useEffect(() => {
@@ -85,6 +88,11 @@ const RussianLessons = () => {
       {/* Hero */}
       <section className="section-padding bg-gradient-to-b from-transparent to-[var(--color-bg-secondary)]">
         <div className="max-w-6xl mx-auto">
+          <Breadcrumb items={[
+            { name: 'Services', url: '/special-projects' },
+            { name: 'Russian Lessons' }
+          ]} />
+          
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
