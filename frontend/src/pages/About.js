@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { FiPlay, FiPause, FiVolume2, FiVolumeX, FiArrowRight } from 'react-icons/fi';
 import { dataabout, meta, worktimeline, skills, services, funFacts, favouriteWords } from '../data/content';
 import TrustBadges from '../components/TrustBadges';
+import LazyImage from '../components/LazyImage';
 
 const VIDEO_URL = 'https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/kodpfas7_copy_F5503918-139B-4C1A-89CB-371F6DF38D88%20%281%29.mp4';
 
@@ -67,7 +68,7 @@ const About = () => {
             >
               <div className="relative w-full max-w-md">
                 <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-hover)] rounded-3xl blur-2xl opacity-20"></div>
-                <img
+                <LazyImage
                   src="https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/n2vsu8vg_lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit.%20lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit%20%281%29.jpeg"
                   alt="Alina Zelinska"
                   className="relative rounded-3xl w-full h-auto object-cover shadow-2xl"
