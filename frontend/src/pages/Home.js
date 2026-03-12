@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Typewriter from 'typewriter-effect';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloatingWords from '../components/FloatingWords';
-import { introdata, meta } from '../data/content';
+import { introdata, meta, whoITeach } from '../data/content';
 import { FiArrowRight } from 'react-icons/fi';
 import { FaTiktok } from 'react-icons/fa';
 
@@ -59,6 +60,16 @@ const Home = () => {
 
             <p className="text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed max-w-xl">
               {introdata.description}
+            </p>
+
+            {/* Social Proof Line */}
+            <p className="text-base md:text-lg text-[var(--color-accent)] font-medium">
+              {introdata.socialProof}
+            </p>
+
+            {/* SEO Tagline */}
+            <p className="text-sm text-[var(--color-text-secondary)] opacity-80">
+              {introdata.seoTagline}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
