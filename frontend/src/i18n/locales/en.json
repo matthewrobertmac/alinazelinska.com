@@ -46,7 +46,7 @@
   },
   "about": {
     "title": "About Me",
-    "subtitle": "Hi, I'm Alina — and I'm a little obsessed with language 💕",
+    "subtitle": "Hi, I'm Alina — 500+ students, 3,500+ lessons, and still as obsessed with language as day one 💕",
     "videoHeading": "Meet Alina 👋",
     "videoCaption": "Hit play — I promise I'm more fun on video 😄",
     "experience": "My Journey So Far",
@@ -62,7 +62,8 @@
   },
   "testimonials": {
     "title": "What My Students Say 💕",
-    "subtitle": "I could tell you I'm a great teacher — but honestly, they say it better than I ever could.",
+    "subtitle": "I could tell you about my perfect 5.0 rating across 3,500+ lessons — but honestly, my students say it better than I ever could.",
+    "verificationNote": "These are real, unedited reviews from italki — where Alina has maintained a perfect 5.0 rating across 3,500+ completed lessons.",
     "cta": {
       "title": "Ready to write your own review? 😄",
       "subtitle": "Book a trial lesson and let's see what we can build together.",
