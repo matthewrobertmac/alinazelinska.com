@@ -65,6 +65,23 @@ const RussianLessons = () => {
 
   return (
     <div className="page-transition pt-24 pb-16">
+      <SEOHead
+        title="Russian Language Lessons | Native Speaker | Alina Zelinska | 5.0★"
+        description="Learn Russian online with a native speaker. 500+ students, 3,500+ lessons, perfect 5.0 rating. From beginner to advanced, personalized 1-on-1 Russian lessons."
+        keywords="Russian lessons, learn Russian online, Russian tutor, native Russian teacher, Russian language course"
+        schema={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            russianCourseSchema,
+            breadcrumbSchema([
+              { name: 'Home', url: 'https://alinazelinska.com' },
+              { name: 'Services', url: 'https://alinazelinska.com/special-projects' },
+              { name: 'Russian Lessons', url: 'https://alinazelinska.com/services/russian-lessons' }
+            ])
+          ]
+        }}
+      />
+      
       {/* Hero */}
       <section className="section-padding bg-gradient-to-b from-transparent to-[var(--color-bg-secondary)]">
         <div className="max-w-6xl mx-auto">
