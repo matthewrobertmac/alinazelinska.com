@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { FaTiktok } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
@@ -35,6 +36,8 @@ const TikTokEmbed = ({ videoId }) => {
 };
 
 const TikTok = () => {
+  const { t } = useTranslation();
+  
   useEffect(() => {
     document.title = `TikTok | ${meta.title}`;
     window.scrollTo(0, 0);
@@ -79,7 +82,7 @@ const TikTok = () => {
                 className="text-5xl md:text-6xl font-serif font-bold"
                 data-testid="tiktok-title"
               >
-                Learn on TikTok
+                {t('tiktok.title')}
               </h1>
             </div>
             <div className="w-24 h-1 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] mx-auto rounded-full mb-6"></div>
@@ -94,7 +97,7 @@ const TikTok = () => {
               <FiExternalLink className="w-5 h-5" />
             </a>
             <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto mt-4">
-              Bite-sized language lessons for Ukrainian, Russian & English learners. Over 1.5M followers learning through practical examples, cultural insights, and fun comparisons between languages!
+              {t('tiktok.followersInfo')}
             </p>
           </motion.div>
 
@@ -136,11 +139,11 @@ const TikTok = () => {
               data-testid="view-tiktok-btn"
             >
               <FaTiktok className="w-5 h-5" />
-              Watch All Videos on TikTok
+              {t('tiktok.watchAll')}
               <FiExternalLink className="w-4 h-4" />
             </a>
             <p className="text-sm text-[var(--color-text-secondary)] mt-4">
-              Follow for bite-sized language lessons and study motivation
+              {t('tiktok.followHint')}
             </p>
           </motion.div>
         </div>
@@ -156,25 +159,25 @@ const TikTok = () => {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-serif font-bold text-center mb-12"
           >
-            What You'll Learn
+            {t('tiktok.whatYouLearn')}
           </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 icon: '🇺🇦',
-                title: 'Ukrainian Lessons',
-                description: 'Alphabet, phrases, grammar hacks, and cultural tips. Compare with Russian to learn faster!',
+                title: t('tiktok.ukrainian.title'),
+                description: t('tiktok.ukrainian.description'),
               },
               {
                 icon: '🇷🇺',
-                title: 'Russian Made Easy',
-                description: 'Pronunciation guides, daily conversations, idioms, and slang from a native speaker',
+                title: t('tiktok.russian.title'),
+                description: t('tiktok.russian.description'),
               },
               {
                 icon: '🇬🇧',
-                title: 'English for Slavic Speakers',
-                description: 'Fix common errors, master prepositions & articles, understand phrasal verbs',
+                title: t('tiktok.english.title'),
+                description: t('tiktok.english.description'),
               },
             ].map((item, index) => (
               <motion.div
@@ -196,6 +199,32 @@ const TikTok = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Join Community Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-16 text-center"
+          >
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
+              {t('tiktok.joinCommunity.title')}
+            </h2>
+            <p className="text-lg text-[var(--color-text-secondary)] mb-8 max-w-2xl mx-auto">
+              {t('tiktok.joinCommunity.subtitle')}
+            </p>
+            <a
+              href="https://www.tiktok.com/@movalina.study"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-flex items-center gap-2"
+            >
+              <FaTiktok className="w-5 h-5" />
+              {t('tiktok.joinCommunity.button')}
+              <FiExternalLink className="w-4 h-4" />
+            </a>
+          </motion.div>
         </div>
       </section>
     </div>
