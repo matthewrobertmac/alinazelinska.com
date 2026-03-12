@@ -21,6 +21,9 @@ const Booking = lazy(() => import('./pages/Booking'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const SuccessStories = lazy(() => import('./pages/SuccessStories'));
 const SpecialProjects = lazy(() => import('./pages/SpecialProjects'));
+const UkrainianLessons = lazy(() => import('./pages/services/UkrainianLessons'));
+const RussianLessons = lazy(() => import('./pages/services/RussianLessons'));
+const SpeakingClub = lazy(() => import('./pages/services/SpeakingClub'));
 const Login = lazy(() => import('./pages/Login'));
 const Profile = lazy(() => import('./pages/Profile'));
 const AuthCallback = lazy(() => import('./pages/AuthCallback'));
@@ -62,6 +65,9 @@ function AppRouter({ theme, toggleTheme }) {
           <Route path="/success-stories" element={<SuccessStories />} />
           <Route path="/special-projects" element={<SpecialProjects />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/services/ukrainian-lessons" element={<UkrainianLessons />} />
+          <Route path="/services/russian-lessons" element={<RussianLessons />} />
+          <Route path="/services/speaking-club" element={<SpeakingClub />} />
           <Route path="/tiktok" element={<TikTok />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/contact" element={<Contact />} />
