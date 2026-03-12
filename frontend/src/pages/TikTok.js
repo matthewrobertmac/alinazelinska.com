@@ -5,33 +5,70 @@ import { FaTiktok } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
 import { meta } from '../data/content';
 
-// TikTok Embed Component
+// Optimized TikTok Embed Component with Lazy Loading
 const TikTokEmbed = ({ videoId }) => {
+  const [isVisible, setIsVisible] = React.useState(false);
+  const embedRef = React.useRef(null);
+
   useEffect(() => {
-    // Load TikTok embed script
-    if (!document.getElementById('tiktok-embed-script')) {
-      const script = document.createElement('script');
-      script.id = 'tiktok-embed-script';
-      script.src = 'https://www.tiktok.com/embed.js';
-      script.async = true;
-      document.body.appendChild(script);
-    } else {
-      // If script already exists, reload embeds
-      if (window.tiktokEmbed) {
-        window.tiktokEmbed.lib.render();
+    // Intersection Observer for lazy loading
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isVisible) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { rootMargin: '50px' }
+    );
+
+    if (embedRef.current) {
+      observer.observe(embedRef.current);
+    }
+
+    return () => {
+      if (embedRef.current) {
+        observer.unobserve(embedRef.current);
+      }
+    };
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (isVisible) {
+      // Load TikTok embed script only when needed
+      if (!document.getElementById('tiktok-embed-script')) {
+        const script = document.createElement('script');
+        script.id = 'tiktok-embed-script';
+        script.src = 'https://www.tiktok.com/embed.js';
+        script.async = true;
+        document.body.appendChild(script);
+      } else {
+        // If script already exists, reload embeds
+        if (window.tiktokEmbed) {
+          window.tiktokEmbed.lib.render();
+        }
       }
     }
-  }, [videoId]);
+  }, [isVisible]);
 
   return (
-    <blockquote
-      className="tiktok-embed"
-      cite={`https://www.tiktok.com/@movalina.study/video/${videoId}`}
-      data-video-id={videoId}
-      style={{ maxWidth: '325px', minWidth: '250px' }}
-    >
-      <section></section>
-    </blockquote>
+    <div ref={embedRef} className="min-h-[500px] flex items-center justify-center">
+      {isVisible ? (
+        <blockquote
+          className="tiktok-embed"
+          cite={`https://www.tiktok.com/@movalina.study/video/${videoId}`}
+          data-video-id={videoId}
+          style={{ maxWidth: '325px', minWidth: '250px' }}
+        >
+          <section></section>
+        </blockquote>
+      ) : (
+        <div className="w-[325px] h-[500px] bg-[var(--color-bg-secondary)] rounded-lg flex items-center justify-center">
+          <p className="text-[var(--color-text-secondary)]">Loading video...</p>
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -101,7 +138,7 @@ const TikTok = () => {
             </p>
           </motion.div>
 
-          {/* TikTok Feed - Actual Embedded Videos */}
+          {/* TikTok Feed - Lazy Loaded Embedded Videos */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
