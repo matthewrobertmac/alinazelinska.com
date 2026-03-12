@@ -234,10 +234,16 @@ const Booking = () => {
             </div>
             
             {/* Payment Info */}
-            <div className="flex items-center justify-center gap-2 text-sm text-[var(--color-text-secondary)]">
-              <FaPaypal className="w-5 h-5 text-[#0070ba]" />
-              <FiCreditCard className="w-5 h-5" />
-              <span>Pay with PayPal or Card</span>
+            <div className="flex flex-col items-center gap-3 mb-6">
+              <div className="flex items-center gap-2 text-sm text-[var(--color-text-secondary)]">
+                <FaPaypal className="w-5 h-5 text-[#0070ba]" />
+                <FiCreditCard className="w-5 h-5" />
+                <span>Pay with PayPal or Card</span>
+              </div>
+              {/* Trust Line */}
+              <p className="text-xs text-[var(--color-accent)] font-medium">
+                {t('booking.trustLine')}
+              </p>
             </div>
           </motion.div>
 
