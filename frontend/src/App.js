@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Testimonials from './pages/Testimonials';
@@ -42,6 +43,7 @@ function AppRouter({ theme, toggleTheme }) {
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
+      <Footer />
     </>
   );
 }
