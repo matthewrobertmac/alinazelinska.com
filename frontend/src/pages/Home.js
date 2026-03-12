@@ -9,7 +9,7 @@ import TrustBadges from '../components/TrustBadges';
 import LazyImage from '../components/LazyImage';
 import SEOHead from '../components/SEOHead';
 import { introdata, meta, whoITeach } from '../data/content';
-import { personSchema, organizationSchema, aggregateRatingSchema } from '../utils/schemas';
+import { personSchema, organizationSchema, aggregateRatingSchema, localBusinessSchema } from '../utils/schemas';
 import { FiArrowRight } from 'react-icons/fi';
 import { FaTiktok } from 'react-icons/fa';
 
@@ -38,7 +38,7 @@ const Home = () => {
         keywords="Ukrainian tutor, learn Ukrainian online, Ukrainian lessons, native Ukrainian teacher, Ukrainian language, Ukrainian course"
         schema={{
           '@context': 'https://schema.org',
-          '@graph': [personSchema, organizationSchema, aggregateRatingSchema]
+          '@graph': [personSchema, organizationSchema, aggregateRatingSchema, localBusinessSchema]
         }}
         hreflang={[
           { lang: 'en', url: 'https://alinazelinska.com/' },
