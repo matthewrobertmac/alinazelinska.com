@@ -179,19 +179,19 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                title: t('home.whatIOffer.languageTutoring.title'),
-                description: t('home.whatIOffer.languageTutoring.description'),
+                title: t('home.whatIOffer.conversationalUkrainian.title'),
+                description: t('home.whatIOffer.conversationalUkrainian.description'),
                 icon: '🗣️',
               },
               {
-                title: t('home.whatIOffer.poetryTranslation.title'),
-                description: t('home.whatIOffer.poetryTranslation.description'),
-                icon: '🌙',
+                title: t('home.whatIOffer.professionalUkrainian.title'),
+                description: t('home.whatIOffer.professionalUkrainian.description'),
+                icon: '💼',
               },
               {
-                title: t('home.whatIOffer.creativeWriting.title'),
-                description: t('home.whatIOffer.creativeWriting.description'),
-                icon: '✨',
+                title: t('home.whatIOffer.examPrep.title'),
+                description: t('home.whatIOffer.examPrep.description'),
+                icon: '📚',
               },
             ].map((service, index) => (
               <motion.div
