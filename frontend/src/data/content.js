@@ -198,3 +198,108 @@ export const floatingWords = [
   'Ріка - River',
   'Ліс - Forest',
 ];
+
+// Fun facts about Alina
+export const funFacts = [
+  {
+    icon: "🌙",
+    text: "I've written poems in Ukrainian, Russian, and English — sometimes all in the same evening",
+  },
+  {
+    icon: "🌶️",
+    text: "I'm learning Spanish because I simply couldn't help myself",
+  },
+  {
+    icon: "🎵",
+    text: "I'm a songwriter too — words are kind of my whole personality",
+  },
+  {
+    icon: "🧴",
+    text: "I once co-founded an eco shampoo brand. Yes, really. I contain multitudes.",
+  },
+  {
+    icon: "🎮",
+    text: "I also co-founded a craft games company. See above re: multitudes.",
+  },
+  {
+    icon: "💡",
+    text: "I believe you can fall in love with a language before you even speak it",
+  },
+];
+
+// Favourite Ukrainian/Russian words with explanations
+export const favouriteWords = [
+  {
+    word: "Натхнення",
+    transliteration: "Natkhnennya",
+    translation: "Inspiration",
+    explanation: "Doesn't it sound exactly like what it means?",
+    language: "Ukrainian",
+  },
+  {
+    word: "Душа",
+    transliteration: "Dusha",
+    translation: "Soul",
+    explanation: "One syllable that holds so much. Every language needs this word.",
+    language: "Russian/Ukrainian",
+  },
+  {
+    word: "Мрія",
+    transliteration: "Mriya",
+    translation: "Dream",
+    explanation: "Also the name of Ukraine's legendary cargo plane. Words carry weight.",
+    language: "Ukrainian",
+  },
+  {
+    word: "Тепло",
+    transliteration: "Teplo",
+    translation: "Warmth",
+    explanation: "I genuinely think this is one of the most beautiful words in existence.",
+    language: "Russian/Ukrainian",
+  },
+  {
+    word: "Поезія",
+    transliteration: "Poeziya",
+    translation: "Poetry",
+    explanation: "It sounds like poetry should sound. I rest my case.",
+    language: "Ukrainian",
+  },
+];
+
+// Who I Teach section
+export const whoITeach = [
+  {
+    icon: "🌱",
+    title: "Total Beginners",
+    description: "No experience needed. We start exactly where you are, at a pace that feels good.",
+  },
+  {
+    icon: "🏠",
+    title: "Heritage Speakers",
+    description: "Grew up hearing Ukrainian or Russian at home but never learned formally? Let's make it official.",
+  },
+  {
+    icon: "🚀",
+    title: "Intermediate & Beyond",
+    description: "You've got the basics. Now let's make you actually fluent — and confident.",
+  },
+];
+
+// Testimonials stats
+export const testimonialStats = [
+  {
+    icon: "🎓",
+    number: "300+",
+    label: "students taught one-on-one",
+  },
+  {
+    icon: "⭐",
+    number: "5-star",
+    label: "rated across 200+ reviews",
+  },
+  {
+    icon: "🌍",
+    number: "30+",
+    label: "countries",
+  },
+];
