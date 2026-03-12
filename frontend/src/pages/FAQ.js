@@ -58,6 +58,18 @@ const FAQ = () => {
       category: "Lessons & Learning",
       questions: [
         {
+          q: "What's your teaching methodology?",
+          a: "I use a communicative approach — meaning we focus on real conversation from day one, not just memorising rules. Every lesson is built around your specific goals. If you're learning for travel, we practise travel scenarios. If you want to connect with family, we work on the phrases and topics that matter to you. I weave in grammar naturally through conversation, use authentic materials (songs, articles, social media posts), and always explain the cultural context behind the language. My students don't just learn words — they learn how to think in their target language."
+        },
+        {
+          q: "What results can I expect?",
+          a: "Every student is different, but here's a general guide: After 5-10 lessons, complete beginners can typically introduce themselves, handle basic conversations, and read simple texts. After 20-30 lessons, you'll be holding real conversations, understanding native speakers at a natural pace, and feeling genuinely confident. After 50+ lessons, most students are functionally fluent for daily life. I've had students go from zero to ordering confidently in restaurants within a month, and heritage speakers who went from 'I understand but can't speak' to fluent conversations in 3-4 months."
+        },
+        {
+          q: "How are online lessons structured?",
+          a: "We meet on Zoom (or your preferred platform). Each lesson typically includes: a warm-up conversation to get you thinking in the language, a focused topic or skill we're working on that day, interactive exercises and real-time corrections, and a recap of what you've learned. I share all materials digitally — vocabulary lists, grammar notes, homework — so you always have something to practise between lessons. And yes, you can message me between sessions if you have questions."
+        },
+        {
           q: "How quickly will I learn?",
           a: "Everyone's different! It depends on your goals, how much time you practice between lessons, and your previous language experience. That said, most students start having basic conversations within 2-3 months of regular lessons. I focus on practical, real-world language — not just textbook theory."
         },
@@ -72,6 +84,18 @@ const FAQ = () => {
         {
           q: "I'm a heritage speaker — can you help me?",
           a: "Definitely! Many of my students grew up hearing Ukrainian or Russian at home but never formally learned it. I'll help you turn that passive knowledge into active fluency and fill in any grammar or writing gaps."
+        },
+        {
+          q: "Do you teach children?",
+          a: "I primarily work with adult learners (18+), as my teaching style is designed for mature students who can engage in complex conversations. However, I'm happy to work with motivated teenagers (16+) who are serious about learning. For younger children, I'd recommend finding a tutor who specializes in teaching kids."
+        },
+        {
+          q: "What's the difference between Ukrainian and Russian?",
+          a: "Great question! While they share the Cyrillic alphabet and some vocabulary (they're both Slavic languages), they're distinct languages with different pronunciation, grammar, and vocabulary. Think of them like Spanish and Portuguese — similar roots, but definitely not the same. Ukrainian has softer sounds and some unique letters. If you speak one, learning the other becomes easier, but they're separate languages that deserve their own study."
+        },
+        {
+          q: "Can I switch between languages?",
+          a: "Absolutely! Some students study both Ukrainian and Russian with me, either alternating lessons or focusing on one and then the other. Just let me know what you want to work on. I'm fluent in both, so we can adapt as your needs change."
         }
       ]
     },
