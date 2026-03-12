@@ -7,6 +7,8 @@ import { meta } from '../data/content';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency } from '../context/CurrencyContext';
 import CurrencySelector from '../components/CurrencySelector';
+import Breadcrumb from '../components/Breadcrumb';
+import SEOHead from '../components/SEOHead';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const PAYPAL_EMAIL = 'zelinskayaalinaig@gmail.com';
@@ -170,8 +172,22 @@ const Booking = () => {
 
   return (
     <div className="page-transition pt-24 pb-16">
+      <SEOHead
+        title="Book Ukrainian Lessons | Alina Zelinska | Trial from €15"
+        description="Book personalized Ukrainian lessons with Alina Zelinska. Trial lesson €15, Standard €30, Intensive pack €120. Perfect 5.0 rating, 500+ students worldwide."
+        keywords="book Ukrainian lessons, Ukrainian tutor booking, learn Ukrainian online, Ukrainian language course"
+        hreflang={[
+          { lang: 'en', url: 'https://alinazelinska.com/booking' },
+          { lang: 'uk', url: 'https://alinazelinska.com/booking?lang=uk' },
+          { lang: 'ru', url: 'https://alinazelinska.com/booking?lang=ru' },
+          { lang: 'x-default', url: 'https://alinazelinska.com/booking' }
+        ]}
+      />
+      
       <section className="section-padding">
         <div className="max-w-6xl mx-auto">
+          <Breadcrumb items={[{ name: 'Book a Lesson' }]} />
+          
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
