@@ -99,7 +99,8 @@ async def create_status_check(input: StatusCheckCreate):
 @api_router.get("/status", response_model=List[StatusCheck])
 async def get_status_checks():
     # Exclude MongoDB's _id field from the query results
-    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
+    # Optimized: Limit to 50 most recent, sorted by timestamp
+    status_checks = await db.status_checks.find({}, {"_id": 0}).sort("timestamp", -1).limit(50).to_list(50)
     
     # Convert ISO string timestamps back to datetime objects
     for check in status_checks:
@@ -376,6 +377,32 @@ async def startup_db_client():
     # Initialize admin user
     await auth_routes.init_admin_user()
     logger.info("Admin user initialized")
+    
+    # Create database indexes for performance
+    try:
+        # Users collection indexes
+        await db.users.create_index("email", unique=True)
+        await db.users.create_index("user_id")
+        await db.users.create_index("created_at")
+        
+        # Bookings collection indexes
+        await db.bookings.create_index("booking_id", unique=True)
+        await db.bookings.create_index("user_id")
+        await db.bookings.create_index("booking_status")
+        await db.bookings.create_index("created_at")
+        await db.bookings.create_index([("created_at", -1)])  # Descending for recent-first queries
+        
+        # Payment transactions indexes
+        await db.payment_transactions.create_index("session_id", unique=True)
+        await db.payment_transactions.create_index("email")
+        await db.payment_transactions.create_index("payment_status")
+        
+        # Status checks indexes
+        await db.status_checks.create_index([("timestamp", -1)])
+        
+        logger.info("Database indexes created successfully")
+    except Exception as e:
+        logger.warning(f"Index creation error (may already exist): {e}")
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
