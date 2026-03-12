@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Typewriter from 'typewriter-effect';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloatingWords from '../components/FloatingWords';
+import QuizWidget from '../components/QuizWidget';
 import { introdata, meta, whoITeach } from '../data/content';
 import { FiArrowRight } from 'react-icons/fi';
 import { FaTiktok } from 'react-icons/fa';
@@ -250,6 +251,28 @@ const Home = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Quiz Section */}
+      <section className="relative py-16 px-6 bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)] z-10">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
+              Find Your Perfect Package 🎯
+            </h2>
+            <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+              Not sure where to start? Take this quick 30-second quiz and I'll recommend the best option for you!
+            </p>
+          </motion.div>
+
+          <QuizWidget />
         </div>
       </section>
 
