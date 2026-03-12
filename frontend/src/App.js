@@ -1,5 +1,6 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -24,6 +25,8 @@ const SpecialProjects = lazy(() => import('./pages/SpecialProjects'));
 const UkrainianLessons = lazy(() => import('./pages/services/UkrainianLessons'));
 const RussianLessons = lazy(() => import('./pages/services/RussianLessons'));
 const SpeakingClub = lazy(() => import('./pages/services/SpeakingClub'));
+const PoetryTranslation = lazy(() => import('./pages/services/PoetryTranslation'));
+const CreativeWriting = lazy(() => import('./pages/services/CreativeWriting'));
 const Login = lazy(() => import('./pages/Login'));
 const Profile = lazy(() => import('./pages/Profile'));
 const AuthCallback = lazy(() => import('./pages/AuthCallback'));
@@ -68,6 +71,8 @@ function AppRouter({ theme, toggleTheme }) {
           <Route path="/services/ukrainian-lessons" element={<UkrainianLessons />} />
           <Route path="/services/russian-lessons" element={<RussianLessons />} />
           <Route path="/services/speaking-club" element={<SpeakingClub />} />
+          <Route path="/services/poetry-translation" element={<PoetryTranslation />} />
+          <Route path="/services/creative-writing" element={<CreativeWriting />} />
           <Route path="/tiktok" element={<TikTok />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/contact" element={<Contact />} />
@@ -108,21 +113,23 @@ function App() {
   };
 
   return (
-    <AuthProvider>
-      <CurrencyProvider>
-        <AnimatePresence mode="wait">
-          {showLanding ? (
-            <LandingPage key="landing" onEnter={handleEnterSite} />
-          ) : (
-            <Router key="main">
-              <div className="App min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-all duration-300">
-                <AppRouter theme={theme} toggleTheme={toggleTheme} />
-              </div>
-            </Router>
-          )}
-        </AnimatePresence>
-      </CurrencyProvider>
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <CurrencyProvider>
+          <AnimatePresence mode="wait">
+            {showLanding ? (
+              <LandingPage key="landing" onEnter={handleEnterSite} />
+            ) : (
+              <Router key="main">
+                <div className="App min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-all duration-300">
+                  <AppRouter theme={theme} toggleTheme={toggleTheme} />
+                </div>
+              </Router>
+            )}
+          </AnimatePresence>
+        </CurrencyProvider>
+      </AuthProvider>
+    </HelmetProvider>
   );
 }
 
