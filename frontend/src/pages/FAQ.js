@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { meta } from '../data/content';
+import Breadcrumb from '../components/Breadcrumb';
+import SEOHead from '../components/SEOHead';
+import { generateFAQSchema } from '../utils/schemas';
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   useEffect(() => {
-    document.title = `FAQ | ${meta.title}`;
     window.scrollTo(0, 0);
   }, []);
 
