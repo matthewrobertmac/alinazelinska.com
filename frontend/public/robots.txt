@@ -1,0 +1,32 @@
+# robots.txt for alinazelinska.com
+
+# Allow all legitimate crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://alinazelinska.com/sitemap.xml
+
+# Block bad bots and scrapers
+User-agent: AhrefsBot
+User-agent: SemrushBot
+User-agent: DotBot
+User-agent: MJ12bot
+Disallow: /
+
+# Allow social media crawlers
+User-agent: facebookexternalhit
+User-agent: Twitterbot
+User-agent: LinkedInBot
+User-agent: WhatsApp
+Allow: /
+
+# Disallow admin and private routes
+User-agent: *
+Disallow: /admin
+Disallow: /login
+Disallow: /profile
+Disallow: /auth/
+
+# Crawl delay for polite bots
+Crawl-delay: 1
