@@ -96,6 +96,17 @@ const About = () => {
             </motion.div>
           </div>
 
+          {/* Trust Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-16"
+          >
+            <TrustBadges />
+          </motion.div>
+
           {/* Video Introduction Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
