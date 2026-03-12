@@ -80,6 +80,9 @@ const Testimonials = () => {
             <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
               {t('testimonials.subtitle')}
             </p>
+            <p className="text-sm text-[var(--color-text-secondary)] max-w-2xl mx-auto mt-3 opacity-80">
+              {t('testimonials.verificationNote')}
+            </p>
           </motion.div>
 
           {/* Stats Bar */}
