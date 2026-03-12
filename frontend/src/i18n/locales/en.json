@@ -1,38 +1,82 @@
 {
   "nav": {
     "home": "Home",
-    "about": "About",
-    "testimonials": "Testimonials",
+    "about": "About Me",
+    "testimonials": "Student Love",
     "tiktok": "TikTok",
     "booking": "Book a Lesson",
-    "contact": "Contact"
+    "contact": "Say Hello"
   },
   "home": {
     "greeting": "I'm Alina Zelinska",
     "tagline": "I love helping people learn",
-    "description": "Professional Language Tutor | Ukrainian-English-Russian Translator | Writer | Songwriter | Poet | Creator",
-    "viewTestimonials": "View Testimonials",
-    "getInTouch": "Get In Touch",
-    "floatingWordsHint": "✨ Click on any word to pause and highlight it ✨"
+    "description": "Ukrainian & Russian Tutor ✦ Translator ✦ Songwriter ✦ Poet ✦ forever learning Spanish 🌻",
+    "socialProof": "Loved by students in 30+ countries 🌍",
+    "seoTagline": "Online Ukrainian & Russian lessons for English speakers — personalised, 1-on-1, and actually fun.",
+    "viewTestimonials": "See What Students Say →",
+    "getInTouch": "Say Hello →",
+    "floatingWordsHint": "✨ Click on any word to pause and highlight it ✨",
+    "whatIOffer": {
+      "title": "What's In My World",
+      "subtitle": "Languages are my love language — let me share them with you ✨",
+      "languageTutoring": {
+        "title": "Language Tutoring",
+        "description": "Real conversations, real progress — lessons that actually feel good 🗣️"
+      },
+      "poetryTranslation": {
+        "title": "Poetry Translation",
+        "description": "Because a poem should still give you chills in any language 🌙"
+      },
+      "creativeWriting": {
+        "title": "Creative Writing",
+        "description": "Words that stick, stories that sparkle, poetry that moves people ✨"
+      },
+      "learnMore": "Get to Know Me →"
+    },
+    "whoITeach": {
+      "title": "There's a Lesson Here For You",
+      "subtitle": "Whether you're a complete beginner, a heritage speaker reconnecting with your roots, or polishing your skills for work or travel — my lessons adapt to you, not the other way around."
+    },
+    "tiktok": {
+      "title": "Come Learn With Me on TikTok 🎵",
+      "subtitle": "I post bite-sized Ukrainian, Russian & English lessons that are genuinely fun to watch. Come join the community!",
+      "viewVideos": "Watch My Videos →",
+      "follow": "Follow @movalina.study →"
+    }
   },
   "about": {
     "title": "About Me",
-    "subtitle": "A bit about myself",
-    "experience": "Experience",
-    "skills": "Language Skills",
-    "services": "Services I Offer"
+    "subtitle": "Hi, I'm Alina — and I'm a little obsessed with language 💕",
+    "videoHeading": "Meet Alina 👋",
+    "videoCaption": "Hit play — I promise I'm more fun on video 😄",
+    "experience": "My Journey So Far",
+    "skills": "Languages I Live In",
+    "services": "How I Can Help You ✨",
+    "funFacts": {
+      "title": "A Few Things About Me 🌸"
+    },
+    "favouriteWords": {
+      "title": "Words I Love 🌸",
+      "subtitle": "Some words just feel like something — here are a few of mine:"
+    }
   },
   "testimonials": {
-    "title": "Student Testimonials",
-    "subtitle": "What my students say about their learning experience"
+    "title": "What My Students Say 💕",
+    "subtitle": "I could tell you I'm a great teacher — but honestly, they say it better than I ever could.",
+    "cta": {
+      "title": "Ready to write your own review? 😄",
+      "subtitle": "Book a trial lesson and let's see what we can build together.",
+      "button": "Book a Trial Lesson →"
+    }
   },
   "booking": {
-    "title": "Book a Lesson",
-    "subtitle": "Choose the perfect lesson package for your language learning journey",
+    "title": "Let's Make It Official 📅",
+    "subtitle": "Find the option that fits your vibe — and let's start learning together!",
+    "reassurance": "Not sure which to pick? The Trial Lesson is the perfect no-pressure place to start. I'd love to meet you! 🌸",
     "selectPackage": "Select Your Package",
     "paymentMethods": "We accept card payments and cryptocurrency (Bitcoin/USDC)",
     "features": "What's included:",
-    "bookNow": "Book Now",
+    "bookNow": "Book Now →",
     "perLesson": "per lesson",
     "processing": "Processing...",
     "success": "Payment Successful!",
@@ -40,59 +84,119 @@
     "backToHome": "Back to Home",
     "error": "Payment Error",
     "tryAgain": "Try Again",
+    "whatToExpect": {
+      "title": "Here's What to Expect",
+      "step1": {
+        "icon": "📋",
+        "title": "We talk about your goals",
+        "description": "Every first lesson starts with you. Where are you now? Where do you want to go? What do you actually enjoy?"
+      },
+      "step2": {
+        "icon": "🗺️",
+        "title": "I build a plan around your life",
+        "description": "No generic textbooks. Your lessons are shaped around your schedule, your interests, and the way you learn best."
+      },
+      "step3": {
+        "icon": "💬",
+        "title": "Every lesson feels like a conversation",
+        "description": "Not a lecture. Not a drill session. A real, engaging hour that leaves you feeling like you actually got somewhere."
+      }
+    },
     "packages": {
       "trial": {
         "name": "Trial Lesson",
         "duration": "30 minutes",
-        "description": "Perfect for first-time students",
-        "features": ["Introduction session", "Learning style assessment", "Personalized study plan"]
+        "description": "Never had a lesson with me? Let's meet and see if we click! 🤝",
+        "features": ["A relaxed getting-to-know-you session", "We figure out how you learn best", "You leave with a clear, personalised plan"]
       },
       "standard": {
         "name": "Standard Lesson",
         "duration": "60 minutes",
-        "description": "Most popular choice",
-        "features": ["Full lesson session", "Homework assignments", "Progress tracking", "Chat support"]
+        "description": "The fan favourite — and honestly, my favourite too. This is where the real progress happens.",
+        "features": ["A full, immersive lesson session", "Homework that actually helps (I promise)", "Regular check-ins on your progress", "Message me between lessons anytime"]
       },
       "intensive": {
         "name": "Intensive Pack",
         "duration": "5 x 60 minutes",
-        "description": "For serious learners",
-        "features": ["5 full lessons", "Custom curriculum", "Priority scheduling", "Unlimited chat support", "Learning materials included"]
+        "description": "For when you're *really* ready to go 🚀",
+        "features": ["5 full, dedicated lessons", "A curriculum built entirely around you", "Priority booking — you come first", "Unlimited messaging between lessons", "All learning materials included — no extras needed"]
       }
     }
   },
   "contact": {
-    "title": "Get In Touch",
-    "subtitle": "Ready to start your language learning journey?",
+    "title": "Say Hello — I'd love to hear from you! 👋",
+    "subtitle": "Lessons, translations, creative collabs, or just a friendly \"Привіт!\" — whatever brings you here, my inbox is always open 💌",
     "name": "Your Name",
     "email": "Your Email",
     "message": "Your Message",
     "send": "Send Message",
     "info": "Contact Information",
-    "followMe": "Follow Me"
+    "followMe": "Follow Me",
+    "emailCard": {
+      "label": "Email",
+      "hint": "Drop me a message — I reply to every one 💌"
+    },
+    "linkedinCard": {
+      "label": "LinkedIn",
+      "hint": "Let's be professional about it 😄"
+    },
+    "instagramCard": {
+      "label": "Instagram",
+      "hint": "Come see what I'm up to ✨"
+    },
+    "whatToExpect": {
+      "title": "Here's What We Can Do Together 💕",
+      "languageLessons": {
+        "icon": "📚",
+        "title": "Language Lessons",
+        "description": "One-on-one lessons in Ukrainian, Russian, or English — shaped around you, your pace, and what you actually want to achieve. No boring drills. I promise."
+      },
+      "translation": {
+        "icon": "📝",
+        "title": "Translation Services",
+        "description": "I take poetry seriously — which means I won't just translate the words. I'll carry the feeling, the rhythm, and the soul of what you wrote."
+      },
+      "creativeWriting": {
+        "icon": "✨",
+        "title": "Creative Writing",
+        "description": "Captions, articles, brand stories, poems — if it involves words, I'm genuinely in. Let's make your content feel alive."
+      },
+      "consulting": {
+        "icon": "💻",
+        "title": "Consulting",
+        "description": "Building something in the language-learning space and want a real educator's perspective? Yes please — let's talk."
+      }
+    },
+    "bottomCta": "So — what are we building together? 🌸"
   },
   "tiktok": {
-    "title": "Learn on TikTok",
-    "subtitle": "Bite-sized language lessons for Ukrainian, Russian & English learners",
-    "followersInfo": "Over 1.5M followers learning through practical examples, cultural insights, and fun comparisons between languages!",
-    "watchAll": "Watch All Videos on TikTok",
-    "followHint": "Follow for bite-sized language lessons and study motivation",
-    "whatYouLearn": "What You'll Learn",
+    "title": "Let's Learn Together on TikTok 🎵",
+    "subtitle": "I post bite-sized Ukrainian, Russian & English lessons that are genuinely fun to watch. Come join the community!",
+    "followersInfo": "I post short, genuinely useful lessons on Ukrainian, Russian & English: cultural stories, surprising comparisons, and the kind of tips you actually remember days later.",
+    "watchAll": "Watch All My Videos →",
+    "followHint": "Follow for daily language inspo, little cultural gems, and the occasional existential thought about grammar ✨",
+    "whatYouLearn": "What's Waiting For You 🌟",
+    "joinCommunity": {
+      "title": "A Growing Community of Language Lovers 🎉",
+      "subtitle": "Every day I post something that makes language a little less scary and a lot more fun. Come find out why so many people are hooked.",
+      "button": "Follow @movalina.study on TikTok →"
+    },
     "ukrainian": {
-      "title": "Ukrainian Lessons",
-      "description": "Alphabet, phrases, grammar hacks, and cultural tips. Compare with Russian to learn faster!"
+      "title": "Ukrainian Lessons 🇺🇦",
+      "description": "From hello to full sentences — Ukrainian that feels warm and approachable, with cultural gems and sneaky side-by-side comparisons to make it stick."
     },
     "russian": {
-      "title": "Russian Made Easy",
-      "description": "Pronunciation guides, daily conversations, idioms, and slang from a native speaker"
+      "title": "Russian Made Easy 🇷🇺",
+      "description": "Native speaker secrets, the real slang, the idioms no textbook will teach you — Russian that sounds genuine, from someone who actually grew up speaking it."
     },
     "english": {
-      "title": "English for Slavic Speakers",
-      "description": "Fix common errors, master prepositions & articles, understand phrasal verbs"
+      "title": "English for Slavic Speakers 🇬🇧",
+      "description": "Prepositions, articles, phrasal verbs — the things that drive Ukrainian and Russian speakers crazy — finally explained in a way that actually makes sense."
     }
   },
   "footer": {
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "tagline": "Made with words, coffee, and a deep love of language ☕"
   },
   "language": {
     "en": "English",
