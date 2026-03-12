@@ -6,26 +6,26 @@ const TrustBadges = ({ variant = 'default' }) => {
   const badges = [
     {
       icon: <FiStar className="w-6 h-6" />,
-      title: "5-Star Rated",
-      description: "200+ verified reviews",
+      title: "Perfect 5.0 Rating",
+      description: "Across 3,500+ lessons",
       color: "from-yellow-400 to-orange-500"
     },
     {
       icon: <FiUsers className="w-6 h-6" />,
-      title: "300+ Students",
-      description: "One-on-one lessons",
+      title: "500+ Students",
+      description: "Worldwide",
       color: "from-[var(--color-accent)] to-pink-600"
     },
     {
       icon: <FiGlobe className="w-6 h-6" />,
-      title: "30+ Countries",
-      description: "Worldwide students",
+      title: "3,500+ Lessons",
+      description: "Delivered",
       color: "from-blue-400 to-cyan-500"
     },
     {
       icon: <FiClock className="w-6 h-6" />,
-      title: "3+ Years",
-      description: "Teaching experience",
+      title: "100% Attendance",
+      description: "Rate since 2022",
       color: "from-purple-400 to-pink-500"
     }
   ];
