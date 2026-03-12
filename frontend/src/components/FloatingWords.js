@@ -6,11 +6,25 @@ const FloatingWords = () => {
   const containerRef = useRef(null);
   const animationFrameRef = useRef(null);
   const wordsRef = useRef([]);
-  const pausedWordsRef = useRef(new Set()); // Use ref instead of state for animation loop
-  const [pausedWordsState, setPausedWordsState] = useState(new Set()); // Keep state for re-renders
+  const pausedWordsRef = useRef(new Set());
+  const [pausedWordsState, setPausedWordsState] = useState(new Set());
+  const usedWordsRef = useRef(new Set()); // Track used words to prevent repetition
 
   const getRandomWord = useCallback(() => {
-    return floatingWords[Math.floor(Math.random() * floatingWords.length)];
+    // Get available words (not currently in use)
+    const availableWords = floatingWords.filter(
+      word => !usedWordsRef.current.has(word)
+    );
+    
+    // If all words are used, reset
+    if (availableWords.length === 0) {
+      usedWordsRef.current.clear();
+      return floatingWords[Math.floor(Math.random() * floatingWords.length)];
+    }
+    
+    const selectedWord = availableWords[Math.floor(Math.random() * availableWords.length)];
+    usedWordsRef.current.add(selectedWord);
+    return selectedWord;
   }, []);
 
   const createWord = useCallback(() => {
@@ -22,7 +36,7 @@ const FloatingWords = () => {
       vx: (Math.random() - 0.5) * 0.05,
       vy: (Math.random() - 0.5) * 0.05,
       opacity: Math.random() * 0.3 + 0.25,
-      baseSize: Math.random() * 14 + 16,
+      baseSize: Math.random() * 10 + 14, // Reduced from 14+16 to 10+14 for smaller words
       scale: 1,
       rotation: (Math.random() - 0.5) * 60,
       rotationSpeed: (Math.random() - 0.5) * 0.15,
@@ -31,11 +45,9 @@ const FloatingWords = () => {
   }, [getRandomWord]);
 
   const handleWordClick = useCallback((wordId, event) => {
-    // Prevent default behavior and stop propagation
     event.preventDefault();
     event.stopPropagation();
     
-    // Update both ref and state
     const newSet = new Set(pausedWordsRef.current);
     if (newSet.has(wordId)) {
       newSet.delete(wordId);
@@ -47,21 +59,22 @@ const FloatingWords = () => {
   }, []);
 
   useEffect(() => {
-    // Initialize with some words
-    const initialWords = Array.from({ length: 25 }, createWord);
+    // Reduced from 25 to 18 words for less clutter
+    const initialWords = Array.from({ length: 18 }, createWord);
     wordsRef.current = initialWords;
     setWords(initialWords);
 
-    // Add new words periodically
     const addWordInterval = setInterval(() => {
-      if (wordsRef.current.length < 30) {
+      // Reduced max from 30 to 22 words
+      if (wordsRef.current.length < 22) {
         const newWord = createWord();
         wordsRef.current = [...wordsRef.current, newWord];
         setWords([...wordsRef.current]);
       } else {
-        // Remove oldest word that isn't paused and add new one
         const oldestNonPaused = wordsRef.current.find((w) => !pausedWordsRef.current.has(w.id));
         if (oldestNonPaused) {
+          // Remove word from used words set when removing it
+          usedWordsRef.current.delete(oldestNonPaused.text);
           wordsRef.current = wordsRef.current.filter((w) => w.id !== oldestNonPaused.id);
           wordsRef.current = [...wordsRef.current, createWord()];
           setWords([...wordsRef.current]);
@@ -69,21 +82,17 @@ const FloatingWords = () => {
       }
     }, 2500);
 
-    // Animation loop
     const animate = () => {
       wordsRef.current = wordsRef.current.map((word) => {
-        // Skip animation if word is paused (frozen)
         if (pausedWordsRef.current.has(word.id)) {
           return word;
         }
 
         let { x, y, vx, vy, scale, pulsePhase, rotation, rotationSpeed } = word;
 
-        // Update position with smoother interpolation
         x += vx;
         y += vy;
 
-        // Smooth bounce off edges with damping
         if (x <= 0 || x >= 100) {
           vx = -vx * 0.98;
           x = Math.max(0, Math.min(100, x));
@@ -93,11 +102,9 @@ const FloatingWords = () => {
           y = Math.max(0, Math.min(100, y));
         }
 
-        // Smooth sinusoidal pulsing effect
         pulsePhase += 0.02;
         scale = 1 + Math.sin(pulsePhase) * 0.15;
 
-        // Update rotation
         rotation += rotationSpeed;
         if (rotation >= 30 || rotation <= -30) {
           rotationSpeed = -rotationSpeed;
@@ -119,12 +126,12 @@ const FloatingWords = () => {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [createWord]); // Remove pausedWords from dependencies
+  }, [createWord]);
 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 overflow-hidden z-0"
+      className="fixed inset-0 overflow-hidden pointer-events-none z-0"
       style={{ opacity: 0.7 }}
     >
       {words.map((word) => {
@@ -134,22 +141,21 @@ const FloatingWords = () => {
             key={word.id}
             onClick={(e) => handleWordClick(word.id, e)}
             onTouchStart={(e) => handleWordClick(word.id, e)}
-            className="absolute font-sans select-none cursor-pointer touch-manipulation"
+            className="absolute font-sans select-none cursor-pointer touch-manipulation pointer-events-auto"
             style={{
               left: `${word.x}%`,
               top: `${word.y}%`,
               fontSize: `${word.baseSize}px`,
-              opacity: isPaused ? 1 : word.opacity,
-              transform: `translate(-50%, -50%) scale(${isPaused ? 1.5 : word.scale}) rotate(${isPaused ? 0 : word.rotation}deg)`,
+              opacity: isPaused ? word.opacity : word.opacity,
+              transform: `translate(-50%, -50%) scale(${isPaused ? 1.5 : word.scale}) rotate(${word.rotation}deg)`,
               color: isPaused ? '#FFD700' : 'var(--color-accent)',
               willChange: isPaused ? 'none' : 'transform',
               textShadow: isPaused
-                ? '0 0 25px rgba(255, 215, 0, 1), 0 0 50px rgba(255, 215, 0, 0.7), 0 0 75px rgba(255, 215, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.4)'
+                ? '0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2)'
                 : '0 2px 10px rgba(255, 145, 164, 0.3)',
-              fontWeight: isPaused ? '800' : '500',
-              zIndex: isPaused ? 30 : 1,
-              pointerEvents: 'auto',
-              filter: isPaused ? 'brightness(1.5) drop-shadow(0 0 15px rgba(255, 215, 0, 0.9))' : 'none',
+              fontWeight: isPaused ? '700' : '500',
+              zIndex: isPaused ? 100 : 50,
+              filter: isPaused ? 'brightness(1.2)' : 'none',
               WebkitTapHighlightColor: 'transparent',
               userSelect: 'none',
               WebkitUserSelect: 'none',
@@ -181,6 +187,7 @@ const FloatingWords = () => {
         style={{
           animation: 'fadeOut 2s ease-in-out 8s forwards',
           opacity: 0.6,
+          zIndex: 100,
         }}
       >
         <p className="text-sm text-[var(--color-accent)] font-medium">
