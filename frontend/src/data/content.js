@@ -1,32 +1,37 @@
 export const logotext = "ALINA";
 
 export const meta = {
-  title: "Alina Zelinska",
-  description: "I'm Alina Zelinska _ Ukrainian / Russian / English language tutor _ Poet & Writer _ currently working in Poland",
+  title: "Alina Zelinska | Ukrainian & Russian Tutor, Translator & Poet",
+  description: "Online Ukrainian & Russian lessons for English speakers — personalised, 1-on-1, and actually fun.",
 };
 
 export const introdata = {
   title: "I'm Alina Zelinska",
   animated: [
-    "I love helping people learn languages",
-    "I write multilingual poetry",
-    "I consult on language learning apps",
+    "I teach Ukrainian like it's a love language 🫶",
+    "I turn grammar into something you actually enjoy",
+    "I write poems in three languages (and counting!)",
+    "I make Russian click — even for total beginners",
+    "I'm building something beautiful, one word at a time",
+    "I consult on language learning apps ✨",
   ],
-  description: `Professional Language Tutor | Ukrainian-English-Russian Translator | Writer | Songwriter | Poet | Creator`,
+  description: `Ukrainian & Russian Tutor ✦ Translator ✦ Songwriter ✦ Poet ✦ forever learning Spanish 🌻`,
+  socialProof: `Loved by students in 30+ countries 🌍`,
+  seoTagline: `Online Ukrainian & Russian lessons for English speakers — personalised, 1-on-1, and actually fun.`,
   image: "https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/n9i5tibv_lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit.%20lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit%20%281%29.png",
 };
 
 export const dataabout = {
-  title: "A bit about myself",
-  aboutme: `Experienced language teacher with a passion for creative writing and a talent for translating poetry. Fluent in English, Ukrainian, and Russian, I have spent years honing my teaching skills and immersing myself in the beauty of language. My love for languages extends beyond teaching, as I thoroughly enjoy writing poems and translating them to and from various languages. Currently, I am expanding my linguistic repertoire by learning Spanish.
+  title: "Hi, I'm Alina — and I'm a little obsessed with language 💕",
+  aboutme: `Language has been my thing for as long as I can remember. I'm a teacher, translator, poet, and general word nerd — fluent in Ukrainian, Russian, and English, with Spanish slowly joining the party 🌶️. I've spent years not just teaching language, but falling deeper in love with it — writing poems, translating them across languages, and finding the magic that lives in the spaces between words.
 
-My teaching methods combine cultural understanding with interactive and engaging lessons, fostering an environment that encourages language exploration and creativity.
+My lessons aren't just about grammar rules (though we absolutely cover those!). I bring culture, stories, and real-life context into every class — because language is alive, and learning it should feel that way.
 
-Outside the classroom, my true joy lies in creative writing. I find immense satisfaction in crafting captivating poems that touch the hearts of readers. The ability to express emotions and ideas through words is a gift I cherish.
+Outside of lessons, you'll find me writing poems that I immediately want to share with everyone. There's something almost magical about putting emotions into words — in *any* language — and I genuinely never get tired of it.
 
-Driven by a deep passion for words and language, I am eager to take on new challenges and opportunities that allow me to create and write. Whether it be crafting my own works or breathing life into the words of others through translation.
+I'm always chasing the next creative challenge — whether that's writing something completely new or giving someone else's words a second life through translation. Honestly? I'd do this even if it weren't my job.
 
-If you have a project that requires linguistic expertise, a creative touch, and a dedication to preserving the essence of the written word, I would love to connect and collaborate. I'll help you to promote your brand and sell any kind of product by writing articles & posts to your or your brand's social media!`,
+Got a project that needs a creative, multilingual touch? Let's collab! Whether it's writing content for your brand, translating something precious, or creating posts that actually sound like a real human wrote them — I'm here for it. Drop me a message and let's make something great together 🌟`,
 };
 
 export const worktimeline = [
