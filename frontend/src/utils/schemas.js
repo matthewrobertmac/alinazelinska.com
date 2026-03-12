@@ -125,3 +125,56 @@ export const breadcrumbSchema = (items) => ({
     "item": item.url
   }))
 });
+
+export const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Alina Zelinska Ukrainian Tutoring",
+  "description": "Online Ukrainian, Russian, and English language lessons with a native speaker.",
+  "image": "https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/n9i5tibv_lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit.%20lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit%20%281%29.png",
+  "@id": "https://alinazelinska.com",
+  "url": "https://alinazelinska.com",
+  "telephone": "",
+  "email": "zelinskayaalinaig@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "",
+    "addressLocality": "Sliema",
+    "addressCountry": "MT"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 35.9122,
+    "longitude": 14.5019
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "Worldwide"
+  },
+  "priceRange": "$$",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "500"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "opens": "09:00",
+    "closes": "21:00"
+  },
+  "sameAs": [
+    "https://www.instagram.com/alin.a.zelinska/",
+    "https://www.linkedin.com/in/alina-zelinska-60317a281/",
+    "https://www.tiktok.com/@movalina.study"
+  ]
+};
+
