@@ -52,7 +52,7 @@ const LazyImage = ({
           alt={alt}
           className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
           onLoad={() => setIsLoaded(true)}
-          loading=\"lazy\"
+          loading="lazy"
           {...props}
         />
       )}
