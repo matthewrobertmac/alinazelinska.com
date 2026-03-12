@@ -57,6 +57,9 @@ const Contact = () => {
             <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
               {t('contact.subtitle')}
             </p>
+            <p className="text-sm text-[var(--color-text-secondary)] max-w-2xl mx-auto mt-3 opacity-80">
+              {t('contact.responseTime')}
+            </p>
           </motion.div>
 
           {/* Contact Cards */}
