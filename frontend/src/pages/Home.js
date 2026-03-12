@@ -193,6 +193,21 @@ const Home = () => {
                 description: t('home.whatIOffer.examPrep.description'),
                 icon: '📚',
               },
+              {
+                title: t('home.whatIOffer.poetryTranslation.title'),
+                description: t('home.whatIOffer.poetryTranslation.description'),
+                icon: '🌙',
+              },
+              {
+                title: t('home.whatIOffer.creativeWriting.title'),
+                description: t('home.whatIOffer.creativeWriting.description'),
+                icon: '✨',
+              },
+              {
+                title: t('home.whatIOffer.russianLessons.title'),
+                description: t('home.whatIOffer.russianLessons.description'),
+                icon: '🇷🇺',
+              },
             ].map((service, index) => (
               <motion.div
                 key={index}
