@@ -190,6 +190,42 @@ const Booking = () => {
             <p className="text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto mb-6">
               {t('booking.reassurance')}
             </p>
+
+            {/* Contact First Notice */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="max-w-2xl mx-auto mb-8"
+            >
+              <div className="card p-6 bg-gradient-to-br from-[var(--color-accent)]/10 to-transparent border-2 border-[var(--color-accent)]/30">
+                <div className="flex items-start gap-4">
+                  <span className="text-3xl flex-shrink-0">💌</span>
+                  <div>
+                    <h3 className="font-bold text-lg mb-2">Before You Book — Let's Connect!</h3>
+                    <p className="text-[var(--color-text-secondary)] leading-relaxed mb-3">
+                      Please <strong>message me first</strong> before making a payment so we can schedule your lesson together and make sure the timing works perfectly for both of us!
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <a
+                        href="https://www.instagram.com/alin.a.zelinska/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] transition-colors text-sm font-medium"
+                      >
+                        📱 Message on Instagram
+                      </a>
+                      <a
+                        href="mailto:zelinskayaalinaig@gmail.com"
+                        className="inline-flex items-center justify-center gap-2 px-4 py-2 border-2 border-[var(--color-accent)] text-[var(--color-accent)] rounded-lg hover:bg-[var(--color-accent)] hover:text-white transition-colors text-sm font-medium"
+                      >
+                        ✉️ Send Email
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
             
             {/* Currency Selector */}
             <div className="flex items-center justify-center gap-4 mb-6">
