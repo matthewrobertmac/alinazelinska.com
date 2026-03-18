@@ -17,9 +17,9 @@ def set_db(database):
     db = database
 
 
-# Admin credentials
-ADMIN_EMAIL = "zelinskayaalinaig@gmail.com"
-ADMIN_DEFAULT_PASSWORD = "mylina"
+# Admin credentials from environment variables
+ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'zelinskayaalinaig@gmail.com')
+ADMIN_DEFAULT_PASSWORD = os.environ.get('ADMIN_DEFAULT_PASSWORD', 'mylina')
 
 
 def hash_password(password: str) -> str:
