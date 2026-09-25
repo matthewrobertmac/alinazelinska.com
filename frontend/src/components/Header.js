@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FiSun, FiMoon, FiMenu, FiX, FiUser } from 'react-icons/fi';
-import { logotext } from '../data/content';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FiSun, FiMoon, FiUser, FiArrowRight } from 'react-icons/fi';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useAuth } from '../context/AuthContext';
+import './Header.css';
+import { ease } from '../utils/motion';
 
 const Header = ({ theme, toggleTheme }) => {
   const { t } = useTranslation();
@@ -14,155 +16,127 @@ const Header = ({ theme, toggleTheme }) => {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 24);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
-    { path: '/', label: t('nav.home') },
     { path: '/about', label: t('nav.about') },
     { path: '/testimonials', label: t('nav.testimonials') },
     { path: '/tiktok', label: t('nav.tiktok') },
-    { path: '/booking', label: t('nav.booking') },
+    { path: '/faq', label: 'FAQ' },
     { path: '/contact', label: t('nav.contact') },
   ];
 
   const isActive = (path) => location.pathname === path;
 
+  const ThemeIcon = theme === 'dark' ? FiSun : FiMoon;
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[var(--color-bg)] bg-opacity-95 backdrop-blur-md shadow-lg border-b border-[var(--color-border)]'
-          : 'bg-transparent'
-      }`}
-    >
-      <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link
-          to="/"
-          className="text-2xl md:text-3xl font-serif font-bold gradient-text hover:opacity-80 transition-opacity"
-          data-testid="logo-link"
-        >
-          {logotext}
+    <header className={`site-header ${isScrolled ? 'is-scrolled' : ''} ${isMobileMenuOpen ? 'is-open' : ''}`}>
+      <nav className="site-header__bar">
+        <Link to="/" className="wordmark" data-testid="logo-link" aria-label="Alina Zelinska — home">
+          <span className="wordmark__a">Alina</span>
+          <span className="wordmark__z">Zelinska</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="site-header__links">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
               data-testid={`nav-${link.label.toLowerCase()}`}
-              className={`font-medium transition-all duration-300 hover:text-[var(--color-accent)] relative ${
-                isActive(link.path)
-                  ? 'text-[var(--color-accent)]'
-                  : 'text-[var(--color-text)]'
-              }`}
+              className={`nav-link ${isActive(link.path) ? 'is-active' : ''}`}
             >
               {link.label}
-              {isActive(link.path) && (
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[var(--color-accent)] rounded-full"></span>
-              )}
             </Link>
           ))}
+        </div>
 
-          {/* Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            data-testid="theme-toggle"
-            className="p-2 rounded-full hover:bg-[var(--color-bg-secondary)] transition-all duration-300"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? (
-              <FiSun className="w-5 h-5 text-[var(--color-accent)]" />
-            ) : (
-              <FiMoon className="w-5 h-5 text-[var(--color-accent)]" />
-            )}
-          </button>
-
-          {/* Language Switcher */}
+        <div className="site-header__tools">
           <LanguageSwitcher />
-
-          {/* User Menu */}
+          <button onClick={toggleTheme} data-testid="theme-toggle" className="icon-btn icon-btn--desk" aria-label="Toggle theme">
+            <ThemeIcon />
+          </button>
           {isAuthenticated ? (
-            <Link
-              to="/profile"
-              className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-[var(--color-bg-secondary)] transition-all"
-            >
-              {user?.picture ? (
-                <img src={user.picture} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
-              ) : (
-                <div className="w-8 h-8 rounded-full bg-[var(--color-accent)] flex items-center justify-center">
-                  <FiUser className="w-4 h-4 text-white" />
-                </div>
-              )}
-              <span className="text-sm font-medium hidden lg:inline">{user?.name?.split(' ')[0]}</span>
+            <Link to="/profile" className="icon-btn" aria-label="Your profile">
+              {user?.picture ? <img src={user.picture} alt="" className="icon-btn__avatar" /> : <FiUser />}
             </Link>
           ) : (
-            <Link
-              to="/login"
-              className="btn-outline text-sm px-4 py-2"
-            >
+            <Link to="/login" className="nav-link nav-link--quiet nav-link--desk">
               Login
             </Link>
           )}
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center space-x-4">
+          <Link to="/booking" className="header-cta" data-testid="nav-book">
+            {t('nav.booking')}
+            <FiArrowRight />
+          </Link>
           <button
-            onClick={toggleTheme}
-            data-testid="theme-toggle-mobile"
-            className="p-2 rounded-full hover:bg-[var(--color-bg-secondary)] transition-all duration-300"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? (
-              <FiSun className="w-5 h-5 text-[var(--color-accent)]" />
-            ) : (
-              <FiMoon className="w-5 h-5 text-[var(--color-accent)]" />
-            )}
-          </button>
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => setIsMobileMenuOpen((o) => !o)}
             data-testid="mobile-menu-toggle"
-            className="p-2 rounded-lg hover:bg-[var(--color-bg-secondary)] transition-all duration-300"
+            className="burger"
             aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? (
-              <FiX className="w-6 h-6 text-[var(--color-accent)]" />
-            ) : (
-              <FiMenu className="w-6 h-6 text-[var(--color-accent)]" />
-            )}
+            <span />
+            <span />
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-[var(--color-bg)] bg-opacity-98 backdrop-blur-md border-t border-[var(--color-border)] shadow-xl">
-          <div className="px-6 py-4 space-y-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                data-testid={`mobile-nav-${link.label.toLowerCase()}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`block py-2 font-medium transition-colors duration-300 ${
-                  isActive(link.path)
-                    ? 'text-[var(--color-accent)]'
-                    : 'text-[var(--color-text)] hover:text-[var(--color-accent)]'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="mobile-menu"
+            initial={{ clipPath: 'inset(0 0 100% 0)' }}
+            animate={{ clipPath: 'inset(0 0 0% 0)' }}
+            exit={{ clipPath: 'inset(0 0 100% 0)' }}
+            transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+          >
+            <div className="mobile-menu__links">
+              {[{ path: '/', label: t('nav.home') }, ...navLinks, { path: '/booking', label: t('nav.booking') }].map(
+                (link, i) => (
+                  <motion.div
+                    key={link.path}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.25 + i * 0.05, ease }}
+                  >
+                    <Link
+                      to={link.path}
+                      data-testid={`mobile-nav-${link.label.toLowerCase()}`}
+                      className={isActive(link.path) ? 'is-active' : ''}
+                    >
+                      <span className="mobile-menu__num">{String(i + 1).padStart(2, '0')}</span>
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                )
+              )}
+            </div>
+            <div className="mobile-menu__foot">
+              <button onClick={toggleTheme} data-testid="theme-toggle-mobile" className="icon-btn" aria-label="Toggle theme">
+                <ThemeIcon />
+              </button>
+              <Link to={isAuthenticated ? '/profile' : '/login'}>{isAuthenticated ? 'Profile' : 'Login'}</Link>
+              <span lang="uk">Мова — це дім ✦</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

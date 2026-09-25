@@ -34,11 +34,8 @@ const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
 
 // Loading fallback component
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="text-center">
-      <div className="w-16 h-16 border-4 border-[var(--color-accent)] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-      <p className="text-[var(--color-text-secondary)]">Loading...</p>
-    </div>
+  <div className="page-loader" role="status" aria-label="Loading">
+    <span lang="uk">Хвилинку…</span>
   </div>
 );
 

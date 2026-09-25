@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { FiMail, FiLock, FiUser, FiEye, FiEyeOff } from 'react-icons/fi';
+import { FiMail, FiLock, FiUser, FiEye, FiEyeOff, FiArrowRight, FiAlertCircle } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { useAuth } from '../context/AuthContext';
 import { meta } from '../data/content';
+import PageHero from '../components/PageHero';
+import './auth.css';
+import { ease } from '../utils/motion';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -57,121 +60,128 @@ const Login = () => {
     }
   };
 
+  const heading = isRegister ? 'Create Account' : 'Welcome Back';
+  const [headFirst, headLast] = heading.split(' ');
+
   return (
-    <div className="page-transition pt-24 pb-16 min-h-screen flex items-center justify-center">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md mx-4"
-      >
-        <div className="card p-8">
-          <h1 className="text-3xl font-serif font-bold text-center mb-2">
-            {isRegister ? 'Create Account' : 'Welcome Back'}
-          </h1>
-          <p className="text-[var(--color-text-secondary)] text-center mb-8">
-            {isRegister ? 'Start your language learning journey' : 'Sign in to continue'}
-          </p>
-
-          {error && (
-            <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg text-sm">
-              {error}
-            </div>
-          )}
-
-          {/* Google Login Button */}
-          <button
-            onClick={loginWithGoogle}
-            className="w-full flex items-center justify-center gap-3 px-4 py-3 border-2 border-[var(--color-border)] rounded-lg hover:bg-[var(--color-bg-secondary)] transition-colors mb-6"
+    <div className="auth-page page-transition">
+      <PageHero
+        compact
+        eyebrow={isRegister ? 'New here' : 'Student area'}
+        uk={isRegister ? 'Вітаю' : 'Знову'}
+        title={
+          <>
+            {headFirst} <em>{headLast}</em>
+          </>
+        }
+        lede={isRegister ? 'Start your language learning journey' : 'Sign in to continue'}
+        aside={
+          <motion.div
+            key={isRegister ? 'register' : 'login'}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease }}
+            className="auth-panel"
           >
-            <FcGoogle className="w-5 h-5" />
-            <span className="font-medium">Continue with Google</span>
-          </button>
+            {error && (
+              <div className="auth-alert" role="alert">
+                <FiAlertCircle aria-hidden="true" />
+                <span>{error}</span>
+              </div>
+            )}
 
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-[var(--color-border)]"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-[var(--color-bg)] text-[var(--color-text-secondary)]">or</span>
-            </div>
-          </div>
+            {/* Google Login Button */}
+            <button type="button" onClick={loginWithGoogle} className="auth-google">
+              <FcGoogle aria-hidden="true" />
+              <span>Continue with Google</span>
+            </button>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {isRegister && (
+            <div className="auth-divider">
+              <span>or</span>
+            </div>
+
+            <form onSubmit={handleSubmit} className="auth-form">
+              {isRegister && (
+                <div>
+                  <label className="field-label" htmlFor="auth-name">Name</label>
+                  <div className="auth-input">
+                    <FiUser aria-hidden="true" />
+                    <input
+                      id="auth-name"
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="field"
+                      placeholder="Your name"
+                      required
+                    />
+                  </div>
+                </div>
+              )}
+
               <div>
-                <label className="block text-sm font-medium mb-2">Name</label>
-                <div className="relative">
-                  <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-text-secondary)]" />
+                <label className="field-label" htmlFor="auth-email">Email</label>
+                <div className="auth-input">
+                  <FiMail aria-hidden="true" />
                   <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] focus:border-[var(--color-accent)] focus:outline-none transition-colors"
-                    placeholder="Your name"
+                    id="auth-email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="field"
+                    placeholder="your@email.com"
                     required
                   />
                 </div>
               </div>
-            )}
 
-            <div>
-              <label className="block text-sm font-medium mb-2">Email</label>
-              <div className="relative">
-                <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-text-secondary)]" />
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] focus:border-[var(--color-accent)] focus:outline-none transition-colors"
-                  placeholder="your@email.com"
-                  required
-                />
+              <div>
+                <label className="field-label" htmlFor="auth-password">Password</label>
+                <div className="auth-input auth-input--toggle">
+                  <FiLock aria-hidden="true" />
+                  <input
+                    id="auth-password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={formData.password}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    className="field"
+                    placeholder="••••••••"
+                    required
+                    minLength={6}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="auth-input__toggle"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  >
+                    {showPassword ? <FiEyeOff /> : <FiEye />}
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">Password</label>
-              <div className="relative">
-                <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-text-secondary)]" />
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="w-full pl-10 pr-12 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] focus:border-[var(--color-accent)] focus:outline-none transition-colors"
-                  placeholder="••••••••"
-                  required
-                  minLength={6}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-secondary)] hover:text-[var(--color-text)]"
-                >
-                  {showPassword ? <FiEyeOff /> : <FiEye />}
-                </button>
-              </div>
-            </div>
+              <button type="submit" disabled={loading} className="btn-primary auth-submit">
+                {loading ? 'Please wait...' : isRegister ? 'Create Account' : 'Sign In'}
+                {!loading && <FiArrowRight />}
+              </button>
+            </form>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full btn-primary py-3 disabled:opacity-50"
-            >
-              {loading ? 'Please wait...' : isRegister ? 'Create Account' : 'Sign In'}
-            </button>
-          </form>
-
-          <p className="text-center mt-6 text-sm text-[var(--color-text-secondary)]">
-            {isRegister ? 'Already have an account?' : "Don't have an account?"}{' '}
-            <button
-              onClick={() => setIsRegister(!isRegister)}
-              className="text-[var(--color-accent)] font-medium hover:underline"
-            >
-              {isRegister ? 'Sign In' : 'Register'}
-            </button>
-          </p>
-        </div>
-      </motion.div>
+            <p className="auth-switch">
+              {isRegister ? 'Already have an account?' : "Don't have an account?"}{' '}
+              <button type="button" onClick={() => setIsRegister(!isRegister)} className="link-underline">
+                {isRegister ? 'Sign In' : 'Register'}
+              </button>
+            </p>
+          </motion.div>
+        }
+      >
+        <p className="auth-note">
+          Lessons, bookings and messages from Alina — all in one place.{' '}
+          <Link to="/booking" className="link-underline">
+            Not a student yet? Book a lesson.
+          </Link>
+        </p>
+      </PageHero>
     </div>
   );
 };

@@ -1,0 +1,200 @@
+/* ─── Accessibility menu ──────────────────────────────────── */
+
+.a11y {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+}
+
+@media (min-width: 768px) {
+  .a11y {
+    left: 1.5rem;
+    bottom: 1.5rem;
+  }
+}
+
+.a11y__toggle {
+  display: grid;
+  place-items: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 50%;
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-surface) 78%, transparent);
+  border: 1px solid var(--color-border-strong);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.35);
+  transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease,
+    transform 0.5s var(--ease-out);
+}
+
+.a11y__toggle svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.a11y__toggle:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.a11y__toggle.is-open {
+  color: var(--color-bg);
+  background: var(--color-text);
+  border-color: var(--color-text);
+}
+
+.a11y__panel {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.75rem);
+  width: min(17.5rem, calc(100vw - 2rem));
+  padding: 1.1rem 1.25rem 0.4rem;
+  border-radius: 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.3);
+  color: var(--color-text);
+}
+
+.a11y__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.85rem;
+}
+
+.a11y__head .eyebrow::before {
+  width: 1.25rem;
+}
+
+.a11y__close {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin-right: -0.4rem;
+  border-radius: 50%;
+  color: var(--color-muted);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.a11y__close:hover {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.a11y__close svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.a11y__row {
+  padding: 1rem 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.a11y__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.a11y__sizes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.a11y__chip {
+  display: grid;
+  place-items: center;
+  height: 2.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border-strong);
+  font-family: var(--font-display);
+  line-height: 1;
+  color: var(--color-text);
+  transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.a11y__chip--small {
+  font-size: 0.95rem;
+}
+
+.a11y__chip--normal {
+  font-size: 1.2rem;
+}
+
+.a11y__chip--large {
+  font-size: 1.5rem;
+}
+
+.a11y__chip:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.a11y__chip.is-active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+.a11y__switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+}
+
+.a11y__switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 2.6rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-bg-secondary);
+  transition: background 0.35s ease, border-color 0.35s ease;
+}
+
+.a11y__knob {
+  position: absolute;
+  top: 50%;
+  left: 0.2rem;
+  width: 1rem;
+  height: 1rem;
+  margin-top: -0.5rem;
+  border-radius: 50%;
+  background: var(--color-muted);
+  transition: transform 0.45s var(--ease-out), background 0.35s ease;
+}
+
+.a11y__switch.is-on {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.a11y__switch.is-on .a11y__knob {
+  transform: translateX(1.1rem);
+  background: var(--color-on-accent);
+}
+
+.a11y__switch-row:hover .a11y__switch:not(.is-on) {
+  border-color: var(--color-accent);
+}
+
+html.high-contrast .a11y__toggle:not(.is-open) {
+  background: var(--color-surface);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}

@@ -1,0 +1,186 @@
+/* ─── Success stories ─────────────────────────────────────── */
+
+/* Hero index of the three stories */
+.story-index {
+  list-style: none;
+  max-width: 34rem;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.story-index li {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.story-index .num {
+  font-size: 1.15rem;
+}
+
+.story-index li > span:last-child {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+}
+
+.story-index small {
+  margin-left: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* Story aside */
+.story__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.story__num {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.story__who {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Generated avatars are re-inked in the palette rather than their own colours */
+.story__avatar {
+  flex-shrink: 0;
+  display: block;
+  width: 5.5rem;
+  height: 5.5rem;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 20px 40px -20px var(--glow-rose);
+}
+
+.story__avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: luminosity;
+  filter: contrast(1.1);
+}
+
+.story__who h2 {
+  font-size: clamp(3rem, 7vw, 4.6rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.story__country {
+  margin-top: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.story__facts {
+  align-self: stretch;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.story__facts > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.story__facts dt {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.story__facts dd {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-style: italic;
+  text-align: right;
+  color: var(--color-text);
+}
+
+/* Story body */
+.story__quote {
+  position: relative;
+}
+
+.story__mark {
+  display: block;
+  height: 4rem;
+  font-family: var(--font-display);
+  font-size: 8rem;
+  line-height: 1;
+  color: var(--color-accent);
+  opacity: 0.4;
+}
+
+.story__quote p {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2.6vw, 2.05rem);
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: -0.005em;
+  color: var(--color-text);
+}
+
+.story__highlights {
+  display: grid;
+  margin-top: 3.5rem;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+@media (min-width: 700px) {
+  .story__highlights {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2rem;
+  }
+}
+
+.story__highlights > div {
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+@media (min-width: 700px) {
+  .story__highlights > div {
+    border-bottom: none;
+  }
+}
+
+.story__highlights dt {
+  margin-bottom: 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.story__highlights dd {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* Closing — long title */

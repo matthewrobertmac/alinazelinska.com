@@ -1,0 +1,373 @@
+/* ─── The Living Lexicon ──────────────────────────────────── */
+
+.lexicon {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.lex-word {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15em;
+  font-family: var(--font-display);
+  font-size: var(--size);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-accent);
+  opacity: var(--rest);
+  filter: blur(var(--blur));
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+  transition: opacity 0.6s var(--ease-out), filter 0.6s var(--ease-out), color 0.6s ease;
+}
+
+.lex-word.is-near .lex-uk {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.lex-uk {
+  display: inline-block;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: transform 0.6s var(--ease-out);
+}
+
+/* Letters begin scattered, blurred and faint… */
+.lex-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translate(var(--sx), var(--sy)) rotate(var(--sr)) scale(0.6);
+  filter: blur(8px);
+  transition:
+    transform 1.6s var(--ease-out) calc(var(--i) * 55ms),
+    opacity 1.2s ease calc(var(--i) * 55ms),
+    filter 1.4s var(--ease-out) calc(var(--i) * 55ms);
+}
+
+/* …then condense into a word. */
+.lex-word.is-formed .lex-letter {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* On retirement they drift apart again, a little faster. */
+.lex-word.is-dissolving .lex-letter {
+  transition:
+    transform 1.5s cubic-bezier(0.5, 0, 0.75, 0) calc(var(--i) * 35ms),
+    opacity 1.1s ease calc(var(--i) * 35ms),
+    filter 1.2s ease calc(var(--i) * 35ms);
+}
+
+.lex-word.is-dissolving {
+  pointer-events: none;
+}
+
+/* Gloss (romanisation · English) unfurls beneath on hover or catch */
+.lex-gloss {
+  display: flex;
+  gap: 0.4em;
+  align-items: baseline;
+  font-family: var(--font-body);
+  font-size: clamp(11px, calc(var(--size) * 0.32), 14px);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--color-text-secondary);
+  opacity: 0;
+  transform: translateY(-4px);
+  clip-path: inset(0 50% 0 50%);
+  transition: opacity 0.4s ease, transform 0.5s var(--ease-out), clip-path 0.6s var(--ease-out);
+}
+
+.lex-tr {
+  font-style: italic;
+}
+
+.lex-dot {
+  color: var(--color-accent);
+}
+
+.lex-en {
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.18em;
+}
+
+.lex-word.is-hover,
+.lex-word.is-caught {
+  opacity: 1;
+  filter: none;
+}
+
+.lex-word.is-hover .lex-uk {
+  transform: scale(1.08);
+}
+
+.lex-word.is-hover .lex-gloss,
+.lex-word.is-caught .lex-gloss {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+
+/* Caught — the word turns to leaf gold and shimmers */
+.lex-word.is-caught .lex-uk {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 18px var(--glow-gold));
+}
+
+.lex-word.is-caught .lex-letter {
+  color: transparent;
+  background: linear-gradient(
+    110deg,
+    var(--color-gold) 0%,
+    var(--color-gold-bright) 35%,
+    #fff5d6 50%,
+    var(--color-gold-bright) 65%,
+    var(--color-gold) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gold-sheen 3.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 60ms);
+}
+
+.lex-word.is-caught .lex-gloss {
+  color: var(--color-gold);
+}
+
+@keyframes gold-sheen {
+  0%, 100% {
+    background-position: 100% 0;
+  }
+  50% {
+    background-position: 0 0;
+  }
+}
+
+.lex-speak {
+  margin-top: 0.35rem;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: var(--color-gold);
+  background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-gold) 40%, transparent);
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s var(--ease-out), background 0.3s ease;
+  animation: pop-in 0.5s var(--ease-out);
+}
+
+.lex-speak:hover {
+  transform: scale(1.1);
+  background: var(--color-surface);
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+
+/* Gold ring that ripples out where a word is caught */
+.lex-bloom {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  border: 1px solid var(--color-gold-bright);
+  box-shadow: 0 0 24px var(--glow-gold), inset 0 0 12px var(--glow-gold);
+  pointer-events: none;
+  z-index: 50;
+  animation: bloom 1.1s var(--ease-out) forwards;
+}
+
+@keyframes bloom {
+  from {
+    opacity: 1;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 0;
+    transform: scale(9);
+  }
+}
+
+/* ─── Hint & word jar ─────────────────────────────────────── */
+
+.lex-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 1.75rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transform: translateX(-50%);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.lex-hint__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold-bright);
+  box-shadow: 0 0 0 0 var(--glow-gold);
+  animation: hint-pulse 2s ease-out infinite;
+}
+
+@keyframes hint-pulse {
+  70% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.lex-jar {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 30;
+}
+
+@media (min-width: 1024px) {
+  .lex-jar {
+    left: 2.5rem;
+    bottom: 2rem;
+  }
+}
+
+.lex-jar__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 1rem 0.45rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-surface) 75%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-gold) 35%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-soft);
+  transition: border-color 0.3s ease, transform 0.4s var(--ease-out);
+}
+
+.lex-jar__toggle:hover {
+  border-color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+.lex-jar__count {
+  display: grid;
+  place-items: center;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #2a1d08;
+  background: linear-gradient(135deg, var(--color-gold-bright), var(--color-gold));
+}
+
+.lex-jar__panel {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.75rem);
+  width: min(20rem, calc(100vw - 3rem));
+  max-height: 22rem;
+  overflow: auto;
+  padding: 1.1rem 1.25rem;
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.3);
+}
+
+.lex-jar__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  color: var(--color-muted);
+}
+
+.lex-jar__panel ul {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.lex-jar__panel li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.lex-jar__panel li button {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--color-gold);
+  transition: color 0.2s ease;
+}
+
+.lex-jar__panel li button:not(:disabled):hover {
+  color: var(--color-accent);
+}
+
+.lex-jar__panel li button:disabled {
+  cursor: default;
+}
+
+.lex-jar__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+}
+
+.lex-jar__foot a {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.lex-jar__foot button {
+  color: var(--color-muted);
+}
+
+.lex-jar__foot button:hover {
+  color: var(--color-text);
+}

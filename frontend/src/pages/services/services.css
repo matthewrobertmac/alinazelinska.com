@@ -1,0 +1,535 @@
+/* ─── Service pages (shared template) ────────────────────────
+   Ukrainian · Russian · Speaking Club · Poetry Translation · Creative Writing
+   Hero → who it's for → what you get → process / examples → FAQ → closing
+   ─────────────────────────────────────────────────────────── */
+
+/* ─── Hero extras ─────────────────────────────────────────── */
+
+.svc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.svc-pairs-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.75rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-style: italic;
+  color: var(--color-text);
+}
+
+.svc-pairs-line span[aria-hidden] {
+  font-style: normal;
+  font-size: 1.1rem;
+  color: var(--color-gold);
+}
+
+/* Ledger — a small paper slip of key facts beside the hero title */
+.svc-ledger {
+  position: relative;
+  max-width: 26rem;
+  margin: 0 auto;
+  padding: 2.25rem 2rem 1.25rem;
+  background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 40px 80px -48px var(--glow-rose);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@media (min-width: 1024px) {
+  .svc-ledger {
+    margin: 0 0 0 auto;
+  }
+}
+
+.svc-ledger__label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.svc-ledger dl > div {
+  display: grid;
+  grid-template-columns: minmax(0, 6.5rem) 1fr;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.svc-ledger dt {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+}
+
+.svc-ledger dt em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.svc-ledger dd {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--color-text-secondary);
+}
+
+.svc-ledger dd strong {
+  display: block;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ─── Audience / offering cards (numeral + title + text) ──── */
+
+.svc-cards {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 700px) {
+  .svc-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .svc-cards--three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.svc-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2.25rem 1.9rem 2.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
+}
+
+.svc-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -30px var(--glow-rose);
+}
+
+.svc-card::after {
+  content: '';
+  position: absolute;
+  left: 1.9rem;
+  right: 1.9rem;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s var(--ease-out);
+}
+
+.svc-card:hover::after {
+  transform: scaleX(1);
+}
+
+.svc-card .num {
+  font-size: 3rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.svc-card h3 {
+  margin: 2rem 0 0.85rem;
+  font-size: 1.85rem;
+}
+
+.svc-card p {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+/* ─── Numbered checklist (what you'll learn / style) ──────── */
+
+.svc-checks {
+  list-style: none;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+@media (min-width: 720px) {
+  .svc-checks--cols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+  }
+}
+
+.svc-checks li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--color-text);
+}
+
+.svc-checks .num {
+  font-size: 1.25rem;
+}
+
+/* ─── Process / steps ─────────────────────────────────────── */
+
+.svc-steps > li {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0.35rem 1rem;
+}
+
+.svc-steps .num {
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+
+.svc-steps h3 {
+  font-size: 1.75rem;
+}
+
+.svc-steps p {
+  grid-column: 2;
+  max-width: 38rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+/* ─── Q&A rows ────────────────────────────────────────────── */
+
+.svc-faq > li {
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (min-width: 900px) {
+  .svc-faq > li {
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 3rem;
+    padding: 2.25rem 0;
+  }
+}
+
+.svc-faq h3 {
+  font-size: 1.7rem;
+  line-height: 1.15;
+}
+
+.svc-faq h3::before {
+  content: 'Q.';
+  margin-right: 0.5rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-gold);
+}
+
+.svc-faq p {
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+/* ─── Student quotes ──────────────────────────────────────── */
+
+.svc-quotes {
+  columns: 1;
+  column-gap: 1.25rem;
+}
+
+@media (min-width: 720px) {
+  .svc-quotes {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1100px) {
+  .svc-quotes--three {
+    columns: 3;
+  }
+}
+
+.svc-quote {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  break-inside: avoid;
+  margin: 0 0 1.25rem;
+  padding: 2.5rem 1.9rem 1.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.svc-quote::before {
+  content: '“';
+  position: absolute;
+  top: 0.4rem;
+  left: 1.5rem;
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  line-height: 1;
+  color: var(--color-accent);
+  opacity: 0.35;
+}
+
+.svc-quote blockquote {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+.svc-quote figcaption {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.svc-quote img {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+}
+
+.svc-quote strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.svc-quote figcaption span {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.svc-more {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+/* ─── Feature columns (speaking club) ─────────────────────── */
+
+.svc-features {
+  list-style: none;
+  display: grid;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+@media (min-width: 700px) {
+  .svc-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .svc-features {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.svc-features li {
+  padding: 2rem 1.5rem 2.25rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+@media (min-width: 1100px) {
+  .svc-features li {
+    padding: 2.25rem 1.75rem 0 0;
+    border-bottom: none;
+  }
+  .svc-features li + li {
+    padding-left: 1.75rem;
+    border-left: 1px solid var(--color-border);
+  }
+}
+
+.svc-features__icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.2rem;
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border-radius: 50%;
+}
+
+.svc-features h3 {
+  margin: 1.5rem 0 0.7rem;
+  font-size: 1.75rem;
+}
+
+.svc-features p {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
+/* ─── Themes list (speaking club) ─────────────────────────── */
+
+.svc-themes {
+  list-style: none;
+  display: grid;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+@media (min-width: 800px) {
+  .svc-themes {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 4rem;
+  }
+}
+
+.svc-themes li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  gap: 0.35rem 1rem;
+  align-items: baseline;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.svc-themes .num {
+  font-size: 1.35rem;
+}
+
+.svc-themes h3 {
+  font-size: 1.7rem;
+}
+
+.svc-themes p {
+  grid-column: 2;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.svc-themes__icon {
+  grid-column: 3;
+  grid-row: 1;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* ─── Who should join (bold lead-in rows) ─────────────────── */
+
+.svc-join li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
+.svc-join .num {
+  font-size: 1.35rem;
+}
+
+.svc-join strong {
+  font-family: var(--font-display);
+  font-size: 1.35em;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.svc-note {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  background: var(--color-accent-soft);
+  border-left: 2px solid var(--color-accent);
+  border-radius: 0 0.9rem 0.9rem 0;
+}
+
+.svc-note strong {
+  color: var(--color-text);
+}
+
+/* ─── Language pairs (poetry) ─────────────────────────────── */
+
+.svc-pairs {
+  list-style: none;
+  display: grid;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+@media (min-width: 800px) {
+  .svc-pairs {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 4rem;
+  }
+}
+
+.svc-pairs li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.svc-pairs__to {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.svc-pairs__arrow {
+  align-self: center;
+  font-size: 1.1rem;
+  color: var(--color-gold);
+}
+
+/* ─── Philosophy / prose emphasis ─────────────────────────── */
+
+.svc-prose em {
+  font-family: var(--font-display);
+  font-size: 1.12em;
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+/* ─── Closing with a longer headline ──────────────────────── */
+

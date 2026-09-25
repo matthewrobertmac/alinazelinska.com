@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { FiUser, FiMail, FiGlobe, FiClock, FiCamera, FiSave, FiLogOut, FiBell, FiBook, FiLock } from 'react-icons/fi';
+import { FiUser, FiMail, FiGlobe, FiClock, FiCamera, FiSave, FiLogOut, FiBell, FiBook, FiLock, FiArrowUpRight, FiAlertCircle, FiCheck } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 import { meta } from '../data/content';
+import PageHero from '../components/PageHero';
+import './auth.css';
+import './profile.css';
+import { ease } from '../utils/motion';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -204,21 +208,22 @@ const Profile = () => {
     }
   };
 
+  // Status → tokenised pill modifier (see profile.css)
   const getStatusBadge = (status) => {
     const badges = {
-      pending: 'bg-yellow-100 text-yellow-800',
-      approved: 'bg-green-100 text-green-800',
-      denied: 'bg-red-100 text-red-800',
-      rescheduled: 'bg-blue-100 text-blue-800',
-      completed: 'bg-gray-100 text-gray-800',
+      pending: 'profile-status--pending',
+      approved: 'profile-status--approved',
+      denied: 'profile-status--denied',
+      rescheduled: 'profile-status--rescheduled',
+      completed: 'profile-status--completed',
     };
-    return badges[status] || 'bg-gray-100 text-gray-800';
+    return badges[status] || 'profile-status--completed';
   };
 
   if (authLoading || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[var(--color-accent)] border-t-transparent"></div>
+      <div className="page-loader" role="status" aria-live="polite">
+        <span>Loading…</span>
       </div>
     );
   }
@@ -226,67 +231,47 @@ const Profile = () => {
   const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
-    <div className="page-transition pt-24 pb-16">
-      <section className="section-padding">
-        <div className="max-w-4xl mx-auto">
-          {/* Profile Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="card p-8 mb-8"
-          >
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              {/* Profile Photo */}
-              <div className="relative">
-                <div className="w-24 h-24 rounded-full overflow-hidden bg-[var(--color-bg-secondary)]">
-                  {profile.picture ? (
-                    <img src={profile.picture} alt={profile.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <FiUser className="w-12 h-12 text-[var(--color-text-secondary)]" />
-                    </div>
-                  )}
-                </div>
-                <label className="absolute bottom-0 right-0 w-8 h-8 bg-[var(--color-accent)] rounded-full flex items-center justify-center cursor-pointer hover:bg-[var(--color-accent-hover)] transition-colors">
-                  <FiCamera className="w-4 h-4 text-white" />
-                  <input type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
-                </label>
-              </div>
-
-              {/* Profile Info */}
-              <div className="flex-1 text-center md:text-left">
-                <h1 className="text-2xl font-serif font-bold">{profile.name}</h1>
-                <p className="text-[var(--color-text-secondary)]">{profile.email}</p>
-                {profile.role === 'admin' && (
-                  <span className="inline-block mt-2 px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">
-                    Admin
-                  </span>
-                )}
-              </div>
-
-              {/* Actions */}
-              <div className="flex gap-3">
-                {profile.role === 'admin' && (
-                  <button
-                    onClick={() => navigate('/admin')}
-                    className="btn-primary flex items-center gap-2"
-                  >
-                    Admin Dashboard
-                  </button>
-                )}
-                <button
-                  onClick={handleLogout}
-                  className="btn-outline flex items-center gap-2 text-red-500 border-red-500 hover:bg-red-50"
-                >
-                  <FiLogOut className="w-4 h-4" />
-                  Logout
-                </button>
-              </div>
+    <div className="profile-page page-transition">
+      <PageHero
+        compact
+        eyebrow="Your account"
+        uk="Кабінет"
+        title={<em>{profile.name}</em>}
+        lede={profile.email}
+        aside={
+          <div className="profile-avatar">
+            <div className="profile-avatar__frame">
+              {profile.picture ? (
+                <img src={profile.picture} alt={profile.name} />
+              ) : (
+                <FiUser aria-hidden="true" />
+              )}
             </div>
-          </motion.div>
+            <label className="profile-avatar__upload" aria-label="Upload profile photo">
+              <FiCamera aria-hidden="true" />
+              <input type="file" accept="image/*" onChange={handlePhotoUpload} hidden />
+            </label>
+          </div>
+        }
+      >
+        <div className="profile-actions">
+          {profile.role === 'admin' && <span className="chip">Admin</span>}
+          {profile.role === 'admin' && (
+            <button type="button" onClick={() => navigate('/admin')} className="btn-primary">
+              Admin Dashboard <FiArrowUpRight />
+            </button>
+          )}
+          <button type="button" onClick={handleLogout} className="btn-outline">
+            <FiLogOut />
+            Logout
+          </button>
+        </div>
+      </PageHero>
 
+      <section className="page-section profile-section">
+        <div className="section-shell">
           {/* Tabs */}
-          <div className="flex gap-2 mb-6 overflow-x-auto">
+          <div className="profile-tabs" role="tablist">
             {[
               { id: 'profile', label: 'Profile', icon: FiUser },
               { id: 'bookings', label: 'My Bookings', icon: FiBook },
@@ -294,20 +279,15 @@ const Profile = () => {
             ].map(tab => (
               <button
                 key={tab.id}
+                type="button"
+                role="tab"
+                aria-selected={activeTab === tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
-                  activeTab === tab.id
-                    ? 'bg-[var(--color-accent)] text-white'
-                    : 'bg-[var(--color-bg-secondary)] hover:bg-[var(--color-border)]'
-                }`}
+                className={`profile-tab ${activeTab === tab.id ? 'is-active' : ''}`}
               >
-                <tab.icon className="w-4 h-4" />
+                <tab.icon aria-hidden="true" />
                 {tab.label}
-                {tab.badge > 0 && (
-                  <span className="ml-1 px-2 py-0.5 bg-red-500 text-white text-xs rounded-full">
-                    {tab.badge}
-                  </span>
-                )}
+                {tab.badge > 0 && <span className="profile-tab__badge">{tab.badge}</span>}
               </button>
             ))}
           </div>
@@ -317,64 +297,65 @@ const Profile = () => {
             key={activeTab}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="card p-6"
+            transition={{ duration: 0.6, ease }}
+            className="profile-panel"
           >
             {activeTab === 'profile' && (
-              <div className="space-y-6">
-                <div className="flex justify-between items-center">
-                  <h2 className="text-xl font-serif font-bold">Profile Settings</h2>
+              <div>
+                <header className="profile-panel__head">
+                  <div>
+                    <p className="eyebrow">Settings</p>
+                    <h2>Profile Settings</h2>
+                  </div>
                   {!editing ? (
-                    <button onClick={() => setEditing(true)} className="btn-outline text-sm">
+                    <button type="button" onClick={() => setEditing(true)} className="btn-outline profile-btn-sm">
                       Edit
                     </button>
                   ) : (
-                    <div className="flex gap-2">
-                      <button onClick={() => setEditing(false)} className="btn-outline text-sm">
+                    <div className="profile-panel__buttons">
+                      <button type="button" onClick={() => setEditing(false)} className="btn-outline profile-btn-sm">
                         Cancel
                       </button>
-                      <button onClick={handleSave} disabled={saving} className="btn-primary text-sm flex items-center gap-2">
-                        <FiSave className="w-4 h-4" />
+                      <button type="button" onClick={handleSave} disabled={saving} className="btn-primary profile-btn-sm">
+                        <FiSave />
                         {saving ? 'Saving...' : 'Save'}
                       </button>
                     </div>
                   )}
-                </div>
+                </header>
 
-                <div className="grid gap-4">
+                <div className="profile-fields">
                   <div>
-                    <label className="block text-sm font-medium mb-2 flex items-center gap-2">
-                      <FiUser className="w-4 h-4" /> Name
+                    <label className="field-label profile-label" htmlFor="profile-name">
+                      <FiUser aria-hidden="true" /> Name
                     </label>
                     <input
+                      id="profile-name"
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       disabled={!editing}
-                      className="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] disabled:opacity-60"
+                      className="field"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2 flex items-center gap-2">
-                      <FiMail className="w-4 h-4" /> Email
+                    <label className="field-label profile-label" htmlFor="profile-email">
+                      <FiMail aria-hidden="true" /> Email
                     </label>
-                    <input
-                      type="email"
-                      value={profile.email}
-                      disabled
-                      className="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] opacity-60"
-                    />
+                    <input id="profile-email" type="email" value={profile.email} disabled className="field" />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2 flex items-center gap-2">
-                      <FiGlobe className="w-4 h-4" /> Language Learning
+                    <label className="field-label profile-label" htmlFor="profile-language">
+                      <FiGlobe aria-hidden="true" /> Language Learning
                     </label>
                     <select
+                      id="profile-language"
                       value={formData.language_learning}
                       onChange={(e) => setFormData({ ...formData, language_learning: e.target.value })}
                       disabled={!editing}
-                      className="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] disabled:opacity-60"
+                      className="field"
                     >
                       <option value="">Select language</option>
                       <option value="ukrainian">Ukrainian</option>
@@ -384,14 +365,15 @@ const Profile = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2 flex items-center gap-2">
-                      <FiClock className="w-4 h-4" /> Timezone
+                    <label className="field-label profile-label" htmlFor="profile-timezone">
+                      <FiClock aria-hidden="true" /> Timezone
                     </label>
                     <select
+                      id="profile-timezone"
                       value={formData.timezone}
                       onChange={(e) => setFormData({ ...formData, timezone: e.target.value })}
                       disabled={!editing}
-                      className="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] disabled:opacity-60"
+                      className="field"
                     >
                       <option value="UTC">UTC</option>
                       <option value="America/New_York">Eastern Time (US)</option>
@@ -407,59 +389,64 @@ const Profile = () => {
 
                 {/* Change Password Section - Only for email/password users */}
                 {profile.auth_provider === 'email' && (
-                  <div className="mt-8 pt-6 border-t border-[var(--color-border)]">
-                    <h3 className="text-lg font-serif font-bold mb-4 flex items-center gap-2">
-                      <FiLock className="w-5 h-5" /> Change Password
-                    </h3>
-                    
-                    <div className="grid gap-4 max-w-md">
+                  <div className="profile-password">
+                    <div className="profile-password__aside">
+                      <p className="eyebrow">Security</p>
+                      <h3>
+                        <FiLock aria-hidden="true" /> Change Password
+                      </h3>
+                    </div>
+
+                    <div className="profile-password__fields">
                       <div>
-                        <label className="block text-sm font-medium mb-2">Current Password</label>
+                        <label className="field-label" htmlFor="profile-current-password">Current Password</label>
                         <input
+                          id="profile-current-password"
                           type="password"
                           value={passwordData.current_password}
                           onChange={(e) => setPasswordData({ ...passwordData, current_password: e.target.value })}
-                          className="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]"
+                          className="field"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium mb-2">New Password</label>
+                        <label className="field-label" htmlFor="profile-new-password">New Password</label>
                         <input
+                          id="profile-new-password"
                           type="password"
                           value={passwordData.new_password}
                           onChange={(e) => setPasswordData({ ...passwordData, new_password: e.target.value })}
-                          className="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]"
+                          className="field"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium mb-2">Confirm New Password</label>
+                        <label className="field-label" htmlFor="profile-confirm-password">Confirm New Password</label>
                         <input
+                          id="profile-confirm-password"
                           type="password"
                           value={passwordData.confirm_password}
                           onChange={(e) => setPasswordData({ ...passwordData, confirm_password: e.target.value })}
-                          className="w-full px-4 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]"
+                          className="field"
                         />
                       </div>
 
                       {passwordError && (
-                        <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-                          {passwordError}
+                        <div className="auth-alert" role="alert">
+                          <FiAlertCircle aria-hidden="true" />
+                          <span>{passwordError}</span>
                         </div>
                       )}
 
                       {passwordSuccess && (
-                        <div className="p-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm">
-                          {passwordSuccess}
+                        <div className="auth-alert auth-alert--ok" role="status">
+                          <FiCheck aria-hidden="true" />
+                          <span>{passwordSuccess}</span>
                         </div>
                       )}
 
-                      <button
-                        onClick={handleChangePassword}
-                        className="btn-primary flex items-center gap-2 justify-center"
-                      >
-                        <FiLock className="w-4 h-4" />
+                      <button type="button" onClick={handleChangePassword} className="btn-primary">
+                        <FiLock />
                         Change Password
                       </button>
                     </div>
@@ -470,76 +457,75 @@ const Profile = () => {
 
             {activeTab === 'bookings' && (
               <div>
-                <h2 className="text-xl font-serif font-bold mb-4">My Bookings</h2>
+                <header className="profile-panel__head">
+                  <div>
+                    <p className="eyebrow">Lessons</p>
+                    <h2>My Bookings</h2>
+                  </div>
+                </header>
                 {bookings.length === 0 ? (
-                  <p className="text-[var(--color-text-secondary)] text-center py-8">
-                    No bookings yet. <a href="/booking" className="text-[var(--color-accent)]">Book a lesson</a>
+                  <p className="profile-empty">
+                    No bookings yet.{' '}
+                    <a href="/booking" className="link-underline">
+                      Book a lesson
+                    </a>
                   </p>
                 ) : (
-                  <div className="space-y-4">
+                  <ul className="profile-list">
                     {bookings.map(booking => (
-                      <div key={booking.booking_id} className="p-4 border border-[var(--color-border)] rounded-lg">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="font-medium">{booking.package_name}</h3>
-                            <p className="text-sm text-[var(--color-text-secondary)]">
-                              ${booking.amount} • {new Date(booking.created_at).toLocaleDateString()}
+                      <li key={booking.booking_id} className="profile-booking">
+                        <div>
+                          <h3>{booking.package_name}</h3>
+                          <p className="profile-booking__meta">
+                            ${booking.amount} • {new Date(booking.created_at).toLocaleDateString()}
+                          </p>
+                          {booking.admin_notes && (
+                            <p className="profile-booking__note">Note: {booking.admin_notes}</p>
+                          )}
+                          {booking.suggested_datetime && (
+                            <p className="profile-booking__suggested">
+                              Suggested time: {booking.suggested_datetime}
                             </p>
-                            {booking.admin_notes && (
-                              <p className="text-sm mt-2 p-2 bg-[var(--color-bg-secondary)] rounded">
-                                Note: {booking.admin_notes}
-                              </p>
-                            )}
-                            {booking.suggested_datetime && (
-                              <p className="text-sm mt-1 text-blue-600">
-                                Suggested time: {booking.suggested_datetime}
-                              </p>
-                            )}
-                          </div>
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusBadge(booking.booking_status)}`}>
-                            {booking.booking_status}
-                          </span>
+                          )}
                         </div>
-                      </div>
+                        <span className={`profile-status ${getStatusBadge(booking.booking_status)}`}>
+                          {booking.booking_status}
+                        </span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 )}
               </div>
             )}
 
             {activeTab === 'notifications' && (
               <div>
-                <h2 className="text-xl font-serif font-bold mb-4">Notifications</h2>
+                <header className="profile-panel__head">
+                  <div>
+                    <p className="eyebrow">Inbox</p>
+                    <h2>Notifications</h2>
+                  </div>
+                </header>
                 {notifications.length === 0 ? (
-                  <p className="text-[var(--color-text-secondary)] text-center py-8">
-                    No notifications yet.
-                  </p>
+                  <p className="profile-empty">No notifications yet.</p>
                 ) : (
-                  <div className="space-y-3">
+                  <ul className="profile-list">
                     {notifications.map(notification => (
-                      <div
+                      <li
                         key={notification.notification_id}
                         onClick={() => !notification.read && markNotificationRead(notification.notification_id)}
-                        className={`p-4 rounded-lg cursor-pointer transition-colors ${
-                          notification.read
-                            ? 'bg-[var(--color-bg-secondary)]'
-                            : 'bg-pink-50 border-l-4 border-[var(--color-accent)]'
-                        }`}
+                        className={`profile-note ${notification.read ? '' : 'is-unread'}`}
                       >
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h3 className="font-medium">{notification.title}</h3>
-                            <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-                              {notification.message}
-                            </p>
-                          </div>
-                          <span className="text-xs text-[var(--color-text-secondary)]">
-                            {new Date(notification.created_at).toLocaleDateString()}
-                          </span>
+                        <div>
+                          <h3>{notification.title}</h3>
+                          <p>{notification.message}</p>
                         </div>
-                      </div>
+                        <span className="profile-note__date">
+                          {new Date(notification.created_at).toLocaleDateString()}
+                        </span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 )}
               </div>
             )}

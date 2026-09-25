@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiCalendar, FiX } from 'react-icons/fi';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { FiCalendar, FiX, FiArrowRight } from 'react-icons/fi';
+import './FloatingBookButton.css';
+import { ease } from '../utils/motion';
 
 const FloatingBookButton = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const location = useLocation();
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     // Don't show on booking page
@@ -48,37 +51,29 @@ const FloatingBookButton = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
+          initial={{ y: reduce ? 0 : 24, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          transition={{ duration: 0.3, type: 'spring' }}
-          className="fixed bottom-6 right-6 z-50"
+          exit={{ y: reduce ? 0 : 24, opacity: 0 }}
+          transition={{ duration: reduce ? 0.2 : 0.6, ease }}
+          className="float-book"
         >
-          <div className="relative">
-            {/* Close button */}
-            <button
-              onClick={handleDismiss}
-              className="absolute -top-2 -right-2 w-6 h-6 bg-gray-800 text-white rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors z-10"
-              aria-label="Dismiss"
-            >
-              <FiX className="w-4 h-4" />
-            </button>
+          {/* Main button */}
+          <Link to="/booking" className="float-book__cta" data-testid="floating-book-btn">
+            <FiCalendar className="float-book__icon" aria-hidden="true" />
+            <span>Book a Lesson</span>
+            <FiArrowRight className="float-book__arrow" aria-hidden="true" />
+          </Link>
 
-            {/* Main button */}
-            <Link
-              to="/booking"
-              className="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-[var(--color-accent)] to-pink-600 text-white rounded-full shadow-2xl hover:shadow-pink-500/50 transition-all hover:scale-105 group"
-            >
-              <FiCalendar className="w-6 h-6" />
-              <span className="font-bold text-lg">Book a Lesson</span>
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                →
-              </motion.span>
-            </Link>
-          </div>
+          {/* Close button */}
+          <button
+            type="button"
+            onClick={handleDismiss}
+            className="float-book__dismiss"
+            aria-label="Dismiss"
+            data-testid="floating-book-dismiss"
+          >
+            <FiX aria-hidden="true" />
+          </button>
         </motion.div>
       )}
     </AnimatePresence>

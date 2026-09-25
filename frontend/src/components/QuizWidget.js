@@ -1,39 +1,42 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiCheck } from 'react-icons/fi';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { FiCheck, FiArrowRight, FiRotateCcw } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import './QuizWidget.css';
+import { ease } from '../utils/motion';
 
 const QuizWidget = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showResult, setShowResult] = useState(false);
+  const reduce = useReducedMotion();
 
   const questions = [
     {
       q: "What's your current level?",
       options: [
-        { value: "beginner", label: "Complete beginner", icon: "🌱" },
-        { value: "heritage", label: "Heritage speaker (understand but can't speak)", icon: "🏠" },
-        { value: "intermediate", label: "I can have basic conversations", icon: "🚀" },
-        { value: "advanced", label: "Pretty fluent, want to polish", icon: "✨" }
+        { value: "beginner", label: "Complete beginner" },
+        { value: "heritage", label: "Heritage speaker (understand but can't speak)" },
+        { value: "intermediate", label: "I can have basic conversations" },
+        { value: "advanced", label: "Pretty fluent, want to polish" }
       ]
     },
     {
       q: "What's your main goal?",
       options: [
-        { value: "family", label: "Connect with family", icon: "👨‍👩‍👧‍👦" },
-        { value: "travel", label: "Travel & cultural exploration", icon: "✈️" },
-        { value: "work", label: "Professional / Business", icon: "💼" },
-        { value: "heritage", label: "Reconnect with my roots", icon: "🌿" },
-        { value: "fun", label: "Personal interest / fun!", icon: "🎉" }
+        { value: "family", label: "Connect with family" },
+        { value: "travel", label: "Travel & cultural exploration" },
+        { value: "work", label: "Professional / Business" },
+        { value: "heritage", label: "Reconnect with my roots" },
+        { value: "fun", label: "Personal interest / fun!" }
       ]
     },
     {
       q: "How much time can you dedicate per week?",
       options: [
-        { value: "1hr", label: "1-2 hours (1 lesson)", icon: "⏰" },
-        { value: "3hr", label: "3-4 hours (2 lessons + practice)", icon: "📚" },
-        { value: "5hr", label: "5+ hours (intensive learning)", icon: "🔥" }
+        { value: "1hr", label: "1-2 hours (1 lesson)" },
+        { value: "3hr", label: "3-4 hours (2 lessons + practice)" },
+        { value: "5hr", label: "5+ hours (intensive learning)" }
       ]
     }
   ];
@@ -84,89 +87,125 @@ const QuizWidget = () => {
     setShowResult(false);
   };
 
+  const total = questions.length;
+  const pad = (n) => String(n).padStart(2, '0');
+  const letters = 'ABCDEFGH';
+  const progress = ((currentQuestion + 1) / total) * 100;
+  const recommendation = showResult ? getRecommendation() : null;
+  const chosenLabels = questions
+    .map((q, i) => q.options.find((o) => o.value === answers[i]))
+    .filter(Boolean)
+    .map((o) => o.label);
+
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="quiz" data-testid="quiz-widget">
       <AnimatePresence mode="wait">
         {!showResult ? (
           <motion.div
             key={currentQuestion}
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: reduce ? 0 : 16 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-            className="card p-8"
+            exit={{ opacity: 0, x: reduce ? 0 : -16 }}
+            transition={{ duration: reduce ? 0.15 : 0.45, ease }}
+            className="quiz__panel"
           >
-            {/* Progress Bar */}
-            <div className="mb-6">
-              <div className="flex justify-between text-sm text-[var(--color-text-secondary)] mb-2">
-                <span>Question {currentQuestion + 1} of {questions.length}</span>
-                <span>{Math.round(((currentQuestion + 1) / questions.length) * 100)}%</span>
+            {/* Progress */}
+            <div className="quiz__progress">
+              <div className="quiz__meta">
+                <span className="quiz__step">
+                  <span className="num">{pad(currentQuestion + 1)}</span>
+                  <span className="quiz__of">/ {pad(total)}</span>
+                </span>
+                <span className="quiz__pct">
+                  Question {currentQuestion + 1} of {total} · {Math.round(progress)}%
+                </span>
               </div>
-              <div className="w-full h-2 bg-[var(--color-bg-secondary)] rounded-full overflow-hidden">
+              <div
+                className="quiz__track"
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={Math.round(progress)}
+                aria-label={`Question ${currentQuestion + 1} of ${total}`}
+              >
                 <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-                  className="h-full bg-gradient-to-r from-[var(--color-accent)] to-pink-600"
-                  transition={{ duration: 0.5 }}
+                  className="quiz__fill"
+                  initial={{ width: `${(currentQuestion / total) * 100}%` }}
+                  animate={{ width: `${progress}%` }}
+                  transition={{ duration: reduce ? 0 : 0.8, ease }}
                 />
               </div>
             </div>
 
             {/* Question */}
-            <h3 className="text-2xl font-serif font-bold mb-6">
+            <h3 className="quiz__question" id={`quiz-q-${currentQuestion}`}>
               {questions[currentQuestion].q}
             </h3>
 
             {/* Options */}
-            <div className="space-y-3">
-              {questions[currentQuestion].options.map((option, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => handleAnswer(option.value)}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full p-4 text-left rounded-lg border-2 border-[var(--color-border)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/5 transition-all flex items-center gap-3"
-                >
-                  <span className="text-2xl">{option.icon}</span>
-                  <span className="flex-grow">{option.label}</span>
-                  {answers[currentQuestion] === option.value && (
-                    <FiCheck className="w-5 h-5 text-[var(--color-accent)]" />
-                  )}
-                </motion.button>
-              ))}
-            </div>
+            <ul className="quiz__options" role="list" aria-labelledby={`quiz-q-${currentQuestion}`}>
+              {questions[currentQuestion].options.map((option, index) => {
+                const selected = answers[currentQuestion] === option.value;
+                return (
+                  <li key={index}>
+                    <button
+                      type="button"
+                      onClick={() => handleAnswer(option.value)}
+                      className={`quiz__option ${selected ? 'is-selected' : ''}`}
+                      aria-pressed={selected}
+                      data-testid={`quiz-option-${option.value}`}
+                    >
+                      <span className="quiz__letter" aria-hidden="true">{letters[index]}</span>
+                      <span className="quiz__label">{option.label}</span>
+                      <span className="quiz__check" aria-hidden="true">
+                        {selected ? <FiCheck /> : <FiArrowRight />}
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
           </motion.div>
         ) : (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="card p-8 text-center"
+            key="result"
+            initial={{ opacity: 0, y: reduce ? 0 : 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: reduce ? 0.15 : 0.7, ease }}
+            className="quiz__panel quiz__result"
+            data-testid="quiz-result"
+            aria-live="polite"
           >
-            <div className="w-20 h-20 bg-gradient-to-br from-[var(--color-accent)] to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <span className="text-4xl">🎯</span>
-            </div>
-            <h3 className="text-3xl font-serif font-bold mb-4">
-              Perfect! Here's What I Recommend:
+            <p className="eyebrow quiz__result-eyebrow">Your recommendation</p>
+            <h3 className="quiz__result-title">
+              Perfect! Here&rsquo;s what I <em className="display-italic">recommend</em>
             </h3>
-            <div className="mb-6">
-              <p className="text-2xl font-bold text-[var(--color-accent)] mb-3">
-                {getRecommendation().package}
-              </p>
-              <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed">
-                {getRecommendation().reason}
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to={getRecommendation().link}
-                className="btn-primary inline-flex items-center gap-2"
-              >
+
+            <p className="quiz__package" data-testid="quiz-package">
+              {recommendation.package}
+            </p>
+            <p className="quiz__reason">{recommendation.reason}</p>
+
+            {chosenLabels.length > 0 && (
+              <ul className="quiz__answers" aria-label="Your answers">
+                {chosenLabels.map((label) => (
+                  <li key={label} className="chip">{label}</li>
+                ))}
+              </ul>
+            )}
+
+            <div className="quiz__actions">
+              <Link to={recommendation.link} className="btn-primary" data-testid="quiz-book-btn">
                 Book This Package
+                <FiArrowRight aria-hidden="true" />
               </Link>
               <button
+                type="button"
                 onClick={resetQuiz}
-                className="btn-outline inline-flex items-center gap-2"
+                className="btn-outline"
+                data-testid="quiz-retake-btn"
               >
+                <FiRotateCcw aria-hidden="true" />
                 Retake Quiz
               </button>
             </div>

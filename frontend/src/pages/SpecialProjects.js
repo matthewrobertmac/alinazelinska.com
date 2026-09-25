@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FiArrowRight, FiBook, FiMusic, FiSmartphone, FiCheck } from 'react-icons/fi';
+import { FiArrowRight, FiArrowUpRight, FiBook, FiMusic, FiSmartphone, FiCheck } from 'react-icons/fi';
 import { meta } from '../data/content';
+import PageHero from '../components/PageHero';
+import { clean } from '../utils/text';
+import './special-projects.css';
+import { reveal, stagger } from '../utils/motion';
+
+// Strip leading emoji ("📚 Book Translation" → "Book Translation"); trailing ones go via clean().
+const stripLead = (s) => clean(s).replace(/^[\s\p{Extended_Pictographic}‍️]+/u, '');
+
+const pad = (n) => String(n).padStart(2, '0');
 
 const SpecialProjects = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -20,210 +29,185 @@ const SpecialProjects = () => {
   ];
 
   return (
-    <div className="page-transition pt-24 pb-16">
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-b from-transparent to-[var(--color-bg-secondary)]">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6">
-              Special Projects & Collaborations ✨
-            </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] mx-auto rounded-full mb-6"></div>
-            <p className="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-3xl mx-auto leading-relaxed">
-              Beyond the classroom — where language meets creativity, strategy, and impact.
-            </p>
-            <p className="text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto mt-4">
-              Teaching is my heart, but these projects are where I get to stretch creatively. From translating books that matter, to writing songs that move people, to helping tech teams build apps that actually teach effectively — this is where language becomes something bigger.
-            </p>
-          </motion.div>
+    <div className="sp-page page-transition">
+      <PageHero
+        crumbs={[{ name: 'Special Projects' }]}
+        eyebrow="Beyond the classroom"
+        uk="Проєкти"
+        title={
+          <>
+            Special projects &amp; <em>collaborations.</em>
+          </>
+        }
+        lede="Beyond the classroom — where language meets creativity, strategy, and impact."
+      >
+        <p className="sp-intro">
+          Teaching is my heart, but these projects are where I get to stretch creatively. From translating books that
+          matter, to writing songs that move people, to helping tech teams build apps that actually teach effectively —
+          this is where language becomes something bigger.
+        </p>
+      </PageHero>
 
-          {/* Filter Tabs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-3 mb-16"
-          >
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all ${
-                  activeTab === tab.id
-                    ? 'bg-[var(--color-accent)] text-white shadow-lg'
-                    : 'bg-[var(--color-bg-secondary)] hover:bg-[var(--color-accent)]/10 border-2 border-[var(--color-border)]'
-                }`}
-              >
-                {tab.label}
-              </button>
+      {/* ─── Index / filter ───────────────────────────────── */}
+      <nav className="sp-index" aria-label="Filter projects">
+        <div className="section-shell">
+          <ul className="sp-index__list" role="tablist">
+            {tabs.map((tab, index) => (
+              <li key={tab.id}>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`sp-index__tab ${activeTab === tab.id ? 'is-active' : ''}`}
+                >
+                  <span className="num">{pad(index)}</span>
+                  <span>{stripLead(tab.label)}</span>
+                </button>
+              </li>
             ))}
-          </motion.div>
+          </ul>
         </div>
-      </section>
+      </nav>
 
-      {/* Book Translation Section */}
+      {/* ─── 01 · Book translation ────────────────────────── */}
       {(activeTab === 'all' || activeTab === 'books') && (
-        <section className="section-padding bg-[var(--color-bg)]">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="mb-12"
-            >
-              <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-center">
-                Book Translation Projects 📚
-              </h2>
-              <p className="text-lg text-[var(--color-text-secondary)] max-w-3xl mx-auto text-center">
-                Translation isn't just swapping words between languages — it's carrying meaning, tone, and soul across borders. I specialize in high-stakes, culturally significant work where accuracy and artistry both matter.
+        <section className="page-section sp-chapter">
+          <div className="section-shell">
+            <motion.header {...reveal} className="section-head section-head--split">
+              <div>
+                <p className="eyebrow">01 · Translation</p>
+                <h2>{clean('Book Translation Projects 📚')}</h2>
+              </div>
+              <p>
+                Translation isn't just swapping words between languages — it's carrying meaning, tone, and soul across
+                borders. I specialize in high-stakes, culturally significant work where accuracy and artistry both
+                matter.
               </p>
-            </motion.div>
+            </motion.header>
 
             {/* Featured Book Project */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="card p-8 md:p-12 mb-12"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Book Cover */}
-                <div className="flex justify-center">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg blur-xl opacity-20"></div>
-                    <img
-                      src="https://via.placeholder.com/300x450/3B82F6/FFFFFF?text=Management+in+Times+of+War"
-                      alt="Management in Times of War Book Cover"
-                      className="relative rounded-lg shadow-2xl w-full max-w-xs"
-                    />
-                  </div>
-                </div>
-
-                {/* Project Details */}
-                <div className="md:col-span-2 space-y-6">
-                  <div>
-                    <div className="inline-block px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-medium mb-3">
-                      Featured Translation
-                    </div>
-                    <h3 className="text-3xl font-serif font-bold mb-2">
-                      Management in Times of War
-                    </h3>
-                    <p className="text-[var(--color-text-secondary)] italic mb-4">
-                      Менеджмент у воєнний час
-                    </p>
-                    <div className="flex flex-wrap gap-4 text-sm mb-6">
-                      <span className="flex items-center gap-2">
-                        <span className="font-semibold">Translation:</span> Ukrainian → English
-                      </span>
-                      <span className="flex items-center gap-2">
-                        <span className="font-semibold">Status:</span> Published
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="prose max-w-none">
-                    <p className="text-[var(--color-text-secondary)] leading-relaxed mb-4">
-                      This wasn't just a translation project — it was a responsibility. "Management in Times of War" offers critical insights for leaders navigating crisis, and I wanted to make sure every strategic concept, every cultural nuance, and every ounce of urgency carried over into English.
-                    </p>
-                    <p className="text-[var(--color-text-secondary)] leading-relaxed mb-4">
-                      Working on this book reminded me why translation matters: words have power, especially in times that demand clarity and action.
-                    </p>
-                  </div>
-
-                  <div className="bg-[var(--color-bg-secondary)] rounded-lg p-6">
-                    <h4 className="font-bold mb-3">Why This Project Mattered:</h4>
-                    <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
-                      In times of global uncertainty, Ukrainian voices deserve to be heard beyond language barriers. This translation ensures that leaders, educators, and change-makers worldwide can learn from Ukraine's resilience and strategic thinking.
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div className="flex items-start gap-2">
-                      <FiCheck className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span>Preserved technical terminology</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <FiCheck className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span>Cultural context adaptation</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <FiCheck className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span>Author collaboration</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <FiCheck className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span>Authentic voice preservation</span>
-                    </div>
-                  </div>
+            <motion.article {...reveal} className="sp-feature">
+              <div className="sp-feature__cover">
+                <div className="sp-feature__frame">
+                  <img
+                    src="https://via.placeholder.com/300x450/3B82F6/FFFFFF?text=Management+in+Times+of+War"
+                    alt="Management in Times of War Book Cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                  <span className="sp-feature__fallback" aria-hidden="true">
+                    <FiBook />
+                    <span>Management in Times of War</span>
+                  </span>
                 </div>
               </div>
-            </motion.div>
+
+              <div className="sp-feature__body">
+                <span className="chip">Featured Translation</span>
+                <h3>Management in Times of War</h3>
+                <p className="sp-feature__uk" lang="uk">
+                  Менеджмент у воєнний час
+                </p>
+
+                <dl className="sp-feature__meta">
+                  <div>
+                    <dt>Translation:</dt>
+                    <dd>Ukrainian → English</dd>
+                  </div>
+                  <div>
+                    <dt>Status:</dt>
+                    <dd>Published</dd>
+                  </div>
+                </dl>
+
+                <div className="prose-ink sp-feature__prose">
+                  <p>
+                    This wasn't just a translation project — it was a responsibility. "Management in Times of War"
+                    offers critical insights for leaders navigating crisis, and I wanted to make sure every strategic
+                    concept, every cultural nuance, and every ounce of urgency carried over into English.
+                  </p>
+                  <p>
+                    Working on this book reminded me why translation matters: words have power, especially in times
+                    that demand clarity and action.
+                  </p>
+                </div>
+
+                <aside className="sp-pull">
+                  <h4>Why This Project Mattered:</h4>
+                  <p>
+                    In times of global uncertainty, Ukrainian voices deserve to be heard beyond language barriers. This
+                    translation ensures that leaders, educators, and change-makers worldwide can learn from Ukraine's
+                    resilience and strategic thinking.
+                  </p>
+                </aside>
+
+                <ul className="sp-checks">
+                  {[
+                    'Preserved technical terminology',
+                    'Cultural context adaptation',
+                    'Author collaboration',
+                    'Authentic voice preservation',
+                  ].map((item) => (
+                    <li key={item}>
+                      <FiCheck aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.article>
 
             {/* Other Translation Work */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="card p-6"
-            >
-              <h4 className="text-xl font-serif font-bold mb-4">Other Translation Work:</h4>
-              <ul className="space-y-2 text-[var(--color-text-secondary)]">
-                <li className="flex items-start gap-2">
-                  <span className="text-[var(--color-accent)]">•</span>
-                  <span>Poetry collections (Ukrainian ↔ English ↔ Russian)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[var(--color-accent)]">•</span>
-                  <span>Cultural essays and articles</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[var(--color-accent)]">•</span>
-                  <span>Literary projects with emotional depth</span>
-                </li>
-              </ul>
-              <div className="mt-6">
-                <Link
-                  to="/contact"
-                  className="btn-primary inline-flex items-center gap-2"
-                >
-                  Have a manuscript that needs a translator who cares?
-                  <FiArrowRight className="w-5 h-5" />
-                </Link>
+            <div className="split sp-other">
+              <motion.header {...reveal} className="split__aside section-head">
+                <p className="eyebrow">Also on my desk</p>
+                <h3 className="sp-subhead">Other Translation Work:</h3>
+              </motion.header>
+              <div>
+                <ol className="rule-list sp-rows">
+                  {[
+                    'Poetry collections (Ukrainian ↔ English ↔ Russian)',
+                    'Cultural essays and articles',
+                    'Literary projects with emotional depth',
+                  ].map((item, index) => (
+                    <motion.li key={item} {...stagger(index)}>
+                      <span className="num">{pad(index + 1)}</span>
+                      <span>{item}</span>
+                    </motion.li>
+                  ))}
+                </ol>
+                <motion.div {...reveal} className="sp-cta">
+                  <Link to="/contact" className="btn-primary sp-cta__btn">
+                    Have a manuscript that needs a translator who cares?
+                    <FiArrowRight />
+                  </Link>
+                </motion.div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
       )}
 
-      {/* Music & Songwriting Section */}
+      {/* ─── 02 · Music & songwriting ─────────────────────── */}
       {(activeTab === 'all' || activeTab === 'music') && (
-        <section className="section-padding bg-[var(--color-bg-secondary)]">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="mb-12"
-            >
-              <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-center">
-                Songwriting & Music Creation 🎵
-              </h2>
-              <p className="text-lg text-[var(--color-text-secondary)] max-w-3xl mx-auto text-center">
-                Words set to music hit differently. I write songs that feel like poetry, conversations, and confessions all at once — in Ukrainian, Russian, or English.
+        <section className="page-section page-section--tint sp-chapter">
+          <div className="section-shell">
+            <motion.header {...reveal} className="section-head section-head--split">
+              <div>
+                <p className="eyebrow">
+                  02 · Music <FiMusic aria-hidden="true" />
+                </p>
+                <h2>{clean('Songwriting & Music Creation 🎵')}</h2>
+              </div>
+              <p>
+                Words set to music hit differently. I write songs that feel like poetry, conversations, and confessions
+                all at once — in Ukrainian, Russian, or English.
               </p>
-            </motion.div>
+            </motion.header>
 
-            {/* What I Create Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <ol className="sp-grid-list">
               {[
                 {
                   title: 'Original Songs',
@@ -246,122 +230,90 @@ const SpecialProjects = () => {
                   icon: '🤝',
                 },
               ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="card p-6 hover-lift"
-                >
-                  <div className="text-4xl mb-3">{item.icon}</div>
-                  <h3 className="text-xl font-serif font-bold mb-3 text-[var(--color-accent)]">
-                    {item.title}
-                  </h3>
-                  <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                    {item.description}
-                  </p>
-                </motion.div>
+                <motion.li key={item.title} {...stagger(index % 2)}>
+                  <span className="num">{pad(index + 1)}</span>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                  <span className="sp-grid-list__icon" aria-hidden="true">
+                    {item.icon}
+                  </span>
+                </motion.li>
               ))}
-            </div>
+            </ol>
 
             {/* Sample Lyric */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="card p-8 md:p-12 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 text-center"
-            >
-              <h4 className="text-2xl font-serif font-bold mb-6">Sample Lyric Excerpt</h4>
-              <div className="max-w-2xl mx-auto space-y-4 text-lg">
-                <p className="font-serif italic text-[var(--color-accent)] text-2xl">
-                  Між зорями і снами
-                </p>
-                <p className="text-sm text-[var(--color-text-secondary)]">
-                  (Between the stars and dreams)
-                </p>
-                <p className="font-serif italic text-[var(--color-accent)] text-2xl">
-                  Я знайшла себе
-                </p>
-                <p className="text-sm text-[var(--color-text-secondary)]">
-                  (I found myself)
-                </p>
-                <p className="font-serif italic text-[var(--color-accent)] text-2xl">
-                  У словах, що ти мені шептав
-                </p>
-                <p className="text-sm text-[var(--color-text-secondary)]">
-                  (In the words you whispered to me)
-                </p>
-              </div>
-            </motion.div>
+            <motion.figure {...reveal} className="sp-lyric">
+              <figcaption className="eyebrow">Sample Lyric Excerpt</figcaption>
+              <blockquote>
+                {[
+                  ['Між зорями і снами', 'Between the stars and dreams'],
+                  ['Я знайшла себе', 'I found myself'],
+                  ['У словах, що ти мені шептав', 'In the words you whispered to me'],
+                ].map(([uk, en]) => (
+                  <p key={uk}>
+                    <span className="sp-lyric__uk" lang="uk">
+                      {uk}
+                    </span>
+                    <span className="sp-lyric__en">({en})</span>
+                  </p>
+                ))}
+              </blockquote>
+            </motion.figure>
 
-            {/* Music CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center mt-8"
-            >
-              <Link
-                to="/contact"
-                className="btn-primary inline-flex items-center gap-2"
-              >
+            <motion.div {...reveal} className="sp-cta sp-cta--center">
+              <Link to="/contact" className="btn-primary sp-cta__btn">
                 Let's create your next song
-                <FiArrowRight className="w-5 h-5" />
+                <FiArrowRight />
               </Link>
             </motion.div>
           </div>
         </section>
       )}
 
-      {/* Language Learning App Consulting Section */}
+      {/* ─── 03 · Language app consulting ─────────────────── */}
       {(activeTab === 'all' || activeTab === 'apps') && (
-        <section className="section-padding bg-[var(--color-bg)]">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="mb-12"
-            >
-              <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-center">
-                Language Learning App Consulting 🚀
-              </h2>
-              <p className="text-lg text-[var(--color-text-secondary)] max-w-3xl mx-auto text-center">
-                Building an app? Great. Building an app that actually <em>teaches</em>? That's where I come in.
+        <section className="page-section sp-chapter">
+          <div className="section-shell">
+            <motion.header {...reveal} className="section-head section-head--split">
+              <div>
+                <p className="eyebrow">
+                  03 · EdTech <FiSmartphone aria-hidden="true" />
+                </p>
+                <h2>{clean('Language Learning App Consulting 🚀')}</h2>
+              </div>
+              <p>
+                Building an app? Great. Building an app that actually <em className="sp-em">teaches</em>? That's where I
+                come in.
               </p>
-            </motion.div>
+            </motion.header>
 
             {/* The Problem */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="card p-8 mb-12 bg-gradient-to-br from-[var(--color-accent)]/5 to-transparent border-l-4 border-[var(--color-accent)]"
-            >
-              <h3 className="text-2xl font-serif font-bold mb-4">The Problem Most Apps Have:</h3>
-              <p className="text-[var(--color-text-secondary)] leading-relaxed mb-4">
-                Here's the thing: most language apps are built by brilliant developers and designers who've never stood in front of a confused beginner trying to understand cases. They're technically impressive but pedagogically... questionable.
-              </p>
-              <p className="text-[var(--color-text)] font-semibold">
-                You don't need another feature. You need someone who knows how humans actually learn.
-              </p>
-            </motion.div>
+            <div className="split sp-block">
+              <motion.header {...reveal} className="split__aside section-head">
+                <p className="eyebrow">The problem</p>
+                <h3 className="sp-subhead">The Problem Most Apps Have:</h3>
+              </motion.header>
+              <motion.div {...reveal} className="prose-ink sp-problem">
+                <p>
+                  Here's the thing: most language apps are built by brilliant developers and designers who've never
+                  stood in front of a confused beginner trying to understand cases. They're technically impressive but
+                  pedagogically... questionable.
+                </p>
+                <p className="sp-problem__punch">
+                  You don't need another feature. You need someone who knows how humans actually learn.
+                </p>
+              </motion.div>
+            </div>
 
             {/* What Makes Me Different */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="mb-12"
-            >
-              <h3 className="text-2xl font-serif font-bold mb-6 text-center">What Makes Me Different:</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="split sp-block">
+              <motion.header {...reveal} className="split__aside section-head">
+                <p className="eyebrow">Credentials</p>
+                <h3 className="sp-subhead">What Makes Me Different:</h3>
+              </motion.header>
+              <ul className="rule-list sp-diff">
                 {[
                   {
                     icon: '👩‍🏫',
@@ -379,82 +331,75 @@ const SpecialProjects = () => {
                     icon: '🤖',
                     text: "I've seen AI fail - And I know how to make it better",
                   },
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start gap-3 card p-4">
-                    <span className="text-3xl flex-shrink-0">{item.icon}</span>
-                    <p className="text-[var(--color-text-secondary)]">{item.text}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+                ].map((item, index) => {
+                  const [lead, ...rest] = item.text.split(' - ');
+                  return (
+                    <motion.li key={item.text} {...stagger(index)}>
+                      <span className="num">{pad(index + 1)}</span>
+                      <p>
+                        <strong>{lead}</strong>
+                        {rest.length > 0 && <span> — {rest.join(' - ')}</span>}
+                      </p>
+                    </motion.li>
+                  );
+                })}
+              </ul>
+            </div>
 
-            {/* Services Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {/* Services — editorial index */}
+            <motion.header {...reveal} className="section-head sp-services-head">
+              <p className="eyebrow">Services</p>
+              <h3 className="sp-subhead">How we can work together</h3>
+            </motion.header>
+            <ol className="sp-services">
               {[
                 {
-                  icon: <FiBook className="w-8 h-8" />,
+                  icon: <FiBook />,
                   title: 'App Audits & UX Review 🔍',
                   description: "I'll use your app like a student would and tell you what's confusing, what's brilliant, and where the learning design falls apart.",
                   deliverable: 'Detailed report with prioritized recommendations',
-                  color: 'from-teal-400 to-cyan-500',
                 },
                 {
-                  icon: <FiBook className="w-8 h-8" />,
+                  icon: <FiBook />,
                   title: 'Curriculum & Content Development 📝',
                   description: "You focus on the tech. I'll build the learning experience: lesson progression, vocabulary selection, grammar explanations, exercises, and cultural context.",
                   deliverable: 'Complete learning curriculum, ready to implement',
-                  color: 'from-blue-400 to-indigo-500',
                 },
                 {
-                  icon: <FiSmartphone className="w-8 h-8" />,
+                  icon: <FiSmartphone />,
                   title: 'AI Model Training & Evaluation 🤖',
                   description: "Using AI for conversation practice, grammar correction, or adaptive learning? I'll help you make it pedagogically sound, not just technically impressive.",
                   deliverable: 'Training data, evaluation criteria, prompt engineering',
-                  color: 'from-purple-400 to-pink-500',
                 },
                 {
-                  icon: <FiSmartphone className="w-8 h-8" />,
+                  icon: <FiSmartphone />,
                   title: 'Strategic Consulting 💡',
                   description: "Feature prioritization, monetization strategies, retention tactics, and localization strategy — all aligned with actual educational outcomes.",
                   deliverable: 'Strategic roadmap with actionable steps',
-                  color: 'from-rose-400 to-pink-500',
                 },
               ].map((service, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="card p-8 hover-lift"
-                >
-                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 text-white`}>
-                    {service.icon}
-                  </div>
-                  <h4 className="text-xl font-serif font-bold mb-3">
-                    {service.title}
-                  </h4>
-                  <p className="text-[var(--color-text-secondary)] mb-4 leading-relaxed">
-                    {service.description}
+                <motion.li key={service.title} {...stagger(index)} className="sp-service">
+                  <span className="sp-service__num">{pad(index + 1)}</span>
+                  <h4>{clean(service.title)}</h4>
+                  <p className="sp-service__desc">{service.description}</p>
+                  <p className="sp-service__deliverable">
+                    <span className="sp-service__icon" aria-hidden="true">
+                      {service.icon}
+                    </span>
+                    <span>
+                      <span className="field-label">Deliverable:</span>
+                      {service.deliverable}
+                    </span>
                   </p>
-                  <div className="text-sm">
-                    <span className="font-semibold">Deliverable:</span>
-                    <span className="text-[var(--color-text-secondary)]"> {service.deliverable}</span>
-                  </div>
-                </motion.div>
+                </motion.li>
               ))}
-            </div>
+            </ol>
 
             {/* Ideal Clients */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="card p-8 mb-12"
-            >
-              <h3 className="text-2xl font-serif font-bold mb-6 text-center">Ideal Clients:</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <motion.div {...reveal} className="sp-clients">
+              <p className="eyebrow">Who it's for</p>
+              <h3 className="sp-subhead">Ideal Clients:</h3>
+              <ul>
                 {[
                   '🚀 Startups building language learning apps',
                   '🤖 AI companies developing conversational agents',
@@ -462,86 +407,60 @@ const SpecialProjects = () => {
                   '🏢 Corporate teams creating training tools',
                   '🎓 EdTech platforms expanding into new languages',
                   '🌍 Localization agencies needing subject matter experts',
-                ].map((client, index) => (
-                  <div key={index} className="flex items-start gap-2">
-                    <span className="flex-shrink-0">{client.split(' ')[0]}</span>
-                    <span className="text-[var(--color-text-secondary)]">
-                      {client.split(' ').slice(1).join(' ')}
+                ].map((client) => (
+                  <li key={client}>
+                    <span className="sp-clients__icon" aria-hidden="true">
+                      {client.split(' ')[0]}
                     </span>
-                  </div>
+                    <span>{client.split(' ').slice(1).join(' ')}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </motion.div>
 
             {/* Why Ukrainian/Russian Apps Need Me */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="card p-8 md:p-12 bg-gradient-to-br from-[var(--color-accent)]/10 to-transparent"
-            >
-              <h3 className="text-2xl font-serif font-bold mb-4">
-                Why Ukrainian/Russian Apps Need Me Specifically:
-              </h3>
-              <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed italic">
-                "Slavic languages are <strong>hard</strong> for English speakers. Cases, aspects, gendered nouns — it's a lot. Most apps either oversimplify (useless) or overwhelm (discouraging). I know how to find the middle ground because I've walked hundreds of students through it. If you're building a Ukrainian or Russian learning app, I'm not just helpful — I'm essential."
-              </p>
-            </motion.div>
+            <motion.figure {...reveal} className="sp-quote">
+              <figcaption className="eyebrow">Why Ukrainian/Russian Apps Need Me Specifically:</figcaption>
+              <blockquote>
+                "Slavic languages are <strong>hard</strong> for English speakers. Cases, aspects, gendered nouns — it's
+                a lot. Most apps either oversimplify (useless) or overwhelm (discouraging). I know how to find the
+                middle ground because I've walked hundreds of students through it. If you're building a Ukrainian or
+                Russian learning app, I'm not just helpful — I'm essential."
+              </blockquote>
+            </motion.figure>
 
-            {/* App Consulting CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center mt-8"
-            >
-              <Link
-                to="/contact"
-                className="btn-primary inline-flex items-center gap-2"
-              >
+            <motion.div {...reveal} className="sp-cta sp-cta--center">
+              <Link to="/contact" className="btn-primary sp-cta__btn">
                 Building a language app? Let's make it actually work
-                <FiArrowRight className="w-5 h-5" />
+                <FiArrowRight />
               </Link>
             </motion.div>
           </div>
         </section>
       )}
 
-      {/* Bottom CTA */}
-      <section className="section-padding">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="card p-8 md:p-12 bg-gradient-to-br from-[var(--color-accent)]/10 to-transparent"
-          >
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
-              Ready to Collaborate? 🌟
-            </h2>
-            <p className="text-lg text-[var(--color-text-secondary)] mb-8">
-              Whether it's a book that needs translating, a song that needs writing, or an app that needs an educator's touch — let's create something meaningful together.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/contact"
-                className="btn-primary inline-flex items-center gap-2"
-              >
-                Get In Touch
-                <FiArrowRight className="w-5 h-5" />
-              </Link>
-              <a
-                href="mailto:zelinskayaalinaig@gmail.com"
-                className="btn-outline inline-flex items-center gap-2"
-              >
-                Email Me Directly
-              </a>
-            </div>
-          </motion.div>
-        </div>
+      {/* ─── Closing ──────────────────────────────────────── */}
+      <section className="closing">
+        <motion.div {...reveal} className="closing__inner">
+          <p className="closing__uk" lang="uk">
+            Створімо щось разом.
+          </p>
+          <h2>
+            Ready to <em className="display-italic">collaborate?</em>
+          </h2>
+          <p className="closing__sub">
+            Whether it's a book that needs translating, a song that needs writing, or an app that needs an educator's
+            touch — let's create something meaningful together.
+          </p>
+          <div className="closing__actions">
+            <Link to="/contact" className="btn-primary">
+              Get In Touch <FiArrowRight />
+            </Link>
+            <a href="mailto:zelinskayaalinaig@gmail.com" className="btn-outline">
+              Email Me Directly <FiArrowUpRight />
+            </a>
+          </div>
+        </motion.div>
       </section>
     </div>
   );

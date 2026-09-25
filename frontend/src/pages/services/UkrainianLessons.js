@@ -1,8 +1,16 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FiArrowRight, FiCheck } from 'react-icons/fi';
+import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
 import { meta, testimonials } from '../../data/content';
+import PageHero from '../../components/PageHero';
+import SEOHead from '../../components/SEOHead';
+import { ukrainianCourseSchema, breadcrumbSchema } from '../../utils/schemas';
+import './services.css';
+import { reveal, stagger } from '../../utils/motion';
+
+const pad = (i) => String(i + 1).padStart(2, '0');
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
 
 const UkrainianLessons = () => {
   useEffect(() => {
@@ -11,7 +19,7 @@ const UkrainianLessons = () => {
   }, []);
 
   // Filter Ukrainian testimonials
-  const ukrainianTestimonials = testimonials.filter(t => 
+  const ukrainianTestimonials = testimonials.filter(t =>
     t.lessons.toLowerCase().includes('ukrainian')
   );
 
@@ -65,7 +73,7 @@ const UkrainianLessons = () => {
   ];
 
   return (
-    <div className="page-transition pt-24 pb-16">
+    <div className="svc-page page-transition">
       <SEOHead
         title="Ukrainian Language Lessons | Native Speaker | Alina Zelinska | 5.0★"
         description="Learn Ukrainian online with Alina, a native speaker from Ukraine. 500+ students, 3,500+ lessons, perfect 5.0 rating. Beginner to advanced, personalized 1-on-1 lessons."
@@ -82,230 +90,169 @@ const UkrainianLessons = () => {
           ]
         }}
       />
-      
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-b from-transparent to-[var(--color-bg-secondary)]">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <div className="inline-block px-4 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-medium mb-6">
-              🇺🇦 Ukrainian Language Lessons
+
+      <PageHero
+        crumbs={[{ name: 'Services', url: '/special-projects' }, { name: 'Ukrainian Lessons' }]}
+        eyebrow="Ukrainian language lessons"
+        uk="Мова"
+        title={
+          <>
+            Learn Ukrainian with a <em>native speaker.</em>
+          </>
+        }
+        lede="One-on-one Ukrainian lessons designed around you, taught by a native speaker who makes grammar actually enjoyable."
+        aside={
+          <div className="svc-ledger">
+            <span className="svc-ledger__label">1-on-1 · online · all levels</span>
+            <dl>
+              <div>
+                <dt>500+</dt>
+                <dd>Students</dd>
+              </div>
+              <div>
+                <dt>3,500+</dt>
+                <dd>Lessons delivered</dd>
+              </div>
+              <div>
+                <dt>
+                  <em>5.0</em>
+                </dt>
+                <dd>Perfect rating</dd>
+              </div>
+            </dl>
+          </div>
+        }
+      >
+        <div className="svc-actions">
+          <Link to="/booking" className="btn-primary">
+            Book a Trial Lesson <FiArrowRight />
+          </Link>
+          <Link to="/contact" className="btn-outline">
+            Ask Me Anything
+          </Link>
+        </div>
+      </PageHero>
+
+      {/* ─── Who this is for ──────────────────────────────── */}
+      <section className="page-section">
+        <div className="section-shell">
+          <motion.header {...reveal} className="section-head section-head--split">
+            <div>
+              <p className="eyebrow">Who it’s for</p>
+              <h2>
+                Who this is <em className="display-italic">for.</em>
+              </h2>
             </div>
-            <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6">
-              Learn Ukrainian with a Native Speaker
-            </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] mx-auto rounded-full mb-6"></div>
-            <p className="text-xl text-[var(--color-text-secondary)] max-w-3xl mx-auto mb-4">
-              500+ Students | 3,500+ Lessons Delivered | Perfect 5.0 Rating
-            </p>
-            <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              One-on-one Ukrainian lessons designed around you, taught by a native speaker who makes grammar actually enjoyable.
-            </p>
-          </motion.div>
+            <p>From your very first Cyrillic letter to the vocabulary of your working day — lessons start wherever you are.</p>
+          </motion.header>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
-          >
-            <Link to="/booking" className="btn-primary inline-flex items-center gap-2">
-              Book a Trial Lesson
-              <FiArrowRight className="w-5 h-5" />
-            </Link>
-            <Link to="/contact" className="btn-outline inline-flex items-center gap-2">
-              Ask Me Anything
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Who This Is For */}
-      <section className="section-padding bg-[var(--color-bg)]">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-serif font-bold text-center mb-12"
-          >
-            Who This Is For
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="svc-cards">
             {learnerTypes.map((type, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="card p-8 hover-lift"
-              >
-                <div className="text-5xl mb-4">{type.icon}</div>
-                <h3 className="text-2xl font-serif font-bold mb-3">
-                  {type.title}
-                </h3>
-                <p className="text-[var(--color-text-secondary)] leading-relaxed">
-                  {type.description}
-                </p>
-              </motion.div>
+              <motion.article key={type.title} className="svc-card" {...stagger(index)}>
+                <span className="num">{ROMAN[index]}</span>
+                <h3>{type.title}</h3>
+                <p>{type.description}</p>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* What You'll Learn */}
-      <section className="section-padding bg-[var(--color-bg-secondary)]">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-serif font-bold text-center mb-12"
-          >
-            What You'll Learn
-          </motion.h2>
+      {/* ─── What you'll learn ────────────────────────────── */}
+      <section className="page-section page-section--tint">
+        <div className="section-shell">
+          <div className="split">
+            <motion.header {...reveal} className="split__aside section-head">
+              <p className="eyebrow">Inside the lessons</p>
+              <h2>
+                What you’ll <em className="display-italic">learn.</em>
+              </h2>
+            </motion.header>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            {whatYoullLearn.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                viewport={{ once: true }}
-                className="flex items-start gap-3 card p-4"
-              >
-                <FiCheck className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
-                <span className="text-[var(--color-text-secondary)]">{item}</span>
-              </motion.div>
-            ))}
+            <ol className="svc-checks">
+              {whatYoullLearn.map((item, index) => (
+                <motion.li key={item} {...stagger(index % 4)}>
+                  <span className="num">{pad(index)}</span>
+                  <span>{item}</span>
+                </motion.li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
-      {/* Student Testimonials */}
-      <section className="section-padding bg-[var(--color-bg)]">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-serif font-bold text-center mb-12"
-          >
-            What Ukrainian Students Say
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {ukrainianTestimonials.slice(0, 6).map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="card p-6"
-              >
-                <div className="flex items-start gap-4 mb-4">
-                  {testimonial.img && (
-                    <img
-                      src={testimonial.img}
-                      alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                  )}
-                  <div>
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-[var(--color-text-secondary)]">{testimonial.lessons}</p>
-                  </div>
-                </div>
-                <p className="text-[var(--color-text-secondary)] italic text-sm leading-relaxed">
-                  "{testimonial.text}"
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <Link to="/testimonials" className="btn-outline inline-flex items-center gap-2">
-              Read All Testimonials
-              <FiArrowRight className="w-5 h-5" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="section-padding bg-[var(--color-bg-secondary)]">
-        <div className="max-w-4xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl font-serif font-bold text-center mb-12"
-          >
-            Ukrainian Learning FAQ
-          </motion.h2>
-
-          <div className="space-y-4">
-            {faq.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="card p-6"
-              >
-                <h3 className="text-lg font-bold mb-3">{item.q}</h3>
-                <p className="text-[var(--color-text-secondary)] leading-relaxed">{item.a}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="section-padding">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="card p-8 md:p-12 bg-gradient-to-br from-[var(--color-accent)]/10 to-transparent"
-          >
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
-              Ready to Start Learning Ukrainian? 🌻
+      {/* ─── Student testimonials ─────────────────────────── */}
+      <section className="page-section">
+        <div className="section-shell">
+          <motion.header {...reveal} className="section-head">
+            <p className="eyebrow">In their words</p>
+            <h2>
+              What Ukrainian students <em className="display-italic">say.</em>
             </h2>
-            <p className="text-lg text-[var(--color-text-secondary)] mb-8">
-              Join 500+ students who've discovered that Ukrainian can be approachable, engaging, and genuinely fun to learn.
-            </p>
-            <Link
-              to="/booking"
-              className="btn-primary inline-flex items-center gap-2"
-            >
-              Book Your Trial Lesson
-              <FiArrowRight className="w-5 h-5" />
+          </motion.header>
+
+          <div className="svc-quotes svc-quotes--three">
+            {ukrainianTestimonials.slice(0, 6).map((testimonial, index) => (
+              <motion.figure key={testimonial.name + index} className="svc-quote" {...stagger(index % 3)}>
+                <blockquote>{testimonial.text}</blockquote>
+                <figcaption>
+                  {testimonial.img && <img src={testimonial.img} alt={testimonial.name} />}
+                  <div>
+                    <strong>{testimonial.name}</strong>
+                    <span>{testimonial.lessons}</span>
+                  </div>
+                </figcaption>
+              </motion.figure>
+            ))}
+          </div>
+
+          <motion.div {...reveal} className="svc-more">
+            <Link to="/testimonials" className="btn-outline">
+              Read All Testimonials <FiArrowUpRight />
             </Link>
           </motion.div>
         </div>
+      </section>
+
+      {/* ─── FAQ ──────────────────────────────────────────── */}
+      <section className="page-section page-section--tint">
+        <div className="section-shell">
+          <motion.header {...reveal} className="section-head">
+            <p className="eyebrow">Good questions</p>
+            <h2>
+              Ukrainian learning <em className="display-italic">FAQ.</em>
+            </h2>
+          </motion.header>
+
+          <ol className="rule-list svc-faq">
+            {faq.map((item, index) => (
+              <motion.li key={item.q} {...stagger(index)}>
+                <h3>{item.q}</h3>
+                <p>{item.a}</p>
+              </motion.li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ─── Closing ──────────────────────────────────────── */}
+      <section className="closing closing--long">
+        <motion.div {...reveal} className="closing__inner">
+          <p className="closing__uk" lang="uk">
+            Почнімо?
+          </p>
+          <h2>
+            Ready to start learning <em className="display-italic">Ukrainian?</em>
+          </h2>
+          <p className="closing__sub">
+            Join 500+ students who've discovered that Ukrainian can be approachable, engaging, and genuinely fun to learn.
+          </p>
+          <div className="closing__actions">
+            <Link to="/booking" className="btn-primary">
+              Book Your Trial Lesson <FiArrowRight />
+            </Link>
+          </div>
+        </motion.div>
       </section>
     </div>
   );

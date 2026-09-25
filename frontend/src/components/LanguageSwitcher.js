@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FiGlobe, FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown } from 'react-icons/fi';
 
 const languages = [
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'uk', name: 'Українська', flag: '🇺🇦' },
-  { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+  { code: 'en', name: 'English' },
+  { code: 'uk', name: 'Українська' },
+  { code: 'ru', name: 'Русский' },
 ];
 
 const LanguageSwitcher = () => {
@@ -34,28 +34,26 @@ const LanguageSwitcher = () => {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg hover:bg-[var(--color-bg-secondary)] transition-all duration-300"
+        className="lang-btn"
         aria-label="Change language"
+        aria-expanded={isOpen}
         data-testid="language-switcher"
       >
-        <FiGlobe className="w-4 h-4 text-[var(--color-accent)]" />
-        <span className="text-sm font-medium hidden sm:inline">{currentLang.flag}</span>
-        <FiChevronDown className={`w-3 h-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span>{currentLang.code.toUpperCase()}</span>
+        <FiChevronDown className={`w-3 h-3 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-40 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-lg shadow-xl overflow-hidden z-50">
+        <div className="lang-menu">
           {languages.map((lang) => (
             <button
               key={lang.code}
               onClick={() => changeLanguage(lang.code)}
-              className={`w-full px-4 py-2.5 text-left flex items-center gap-3 hover:bg-[var(--color-bg-secondary)] transition-colors ${
-                i18n.language === lang.code ? 'bg-[var(--color-bg-secondary)] text-[var(--color-accent)]' : ''
-              }`}
+              className={i18n.language === lang.code ? 'is-active' : ''}
               data-testid={`lang-${lang.code}`}
             >
-              <span className="text-lg">{lang.flag}</span>
-              <span className="text-sm font-medium">{lang.name}</span>
+              <span className="lang-menu__code">{lang.code.toUpperCase()}</span>
+              <span>{lang.name}</span>
             </button>
           ))}
         </div>

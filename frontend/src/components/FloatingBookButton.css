@@ -1,0 +1,97 @@
+/* ─── Floating book CTA ───────────────────────────────────── */
+
+.float-book {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-bg) 72%, transparent);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: 0 10px 40px -20px rgba(0, 0, 0, 0.35);
+}
+
+@media (min-width: 768px) {
+  .float-book {
+    right: 1.5rem;
+    bottom: 1.5rem;
+  }
+}
+
+.float-book__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1.3rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  color: var(--color-bg);
+  background: var(--color-text);
+  transition: background 0.4s ease, color 0.4s ease, transform 0.5s var(--ease-out),
+    box-shadow 0.5s var(--ease-out);
+}
+
+.float-book__cta:hover {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px -12px var(--glow-rose);
+}
+
+.float-book__icon {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.75;
+}
+
+.float-book__arrow {
+  width: 0.95rem;
+  height: 0.95rem;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.float-book__cta:hover .float-book__arrow {
+  transform: translateX(3px);
+}
+
+.float-book__dismiss {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  color: var(--color-muted);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.float-book__dismiss:hover {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.float-book__dismiss svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+html.high-contrast .float-book {
+  background: var(--color-bg);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* From 640px the header carries its own Book CTA */
+@media (min-width: 640px) {
+  .float-book {
+    display: none;
+  }
+}

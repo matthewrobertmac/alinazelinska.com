@@ -1,35 +1,39 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { FiMail, FiLinkedin, FiInstagram } from 'react-icons/fi';
-import { contactInfo, meta } from '../data/content';
-import Breadcrumb from '../components/Breadcrumb';
+import { FiMail, FiLinkedin, FiInstagram, FiArrowUpRight, FiArrowRight } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { contactInfo } from '../data/content';
+import PageHero from '../components/PageHero';
 import SEOHead from '../components/SEOHead';
+import { accent, clean } from '../utils/text';
+import './contact.css';
+import { reveal, stagger } from '../utils/motion';
 
 const Contact = () => {
   const { t } = useTranslation();
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const contactMethods = [
     {
-      icon: <FiMail className="w-8 h-8" />,
+      icon: <FiMail />,
       title: t('contact.emailCard.label'),
       value: contactInfo.email,
       link: `mailto:${contactInfo.email}`,
       description: t('contact.emailCard.hint'),
     },
     {
-      icon: <FiLinkedin className="w-8 h-8" />,
+      icon: <FiLinkedin />,
       title: t('contact.linkedinCard.label'),
       value: 'Connect with me',
       link: contactInfo.linkedin,
       description: t('contact.linkedinCard.hint'),
     },
     {
-      icon: <FiInstagram className="w-8 h-8" />,
+      icon: <FiInstagram />,
       title: t('contact.instagramCard.label'),
       value: '@alin.a.zelinska',
       link: contactInfo.instagram,
@@ -37,8 +41,10 @@ const Contact = () => {
     },
   ];
 
+  const offerings = ['languageLessons', 'translation', 'creativeWriting', 'consulting'];
+
   return (
-    <div className="page-transition pt-24 pb-16">
+    <div className="contact-page page-transition">
       <SEOHead
         title="Contact Alina Zelinska | Ukrainian Tutor | 100% Response Rate"
         description="Get in touch with Alina Zelinska for Ukrainian, Russian, or English lessons. Based in Malta, teaching worldwide. 100% response rate within hours."
@@ -47,131 +53,121 @@ const Contact = () => {
           { lang: 'en', url: 'https://alinazelinska.com/contact' },
           { lang: 'uk', url: 'https://alinazelinska.com/contact?lang=uk' },
           { lang: 'ru', url: 'https://alinazelinska.com/contact?lang=ru' },
-          { lang: 'x-default', url: 'https://alinazelinska.com/contact' }
+          { lang: 'x-default', url: 'https://alinazelinska.com/contact' },
         ]}
       />
-      
-      {/* Hero Section */}
-      <section className="section-padding">
-        <div className="max-w-4xl mx-auto">
-          <Breadcrumb items={[{ name: 'Say Hello' }]} />
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h1
-              className="text-5xl md:text-6xl font-serif font-bold mb-6"
-              data-testid="contact-title"
-            >
-              {t('contact.title')}
-            </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] mx-auto rounded-full mb-6"></div>
-            <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              {t('contact.subtitle')}
-            </p>
-            <p className="text-sm text-[var(--color-text-secondary)] max-w-2xl mx-auto mt-3 opacity-80">
-              {t('contact.responseTime')}
-            </p>
-          </motion.div>
 
-          {/* Contact Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {contactMethods.map((method, index) => (
-              <motion.a
-                key={index}
-                href={method.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="card hover-lift text-center p-8 block no-underline"
-                data-testid={`contact-method-${index}`}
-              >
-                <div className="text-[var(--color-accent)] mb-4 flex justify-center">
-                  {method.icon}
-                </div>
-                <h3 className="text-xl font-serif font-semibold mb-2">
-                  {method.title}
-                </h3>
-                <p className="text-[var(--color-text)] mb-2 break-words">
-                  {method.value}
-                </p>
-                <p className="text-sm text-[var(--color-text-secondary)]">
-                  {method.description}
-                </p>
-              </motion.a>
-            ))}
+      <PageHero
+        crumbs={[{ name: 'Say Hello' }]}
+        eyebrow="Contact · Sliema, Malta"
+        uk="Привіт"
+        testId="contact-title"
+        title={accent(t('contact.title'), { dash: true })}
+        lede={t('contact.subtitle')}
+      >
+        <p className="contact-response">
+          <span className="contact-response__dot" aria-hidden="true" />
+          {t('contact.responseTime')}
+        </p>
+      </PageHero>
+
+      {/* ─── Channels ─────────────────────────────────────── */}
+      <section className="page-section">
+        <div className="section-shell">
+          <div className="split">
+            <motion.header {...reveal} className="split__aside section-head contact-talk">
+              <p className="eyebrow">{t('contact.info')}</p>
+              <h2>
+                Let’s <em className="display-italic">talk.</em>
+              </h2>
+              <p>Pick whichever feels most like you — every message lands with me, not an assistant.</p>
+              <p className="contact-talk__uk" lang="uk">
+                Пишіть — я відповім.
+              </p>
+            </motion.header>
+
+            <ul className="contact-channels">
+              {contactMethods.map((method, index) => (
+                <motion.li key={method.title} {...stagger(index)}>
+                  <a
+                    href={method.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-channel"
+                    data-testid={`contact-method-${index}`}
+                  >
+                    <span className="contact-channel__icon" aria-hidden="true">
+                      {method.icon}
+                    </span>
+                    <span className="contact-channel__body">
+                      <span className="contact-channel__label">{method.title}</span>
+                      <span className="contact-channel__value">{method.value}</span>
+                      <span className="contact-channel__hint">{clean(method.description)}</span>
+                    </span>
+                    <span className="contact-channel__arrow" aria-hidden="true">
+                      <FiArrowUpRight />
+                    </span>
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
           </div>
-
-          {/* Additional Information */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="card p-8 md:p-12 text-center bg-gradient-to-br from-[var(--color-bg-secondary)] to-[var(--color-bg)]"
-          >
-            <h2 className="text-3xl font-serif font-bold mb-6">
-              {t('contact.whatToExpect.title')}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-              <div>
-                <h3 className="text-xl font-semibold text-[var(--color-accent)] mb-3">
-                  {t('contact.whatToExpect.languageLessons.icon')} {t('contact.whatToExpect.languageLessons.title')}
-                </h3>
-                <p className="text-[var(--color-text-secondary)]">
-                  {t('contact.whatToExpect.languageLessons.description')}
-                </p>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-[var(--color-accent)] mb-3">
-                  {t('contact.whatToExpect.translation.icon')} {t('contact.whatToExpect.translation.title')}
-                </h3>
-                <p className="text-[var(--color-text-secondary)]">
-                  {t('contact.whatToExpect.translation.description')}
-                </p>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-[var(--color-accent)] mb-3">
-                  {t('contact.whatToExpect.creativeWriting.icon')} {t('contact.whatToExpect.creativeWriting.title')}
-                </h3>
-                <p className="text-[var(--color-text-secondary)]">
-                  {t('contact.whatToExpect.creativeWriting.description')}
-                </p>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-[var(--color-accent)] mb-3">
-                  {t('contact.whatToExpect.consulting.icon')} {t('contact.whatToExpect.consulting.title')}
-                </h3>
-                <p className="text-[var(--color-text-secondary)]">
-                  {t('contact.whatToExpect.consulting.description')}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Call to Action */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-center mt-12"
-          >
-            <p className="text-lg text-[var(--color-text-secondary)] mb-6">
-              {t('contact.bottomCta')}
-            </p>
-            <a
-              href={`mailto:${contactInfo.email}`}
-              data-testid="email-cta-btn"
-              className="btn-primary inline-block"
-            >
-              {t('contact.send')} →
-            </a>
-          </motion.div>
         </div>
+      </section>
+
+      {/* ─── What we can do together ──────────────────────── */}
+      <section className="page-section page-section--tint">
+        <div className="section-shell">
+          <motion.header {...reveal} className="section-head section-head--split">
+            <div>
+              <p className="eyebrow">Ways to work together</p>
+              <h2>{clean(t('contact.whatToExpect.title'))}</h2>
+            </div>
+            <p>
+              Lessons, translation, writing, consulting — a message is the start of every one of them.{' '}
+              <Link to="/special-projects" className="link-underline contact-inline-link">
+                See special projects
+              </Link>
+              .
+            </p>
+          </motion.header>
+
+          <ol className="contact-offer">
+            {offerings.map((key, index) => (
+              <motion.li key={key} {...stagger(index % 2)}>
+                <span className="num">{String(index + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3>{t(`contact.whatToExpect.${key}.title`)}</h3>
+                  <p>{t(`contact.whatToExpect.${key}.description`)}</p>
+                </div>
+                <span className="contact-offer__icon" aria-hidden="true">
+                  {t(`contact.whatToExpect.${key}.icon`)}
+                </span>
+              </motion.li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ─── Closing ──────────────────────────────────────── */}
+      <section className="closing">
+        <motion.div {...reveal} className="closing__inner">
+          <p className="closing__uk" lang="uk">
+            До зустрічі.
+          </p>
+          <h2>
+            Write to <em className="display-italic">me.</em>
+          </h2>
+          <p className="closing__sub">{clean(t('contact.bottomCta'))}</p>
+          <div className="closing__actions">
+            <a href={`mailto:${contactInfo.email}`} data-testid="email-cta-btn" className="btn-primary">
+              {clean(t('contact.send'))} <FiArrowRight />
+            </a>
+            <Link to="/booking" className="btn-outline">
+              Book a lesson <FiArrowUpRight />
+            </Link>
+          </div>
+        </motion.div>
       </section>
     </div>
   );

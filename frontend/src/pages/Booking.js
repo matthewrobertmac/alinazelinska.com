@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { FiCheck, FiCreditCard, FiClock, FiArrowRight, FiHome } from 'react-icons/fi';
+import { FiCheck, FiCreditCard, FiClock, FiArrowRight, FiHome, FiInstagram, FiMail, FiAlertCircle } from 'react-icons/fi';
 import { FaPaypal } from 'react-icons/fa';
 import { meta } from '../data/content';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency } from '../context/CurrencyContext';
 import CurrencySelector from '../components/CurrencySelector';
-import Breadcrumb from '../components/Breadcrumb';
+import PageHero from '../components/PageHero';
 import SEOHead from '../components/SEOHead';
+import { accent, clean } from '../utils/text';
+import './booking.css';
+import { ease, reveal, stagger } from '../utils/motion';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const PAYPAL_EMAIL = 'zelinskayaalinaig@gmail.com';
@@ -20,6 +23,8 @@ const Booking = () => {
   const [loading, setLoading] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState(null);
   const [error, setError] = useState(null);
+  // Purely visual: which package panel is highlighted (the popular one by default)
+  const [selected, setSelected] = useState('standard');
 
   const prices = getPackagePrices();
 
@@ -48,19 +53,16 @@ const Booking = () => {
       id: 'trial',
       priceEur: basePricesEur.trial,
       popular: false,
-      color: 'from-blue-400 to-blue-600',
     },
     {
       id: 'standard',
       priceEur: basePricesEur.standard,
       popular: true,
-      color: 'from-[var(--color-accent)] to-pink-600',
     },
     {
       id: 'intensive',
       priceEur: basePricesEur.intensive,
       popular: false,
-      color: 'from-purple-400 to-purple-600',
     },
   ];
 
@@ -147,22 +149,23 @@ const Booking = () => {
   // Success state
   if (paymentStatus === 'success') {
     return (
-      <div className="page-transition pt-24 pb-16 min-h-screen flex items-center justify-center">
+      <div className="booking-page booking-success page-transition">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center max-w-md mx-auto px-6"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease }}
+          className="booking-success__inner"
         >
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <FiCheck className="w-10 h-10 text-green-600" />
-          </div>
-          <h1 className="text-3xl font-serif font-bold mb-4 text-green-600">{t('booking.success')}</h1>
-          <p className="text-[var(--color-text-secondary)] mb-8">{t('booking.successMessage')}</p>
-          <a
-            href="/"
-            className="btn-primary inline-flex items-center gap-2"
-          >
-            <FiHome className="w-5 h-5" />
+          <span className="booking-success__seal" aria-hidden="true">
+            <FiCheck />
+          </span>
+          <p className="closing__uk" lang="uk">
+            Дякую!
+          </p>
+          <h1>{clean(t('booking.success'))}</h1>
+          <p className="booking-success__text">{t('booking.successMessage')}</p>
+          <a href="/" className="btn-primary">
+            <FiHome />
             {t('booking.backToHome')}
           </a>
         </motion.div>
@@ -170,8 +173,14 @@ const Booking = () => {
     );
   }
 
+  const steps = ['step1', 'step2', 'step3'].map((key) => ({
+    icon: t(`booking.whatToExpect.${key}.icon`),
+    title: t(`booking.whatToExpect.${key}.title`),
+    description: t(`booking.whatToExpect.${key}.description`),
+  }));
+
   return (
-    <div className="page-transition pt-24 pb-16">
+    <div className="booking-page page-transition">
       <SEOHead
         title="Book Ukrainian Lessons | Alina Zelinska | Trial from €15"
         description="Book personalized Ukrainian lessons with Alina Zelinska. Trial lesson €15, Standard €30, Intensive pack €120. Perfect 5.0 rating, 500+ students worldwide."
@@ -183,214 +192,186 @@ const Booking = () => {
           { lang: 'x-default', url: 'https://alinazelinska.com/booking' }
         ]}
       />
-      
-      <section className="section-padding">
-        <div className="max-w-6xl mx-auto">
-          <Breadcrumb items={[{ name: 'Book a Lesson' }]} />
-          
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6" data-testid="booking-title">
-              {t('booking.title')}
-            </h1>
-            <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto mb-4">
-              {t('booking.subtitle')}
-            </p>
 
-            {/* Reassurance Line */}
-            <p className="text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto mb-6">
-              {t('booking.reassurance')}
-            </p>
+      <PageHero
+        crumbs={[{ name: 'Book a Lesson' }]}
+        eyebrow="Book a lesson · Online, worldwide"
+        uk="Урок"
+        testId="booking-title"
+        title={accent(t('booking.title'))}
+        lede={t('booking.subtitle')}
+      >
+        <p className="booking-reassure">{clean(t('booking.reassurance'))}</p>
+        <ul className="booking-trust">
+          {t('booking.trustLine')
+            .split('|')
+            .map((item) => (
+              <li key={item}>{item.trim()}</li>
+            ))}
+        </ul>
+      </PageHero>
 
-            {/* Contact First Notice */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="max-w-2xl mx-auto mb-8"
-            >
-              <div className="card p-6 bg-gradient-to-br from-[var(--color-accent)]/10 to-transparent border-2 border-[var(--color-accent)]/30">
-                <div className="flex items-start gap-4">
-                  <span className="text-3xl flex-shrink-0">💌</span>
-                  <div>
-                    <h3 className="font-bold text-lg mb-2">Before You Book — Let's Connect!</h3>
-                    <p className="text-[var(--color-text-secondary)] leading-relaxed mb-3">
-                      Please <strong>message me first</strong> before making a payment so we can schedule your lesson together and make sure the timing works perfectly for both of us!
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <a
-                        href="https://www.instagram.com/alin.a.zelinska/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] transition-colors text-sm font-medium"
-                      >
-                        📱 Message on Instagram
-                      </a>
-                      <a
-                        href="mailto:zelinskayaalinaig@gmail.com"
-                        className="inline-flex items-center justify-center gap-2 px-4 py-2 border-2 border-[var(--color-accent)] text-[var(--color-accent)] rounded-lg hover:bg-[var(--color-accent)] hover:text-white transition-colors text-sm font-medium"
-                      >
-                        ✉️ Send Email
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-            
-            {/* Currency Selector */}
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <span className="text-sm text-[var(--color-text-secondary)]">Currency:</span>
-              <CurrencySelector />
+      {/* ─── Step 01 · Say hello first ────────────────────── */}
+      <section className="page-section booking-step-section">
+        <div className="section-shell">
+          <motion.div {...reveal} className="booking-connect">
+            <div className="booking-connect__marker">
+              <span className="booking-step__label">Step</span>
+              <span className="booking-step__num">01</span>
             </div>
-            
-            {/* Payment Info */}
-            <div className="flex flex-col items-center gap-3 mb-6">
-              <div className="flex items-center gap-2 text-sm text-[var(--color-text-secondary)]">
-                <FaPaypal className="w-5 h-5 text-[#0070ba]" />
-                <FiCreditCard className="w-5 h-5" />
-                <span>Pay with PayPal or Card</span>
+            <div className="booking-connect__body">
+              <p className="eyebrow">Before you book</p>
+              <h2>
+                Let’s <em className="display-italic">connect</em> first.
+              </h2>
+              <p className="booking-connect__text">
+                Please <strong>message me first</strong> before making a payment so we can schedule your lesson
+                together and make sure the timing works perfectly for both of us!
+              </p>
+              <div className="booking-connect__actions">
+                <a
+                  href="https://www.instagram.com/alin.a.zelinska/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                >
+                  <FiInstagram /> Message on Instagram
+                </a>
+                <a href="mailto:zelinskayaalinaig@gmail.com" className="btn-outline">
+                  <FiMail /> Send Email
+                </a>
               </div>
-              {/* Trust Line */}
-              <p className="text-xs text-[var(--color-accent)] font-medium">
-                {t('booking.trustLine')}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ─── Step 02 · Choose a format ────────────────────── */}
+      <section className="page-section page-section--tint">
+        <div className="section-shell">
+          <motion.header {...reveal} className="section-head section-head--split booking-packages-head">
+            <div>
+              <p className="eyebrow">Step 02 · Choose your format</p>
+              <h2>{clean(t('booking.selectPackage'))}</h2>
+            </div>
+            <div className="booking-pay">
+              <div className="booking-pay__row">
+                <span className="field-label">Currency</span>
+                <CurrencySelector />
+              </div>
+              <p className="booking-pay__methods">
+                <FaPaypal aria-hidden="true" />
+                <FiCreditCard aria-hidden="true" />
+                <span>Pay with PayPal or Card</span>
               </p>
             </div>
-          </motion.div>
-
-          {/* What to Expect Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-4xl mx-auto mb-16"
-          >
-            <h2 className="text-3xl font-serif font-bold text-center mb-8">
-              {t('booking.whatToExpect.title')}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  icon: t('booking.whatToExpect.step1.icon'),
-                  title: t('booking.whatToExpect.step1.title'),
-                  description: t('booking.whatToExpect.step1.description'),
-                },
-                {
-                  icon: t('booking.whatToExpect.step2.icon'),
-                  title: t('booking.whatToExpect.step2.title'),
-                  description: t('booking.whatToExpect.step2.description'),
-                },
-                {
-                  icon: t('booking.whatToExpect.step3.icon'),
-                  title: t('booking.whatToExpect.step3.title'),
-                  description: t('booking.whatToExpect.step3.description'),
-                },
-              ].map((step, index) => (
-                <div key={index} className="card p-6 text-center">
-                  <div className="text-4xl mb-3">{step.icon}</div>
-                  <h3 className="font-semibold mb-2">{step.title}</h3>
-                  <p className="text-sm text-[var(--color-text-secondary)]">
-                    {step.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+          </motion.header>
 
           {/* Error message */}
           {error && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="max-w-md mx-auto mb-8 p-4 bg-red-50 border border-red-200 rounded-lg text-center"
-            >
-              <p className="text-red-600 font-medium">{t('booking.error')}</p>
-              <p className="text-red-500 text-sm mt-1">{error}</p>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="booking-error" role="alert">
+              <FiAlertCircle aria-hidden="true" />
+              <div>
+                <p className="booking-error__title">{t('booking.error')}</p>
+                <p>{error}</p>
+              </div>
             </motion.div>
           )}
 
-          {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {packages.map((pkg, index) => (
-              <motion.div
-                key={pkg.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative card p-8 ${
-                  pkg.popular ? 'border-2 border-[var(--color-accent)] scale-105' : ''
-                }`}
-                data-testid={`package-${pkg.id}`}
-              >
-                {pkg.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[var(--color-accent)] text-white px-4 py-1 rounded-full text-sm font-medium">
-                    Most Popular ⭐
-                  </div>
-                )}
-
-                <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${pkg.color} flex items-center justify-center mb-6`}>
-                  <FiClock className="w-8 h-8 text-white" />
-                </div>
-
-                <h3 className="text-2xl font-serif font-bold mb-2">
-                  {t(`booking.packages.${pkg.id}.name`)}
-                </h3>
-                <p className="text-[var(--color-text-secondary)] text-sm mb-4">
-                  {t(`booking.packages.${pkg.id}.duration`)}
-                </p>
-                <p className="text-[var(--color-text-secondary)] mb-6">
-                  {t(`booking.packages.${pkg.id}.description`)}
-                </p>
-
-                <div className="mb-6">
-                  <span className="text-4xl font-bold">{formatPrice(pkg.priceEur)}</span>
-                  <span className="text-[var(--color-text-secondary)] ml-2">
-                    {pkg.id === 'intensive' ? '' : t('booking.perLesson')}
-                  </span>
-                  {currency !== 'EUR' && (
-                    <p className="text-xs text-[var(--color-text-secondary)] mt-1">
-                      (€{pkg.priceEur.toFixed(2)} EUR)
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-3 mb-8">
-                  <p className="font-medium text-sm">{t('booking.features')}</p>
-                  {t(`booking.packages.${pkg.id}.features`, { returnObjects: true }).map((feature, i) => (
-                    <div key={i} className="flex items-start gap-2">
-                      <FiCheck className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-[var(--color-text-secondary)]">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  onClick={() => handleBooking(pkg.id)}
-                  disabled={loading === pkg.id}
-                  className={`w-full py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 ${
-                    pkg.popular
-                      ? 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]'
-                      : 'bg-[var(--color-bg-secondary)] hover:bg-[var(--color-accent)] hover:text-white'
-                  } disabled:opacity-50 disabled:cursor-not-allowed`}
-                  data-testid={`book-${pkg.id}`}
+          <div className="booking-packages">
+            {packages.map((pkg, index) => {
+              const isSelected = selected === pkg.id;
+              return (
+                <motion.article
+                  key={pkg.id}
+                  {...stagger(index)}
+                  className={`booking-pkg ${isSelected ? 'is-selected' : ''} ${pkg.popular ? 'is-popular' : ''}`}
+                  onClick={() => setSelected(pkg.id)}
+                  onFocusCapture={() => setSelected(pkg.id)}
+                  data-testid={`package-${pkg.id}`}
                 >
-                  {loading === pkg.id ? (
-                    <span className="animate-pulse">{t('booking.processing')}</span>
-                  ) : (
-                    <>
-                      {t('booking.bookNow')}
-                      <FiArrowRight className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
-              </motion.div>
-            ))}
+                  <div className="booking-pkg__top">
+                    <span className="num">{String(index + 1).padStart(2, '0')}</span>
+                    {pkg.popular && <span className="chip">Most Popular</span>}
+                    <span className="booking-pkg__radio" aria-hidden="true">
+                      <FiCheck />
+                    </span>
+                  </div>
+
+                  <h3>{t(`booking.packages.${pkg.id}.name`)}</h3>
+                  <p className="booking-pkg__duration">
+                    <FiClock aria-hidden="true" />
+                    {t(`booking.packages.${pkg.id}.duration`)}
+                  </p>
+
+                  <div className="booking-pkg__price">
+                    <span className="booking-pkg__amount">{formatPrice(pkg.priceEur)}</span>
+                    <span className="booking-pkg__per">
+                      {pkg.id === 'intensive' ? '' : t('booking.perLesson')}
+                    </span>
+                    {currency !== 'EUR' && (
+                      <span className="booking-pkg__eur">(€{pkg.priceEur.toFixed(2)} EUR)</span>
+                    )}
+                  </div>
+
+                  <p className="booking-pkg__desc">{t(`booking.packages.${pkg.id}.description`)}</p>
+
+                  <div className="booking-pkg__features">
+                    <p className="field-label">{t('booking.features')}</p>
+                    <ul>
+                      {t(`booking.packages.${pkg.id}.features`, { returnObjects: true }).map((feature, i) => (
+                        <li key={i}>
+                          <FiCheck aria-hidden="true" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <button
+                    onClick={() => handleBooking(pkg.id)}
+                    disabled={loading === pkg.id}
+                    className={`booking-pkg__cta ${isSelected ? 'btn-primary' : 'btn-outline'}`}
+                    data-testid={`book-${pkg.id}`}
+                  >
+                    {loading === pkg.id ? (
+                      <span className="booking-pkg__processing">{t('booking.processing')}</span>
+                    ) : (
+                      <>
+                        {clean(t('booking.bookNow'))}
+                        <FiArrowRight />
+                      </>
+                    )}
+                  </button>
+                </motion.article>
+              );
+            })}
           </div>
+        </div>
+      </section>
+
+      {/* ─── What to expect ───────────────────────────────── */}
+      <section className="page-section">
+        <div className="section-shell">
+          <motion.header {...reveal} className="section-head">
+            <p className="eyebrow">Step 03 · Your first lesson</p>
+            <h2>{clean(t('booking.whatToExpect.title'))}</h2>
+          </motion.header>
+
+          <ol className="booking-expect">
+            {steps.map((step, index) => (
+              <motion.li key={index} {...stagger(index)}>
+                <div className="booking-expect__head">
+                  <span className="num">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="booking-expect__icon" aria-hidden="true">
+                    {step.icon}
+                  </span>
+                </div>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </motion.li>
+            ))}
+          </ol>
         </div>
       </section>
     </div>

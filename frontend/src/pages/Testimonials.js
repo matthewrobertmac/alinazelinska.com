@@ -1,16 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { testimonials, meta, testimonialStats } from '../data/content';
-import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
-import Breadcrumb from '../components/Breadcrumb';
+import { FiArrowLeft, FiArrowRight, FiStar } from 'react-icons/fi';
+import PageHero from '../components/PageHero';
 import SEOHead from '../components/SEOHead';
 import { aggregateRatingSchema } from '../utils/schemas';
+import { accent, clean } from '../utils/text';
+import './testimonials.css';
+import { ease, reveal } from '../utils/motion';
+
+// Get initials from name
+const getInitials = (name) => {
+  const parts = name.split(' ');
+  if (parts.length >= 2) {
+    return parts[0][0] + parts[1][0];
+  }
+  return parts[0][0];
+};
+
+const Avatar = ({ testimonial }) =>
+  testimonial.img ? (
+    <img src={testimonial.img} alt={testimonial.name} className="voice__avatar" loading="lazy" />
+  ) : (
+    <span className="voice__avatar voice__avatar--initials" aria-hidden="true">
+      {getInitials(testimonial.name)}
+    </span>
+  );
+
+const Stars = () => (
+  <span className="voice__stars" aria-label="Rated 5 out of 5">
+    {[...Array(5)].map((_, i) => (
+      <FiStar key={i} aria-hidden="true" />
+    ))}
+  </span>
+);
 
 const Testimonials = () => {
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(0);
+  const wallRef = useRef(null);
   const testimonialsPerPage = 6;
   const totalPages = Math.ceil(testimonials.length / testimonialsPerPage);
 
@@ -25,45 +55,34 @@ const Testimonials = () => {
     return testimonials.slice(start, end);
   };
 
+  // Bring the top of the wall back into view when paging
+  const scrollToWall = () => {
+    if (wallRef.current) {
+      const top = wallRef.current.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const nextPage = () => {
     if (currentPage < totalPages - 1) {
       setCurrentPage(currentPage + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollToWall();
     }
   };
 
   const prevPage = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollToWall();
     }
   };
 
-  // Generate a color based on the name
-  const getColorFromName = (name) => {
-    const colors = [
-      'from-pink-400 to-rose-500',
-      'from-purple-400 to-pink-500',
-      'from-rose-400 to-pink-500',
-      'from-fuchsia-400 to-pink-500',
-      'from-pink-500 to-rose-600',
-      'from-rose-500 to-pink-600',
-    ];
-    const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return colors[hash % colors.length];
-  };
-
-  // Get initials from name
-  const getInitials = (name) => {
-    const parts = name.split(' ');
-    if (parts.length >= 2) {
-      return parts[0][0] + parts[1][0];
-    }
-    return parts[0][0];
-  };
+  const [lead, ...rest] = getCurrentTestimonials();
 
   return (
-    <div className="page-transition pt-24 pb-16">
+    <div className="testimonials-page page-transition">
       <SEOHead
         title="Student Testimonials | Alina Zelinska | 500+ Students, Perfect 5.0 Rating"
         description="Read reviews from 500+ students who've learned Ukrainian, Russian, and English with Alina Zelinska. Perfect 5.0 rating across 3,500+ lessons delivered."
@@ -76,184 +95,150 @@ const Testimonials = () => {
           { lang: 'x-default', url: 'https://alinazelinska.com/testimonials' }
         ]}
       />
-      
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-b from-transparent to-[var(--color-bg-secondary)]">
-        <div className="max-w-6xl mx-auto">
-          <Breadcrumb items={[{ name: 'Student Love' }]} />
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h1
-              className="text-5xl md:text-6xl font-serif font-bold mb-6"
-              data-testid="testimonials-title"
-            >
-              {t('testimonials.title')}
-            </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] mx-auto rounded-full mb-6"></div>
-            <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              {t('testimonials.subtitle')}
-            </p>
-            <p className="text-sm text-[var(--color-text-secondary)] max-w-2xl mx-auto mt-3 opacity-80">
-              {t('testimonials.verificationNote')}
-            </p>
-          </motion.div>
 
-          {/* Stats Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto"
-          >
+      <PageHero
+        crumbs={[{ name: 'Student Love' }]}
+        eyebrow="Student love · italki reviews"
+        uk="Відгуки"
+        testId="testimonials-title"
+        title={accent(t('testimonials.title'))}
+        lede={t('testimonials.subtitle')}
+      >
+        <p className="voices-verified">
+          <FiStar aria-hidden="true" />
+          <span>{t('testimonials.verificationNote')}</span>
+        </p>
+      </PageHero>
+
+      {/* ─── Stats ────────────────────────────────────────── */}
+      <section className="page-section voices-stats-section">
+        <div className="section-shell">
+          <motion.dl {...reveal} className="trust-row voices-stats">
             {testimonialStats.map((stat, index) => (
-              <div
-                key={index}
-                className="card text-center p-6"
-              >
-                <div className="text-4xl mb-2">{stat.icon}</div>
-                <div className="text-3xl font-bold text-[var(--color-accent)] mb-1">
-                  {stat.number}
-                </div>
-                <div className="text-sm text-[var(--color-text-secondary)]">
-                  {stat.label}
-                </div>
+              <div key={index}>
+                <dt>{stat.number}</dt>
+                <dd>{stat.label}</dd>
               </div>
             ))}
-          </motion.div>
+          </motion.dl>
+        </div>
+      </section>
 
-          {/* Testimonials Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {getCurrentTestimonials().map((testimonial, index) => {
-              const initials = getInitials(testimonial.name);
-              const colorClass = getColorFromName(testimonial.name);
+      {/* ─── Wall of quotes ───────────────────────────────── */}
+      <section className="page-section page-section--tint" ref={wallRef}>
+        <div className="section-shell">
+          <motion.header {...reveal} className="section-head section-head--split">
+            <div>
+              <p className="eyebrow">In their words</p>
+              <h2>
+                Unedited, <em className="display-italic">unprompted.</em>
+              </h2>
+            </div>
+            <p>
+              {testimonials.length} reviews from students of Ukrainian, Russian and English — every one of them a
+              five-star lesson.
+            </p>
+          </motion.header>
 
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="card hover-lift flex flex-col relative overflow-hidden"
-                  data-testid={`testimonial-card-${index}`}
-                >
-                  {/* Decorative background element */}
-                  <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-                    <div className={`w-full h-full bg-gradient-to-br ${colorClass} rounded-full blur-2xl transform translate-x-12 -translate-y-12`}></div>
-                  </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentPage}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.7, ease }}
+            >
+              {lead && (
+                <figure className="voice-lead" data-testid="testimonial-card-0">
+                  <span className="voice-lead__mark" aria-hidden="true">
+                    “
+                  </span>
+                  <blockquote>{lead.text}</blockquote>
+                  <figcaption className="voice__by">
+                    <Avatar testimonial={lead} />
+                    <span>
+                      <strong>{lead.name}</strong>
+                      <small>{lead.lessons}</small>
+                    </span>
+                    <Stars />
+                  </figcaption>
+                </figure>
+              )}
 
-                  {/* Avatar with image or initials */}
-                  <div className="flex items-start gap-4 mb-4 relative z-10">
-                    {testimonial.img ? (
-                      <img
-                        src={testimonial.img}
-                        alt={testimonial.name}
-                        className="w-16 h-16 rounded-full object-cover shadow-lg flex-shrink-0"
-                      />
-                    ) : (
-                      <div
-                        className={`w-16 h-16 rounded-full bg-gradient-to-br ${colorClass} flex items-center justify-center text-white font-bold text-xl shadow-lg flex-shrink-0`}
-                      >
-                        {initials}
-                      </div>
-                    )}
-                    <div className="flex-grow">
-                      <p className="font-semibold text-[var(--color-text)] text-lg">
-                        {testimonial.name}
-                      </p>
-                      <p className="text-sm text-[var(--color-text-secondary)]">
-                        {testimonial.lessons}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Star rating */}
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <FiStar
-                        key={i}
-                        className="w-4 h-4 fill-[var(--color-accent)] text-[var(--color-accent)]"
-                      />
-                    ))}
-                  </div>
-
-                  {/* Testimonial text */}
-                  <p className="text-[var(--color-text-secondary)] italic flex-grow leading-relaxed relative z-10">
-                    "{testimonial.text}"
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
+              <div className="voice-wall">
+                {rest.map((testimonial, index) => (
+                  <motion.figure
+                    key={testimonial.name + index}
+                    className="voice"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease, delay: 0.1 + index * 0.07 }}
+                    data-testid={`testimonial-card-${index + 1}`}
+                  >
+                    <span className="voice__mark" aria-hidden="true">
+                      “
+                    </span>
+                    <blockquote>{testimonial.text}</blockquote>
+                    <figcaption className="voice__by">
+                      <Avatar testimonial={testimonial} />
+                      <span>
+                        <strong>{testimonial.name}</strong>
+                        <small>{testimonial.lessons}</small>
+                      </span>
+                    </figcaption>
+                  </motion.figure>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex items-center justify-center gap-4"
-            >
+            <nav className="voice-pager" aria-label="Testimonial pages">
               <button
+                type="button"
                 onClick={prevPage}
                 disabled={currentPage === 0}
                 data-testid="prev-page-btn"
-                className={`p-3 rounded-full border-2 transition-all duration-300 touch-manipulation ${
-                  currentPage === 0
-                    ? 'border-gray-400 text-gray-400 cursor-not-allowed opacity-50'
-                    : 'border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-white active:scale-95'
-                }`}
+                className="voice-pager__btn"
                 aria-label="Previous page"
               >
-                <FiChevronLeft className="w-6 h-6" />
+                <FiArrowLeft />
               </button>
 
-              <span className="text-lg font-medium" data-testid="page-indicator">
-                Page {currentPage + 1} of {totalPages}
+              <span className="voice-pager__label" data-testid="page-indicator">
+                Page <b>{currentPage + 1}</b> of {totalPages}
               </span>
 
               <button
+                type="button"
                 onClick={nextPage}
                 disabled={currentPage === totalPages - 1}
                 data-testid="next-page-btn"
-                className={`p-3 rounded-full border-2 transition-all duration-300 touch-manipulation ${
-                  currentPage === totalPages - 1
-                    ? 'border-gray-400 text-gray-400 cursor-not-allowed opacity-50'
-                    : 'border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-white active:scale-95'
-                }`}
+                className="voice-pager__btn"
                 aria-label="Next page"
               >
-                <FiChevronRight className="w-6 h-6" />
+                <FiArrowRight />
               </button>
-            </motion.div>
+            </nav>
           )}
-
-          {/* Bottom CTA Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mt-16 text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
-              {t('testimonials.cta.title')}
-            </h2>
-            <p className="text-lg text-[var(--color-text-secondary)] mb-8 max-w-2xl mx-auto">
-              {t('testimonials.cta.subtitle')}
-            </p>
-            <Link
-              to="/booking"
-              className="btn-primary inline-flex items-center gap-2"
-            >
-              {t('testimonials.cta.button')}
-            </Link>
-          </motion.div>
         </div>
+      </section>
+
+      {/* ─── Closing ──────────────────────────────────────── */}
+      <section className="closing closing--long">
+        <motion.div {...reveal} className="closing__inner">
+          <p className="closing__uk" lang="uk">
+            Твоя черга.
+          </p>
+          <h2>{accent(t('testimonials.cta.title'))}</h2>
+          <p className="closing__sub">{t('testimonials.cta.subtitle')}</p>
+          <div className="closing__actions">
+            <Link to="/booking" className="btn-primary">
+              {clean(t('testimonials.cta.button'))} <FiArrowRight />
+            </Link>
+          </div>
+        </motion.div>
       </section>
     </div>
   );

@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FiArrowRight, FiClock, FiTrendingUp } from 'react-icons/fi';
+import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
 import { meta } from '../data/content';
+import PageHero from '../components/PageHero';
+import './success-stories.css';
+import { reveal, stagger } from '../utils/motion';
 
 const SuccessStories = () => {
   useEffect(() => {
@@ -53,122 +56,112 @@ const SuccessStories = () => {
   ];
 
   return (
-    <div className="page-transition pt-24 pb-16">
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-b from-transparent to-[var(--color-bg-secondary)]">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6">
-              Real Students, Real Results ✨
-            </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] mx-auto rounded-full mb-6"></div>
-            <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              These are real people who started exactly where you are now. Here's how they transformed their language skills (and confidence!) with personalized lessons.
-            </p>
-          </motion.div>
+    <div className="stories-page page-transition">
+      <PageHero
+        crumbs={[{ name: 'Success Stories' }]}
+        eyebrow="Success stories"
+        uk="Історії"
+        title={
+          <>
+            Real Students, Real <em>Results</em>
+          </>
+        }
+        lede="These are real people who started exactly where you are now. Here's how they transformed their language skills (and confidence!) with personalized lessons."
+      >
+        <ol className="story-index">
+          {stories.map((story, index) => (
+            <li key={story.name}>
+              <span className="num">{String(index + 1).padStart(2, '0')}</span>
+              <span>
+                {story.name} <small>{story.level}</small>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </PageHero>
 
-          {/* Success Stories */}
-          <div className="space-y-16">
-            {stories.map((story, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="card p-8 md:p-12"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {/* Student Photo & Stats */}
-                  <div className="text-center md:text-left">
-                    <img
-                      src={story.image}
-                      alt={story.name}
-                      className="w-32 h-32 rounded-full mx-auto md:mx-0 mb-4 shadow-lg"
-                    />
-                    <h3 className="text-2xl font-serif font-bold mb-2">{story.name}</h3>
-                    <p className="text-[var(--color-text-secondary)] mb-4">{story.country}</p>
-                    
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2 justify-center md:justify-start">
-                        <FiClock className="w-5 h-5 text-[var(--color-accent)]" />
-                        <span className="text-sm">{story.duration} • {story.lessons} lessons</span>
-                      </div>
-                      <div className="flex items-center gap-2 justify-center md:justify-start">
-                        <FiTrendingUp className="w-5 h-5 text-[var(--color-accent)]" />
-                        <span className="text-sm font-semibold">{story.level}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Story Content */}
-                  <div className="md:col-span-2">
-                    <div className="mb-6">
-                      <span className="inline-block px-3 py-1 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-full text-sm font-medium mb-4">
-                        Learning {story.language}
-                      </span>
-                      <p className="text-lg leading-relaxed text-[var(--color-text-secondary)] italic mb-6">
-                        "{story.story}"
-                      </p>
-                    </div>
-
-                    {/* Achievement Highlights */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 bg-[var(--color-bg-secondary)] rounded-lg">
-                      <div>
-                        <p className="text-xs text-[var(--color-text-secondary)] mb-1">Goal:</p>
-                        <p className="font-semibold">{story.goal}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-[var(--color-text-secondary)] mb-1">Achievement:</p>
-                        <p className="font-semibold">{story.achievement}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-[var(--color-text-secondary)] mb-1">Favorite Part:</p>
-                        <p className="font-semibold">{story.favorite}</p>
-                      </div>
-                    </div>
+      {/* ─── Stories ──────────────────────────────────────── */}
+      {stories.map((story, index) => (
+        <section key={index} className={`page-section story ${index % 2 ? 'page-section--tint' : ''}`}>
+          <div className="section-shell">
+            <div className="split">
+              <motion.header {...reveal} className="split__aside story__aside">
+                <span className="num story__num">{String(index + 1).padStart(2, '0')}</span>
+                <div className="story__who">
+                  <span className="story__avatar">
+                    <img src={story.image} alt={story.name} loading="lazy" />
+                  </span>
+                  <div>
+                    <h2>{story.name}</h2>
+                    <p className="story__country">{story.country}</p>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+                <span className="chip">Learning {story.language}</span>
 
-          {/* CTA Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mt-16 card p-8 md:p-12 bg-gradient-to-br from-[var(--color-accent)]/10 to-transparent"
-          >
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
-              Ready to Write Your Own Success Story? 🌟
-            </h2>
-            <p className="text-lg text-[var(--color-text-secondary)] mb-8 max-w-2xl mx-auto">
-              These students started where you are right now. Let's create your transformation together!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/booking"
-                className="btn-primary inline-flex items-center gap-2"
-              >
-                Book Your Trial Lesson
-                <FiArrowRight className="w-5 h-5" />
-              </Link>
-              <Link
-                to="/contact"
-                className="btn-outline inline-flex items-center gap-2"
-              >
-                Ask Me Anything
-              </Link>
+                <dl className="story__facts">
+                  <div>
+                    <dt>Duration</dt>
+                    <dd>{story.duration}</dd>
+                  </div>
+                  <div>
+                    <dt>Lessons</dt>
+                    <dd>{story.lessons} lessons</dd>
+                  </div>
+                  <div>
+                    <dt>Progress</dt>
+                    <dd>{story.level}</dd>
+                  </div>
+                </dl>
+              </motion.header>
+
+              <div>
+                <motion.blockquote {...reveal} className="story__quote">
+                  <span className="story__mark" aria-hidden="true">
+                    “
+                  </span>
+                  <p>{story.story}</p>
+                </motion.blockquote>
+
+                {/* Achievement Highlights */}
+                <dl className="story__highlights">
+                  {[
+                    ['Goal', story.goal],
+                    ['Achievement', story.achievement],
+                    ['Favorite Part', story.favorite],
+                  ].map(([label, value], i) => (
+                    <motion.div key={label} {...stagger(i)}>
+                      <dt>{label}</dt>
+                      <dd>{value}</dd>
+                    </motion.div>
+                  ))}
+                </dl>
+              </div>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </section>
+      ))}
+
+      {/* ─── Closing ──────────────────────────────────────── */}
+      <section className="closing closing--long">
+        <motion.div {...reveal} className="closing__inner">
+          <p className="closing__uk" lang="uk">
+            Твоя історія — наступна.
+          </p>
+          <h2>
+            Ready to Write Your Own Success <em className="display-italic">Story?</em>
+          </h2>
+          <p className="closing__sub">
+            These students started where you are right now. Let's create your transformation together!
+          </p>
+          <div className="closing__actions">
+            <Link to="/booking" className="btn-primary">
+              Book Your Trial Lesson <FiArrowRight />
+            </Link>
+            <Link to="/contact" className="btn-outline">
+              Ask Me Anything <FiArrowUpRight />
+            </Link>
+          </div>
+        </motion.div>
       </section>
     </div>
   );

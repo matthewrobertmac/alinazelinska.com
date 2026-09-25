@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { FiType, FiSun, FiMoon } from 'react-icons/fi';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { FiType, FiX } from 'react-icons/fi';
+import './AccessibilityMenu.css';
+import { ease } from '../utils/motion';
 
 const AccessibilityMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [fontSize, setFontSize] = useState('normal');
   const [highContrast, setHighContrast] = useState(false);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     // Load saved preferences
@@ -45,71 +48,102 @@ const AccessibilityMenu = () => {
     applySettings(fontSize, newValue);
   };
 
+  // Close on Escape
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen]);
+
+  const sizes = [
+    { key: 'small', label: 'Small text' },
+    { key: 'normal', label: 'Default text size' },
+    { key: 'large', label: 'Large text' },
+  ];
+
   return (
-    <div className="fixed bottom-6 left-6 z-50">
+    <div className="a11y" data-testid="accessibility-menu">
       {/* Toggle Button */}
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-12 h-12 bg-[var(--color-accent)] text-white rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center"
+        className={`a11y__toggle ${isOpen ? 'is-open' : ''}`}
         aria-label="Accessibility options"
+        aria-expanded={isOpen}
+        aria-controls="a11y-panel"
+        data-testid="accessibility-toggle"
       >
-        <FiType className="w-6 h-6" />
+        <FiType aria-hidden="true" />
       </button>
 
       {/* Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          className="absolute bottom-16 left-0 bg-[var(--color-bg)] border-2 border-[var(--color-border)] rounded-lg shadow-xl p-4 w-64"
-        >
-          <h3 className="font-bold mb-4">Accessibility</h3>
-
-          {/* Font Size */}
-          <div className="mb-4">
-            <p className="text-sm text-[var(--color-text-secondary)] mb-2">Text Size:</p>
-            <div className="flex gap-2">
-              {['small', 'normal', 'large'].map((size) => (
-                <button
-                  key={size}
-                  onClick={() => handleFontSizeChange(size)}
-                  className={`flex-1 px-3 py-2 rounded border-2 transition-colors ${
-                    fontSize === size
-                      ? 'border-[var(--color-accent)] bg-[var(--color-accent)]/10'
-                      : 'border-[var(--color-border)] hover:border-[var(--color-accent)]'
-                  }`}
-                >
-                  <span className={size === 'small' ? 'text-xs' : size === 'large' ? 'text-lg' : 'text-sm'}>
-                    {size === 'small' ? 'A' : size === 'normal' ? 'A' : 'A'}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* High Contrast */}
-          <div>
-            <button
-              onClick={toggleHighContrast}
-              className="w-full flex items-center justify-between p-3 rounded border-2 border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors"
-            >
-              <span className="text-sm">High Contrast</span>
-              <div
-                className={`w-12 h-6 rounded-full transition-colors ${
-                  highContrast ? 'bg-[var(--color-accent)]' : 'bg-gray-300'
-                }`}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            id="a11y-panel"
+            role="dialog"
+            aria-label="Accessibility settings"
+            initial={{ opacity: 0, y: reduce ? 0 : 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: reduce ? 0 : 10 }}
+            transition={{ duration: reduce ? 0.15 : 0.45, ease }}
+            className="a11y__panel"
+            data-testid="accessibility-panel"
+          >
+            <div className="a11y__head">
+              <p className="eyebrow">Accessibility</p>
+              <button
+                type="button"
+                className="a11y__close"
+                onClick={() => setIsOpen(false)}
+                aria-label="Close accessibility options"
               >
-                <div
-                  className={`w-5 h-5 bg-white rounded-full shadow-md transition-transform ${
-                    highContrast ? 'translate-x-6' : 'translate-x-0.5'
-                  } mt-0.5`}
-                />
+                <FiX aria-hidden="true" />
+              </button>
+            </div>
+
+            {/* Font Size */}
+            <div className="a11y__row">
+              <p className="a11y__label" id="a11y-size-label">Text size</p>
+              <div className="a11y__sizes" role="group" aria-labelledby="a11y-size-label">
+                {sizes.map(({ key, label }) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => handleFontSizeChange(key)}
+                    className={`a11y__chip a11y__chip--${key} ${fontSize === key ? 'is-active' : ''}`}
+                    aria-pressed={fontSize === key}
+                    aria-label={label}
+                    data-testid={`font-size-${key}`}
+                  >
+                    A
+                  </button>
+                ))}
               </div>
-            </button>
-          </div>
-        </motion.div>
-      )}
+            </div>
+
+            {/* High Contrast */}
+            <div className="a11y__row">
+              <button
+                type="button"
+                role="switch"
+                aria-checked={highContrast}
+                onClick={toggleHighContrast}
+                className="a11y__switch-row"
+                data-testid="high-contrast-toggle"
+              >
+                <span className="a11y__label">High contrast</span>
+                <span className={`a11y__switch ${highContrast ? 'is-on' : ''}`} aria-hidden="true">
+                  <span className="a11y__knob" />
+                </span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

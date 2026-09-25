@@ -1,0 +1,144 @@
+/* ─── Inner page hero ─────────────────────────────────────── */
+
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 9rem 0 5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+@media (min-width: 900px) {
+  .page-hero {
+    padding: 11rem 0 7rem;
+  }
+}
+
+.page-hero--compact {
+  padding-bottom: 3.5rem;
+}
+
+@media (min-width: 900px) {
+  .page-hero--compact {
+    padding: 10rem 0 4.5rem;
+  }
+}
+
+.page-hero__aura {
+  position: absolute;
+  inset: -30% -10% auto;
+  height: 140%;
+  pointer-events: none;
+  background:
+    radial-gradient(35% 40% at 85% 30%, var(--glow-rose), transparent 70%),
+    radial-gradient(25% 30% at 5% 90%, var(--glow-gold), transparent 70%);
+  opacity: 0.45;
+  filter: blur(24px);
+}
+
+/* Oversized Ukrainian word ghosted behind the title */
+.page-hero__watermark {
+  position: absolute;
+  right: -0.05em;
+  bottom: -0.22em;
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 22vw, 20rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--color-text);
+  opacity: 0.045;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.page-hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  gap: 3.5rem;
+  align-items: end;
+}
+
+@media (min-width: 1024px) {
+  .page-hero__inner {
+    padding: 0 2.5rem;
+  }
+  .page-hero--split .page-hero__inner {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 5rem;
+    align-items: center;
+  }
+}
+
+.page-hero__copy {
+  max-width: 54rem;
+}
+
+.page-hero__title {
+  overflow: hidden;
+  margin: 1.4rem 0 1.6rem;
+  padding-bottom: 0.08em;
+  font-size: clamp(3rem, 8vw, 6.4rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+
+.page-hero__title em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.page-hero__lede {
+  max-width: 38rem;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.page-hero__extra {
+  margin-top: 2.25rem;
+}
+
+.page-hero__aside {
+  position: relative;
+}
+
+/* ─── Breadcrumb ──────────────────────────────────────────── */
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 2.25rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-accent);
+}
+
+.breadcrumb__sep {
+  color: var(--color-gold);
+  font-size: 0.6rem;
+}
+
+.breadcrumb [aria-current='page'] {
+  color: var(--color-text);
+}

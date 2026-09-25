@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { FiArrowUpRight, FiMail } from 'react-icons/fi';
 import { meta } from '../data/content';
-import Breadcrumb from '../components/Breadcrumb';
+import PageHero from '../components/PageHero';
 import SEOHead from '../components/SEOHead';
 import { generateFAQSchema } from '../utils/schemas';
+import './faq.css';
+import { ease, reveal } from '../utils/motion';
+
+const stagger = (i) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-60px' },
+  transition: { duration: 0.9, ease, delay: i * 0.05 },
+});
+
+const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -149,11 +160,19 @@ const FAQ = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const jumpTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  };
+
   // Flatten all FAQs for schema
   const allFAQs = faqs.flatMap(section => section.questions);
 
   return (
-    <div className="page-transition pt-24 pb-16">
+    <div className="faq-page page-transition">
       <SEOHead
         title="FAQ | Ukrainian Lessons with Alina Zelinska | All Your Questions Answered"
         description="Common questions about learning Ukrainian, Russian, and English with Alina Zelinska. Booking, pricing, lesson format, and more. 100% response rate."
@@ -164,115 +183,117 @@ const FAQ = () => {
           { lang: 'x-default', url: 'https://alinazelinska.com/faq' }
         ]}
       />
-      
-      <section className="section-padding">
-        <div className="max-w-4xl mx-auto">
-          <Breadcrumb items={[{ name: 'FAQ' }]} />
-          
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6">
-              Questions? I've Got Answers 💬
-            </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] mx-auto rounded-full mb-6"></div>
-            <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              Everything you need to know about lessons, booking, and learning with me. Don't see your question? Just ask!
-            </p>
-          </motion.div>
 
-          {/* FAQ Sections */}
+      <PageHero
+        crumbs={[{ name: 'FAQ' }]}
+        eyebrow={`${allFAQs.length} questions · ${faqs.length} topics`}
+        uk="Питання"
+        title={
+          <>
+            Questions? I’ve got <em>answers.</em>
+          </>
+        }
+        lede="Everything you need to know about lessons, booking, and learning with me. Don't see your question? Just ask!"
+      >
+        <nav className="faq-index" aria-label="FAQ topics">
           {faqs.map((section, sectionIndex) => (
-            <motion.div
-              key={sectionIndex}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: sectionIndex * 0.1 }}
-              className="mb-12"
-            >
-              <h2 className="text-2xl font-serif font-bold mb-6 text-[var(--color-accent)]">
-                {section.category}
-              </h2>
-              <div className="space-y-4">
+            <button key={section.category} type="button" onClick={() => jumpTo(`faq-${slug(section.category)}`)}>
+              <span className="num">{String(sectionIndex + 1).padStart(2, '0')}</span>
+              {section.category}
+            </button>
+          ))}
+        </nav>
+      </PageHero>
+
+      {/* ─── FAQ groups ───────────────────────────────────── */}
+      {faqs.map((section, sectionIndex) => (
+        <section
+          key={section.category}
+          id={`faq-${slug(section.category)}`}
+          className={`page-section faq-group ${sectionIndex % 2 ? 'page-section--tint' : ''}`}
+        >
+          <div className="section-shell">
+            <div className="split">
+              <motion.header {...reveal} className="split__aside section-head faq-group__head">
+                <span className="num faq-group__num">{String(sectionIndex + 1).padStart(2, '0')}</span>
+                <h2>{section.category}</h2>
+                <p className="faq-group__count">
+                  {section.questions.length} {section.questions.length === 1 ? 'question' : 'questions'}
+                </p>
+              </motion.header>
+
+              <ul className="faq-list">
                 {section.questions.map((faq, qIndex) => {
                   const globalIndex = `${sectionIndex}-${qIndex}`;
                   const isOpen = openIndex === globalIndex;
-                  
+                  const panelId = `faq-panel-${globalIndex}`;
+                  const buttonId = `faq-button-${globalIndex}`;
+
                   return (
-                    <div
-                      key={qIndex}
-                      className="card overflow-hidden"
-                    >
-                      <button
-                        onClick={() => toggleQuestion(globalIndex)}
-                        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-[var(--color-bg-secondary)] transition-colors"
-                      >
-                        <span className="text-lg font-semibold pr-4">
-                          {faq.q}
-                        </span>
-                        {isOpen ? (
-                          <FiChevronUp className="w-6 h-6 text-[var(--color-accent)] flex-shrink-0" />
-                        ) : (
-                          <FiChevronDown className="w-6 h-6 text-[var(--color-accent)] flex-shrink-0" />
-                        )}
-                      </button>
-                      
-                      <AnimatePresence>
+                    <motion.li key={qIndex} {...stagger(qIndex)} className={isOpen ? 'is-open' : ''}>
+                      <h3>
+                        <button
+                          id={buttonId}
+                          type="button"
+                          onClick={() => toggleQuestion(globalIndex)}
+                          aria-expanded={isOpen}
+                          aria-controls={panelId}
+                          className="faq-q"
+                        >
+                          <span>{faq.q}</span>
+                          <span className="faq-q__icon" aria-hidden="true" />
+                        </button>
+                      </h3>
+
+                      <AnimatePresence initial={false}>
                         {isOpen && (
                           <motion.div
+                            id={panelId}
+                            role="region"
+                            aria-labelledby={buttonId}
+                            className="faq-a"
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
+                            transition={{ duration: 0.5, ease }}
                           >
-                            <div className="px-6 pb-4 text-[var(--color-text-secondary)] leading-relaxed">
-                              {faq.a}
-                            </div>
+                            <p>{faq.a}</p>
                           </motion.div>
                         )}
                       </AnimatePresence>
-                    </div>
+                    </motion.li>
                   );
                 })}
-              </div>
-            </motion.div>
-          ))}
-
-          {/* Bottom CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-center mt-16 card p-8 bg-gradient-to-br from-[var(--color-accent)]/10 to-transparent"
-          >
-            <h3 className="text-2xl font-serif font-bold mb-4">
-              Still have questions? 🤔
-            </h3>
-            <p className="text-[var(--color-text-secondary)] mb-6">
-              I'm here to help! Drop me a message and I'll get back to you ASAP.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://www.instagram.com/alin.a.zelinska/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary inline-flex items-center gap-2"
-              >
-                Message me on Instagram
-              </a>
-              <a
-                href="mailto:zelinskayaalinaig@gmail.com"
-                className="btn-outline inline-flex items-center gap-2"
-              >
-                Send me an email
-              </a>
+              </ul>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </section>
+      ))}
+
+      {/* ─── Closing ──────────────────────────────────────── */}
+      <section className="closing">
+        <motion.div {...reveal} className="closing__inner">
+          <p className="closing__uk" lang="uk">
+            Питай сміливо.
+          </p>
+          <h2>
+            Still have <em className="display-italic">questions?</em>
+          </h2>
+          <p className="closing__sub">I'm here to help! Drop me a message and I'll get back to you ASAP.</p>
+          <div className="closing__actions">
+            <a
+              href="https://www.instagram.com/alin.a.zelinska/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              Message me on Instagram <FiArrowUpRight />
+            </a>
+            <a href="mailto:zelinskayaalinaig@gmail.com" className="btn-outline">
+              Send me an email <FiMail />
+            </a>
+          </div>
+        </motion.div>
       </section>
     </div>
   );

@@ -1,11 +1,18 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FiArrowRight, FiCheck } from 'react-icons/fi';
-import { meta } from '../../data/content';
-import Breadcrumb from '../../components/Breadcrumb';
+import { FiArrowRight } from 'react-icons/fi';
+import PageHero from '../../components/PageHero';
 import SEOHead from '../../components/SEOHead';
 import { breadcrumbSchema } from '../../utils/schemas';
+import './services.css';
+import { reveal, stagger } from '../../utils/motion';
+
+const pad = (i) => String(i + 1).padStart(2, '0');
+
+// Philosophy copy uses *word* for emphasis
+const emphasise = (text) =>
+  text.split(/\*(.+?)\*/).map((part, i) => (i % 2 ? <em key={i}>{part}</em> : part));
 
 const PoetryTranslation = () => {
   useEffect(() => {
@@ -43,11 +50,17 @@ const PoetryTranslation = () => {
     'Memorial and tribute poems',
   ];
 
+  const philosophy = [
+    'Poetry translation is sacred work. When someone trusts you with their poem, they’re trusting you with a piece of their soul. The words they chose, the rhythm they crafted, the emotions they poured in — all of it matters.',
+    'I don’t believe in literal translations. A word-for-word conversion kills the poetry. Instead, I ask: What is this poem trying to make you *feel*? What images does it paint? What music does it carry? Then I recreate that experience in the target language.',
+    'Sometimes that means changing a metaphor, adjusting a rhythm, or finding a phrase that doesn’t literally translate but *feels* right. Because at the end of the day, a translated poem should still give you chills.',
+  ];
+
   return (
-    <div className="page-transition pt-24 pb-16">
+    <div className="svc-page page-transition">
       <SEOHead
         title="Poetry Translation Services | Ukrainian, Russian, English | Alina Zelinska"
-        description="Professional poetry translation between Ukrainian, Russian, and English. I don\'t just translate words — I carry the feeling, rhythm, and soul of your poem across languages."
+        description="Professional poetry translation between Ukrainian, Russian, and English. I don't just translate words — I carry the feeling, rhythm, and soul of your poem across languages."
         keywords="poetry translation, Ukrainian poetry translation, Russian poetry translation, literary translation, poem translator"
         schema={breadcrumbSchema([
           { name: 'Home', url: 'https://alinazelinska.com' },
@@ -56,186 +69,136 @@ const PoetryTranslation = () => {
         ])}
       />
 
-      <section className="section-padding">
-        <div className="max-w-6xl mx-auto">
-          <Breadcrumb items={breadcrumbItems} />
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <div className="inline-block px-4 py-2 bg-purple-100 text-purple-600 rounded-full text-sm font-medium mb-6">
-              🌙 Poetry Translation
-            </div>
-            <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6">
-              Poetry Translation Services
-            </h1>
-            <div className="w-24 h-1 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] mx-auto rounded-full mb-6"></div>
-            <p className="text-xl text-[var(--color-text-secondary)] max-w-3xl mx-auto mb-4">
-              Ukrainian ↔ Russian ↔ English
-            </p>
-            <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              I don\'t just translate words — I carry the feeling, the rhythm, and the soul of your poem across languages. Because a poem that doesn\'t move you isn\'t a poem anymore.
-            </p>
-          </motion.div>
+      <PageHero
+        crumbs={breadcrumbItems}
+        eyebrow="Poetry translation"
+        uk="Вірш"
+        title={
+          <>
+            Poetry translation <em>services.</em>
+          </>
+        }
+        lede="I don’t just translate words — I carry the feeling, the rhythm, and the soul of your poem across languages. Because a poem that doesn’t move you isn’t a poem anymore."
+      >
+        <p className="svc-pairs-line">
+          Ukrainian <span aria-hidden="true">↔</span> Russian <span aria-hidden="true">↔</span> English
+        </p>
+        <div className="svc-actions">
+          <Link to="/contact" className="btn-primary">
+            Let’s Talk About Your Project <FiArrowRight />
+          </Link>
+        </div>
+      </PageHero>
+
+      {/* ─── Philosophy ───────────────────────────────────── */}
+      <section className="page-section">
+        <div className="section-shell">
+          <div className="split">
+            <motion.header {...reveal} className="split__aside section-head">
+              <p className="eyebrow">How I think about it</p>
+              <h2>
+                My translation <em className="display-italic">philosophy.</em>
+              </h2>
+            </motion.header>
+
+            <motion.div {...reveal} className="prose-ink svc-prose">
+              {philosophy.map((paragraph, index) => (
+                <p key={index}>{emphasise(paragraph)}</p>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* My Philosophy */}
-      <section className="section-padding bg-[var(--color-bg-secondary)]">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="card p-8 md:p-12 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20"
-          >
-            <h2 className="text-3xl font-serif font-bold mb-6 text-center">
-              My Translation Philosophy
+      {/* ─── Language pairs ───────────────────────────────── */}
+      <section className="page-section page-section--tint">
+        <div className="section-shell">
+          <motion.header {...reveal} className="section-head">
+            <p className="eyebrow">Language pairs</p>
+            <h2>
+              Languages I <em className="display-italic">work in.</em>
             </h2>
-            <div className="space-y-4 text-lg text-[var(--color-text-secondary)] leading-relaxed">
-              <p>
-                Poetry translation is sacred work. When someone trusts you with their poem, they\'re trusting you with a piece of their soul. The words they chose, the rhythm they crafted, the emotions they poured in — all of it matters.
-              </p>
-              <p>
-                I don\'t believe in literal translations. A word-for-word conversion kills the poetry. Instead, I ask: What is this poem trying to make you *feel*? What images does it paint? What music does it carry? Then I recreate that experience in the target language.
-              </p>
-              <p>
-                Sometimes that means changing a metaphor, adjusting a rhythm, or finding a phrase that doesn\'t literally translate but *feels* right. Because at the end of the day, a translated poem should still give you chills.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+          </motion.header>
 
-      {/* Language Pairs */}
-      <section className="section-padding bg-[var(--color-bg)]">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl font-serif font-bold text-center mb-12"
-          >
-            Languages I Work In
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <ul className="svc-pairs">
             {languagePairs.map((pair, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="card p-6 text-center hover-lift"
-              >
-                <div className="text-4xl mb-3">{pair.icon}</div>
-                <p className="text-lg font-semibold">
-                  {pair.from} to {pair.to}
-                </p>
-              </motion.div>
+              <motion.li key={`${pair.from}-${pair.to}`} {...stagger(index % 2)}>
+                <span>{pair.from}</span>
+                <span className="svc-pairs__arrow" aria-hidden="true">
+                  <FiArrowRight />
+                </span>
+                <span className="sr-only">to</span>
+                <span className="svc-pairs__to">{pair.to}</span>
+              </motion.li>
             ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ─── Process ──────────────────────────────────────── */}
+      <section className="page-section">
+        <div className="section-shell">
+          <div className="split">
+            <motion.header {...reveal} className="split__aside section-head">
+              <p className="eyebrow">Step by step</p>
+              <h2>
+                My translation <em className="display-italic">process.</em>
+              </h2>
+            </motion.header>
+
+            <ol className="rule-list svc-steps">
+              {process.map((item, index) => (
+                <motion.li key={item.step} {...stagger(index)}>
+                  <span className="num">{pad(Number(item.step) - 1)}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </motion.li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
 
-      {/* Translation Process */}
-      <section className="section-padding bg-[var(--color-bg-secondary)]">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl font-serif font-bold text-center mb-12"
-          >
-            My Translation Process
-          </motion.h2>
-
-          <div className="space-y-6">
-            {process.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="card p-6 flex items-start gap-6"
-              >
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
-                  {item.step}
-                </div>
-                <div>
-                  <h3 className="text-xl font-serif font-bold mb-2">{item.title}</h3>
-                  <p className="text-[var(--color-text-secondary)] leading-relaxed">{item.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What I Translate */}
-      <section className="section-padding bg-[var(--color-bg)]">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl font-serif font-bold text-center mb-12"
-          >
-            What I Translate
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            {whatITranslate.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                viewport={{ once: true }}
-                className="flex items-start gap-3 card p-4"
-              >
-                <FiCheck className="w-6 h-6 text-purple-500 flex-shrink-0 mt-1" />
-                <span className="text-[var(--color-text-secondary)]">{item}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section-padding bg-[var(--color-bg-secondary)]">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="card p-8 md:p-12 bg-gradient-to-br from-[var(--color-accent)]/10 to-transparent"
-          >
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
-              Have a Poem That Needs Translating? 🌙
+      {/* ─── What I translate ─────────────────────────────── */}
+      <section className="page-section page-section--tint">
+        <div className="section-shell">
+          <motion.header {...reveal} className="section-head">
+            <p className="eyebrow">Commissions</p>
+            <h2>
+              What I <em className="display-italic">translate.</em>
             </h2>
-            <p className="text-lg text-[var(--color-text-secondary)] mb-8">
-              Whether it\'s a personal collection, a literary work for publication, or a single poem close to your heart — I\'ll treat it with the care and artistry it deserves.
-            </p>
-            <Link
-              to="/contact"
-              className="btn-primary inline-flex items-center gap-2"
-            >
-              Let\'s Talk About Your Project
-              <FiArrowRight className="w-5 h-5" />
-            </Link>
-          </motion.div>
+          </motion.header>
+
+          <ol className="svc-checks svc-checks--cols">
+            {whatITranslate.map((item, index) => (
+              <motion.li key={item} {...stagger(index % 2)}>
+                <span className="num">{pad(index)}</span>
+                <span>{item}</span>
+              </motion.li>
+            ))}
+          </ol>
         </div>
+      </section>
+
+      {/* ─── Closing ──────────────────────────────────────── */}
+      <section className="closing closing--long">
+        <motion.div {...reveal} className="closing__inner">
+          <p className="closing__uk" lang="uk">
+            Слово за словом.
+          </p>
+          <h2>
+            Have a poem that needs <em className="display-italic">translating?</em>
+          </h2>
+          <p className="closing__sub">
+            Whether it’s a personal collection, a literary work for publication, or a single poem close to your heart —
+            I’ll treat it with the care and artistry it deserves.
+          </p>
+          <div className="closing__actions">
+            <Link to="/contact" className="btn-primary">
+              Let’s Talk About Your Project <FiArrowRight />
+            </Link>
+          </div>
+        </motion.div>
       </section>
     </div>
   );

@@ -1,0 +1,169 @@
+/* ─── TikTok ──────────────────────────────────────────────── */
+
+.tiktok-page .page-hero .eyebrow svg {
+  font-size: 0.85rem;
+}
+
+.tt-handle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.tt-handle svg {
+  font-size: 0.7em;
+  transition: transform 0.45s var(--ease-out);
+}
+
+.tt-handle:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* Feed grid */
+.tt-grid {
+  display: grid;
+  gap: 3rem 2rem;
+}
+
+@media (min-width: 720px) {
+  .tt-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .tt-grid {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2.5rem;
+  }
+}
+
+.tt-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.tt-item__label {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.9rem 0 1.25rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.tt-item__label .num {
+  font-size: 1.35rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Embed — TikTok renders its own card; we only frame the space it lands in */
+.tt-embed {
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.tt-embed .tiktok-embed {
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.tt-embed__placeholder {
+  width: 100%;
+  max-width: 325px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.tt-embed__placeholder svg {
+  font-size: 1.75rem;
+  color: var(--color-accent);
+  opacity: 0.5;
+}
+
+.tt-embed__placeholder p {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--color-muted);
+}
+
+.tt-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 4.5rem;
+}
+
+.tt-more .btn-primary {
+  white-space: normal;
+  text-align: center;
+}
+
+/* Topics */
+.tt-topics li {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 1rem;
+  padding: 2.25rem 0;
+}
+
+@media (min-width: 900px) {
+  .tt-topics li {
+    grid-template-columns: 4rem 1fr;
+  }
+}
+
+.tt-topics .num {
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.tt-topics__word {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.tt-topics h3 {
+  margin: 0.35rem 0 0.75rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+}
+
+.tt-topics p {
+  max-width: 36rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+/* Closing — long i18n title */
+.tiktok-page .closing .btn-primary {
+  white-space: normal;
+  text-align: center;
+}
