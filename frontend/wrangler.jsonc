@@ -6,7 +6,8 @@
   "preview_urls": true,
   "routes": [
     { "pattern": "alinazelinska.com", "custom_domain": true },
-    { "pattern": "www.alinazelinska.com", "custom_domain": true }
+    // www has its own proxied CNAME to the apex, so it's attached as a route
+    { "pattern": "www.alinazelinska.com/*", "zone_name": "alinazelinska.com" }
   ],
   "assets": {
     "directory": "./build",
