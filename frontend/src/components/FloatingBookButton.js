@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLangPath } from '../i18n/routing';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { FiCalendar, FiX, FiArrowRight } from 'react-icons/fi';
@@ -10,12 +10,12 @@ const FloatingBookButton = () => {
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
-  const location = useLocation();
+  const { path: currentPath } = useLangPath();
   const reduce = useReducedMotion();
 
   useEffect(() => {
     // Don't show on booking page
-    if (location.pathname === '/booking') {
+    if (currentPath === '/booking') {
       setIsVisible(false);
       return;
     }
@@ -38,7 +38,7 @@ const FloatingBookButton = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [location, isDismissed]);
+  }, [currentPath, isDismissed]);
 
   const handleDismiss = (e) => {
     e.preventDefault();

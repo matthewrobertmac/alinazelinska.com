@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { FiMail, FiLinkedin, FiInstagram, FiArrowUpRight, FiArrowRight } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link } from '../i18n/routing';
 import { contactInfo } from '../data/content';
 import PageHero from '../components/PageHero';
 import SEOHead from '../components/SEOHead';
@@ -63,12 +63,6 @@ const Contact = () => {
         title={t('contact.seo.title')}
         description={t('contact.seo.description')}
         keywords={t('contact.seo.keywords')}
-        hreflang={[
-          { lang: 'en', url: 'https://alinazelinska.com/contact' },
-          { lang: 'uk', url: 'https://alinazelinska.com/contact?lang=uk' },
-          { lang: 'ru', url: 'https://alinazelinska.com/contact?lang=ru' },
-          { lang: 'x-default', url: 'https://alinazelinska.com/contact' },
-        ]}
       />
 
       <PageHero

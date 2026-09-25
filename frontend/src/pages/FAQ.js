@@ -47,10 +47,6 @@ const FAQ = () => {
         description={t('faq.seo.description')}
         keywords={t('faq.seo.keywords')}
         schema={generateFAQSchema(allFAQs)}
-        hreflang={[
-          { lang: 'en', url: 'https://alinazelinska.com/faq' },
-          { lang: 'x-default', url: 'https://alinazelinska.com/faq' }
-        ]}
       />
 
       <PageHero

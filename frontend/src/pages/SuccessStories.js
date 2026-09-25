@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link } from '../i18n/routing';
 import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import SEOHead from '../components/SEOHead';

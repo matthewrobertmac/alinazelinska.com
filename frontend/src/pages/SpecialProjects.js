@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link } from '../i18n/routing';
 import { FiArrowRight, FiArrowUpRight, FiBook, FiMusic, FiSmartphone, FiCheck } from 'react-icons/fi';
 import { useTranslation, Trans } from 'react-i18next';
 import SEOHead from '../components/SEOHead';

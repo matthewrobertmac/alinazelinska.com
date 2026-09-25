@@ -1,6 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
+import { LANGS, DEFAULT_LANG, SITE_URL, localizePath, useLangPath } from '../i18n/routing';
+
+const OG_LOCALE = { en: 'en_US', uk: 'uk_UA', ru: 'ru_RU' };
 
 const SEOHead = ({
   title: titleProp,
@@ -8,15 +11,14 @@ const SEOHead = ({
   keywords = '',
   ogImage = 'https://alinazelinska.com/media/alina-portrait.jpg',
   schema = null,
-  canonical = null,
-  hreflang = null,
 }) => {
   const { t } = useTranslation();
   const title = titleProp || t('seo.defaultTitle');
   const description = descriptionProp || t('seo.defaultDescription');
-  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://alinazelinska.com';
-  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
-  const fullUrl = canonical || `${siteUrl}${currentPath}`;
+  // Each language version is its own canonical page, cross-linked with hreflang
+  const { lng, path } = useLangPath();
+  const urlFor = (lang) => `${SITE_URL}${localizePath(path, lang)}`;
+  const fullUrl = urlFor(lng);
 
   return (
     <Helmet>
@@ -33,6 +35,10 @@ const SEOHead = ({
       <meta property="og:url" content={fullUrl} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={t('seo.siteName')} />
+      <meta property="og:locale" content={OG_LOCALE[lng]} />
+      {LANGS.filter((lang) => lang !== lng).map((lang) => (
+        <meta key={lang} property="og:locale:alternate" content={OG_LOCALE[lang]} />
+      ))}
 
       {/* Twitter Card Tags */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -40,10 +46,11 @@ const SEOHead = ({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
 
-      {/* Hreflang Tags */}
-      {hreflang && hreflang.map((lang, index) => (
-        <link key={index} rel="alternate" hrefLang={lang.lang} href={lang.url} />
+      {/* Hreflang: every language version, plus English as the default */}
+      {LANGS.map((lang) => (
+        <link key={lang} rel="alternate" hrefLang={lang} href={urlFor(lang)} />
       ))}
+      <link rel="alternate" hrefLang="x-default" href={urlFor(DEFAULT_LANG)} />
 
       {/* JSON-LD Structured Data */}
       {schema && (

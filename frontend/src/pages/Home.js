@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../i18n/routing';
 import { useTranslation, Trans } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloatingWords from '../components/FloatingWords';
@@ -116,12 +116,6 @@ const Home = () => {
           '@context': 'https://schema.org',
           '@graph': [personSchema, organizationSchema, aggregateRatingSchema],
         }}
-        hreflang={[
-          { lang: 'en', url: 'https://alinazelinska.com/' },
-          { lang: 'uk', url: 'https://alinazelinska.com/?lang=uk' },
-          { lang: 'ru', url: 'https://alinazelinska.com/?lang=ru' },
-          { lang: 'x-default', url: 'https://alinazelinska.com/' },
-        ]}
       />
 
       {/* ─── Hero ─────────────────────────────────────────── */}
@@ -415,7 +409,7 @@ const Home = () => {
       <section className="closing">
         <motion.div {...reveal} className="closing__inner">
           <p className="closing__uk" lang="uk">
-            Давай почнемо.
+            Почнімо.
           </p>
           <h2>
             <Trans i18nKey="home.closing.title" components={emItalic} />

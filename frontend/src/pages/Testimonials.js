@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../i18n/routing';
 import { Trans, useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { testimonials as testimonialImages } from '../data/content';
@@ -95,12 +95,6 @@ const Testimonials = () => {
         description={t('testimonials.seo.description')}
         keywords={t('testimonials.seo.keywords')}
         schema={aggregateRatingSchema}
-        hreflang={[
-          { lang: 'en', url: 'https://alinazelinska.com/testimonials' },
-          { lang: 'uk', url: 'https://alinazelinska.com/testimonials?lang=uk' },
-          { lang: 'ru', url: 'https://alinazelinska.com/testimonials?lang=ru' },
-          { lang: 'x-default', url: 'https://alinazelinska.com/testimonials' }
-        ]}
       />
 
       <PageHero

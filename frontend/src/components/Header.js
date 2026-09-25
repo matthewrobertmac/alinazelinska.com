@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLangPath } from '../i18n/routing';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FiSun, FiMoon, FiArrowRight } from 'react-icons/fi';
@@ -11,7 +11,7 @@ const Header = ({ theme, toggleTheme }) => {
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  const { path: currentPath } = useLangPath();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 24);
@@ -22,7 +22,7 @@ const Header = ({ theme, toggleTheme }) => {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, [location.pathname]);
+  }, [currentPath]);
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
@@ -40,7 +40,7 @@ const Header = ({ theme, toggleTheme }) => {
     { path: '/contact', id: 'say hello', label: t('nav.contact') },
   ];
 
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => currentPath === path;
 
   const ThemeIcon = theme === 'dark' ? FiSun : FiMoon;
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link } from '../../i18n/routing';
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
 import useReviews from './useReviews';
@@ -17,10 +17,6 @@ const UkrainianLessons = () => {
   const { t } = useTranslation();
   const p = (k, o) => t(`services.ukrainian.${k}`, o);
   const s = (k) => t(`services.shared.${k}`);
-
-  useEffect(() => {
-    document.title = `${p('docTitle')} | ${s('siteTitle')}`;
-  }, [t]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     window.scrollTo(0, 0);

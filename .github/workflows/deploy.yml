@@ -35,6 +35,10 @@ jobs:
           corepack enable
           yarn install --frozen-lockfile --non-interactive
 
+      # The build prerenders every page with a headless browser (scripts/prerender.mjs)
+      - name: Install headless browser
+        run: npx playwright install --with-deps chromium
+
       - name: Build
         run: yarn build
 

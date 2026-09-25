@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { FiCheck, FiArrowRight, FiRotateCcw } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link } from '../i18n/routing';
 import { useTranslation } from 'react-i18next';
 import { accent } from '../utils/text';
 import './QuizWidget.css';

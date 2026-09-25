@@ -9,6 +9,7 @@ import PageHero from '../components/PageHero';
 import SEOHead from '../components/SEOHead';
 import { accent, clean } from '../utils/text';
 import './booking.css';
+import { Link, localizePath, useLangPath } from '../i18n/routing';
 import { ease, reveal, stagger } from '../utils/motion';
 
 const PAYPAL_EMAIL = 'zelinskayaalinaig@gmail.com';
@@ -29,6 +30,7 @@ const emphasise = (text, Tag = 'em', className) =>
 
 const Booking = () => {
   const { t } = useTranslation();
+  const { lng } = useLangPath();
   const { getPackagePrices, currency, formatPrice, basePricesEur } = useCurrency();
   const [loading, setLoading] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState(null);
@@ -39,7 +41,6 @@ const Booking = () => {
   const prices = getPackagePrices();
 
   useEffect(() => {
-    document.title = t('booking.docTitle');
     window.scrollTo(0, 0);
 
     // Handle PayPal return
@@ -85,8 +86,8 @@ const Booking = () => {
       intensive: 'Intensive Pack (5 x 60 min)',
     };
     
-    const returnUrl = encodeURIComponent(`${window.location.origin}/booking?paypal_success=true`);
-    const cancelUrl = encodeURIComponent(`${window.location.origin}/booking`);
+    const returnUrl = encodeURIComponent(`${window.location.origin}${localizePath('/booking', lng)}?paypal_success=true`);
+    const cancelUrl = encodeURIComponent(`${window.location.origin}${localizePath('/booking', lng)}`);
     const itemName = encodeURIComponent(`Language Lesson - ${packageNames[packageId]}`);
     
     // Create PayPal payment URL with guest checkout (landing_page=billing shows card form first)
@@ -114,10 +115,10 @@ const Booking = () => {
           </p>
           <h1>{clean(t('booking.success'))}</h1>
           <p className="booking-success__text">{t('booking.successMessage')}</p>
-          <a href="/" className="btn-primary">
+          <Link to="/" className="btn-primary">
             <FiHome />
             {t('booking.backToHome')}
-          </a>
+          </Link>
         </motion.div>
       </div>
     );
@@ -135,12 +136,6 @@ const Booking = () => {
         title={t('booking.seo.title')}
         description={t('booking.seo.description')}
         keywords={t('booking.seo.keywords')}
-        hreflang={[
-          { lang: 'en', url: 'https://alinazelinska.com/booking' },
-          { lang: 'uk', url: 'https://alinazelinska.com/booking?lang=uk' },
-          { lang: 'ru', url: 'https://alinazelinska.com/booking?lang=ru' },
-          { lang: 'x-default', url: 'https://alinazelinska.com/booking' }
-        ]}
       />
 
       <PageHero

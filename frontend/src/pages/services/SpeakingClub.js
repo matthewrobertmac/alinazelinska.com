@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link } from '../../i18n/routing';
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiArrowUpRight, FiUsers, FiClock, FiDollarSign, FiCalendar } from 'react-icons/fi';
 import PageHero from '../../components/PageHero';
+import SEOHead from '../../components/SEOHead';
 import './services.css';
 import { reveal, stagger } from '../../utils/motion';
 
@@ -15,10 +16,6 @@ const SpeakingClub = () => {
   const { t } = useTranslation();
   const p = (k, o) => t(`services.speakingClub.${k}`, o);
   const s = (k) => t(`services.shared.${k}`);
-
-  useEffect(() => {
-    document.title = `${p('docTitle')} | ${s('siteTitle')}`;
-  }, [t]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -40,6 +37,7 @@ const SpeakingClub = () => {
 
   return (
     <div className="svc-page page-transition">
+      <SEOHead title={p('seo.title')} description={p('seo.description')} keywords={p('seo.keywords')} />
       <PageHero
         crumbs={[{ name: s('services'), url: '/special-projects' }, { name: p('crumb') }]}
         eyebrow={p('eyebrow')}

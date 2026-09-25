@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../i18n/routing';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { FiPlay, FiPause, FiVolume2, FiVolumeX, FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
@@ -40,10 +40,6 @@ const About = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    document.title = t('about.docTitle');
-  }, [t]);
 
   const togglePlay = () => {
     if (!videoRef.current) return;

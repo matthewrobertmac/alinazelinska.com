@@ -21,7 +21,3 @@ User-agent: LinkedInBot
 User-agent: WhatsApp
 Allow: /
 
-
-
-# Crawl delay for polite bots
-Crawl-delay: 1

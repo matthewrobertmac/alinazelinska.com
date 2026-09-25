@@ -1,8 +1,8 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
+import { LANGS, splitLang } from './routing';
 
-export const languages = ['en', 'uk', 'ru'];
+export const languages = LANGS;
 
 // Every JSON file under locales/<lang>/ is merged into that language's strings,
 // so each area of the site keeps its own file (common.json, home.json, …).
@@ -26,10 +26,11 @@ files.keys().forEach((path) => {
 });
 
 i18n
-  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources,
+    // The URL decides the language (/uk/…, /ru/…); see routing.js and LanguageSync in App.js
+    lng: splitLang(window.location.pathname).lng,
     supportedLngs: languages,
     // uk-UA, ru-RU, en-GB… all map onto the three sites
     nonExplicitSupportedLngs: true,
@@ -37,11 +38,6 @@ i18n
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
-    },
-    detection: {
-      order: ['querystring', 'localStorage', 'navigator'],
-      lookupQuerystring: 'lang',
-      caches: ['localStorage'],
     },
   });
 

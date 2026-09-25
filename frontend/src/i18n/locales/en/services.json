@@ -201,24 +201,50 @@
       "themesTitle": "Past session",
       "themesAccent": "themes.",
       "themes": [
-        { "title": "Christmas Edition", "description": "Holiday vocabulary, traditions, and festive conversations" },
-        { "title": "New Year's Resolutions", "description": "Goals, aspirations, and future tense practice" },
-        { "title": "Travel & Adventure", "description": "Vacation stories, travel vocabulary, and future trip planning" },
-        { "title": "Food & Cooking", "description": "Recipes, restaurants, and culinary conversations" }
+        {
+          "title": "Christmas Edition",
+          "description": "Holiday vocabulary, traditions, and festive conversations"
+        },
+        {
+          "title": "New Year's Resolutions",
+          "description": "Goals, aspirations, and future tense practice"
+        },
+        {
+          "title": "Travel & Adventure",
+          "description": "Vacation stories, travel vocabulary, and future trip planning"
+        },
+        {
+          "title": "Food & Cooking",
+          "description": "Recipes, restaurants, and culinary conversations"
+        }
       ],
       "joinEyebrow": "Is it for you?",
       "joinTitle": "Who should",
       "joinAccent": "join?",
       "join": [
-        { "lead": "Intermediate learners", "text": "who want more speaking practice between 1-on-1 lessons" },
-        { "lead": "Advanced students", "text": "looking to maintain fluency and learn from other learners" },
-        { "lead": "Anyone who loves Ukrainian", "text": "and wants a supportive community to practice with" }
+        {
+          "lead": "Intermediate learners",
+          "text": "who want more speaking practice between 1-on-1 lessons"
+        },
+        {
+          "lead": "Advanced students",
+          "text": "looking to maintain fluency and learn from other learners"
+        },
+        {
+          "lead": "Anyone who loves Ukrainian",
+          "text": "and wants a supportive community to practice with"
+        }
       ],
       "noteLabel": "Note:",
       "note": "The Speaking Club is best for students with at least basic Ukrainian (A2 level or higher). Complete beginners should start with 1-on-1 lessons first.",
       "closingTitle": "Interested in",
       "closingAccent": "joining?",
-      "closingSub": "I announce upcoming Speaking Club sessions on Instagram! Follow me there for dates, times, and sign-up links — or message me directly to get on the list."
+      "closingSub": "I announce upcoming Speaking Club sessions on Instagram! Follow me there for dates, times, and sign-up links — or message me directly to get on the list.",
+      "seo": {
+        "title": "Ukrainian Speaking Club | Small-Group Conversation Practice | Alina Zelinska",
+        "description": "Practise speaking Ukrainian in small online groups of 3–4 learners, led by native speaker Alina Zelinska. 60-minute themed sessions for A2 level and up — $12 per session.",
+        "keywords": "Ukrainian speaking club, Ukrainian conversation practice, Ukrainian group lessons online, practise speaking Ukrainian"
+      }
     },
     "poetry": {
       "crumb": "Poetry Translation",
@@ -247,11 +273,26 @@
       "processTitle": "My translation",
       "processAccent": "process.",
       "process": [
-        { "title": "Initial Read & Analysis", "description": "I read your poem multiple times, understanding not just the words but the emotion, rhythm, and deeper meaning." },
-        { "title": "First Draft", "description": "I translate the content while maintaining the poetic structure, meter, and emotional core." },
-        { "title": "Rhythm Matching", "description": "I refine the translation to match the original's rhythm, flow, and musicality — this is where poetry translation becomes an art." },
-        { "title": "Cultural Adaptation", "description": "I adapt cultural references and metaphors so they resonate in the target language without losing authenticity." },
-        { "title": "Final Polish", "description": "Multiple revisions until the translated poem gives the same chills as the original." }
+        {
+          "title": "Initial Read & Analysis",
+          "description": "I read your poem multiple times, understanding not just the words but the emotion, rhythm, and deeper meaning."
+        },
+        {
+          "title": "First Draft",
+          "description": "I translate the content while maintaining the poetic structure, meter, and emotional core."
+        },
+        {
+          "title": "Rhythm Matching",
+          "description": "I refine the translation to match the original's rhythm, flow, and musicality — this is where poetry translation becomes an art."
+        },
+        {
+          "title": "Cultural Adaptation",
+          "description": "I adapt cultural references and metaphors so they resonate in the target language without losing authenticity."
+        },
+        {
+          "title": "Final Polish",
+          "description": "Multiple revisions until the translated poem gives the same chills as the original."
+        }
       ],
       "translateTitle": "What I",
       "translateAccent": "translate.",

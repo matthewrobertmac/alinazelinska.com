@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { splitLang, localizePath } from '../i18n/routing';
 import { FiChevronDown } from 'react-icons/fi';
 
 const languages = [
@@ -12,6 +14,8 @@ const LanguageSwitcher = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const { pathname, search, hash } = useLocation();
+  const navigate = useNavigate();
 
   const currentLang = languages.find((lang) => lang.code === i18n.resolvedLanguage) || languages[0];
 
@@ -25,8 +29,12 @@ const LanguageSwitcher = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Each language has its own address (/about, /uk/about, /ru/about); remember the choice for next visit
   const changeLanguage = (langCode) => {
-    i18n.changeLanguage(langCode);
+    try {
+      localStorage.setItem('i18nextLng', langCode);
+    } catch {}
+    navigate(`${localizePath(splitLang(pathname).path, langCode)}${search}${hash}`);
     setIsOpen(false);
   };
 
