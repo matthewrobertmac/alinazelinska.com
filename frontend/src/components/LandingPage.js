@@ -166,7 +166,7 @@ const LandingPage = ({ onEnter }) => {
 
           <p className="landing__caption" aria-hidden="true">
             <span className="num">01</span>
-            <span>A short hello from Malta</span>
+            <span>A short hello from Alina</span>
           </p>
         </motion.div>
 

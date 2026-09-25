@@ -71,46 +71,124 @@
 
 /* Embed — TikTok renders its own card; we only frame the space it lands in */
 .tt-embed {
-  width: 100%;
-  min-height: 500px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.tt-embed .tiktok-embed {
-  margin: 0 auto;
-  padding: 0;
-  border: none;
-  border-radius: 1rem;
-  overflow: hidden;
-}
-
-.tt-embed__placeholder {
+  position: relative;
   width: 100%;
   max-width: 325px;
-  height: 500px;
+  margin: 0 auto;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.tt-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Cover image with a play button — no TikTok code loads until clicked */
+.tt-embed__poster {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: none;
+}
+
+.tt-embed__poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out), filter 0.4s ease;
+}
+
+.tt-embed__poster::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(17, 12, 15, 0.45));
+}
+
+.tt-embed__play {
+  position: absolute;
+  z-index: 1;
+  right: 1rem;
+  bottom: 1rem;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 1.15rem;
+  color: #1C0E14;
+  background: rgba(255, 248, 245, 0.92);
+  border-radius: 50%;
+  box-shadow: 0 0 0 8px rgba(255, 248, 245, 0.18);
+  transition: transform 0.5s var(--ease-out), background 0.3s ease, box-shadow 0.5s var(--ease-out);
+}
+
+.tt-embed__play svg {
+  margin-left: 0.2rem;
+}
+
+.tt-embed__poster:hover img {
+  transform: scale(1.03);
+}
+
+.tt-embed__poster:hover .tt-embed__play,
+.tt-embed__poster:focus-visible .tt-embed__play {
+  background: #F08BA6;
+  transform: scale(1.06);
+  box-shadow: 0 0 0 12px rgba(240, 139, 166, 0.22);
+}
+
+/* Shown after clicking, until TikTok's player has loaded */
+.tt-embed__loading {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  text-align: center;
   background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
 }
 
-.tt-embed__placeholder svg {
-  font-size: 1.75rem;
-  color: var(--color-accent);
-  opacity: 0.5;
-}
-
-.tt-embed__placeholder p {
+.tt-embed__loading p {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   font-style: italic;
+  color: var(--color-text);
+}
+
+.tt-embed__loading small {
+  font-size: 0.8rem;
   color: var(--color-muted);
+}
+
+.tt-embed__spinner {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: 0.4rem;
+  border-radius: 50%;
+  border: 2px solid var(--color-border-strong);
+  border-top-color: var(--color-accent);
+  animation: tt-spin 0.9s linear infinite;
+}
+
+@keyframes tt-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .tt-more {

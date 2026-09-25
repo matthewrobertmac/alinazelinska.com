@@ -56,9 +56,9 @@ const About = () => {
   return (
     <div className="about-page page-transition">
       <SEOHead
-        title="About Alina Zelinska | Ukrainian Tutor from Malta | 5.0★ Rating"
-        description="Meet Alina Zelinska: Native Ukrainian & Russian tutor based in Sliema, Malta. 500+ students, 3,500+ lessons, perfect 5.0 rating, 100% attendance."
-        keywords="Alina Zelinska, Ukrainian tutor Malta, language teacher, native Ukrainian speaker"
+        title="About Alina Zelinska | Native Ukrainian Tutor | 5.0★ Rating"
+        description="Meet Alina Zelinska: native Ukrainian & Russian tutor from Ukraine, teaching online worldwide. 500+ students, 3,500+ lessons, perfect 5.0 rating, 100% attendance."
+        keywords="Alina Zelinska, Ukrainian tutor online, language teacher, native Ukrainian speaker"
         schema={{
           '@context': 'https://schema.org',
           '@type': 'ProfilePage',
@@ -68,7 +68,7 @@ const About = () => {
 
       <PageHero
         crumbs={[{ name: 'About Me' }]}
-        eyebrow="About me · Sliema, Malta"
+        eyebrow="About me · From Ukraine"
         uk="Слово"
         testId="about-title"
         title={
@@ -76,7 +76,7 @@ const About = () => {
             Hi, I’m Alina — a little <em>obsessed</em> with language.
           </>
         }
-        lede="Teacher, translator, poet, songwriter — and, let’s be honest, a total word nerd. Originally from Ukraine, teaching the world from a Mediterranean island."
+        lede="Teacher, translator, poet, songwriter — and, let’s be honest, a total word nerd. Originally from Ukraine, teaching students all over the world online."
         aside={
           <figure className="about-portrait">
             <div className="about-portrait__frame">

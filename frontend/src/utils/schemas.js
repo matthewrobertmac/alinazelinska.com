@@ -14,10 +14,9 @@ export const personSchema = {
     "https://www.tiktok.com/@movalina.study"
   ],
   "knowsLanguage": ["Ukrainian", "Russian", "English", "Spanish", "German"],
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Sliema",
-    "addressCountry": "Malta"
+  "nationality": {
+    "@type": "Country",
+    "name": "Ukraine"
   },
   "alumniOf": {
     "@type": "Organization",
@@ -29,14 +28,9 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
   "name": "Alina Zelinska Ukrainian Tutoring",
-  "description": "Online Ukrainian, Russian, and English language lessons with a native speaker based in Malta.",
+  "description": "Ukrainian, Russian, and English language lessons with a native speaker, taught online worldwide.",
   "url": "https://alinazelinska.com",
   "logo": "https://alinazelinska.com/media/alina-portrait.jpg",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Sliema",
-    "addressCountry": "Malta"
-  },
   "areaServed": "Worldwide",
   "availableLanguage": ["Ukrainian", "Russian", "English"],
   "aggregateRating": {
@@ -125,56 +119,4 @@ export const breadcrumbSchema = (items) => ({
     "item": item.url
   }))
 });
-
-export const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Alina Zelinska Ukrainian Tutoring",
-  "description": "Online Ukrainian, Russian, and English language lessons with a native speaker.",
-  "image": "https://alinazelinska.com/media/alina-portrait.jpg",
-  "@id": "https://alinazelinska.com",
-  "url": "https://alinazelinska.com",
-  "telephone": "",
-  "email": "zelinskayaalinaig@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "",
-    "addressLocality": "Sliema",
-    "addressCountry": "MT"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 35.9122,
-    "longitude": 14.5019
-  },
-  "areaServed": {
-    "@type": "Place",
-    "name": "Worldwide"
-  },
-  "priceRange": "$$",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "500"
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ],
-    "opens": "09:00",
-    "closes": "21:00"
-  },
-  "sameAs": [
-    "https://www.instagram.com/alin.a.zelinska/",
-    "https://www.linkedin.com/in/alina-zelinska-60317a281/",
-    "https://www.tiktok.com/@movalina.study"
-  ]
-};
 

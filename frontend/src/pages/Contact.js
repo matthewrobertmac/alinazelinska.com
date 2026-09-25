@@ -47,7 +47,7 @@ const Contact = () => {
     <div className="contact-page page-transition">
       <SEOHead
         title="Contact Alina Zelinska | Ukrainian Tutor | 100% Response Rate"
-        description="Get in touch with Alina Zelinska for Ukrainian, Russian, or English lessons. Based in Malta, teaching worldwide. 100% response rate within hours."
+        description="Get in touch with Alina Zelinska for Ukrainian, Russian, or English lessons. Teaching online, worldwide. 100% response rate within hours."
         keywords="contact Ukrainian tutor, book Ukrainian lessons, Alina Zelinska contact"
         hreflang={[
           { lang: 'en', url: 'https://alinazelinska.com/contact' },
@@ -59,7 +59,7 @@ const Contact = () => {
 
       <PageHero
         crumbs={[{ name: 'Say Hello' }]}
-        eyebrow="Contact · Sliema, Malta"
+        eyebrow="Contact · Online, worldwide"
         uk="Привіт"
         testId="contact-title"
         title={accent(t('contact.title'), { dash: true })}

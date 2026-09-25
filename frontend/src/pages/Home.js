@@ -6,7 +6,7 @@ import FloatingWords from '../components/FloatingWords';
 import QuizWidget from '../components/QuizWidget';
 import SEOHead from '../components/SEOHead';
 import { introdata, whoITeach, testimonials, floatingWords, contactInfo } from '../data/content';
-import { personSchema, organizationSchema, aggregateRatingSchema, localBusinessSchema } from '../utils/schemas';
+import { personSchema, organizationSchema, aggregateRatingSchema } from '../utils/schemas';
 import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
 import { FaTiktok } from 'react-icons/fa';
 import { clean } from '../utils/text';
@@ -88,12 +88,12 @@ const Home = () => {
   return (
     <div className="home-page relative page-transition">
       <SEOHead
-        title="Alina Zelinska | Ukrainian Tutor Online from Malta | 5.0★ Rating"
-        description="Learn Ukrainian with Alina Zelinska, a native Ukrainian tutor based in Malta. 500+ students, 5.0★ rating, 3,500+ lessons. Book your first lesson today."
+        title="Alina Zelinska | Native Ukrainian Tutor Online | 5.0★ Rating"
+        description="Learn Ukrainian with Alina Zelinska, a native Ukrainian tutor teaching online worldwide. 500+ students, 5.0★ rating, 3,500+ lessons. Book your first lesson today."
         keywords="Ukrainian tutor, learn Ukrainian online, Ukrainian lessons, native Ukrainian teacher, Ukrainian language, Ukrainian course"
         schema={{
           '@context': 'https://schema.org',
-          '@graph': [personSchema, organizationSchema, aggregateRatingSchema, localBusinessSchema],
+          '@graph': [personSchema, organizationSchema, aggregateRatingSchema],
         }}
         hreflang={[
           { lang: 'en', url: 'https://alinazelinska.com/' },
@@ -116,7 +116,7 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease, delay: 0.2 }}
             >
-              Ukrainian · Russian · English — from Malta
+              Ukrainian · Russian · English — online, worldwide
             </motion.p>
 
             <h1 className="hero__title" data-testid="hero-title">

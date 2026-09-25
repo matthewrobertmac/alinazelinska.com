@@ -15,7 +15,7 @@ export const introdata = {
     "I've taught 3,500+ lessons to students in 30+ countries",
     "I consult on language learning apps ✨",
   ],
-  description: `Native Ukrainian & Russian Tutor ✦ Poetry Translator ✦ Songwriter ✦ Poet ✦ Living in Malta ✦ Learning Spanish & German 🌻`,
+  description: `Native Ukrainian & Russian Tutor ✦ Poetry Translator ✦ Songwriter ✦ Poet ✦ Learning Spanish & German 🌻`,
   socialProof: `500+ students in 30+ countries | 3,500+ lessons | Perfect 5.0 rating`,
   seoTagline: `Online Ukrainian & Russian lessons from a native speaker with 3,500+ lessons and a perfect 5.0 rating — personalised, 1-on-1, and actually fun.`,
   image: "/media/alina-portrait.jpg",
@@ -25,7 +25,7 @@ export const dataabout = {
   title: "Hi, I'm Alina — and I'm a little obsessed with language 💕",
   aboutme: `Language has been my world for as long as I can remember. I'm a teacher, translator, poet, songwriter, and - let's be honest - a total word nerd.
 
-I'm originally from Ukraine, currently living in sunny Sliema, Malta. I speak Ukrainian and Russian natively, English fluently, and I'm working on Spanish and German because apparently four languages weren't enough for me.
+I'm originally from Ukraine. I speak Ukrainian and Russian natively, English fluently, and I'm working on Spanish and German because apparently four languages weren't enough for me.
 
 Since April 2022, I've completed over 3,500 one-on-one lessons with more than 500 students from 30+ countries on italki - and I've maintained a perfect 5.0 rating with 100% attendance the entire time. Teaching isn't just what I do; it's what I genuinely love doing.
 
@@ -241,10 +241,6 @@ export const funFacts = [
   {
     icon: "🗣️",
     text: "I also speak German (yes, I'm collecting languages like some people collect stamps)",
-  },
-  {
-    icon: "🏝️",
-    text: "I live in Malta now — teaching students worldwide from a Mediterranean island with great coffee",
   },
 ];
 
