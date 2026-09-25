@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiSun, FiMoon, FiUser, FiArrowRight } from 'react-icons/fi';
+import { FiSun, FiMoon, FiArrowRight } from 'react-icons/fi';
 import LanguageSwitcher from './LanguageSwitcher';
-import { useAuth } from '../context/AuthContext';
 import './Header.css';
 import { ease } from '../utils/motion';
 
 const Header = ({ theme, toggleTheme }) => {
   const { t } = useTranslation();
-  const { user, isAuthenticated } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -71,15 +69,6 @@ const Header = ({ theme, toggleTheme }) => {
           <button onClick={toggleTheme} data-testid="theme-toggle" className="icon-btn icon-btn--desk" aria-label="Toggle theme">
             <ThemeIcon />
           </button>
-          {isAuthenticated ? (
-            <Link to="/profile" className="icon-btn" aria-label="Your profile">
-              {user?.picture ? <img src={user.picture} alt="" className="icon-btn__avatar" /> : <FiUser />}
-            </Link>
-          ) : (
-            <Link to="/login" className="nav-link nav-link--quiet nav-link--desk">
-              Login
-            </Link>
-          )}
           <Link to="/booking" className="header-cta" data-testid="nav-book">
             {t('nav.booking')}
             <FiArrowRight />
@@ -131,7 +120,6 @@ const Header = ({ theme, toggleTheme }) => {
               <button onClick={toggleTheme} data-testid="theme-toggle-mobile" className="icon-btn" aria-label="Toggle theme">
                 <ThemeIcon />
               </button>
-              <Link to={isAuthenticated ? '/profile' : '/login'}>{isAuthenticated ? 'Profile' : 'Login'}</Link>
               <span lang="uk">Мова — це дім ✦</span>
             </div>
           </motion.div>

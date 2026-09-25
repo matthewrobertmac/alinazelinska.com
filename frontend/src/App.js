@@ -1,5 +1,5 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
@@ -7,7 +7,6 @@ import Footer from './components/Footer';
 import FloatingBookButton from './components/FloatingBookButton';
 import AccessibilityMenu from './components/AccessibilityMenu';
 import { LandingPage, shouldShowLanding } from './components/LandingPage';
-import { AuthProvider } from './context/AuthContext';
 import { CurrencyProvider } from './context/CurrencyContext';
 import './i18n';
 import './App.css';
@@ -27,10 +26,6 @@ const RussianLessons = lazy(() => import('./pages/services/RussianLessons'));
 const SpeakingClub = lazy(() => import('./pages/services/SpeakingClub'));
 const PoetryTranslation = lazy(() => import('./pages/services/PoetryTranslation'));
 const CreativeWriting = lazy(() => import('./pages/services/CreativeWriting'));
-const Login = lazy(() => import('./pages/Login'));
-const Profile = lazy(() => import('./pages/Profile'));
-const AuthCallback = lazy(() => import('./pages/AuthCallback'));
-const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -39,19 +34,8 @@ const PageLoader = () => (
   </div>
 );
 
-// Router component to handle auth callback detection
 function AppRouter({ theme, toggleTheme }) {
-  const location = useLocation();
   
-  // Check for session_id in URL fragment BEFORE rendering routes
-  if (location.hash?.includes('session_id=')) {
-    return (
-      <Suspense fallback={<PageLoader />}>
-        <AuthCallback />
-      </Suspense>
-    );
-  }
-
   return (
     <>
       <Header theme={theme} toggleTheme={toggleTheme} />
@@ -73,10 +57,8 @@ function AppRouter({ theme, toggleTheme }) {
           <Route path="/tiktok" element={<TikTok />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/auth/callback" element={<AuthCallback />} />
-          <Route path="/admin" element={<AdminDashboard />} />
+          {/* Retired addresses (/login, /profile, /admin…) land on the home page */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
       <Footer />
@@ -111,7 +93,6 @@ function App() {
 
   return (
     <HelmetProvider>
-      <AuthProvider>
         <CurrencyProvider>
           <AnimatePresence mode="wait">
             {showLanding ? (
@@ -125,7 +106,6 @@ function App() {
             )}
           </AnimatePresence>
         </CurrencyProvider>
-      </AuthProvider>
     </HelmetProvider>
   );
 }

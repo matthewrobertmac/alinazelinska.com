@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { FiCheck, FiCreditCard, FiClock, FiArrowRight, FiHome, FiInstagram, FiMail, FiAlertCircle } from 'react-icons/fi';
 import { FaPaypal } from 'react-icons/fa';
 import { meta } from '../data/content';
-import { useAuth } from '../context/AuthContext';
 import { useCurrency } from '../context/CurrencyContext';
 import CurrencySelector from '../components/CurrencySelector';
 import PageHero from '../components/PageHero';
@@ -13,12 +12,10 @@ import { accent, clean } from '../utils/text';
 import './booking.css';
 import { ease, reveal, stagger } from '../utils/motion';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const PAYPAL_EMAIL = 'zelinskayaalinaig@gmail.com';
 
 const Booking = () => {
   const { t } = useTranslation();
-  const { user, isAuthenticated } = useAuth();
   const { getPackagePrices, currency, formatPrice, basePricesEur } = useCurrency();
   const [loading, setLoading] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState(null);
@@ -32,16 +29,8 @@ const Booking = () => {
     document.title = `${t('nav.booking')} | ${meta.title}`;
     window.scrollTo(0, 0);
 
-    // Check for payment return
-    const urlParams = new URLSearchParams(window.location.search);
-    const sessionId = urlParams.get('session_id');
-    const paypalSuccess = urlParams.get('paypal_success');
-    
-    if (sessionId) {
-      pollPaymentStatus(sessionId);
-    }
-    
     // Handle PayPal return
+    const paypalSuccess = new URLSearchParams(window.location.search).get('paypal_success');
     if (paypalSuccess === 'true') {
       setPaymentStatus('success');
       window.history.replaceState({}, document.title, window.location.pathname);
@@ -66,41 +55,7 @@ const Booking = () => {
     },
   ];
 
-  const pollPaymentStatus = async (sessionId, attempts = 0) => {
-    const maxAttempts = 5;
-    const pollInterval = 2000;
-
-    if (attempts >= maxAttempts) {
-      setPaymentStatus('timeout');
-      return;
-    }
-
-    try {
-      setPaymentStatus('checking');
-      const response = await fetch(`${BACKEND_URL}/api/payments/checkout/status/${sessionId}`);
-      if (!response.ok) throw new Error('Failed to check status');
-
-      const data = await response.json();
-      
-      if (data.payment_status === 'paid') {
-        setPaymentStatus('success');
-        // Clear the URL params
-        window.history.replaceState({}, document.title, window.location.pathname);
-        return;
-      } else if (data.status === 'expired') {
-        setPaymentStatus('expired');
-        return;
-      }
-
-      // Continue polling
-      setTimeout(() => pollPaymentStatus(sessionId, attempts + 1), pollInterval);
-    } catch (err) {
-      console.error('Error checking payment:', err);
-      setPaymentStatus('error');
-    }
-  };
-
-  const handleBooking = async (packageId) => {
+  const handleBooking = (packageId) => {
     setLoading(packageId);
     setError(null);
 
@@ -123,25 +78,6 @@ const Booking = () => {
     
     // Create PayPal payment URL with guest checkout (landing_page=billing shows card form first)
     const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=${encodeURIComponent(PAYPAL_EMAIL)}&amount=${pkg.priceEur.toFixed(2)}&currency_code=EUR&item_name=${itemName}&return=${returnUrl}&cancel_return=${cancelUrl}&no_shipping=1&no_note=1&landing_page=billing`;
-    
-    // Create booking record in database before redirecting
-    try {
-      await fetch(`${BACKEND_URL}/api/bookings/create`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({
-          package_id: packageId,
-          user_id: user?.user_id || null,
-          user_name: user?.name || 'PayPal Customer',
-          user_email: user?.email || '',
-          payment_method: 'paypal',
-          amount: pkg.priceEur,
-        }),
-      });
-    } catch (e) {
-      console.log('Could not create booking record:', e);
-    }
     
     window.location.href = paypalUrl;
   };

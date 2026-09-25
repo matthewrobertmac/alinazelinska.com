@@ -4,7 +4,7 @@ import { FiPlay, FiVolume2, FiVolumeX, FiArrowRight } from 'react-icons/fi';
 import './LandingPage.css';
 import { ease } from '../utils/motion';
 
-const VIDEO_URL = 'https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/kodpfas7_copy_F5503918-139B-4C1A-89CB-371F6DF38D88%20%281%29.mp4';
+const VIDEO_URL = '/media/alina-intro.mp4';
 
 // Check if user should see landing page (first visit or > 7 days since last visit)
 const shouldShowLanding = () => {

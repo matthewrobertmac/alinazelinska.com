@@ -7,7 +7,7 @@ export const personSchema = {
   "jobTitle": "Ukrainian Language Tutor",
   "description": "Native Ukrainian and Russian language tutor with over 3,500 lessons delivered and a perfect 5.0 rating.",
   "url": "https://alinazelinska.com",
-  "image": "https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/n9i5tibv_lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit.%20lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit%20%281%29.png",
+  "image": "https://alinazelinska.com/media/alina-portrait.jpg",
   "sameAs": [
     "https://www.instagram.com/alin.a.zelinska/",
     "https://www.linkedin.com/in/alina-zelinska-60317a281/",
@@ -31,7 +31,7 @@ export const organizationSchema = {
   "name": "Alina Zelinska Ukrainian Tutoring",
   "description": "Online Ukrainian, Russian, and English language lessons with a native speaker based in Malta.",
   "url": "https://alinazelinska.com",
-  "logo": "https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/n9i5tibv_lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit.%20lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit%20%281%29.png",
+  "logo": "https://alinazelinska.com/media/alina-portrait.jpg",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Sliema",
@@ -131,7 +131,7 @@ export const localBusinessSchema = {
   "@type": "LocalBusiness",
   "name": "Alina Zelinska Ukrainian Tutoring",
   "description": "Online Ukrainian, Russian, and English language lessons with a native speaker.",
-  "image": "https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/n9i5tibv_lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit.%20lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit%20%281%29.png",
+  "image": "https://alinazelinska.com/media/alina-portrait.jpg",
   "@id": "https://alinazelinska.com",
   "url": "https://alinazelinska.com",
   "telephone": "",

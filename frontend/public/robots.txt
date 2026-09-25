@@ -21,12 +21,7 @@ User-agent: LinkedInBot
 User-agent: WhatsApp
 Allow: /
 
-# Disallow admin and private routes
-User-agent: *
-Disallow: /admin
-Disallow: /login
-Disallow: /profile
-Disallow: /auth/
+
 
 # Crawl delay for polite bots
 Crawl-delay: 1

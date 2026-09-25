@@ -18,7 +18,7 @@ export const introdata = {
   description: `Native Ukrainian & Russian Tutor ✦ Poetry Translator ✦ Songwriter ✦ Poet ✦ Living in Malta ✦ Learning Spanish & German 🌻`,
   socialProof: `500+ students in 30+ countries | 3,500+ lessons | Perfect 5.0 rating`,
   seoTagline: `Online Ukrainian & Russian lessons from a native speaker with 3,500+ lessons and a perfect 5.0 rating — personalised, 1-on-1, and actually fun.`,
-  image: "https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/n9i5tibv_lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit.%20lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit%20%281%29.png",
+  image: "/media/alina-portrait.jpg",
 };
 
 export const dataabout = {

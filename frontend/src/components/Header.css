@@ -139,13 +139,6 @@
   transform: rotate(-12deg);
 }
 
-.icon-btn__avatar {
-  width: 1.9rem;
-  height: 1.9rem;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .header-cta {
   display: none;
   align-items: center;
@@ -342,13 +335,7 @@
   color: var(--color-gold);
 }
 
-/* Tools that live in the mobile menu below these widths */
-@media (max-width: 1023px) {
-  .nav-link--desk {
-    display: none;
-  }
-}
-
+/* The theme toggle lives in the mobile menu on phones */
 @media (max-width: 639px) {
   .icon-btn--desk {
     display: none;

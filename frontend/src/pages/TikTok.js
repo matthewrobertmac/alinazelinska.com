@@ -52,7 +52,7 @@ const TikTokEmbed = ({ videoId }) => {
         document.body.appendChild(script);
       } else {
         // If script already exists, reload embeds
-        if (window.tiktokEmbed) {
+        if (window.tiktokEmbed?.lib?.render) {
           window.tiktokEmbed.lib.render();
         }
       }

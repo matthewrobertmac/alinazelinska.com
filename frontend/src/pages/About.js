@@ -13,8 +13,8 @@ import { clean } from '../utils/text';
 import './about.css';
 import { ease, reveal, stagger } from '../utils/motion';
 
-const VIDEO_URL = 'https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/kodpfas7_copy_F5503918-139B-4C1A-89CB-371F6DF38D88%20%281%29.mp4';
-const PORTRAIT_URL = 'https://customer-assets.emergentagent.com/job_tutor-portfolio-1/artifacts/n2vsu8vg_lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit.%20lorem%20ipsum%20dolor%20sit%20amet%20consectetur%20adipiscit%20elit%20%281%29.jpeg';
+const VIDEO_URL = '/media/alina-intro.mp4';
+const PORTRAIT_URL = '/media/alina-about.jpeg';
 
 // Content strings use *word* for emphasis
 const emphasise = (text) =>
