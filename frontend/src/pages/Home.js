@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React from 'react';
 import { Link } from '../i18n/routing';
 import { useTranslation, Trans } from 'react-i18next';
 import { motion } from 'framer-motion';
@@ -54,9 +54,6 @@ const CircleBadge = ({ text }) => (
 
 // Each language leads with its own audience's offer; the order and copy live in home.json
 const Home = () => {
-  const copyRef = useRef(null);
-  // Words keep clear of every piece of text in the hero: the copy, the rating badge and the note
-  const avoidRefs = useMemo(() => [copyRef, '.hero .circle-badge', '.hero .hero__note'], []);
   const { t, i18n } = useTranslation();
   const lng = i18n.resolvedLanguage;
 
@@ -80,11 +77,11 @@ const Home = () => {
       {/* ─── Hero ─────────────────────────────────────────── */}
       <section className="hero">
         <div className="hero__aura" aria-hidden="true" />
-        {/* Desktop: words drift across the whole hero, over the portrait, but never over the copy */}
-        <FloatingWords avoidRefs={avoidRefs} />
+        {/* Desktop: words drift freely behind the whole hero — title, text and portrait */}
+        <FloatingWords />
 
         <div className="hero__inner">
-          <div className="hero__copy" ref={copyRef}>
+          <div className="hero__copy">
             <motion.p
               className="eyebrow"
               initial={{ opacity: 0, y: 12 }}

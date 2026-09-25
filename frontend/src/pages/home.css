@@ -156,8 +156,6 @@
 /* Floating words: the whole hero, starting below the fixed header */
 .hero > .lexicon {
   top: 6.5rem;
-  /* Above the portrait; the copy is kept clear by the keep-out zone */
-  z-index: 20;
   /* Words fade out as they rise toward the header rather than being cut off */
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 5rem);
   mask-image: linear-gradient(to bottom, transparent 0, #000 5rem);
