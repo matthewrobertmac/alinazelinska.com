@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { FiPlay, FiVolume2, FiVolumeX, FiArrowRight } from 'react-icons/fi';
 import './LandingPage.css';
 import { ease } from '../utils/motion';
@@ -22,6 +23,7 @@ const shouldShowLanding = () => {
 };
 
 const LandingPage = ({ onEnter }) => {
+  const { t } = useTranslation();
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -103,7 +105,7 @@ const LandingPage = ({ onEnter }) => {
           </h1>
 
           <motion.p className="eyebrow landing__subtitle" {...rise(0.7, 12)}>
-            Ukrainian · Russian · English Language Tutor
+            {t('widgets.landing.subtitle')}
           </motion.p>
         </div>
 
@@ -123,7 +125,7 @@ const LandingPage = ({ onEnter }) => {
               muted={isMuted}
               onEnded={handleVideoEnd}
               poster=""
-              aria-label="Introduction video from Alina Zelinska"
+              aria-label={t('widgets.landing.videoLabel')}
               data-testid="landing-video"
             />
 
@@ -138,13 +140,13 @@ const LandingPage = ({ onEnter }) => {
                   transition={{ duration: 0.4 }}
                   className="landing__play"
                   onClick={handlePlay}
-                  aria-label="Play introduction video"
+                  aria-label={t('widgets.landing.play')}
                   data-testid="landing-play-btn"
                 >
                   <span className="landing__play-disc" aria-hidden="true">
                     <FiPlay />
                   </span>
-                  <span className="landing__play-label">Tap to play</span>
+                  <span className="landing__play-label">{t('widgets.landing.tapToPlay')}</span>
                 </motion.button>
               )}
             </AnimatePresence>
@@ -155,7 +157,7 @@ const LandingPage = ({ onEnter }) => {
                 type="button"
                 onClick={toggleMute}
                 className="landing__mute"
-                aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+                aria-label={isMuted ? t('widgets.landing.unmute') : t('widgets.landing.mute')}
                 aria-pressed={isMuted}
                 data-testid="landing-mute-btn"
               >
@@ -166,7 +168,7 @@ const LandingPage = ({ onEnter }) => {
 
           <p className="landing__caption" aria-hidden="true">
             <span className="num">01</span>
-            <span>A short hello from Alina</span>
+            <span>{t('widgets.landing.caption')}</span>
           </p>
         </motion.div>
 
@@ -187,12 +189,12 @@ const LandingPage = ({ onEnter }) => {
                   className="btn-primary"
                   data-testid="landing-enter-btn"
                 >
-                  {videoEnded ? 'Start learning' : 'Enter website'}
+                  {videoEnded ? t('widgets.landing.start') : t('widgets.landing.enter')}
                   <FiArrowRight aria-hidden="true" />
                 </button>
 
                 {!videoEnded && (
-                  <p className="landing__hint">Or watch the full intro video</p>
+                  <p className="landing__hint">{t('widgets.landing.hint')}</p>
                 )}
               </motion.div>
             )}

@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "home": "Главная",
+    "about": "Обо мне",
+    "testimonials": "Отзывы",
+    "tiktok": "TikTok",
+    "faq": "Вопросы",
+    "booking": "Записаться на урок",
+    "contact": "Напишите мне"
+  },
+  "header": {
+    "logoLabel": "Алина Зелинская — на главную",
+    "toggleTheme": "Сменить тему",
+    "toggleMenu": "Открыть меню"
+  },
+  "breadcrumb": {
+    "label": "Навигационная цепочка"
+  },
+  "footer": {
+    "owner": "Алина Зелинская",
+    "eyebrow": "Напишите мне",
+    "mailLead": "Поговорим о",
+    "mailAccent": "словах.",
+    "navLabel": "Нижнее меню",
+    "columns": {
+      "learn": "Учиться",
+      "create": "Творить",
+      "alina": "Алина"
+    },
+    "links": {
+      "ukrainianLessons": "Уроки украинского",
+      "russianLessons": "Уроки русского",
+      "speakingClub": "Разговорный клуб",
+      "poetryTranslation": "Перевод поэзии",
+      "creativeWriting": "Творческое письмо",
+      "specialProjects": "Особые проекты",
+      "successStories": "Истории успеха"
+    },
+    "rights": "Все права защищены",
+    "tagline": "Сделано из слов, кофе и огромной любви к языку ☕"
+  },
+  "language": {
+    "change": "Сменить язык",
+    "en": "English",
+    "uk": "Українська",
+    "ru": "Русский"
+  },
+  "seo": {
+    "defaultTitle": "Алина Зелинская | Преподаватель украинского",
+    "defaultDescription": "Изучайте украинский с Алиной Зелинской",
+    "siteName": "Алина Зелинская — преподаватель украинского"
+  }
+}

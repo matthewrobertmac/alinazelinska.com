@@ -1,0 +1,74 @@
+{
+  "reviews": {
+    "items": [
+      {
+        "name": "Doug",
+        "lessons": "63 Russian Lessons",
+        "text": "Alina is incredibly patient with newbies (such as myself) and provides a highly welcoming and calm approach to learning Russian. I learn new things every single lesson and I feel very confident in her teachings. She is a highly gifted instructor and I would recommend her to anyone wanting to learn the Russian language."
+      },
+      {
+        "name": "Sean Davis",
+        "lessons": "7 Ukrainian Lessons",
+        "text": "I worked more on endings of words, which were quite difficult, but getting the hang of it, also working on adjectives in different cases!"
+      },
+      {
+        "name": "John Anthony Madrid",
+        "lessons": "9 Ukrainian Lessons",
+        "text": "I loved my lesson with Alina because as a beginner into a language that I know nothing about I feel like the challenge of learning Ukrainian is a lot more achievable now!"
+      },
+      {
+        "name": "poppy.pc.ccms",
+        "lessons": "29 Ukrainian Lessons",
+        "text": "I enjoyed my trial lesson with Alina today. I look forward to working with her in the future and learning more Ukrainian - Thank you!"
+      },
+      {
+        "name": "Ralph",
+        "lessons": "16 Ukrainian Lessons",
+        "text": "Alina is very patient and encouraging, and quite flexible in adapting material to the lessons as we go along, and in sensing what would be good exercises for the next lesson. (We are focusing on the cases, several lessons for each case.)"
+      },
+      {
+        "name": "saguaromedia",
+        "lessons": "9 Ukrainian Lessons",
+        "text": "Alina is wonderful!!! I really enjoy our conversations. Learning a new and very different language from English is challenging but she makes it fun!"
+      },
+      {
+        "name": "Trey Lines",
+        "lessons": "54 Russian Lessons",
+        "text": "This lesson was perfect for practicing speaking and I look forward to further lessons in the future. Alina is nice, patient, and willing to help with whatever questions you may have."
+      },
+      {
+        "name": "Ivan Prince",
+        "lessons": "21 English Lessons",
+        "text": "It was a great and enjoyable conversation with her and I'm very motivated to improve my English speaking skill further."
+      },
+      {
+        "name": "Josef Chlachula",
+        "lessons": "16 Ukrainian Lessons",
+        "text": "I've been taking weekly Ukrainian conversation practice lessons with Alina for several months now and have seen a real improvement in my conversation skills. She clearly takes an interest in her students and is excellent at guiding a conversation to help a student produce output and be creative with the language. Highly recommend!"
+      },
+      {
+        "name": "Gennadii Selivanov",
+        "lessons": "217 English Lessons",
+        "text": "Best teacher ever! Every lesson is very useful and informative! Great trusting atmosphere, individual approach and excellent explanation of materials of any difficulty! Thank you! =)"
+      }
+    ],
+    "stats": [
+      {
+        "number": "500+",
+        "label": "students taught one-on-one"
+      },
+      {
+        "number": "Perfect 5.0",
+        "label": "across 3,500+ lessons"
+      },
+      {
+        "number": "30+",
+        "label": "countries"
+      },
+      {
+        "number": "100%",
+        "label": "attendance rate"
+      }
+    ]
+  }
+}

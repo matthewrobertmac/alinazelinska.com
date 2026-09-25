@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Me",
+    "testimonials": "Testimonials",
+    "tiktok": "TikTok",
+    "faq": "FAQ",
+    "booking": "Book a Lesson",
+    "contact": "Say Hello"
+  },
+  "header": {
+    "logoLabel": "Alina Zelinska — home",
+    "toggleTheme": "Toggle theme",
+    "toggleMenu": "Toggle menu"
+  },
+  "breadcrumb": {
+    "label": "Breadcrumb"
+  },
+  "footer": {
+    "owner": "Alina Zelinska",
+    "eyebrow": "Write to me",
+    "mailLead": "Let’s talk",
+    "mailAccent": "words.",
+    "navLabel": "Footer",
+    "columns": {
+      "learn": "Learn",
+      "create": "Create",
+      "alina": "Alina"
+    },
+    "links": {
+      "ukrainianLessons": "Ukrainian lessons",
+      "russianLessons": "Russian lessons",
+      "speakingClub": "Speaking club",
+      "poetryTranslation": "Poetry translation",
+      "creativeWriting": "Creative writing",
+      "specialProjects": "Special projects",
+      "successStories": "Success stories"
+    },
+    "rights": "All rights reserved",
+    "tagline": "Made with words, coffee, and a deep love of language ☕"
+  },
+  "language": {
+    "change": "Change language",
+    "en": "English",
+    "uk": "Українська",
+    "ru": "Русский"
+  },
+  "seo": {
+    "defaultTitle": "Alina Zelinska | Ukrainian Tutor",
+    "defaultDescription": "Learn Ukrainian with Alina Zelinska",
+    "siteName": "Alina Zelinska - Ukrainian Tutor"
+  }
+}

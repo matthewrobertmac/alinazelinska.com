@@ -12,30 +12,30 @@ const Footer = () => {
 
   const columns = [
     {
-      title: 'Learn',
+      title: t('footer.columns.learn'),
       links: [
-        { path: '/services/ukrainian-lessons', label: 'Ukrainian lessons' },
-        { path: '/services/russian-lessons', label: 'Russian lessons' },
-        { path: '/services/speaking-club', label: 'Speaking club' },
+        { path: '/services/ukrainian-lessons', label: t('footer.links.ukrainianLessons') },
+        { path: '/services/russian-lessons', label: t('footer.links.russianLessons') },
+        { path: '/services/speaking-club', label: t('footer.links.speakingClub') },
         { path: '/booking', label: t('nav.booking') },
       ],
     },
     {
-      title: 'Create',
+      title: t('footer.columns.create'),
       links: [
-        { path: '/services/poetry-translation', label: 'Poetry translation' },
-        { path: '/services/creative-writing', label: 'Creative writing' },
-        { path: '/special-projects', label: 'Special projects' },
+        { path: '/services/poetry-translation', label: t('footer.links.poetryTranslation') },
+        { path: '/services/creative-writing', label: t('footer.links.creativeWriting') },
+        { path: '/special-projects', label: t('footer.links.specialProjects') },
       ],
     },
     {
-      title: 'Alina',
+      title: t('footer.columns.alina'),
       links: [
         { path: '/about', label: t('nav.about') },
         { path: '/testimonials', label: t('nav.testimonials') },
-        { path: '/success-stories', label: 'Success stories' },
+        { path: '/success-stories', label: t('footer.links.successStories') },
         { path: '/tiktok', label: t('nav.tiktok') },
-        { path: '/faq', label: 'FAQ' },
+        { path: '/faq', label: t('nav.faq') },
         { path: '/contact', label: t('nav.contact') },
       ],
     },
@@ -52,17 +52,19 @@ const Footer = () => {
       <div className="site-footer__inner">
         <div className="site-footer__top">
           <div className="site-footer__pitch">
-            <p className="eyebrow">Write to me</p>
+            <p className="eyebrow">{t('footer.eyebrow')}</p>
             <a href={`mailto:${contactInfo.email}`} className="site-footer__mail">
-              Let’s talk <em>words.</em>
+              <span>
+                {t('footer.mailLead')} <em>{t('footer.mailAccent')}</em>
+              </span>
               <FiArrowUpRight />
             </a>
             <p className="site-footer__email">{contactInfo.email}</p>
           </div>
 
-          <nav className="site-footer__cols" aria-label="Footer">
+          <nav className="site-footer__cols" aria-label={t('footer.navLabel')}>
             {columns.map((col) => (
-              <div key={col.title}>
+              <div key={col.links[0].path}>
                 <h4>{col.title}</h4>
                 <ul>
                   {col.links.map((link) => (
@@ -85,7 +87,7 @@ const Footer = () => {
 
         <div className="site-footer__bottom">
           <p>
-            © {currentYear} Alina Zelinska · {t('footer.rights')}
+            © {currentYear} {t('footer.owner')} · {t('footer.rights')}
           </p>
           <p className="site-footer__tagline">{t('footer.tagline')}</p>
           <div className="site-footer__socials">

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiArrowUpRight, FiUsers, FiClock, FiDollarSign, FiCalendar } from 'react-icons/fi';
-import { meta } from '../../data/content';
 import PageHero from '../../components/PageHero';
 import './services.css';
 import { reveal, stagger } from '../../utils/motion';
@@ -12,76 +12,61 @@ const pad = (i) => String(i + 1).padStart(2, '0');
 const INSTAGRAM_URL = 'https://www.instagram.com/alin.a.zelinska/';
 
 const SpeakingClub = () => {
+  const { t } = useTranslation();
+  const p = (k, o) => t(`services.speakingClub.${k}`, o);
+  const s = (k) => t(`services.shared.${k}`);
+
   useEffect(() => {
-    document.title = `Ukrainian Speaking Club | ${meta.title}`;
+    document.title = `${p('docTitle')} | ${s('siteTitle')}`;
+  }, [t]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const clubFeatures = [
-    {
-      icon: <FiUsers />,
-      title: 'Small Groups',
-      description: '3-4 students max — small enough to get real speaking time, big enough for dynamic conversation',
-    },
-    {
-      icon: <FiClock />,
-      title: '60 Minutes',
-      description: 'Full hour of guided conversation practice with themed topics and real-time corrections',
-    },
-    {
-      icon: <FiDollarSign />,
-      title: 'Just $12',
-      description: 'Affordable group practice to supplement your 1-on-1 lessons or practice independently',
-    },
-    {
-      icon: <FiCalendar />,
-      title: 'Themed Sessions',
-      description: 'Each session has a topic: holidays, travel, food, current events — always something interesting to talk about',
-    },
-  ];
+  const FEATURE_ICONS = [<FiUsers />, <FiClock />, <FiDollarSign />, <FiCalendar />];
+  const clubFeatures = p('features', { returnObjects: true }).map((feature, index) => ({
+    ...feature,
+    icon: FEATURE_ICONS[index],
+  }));
 
-  const pastThemes = [
-    { icon: '🎄', title: 'Christmas Edition', description: 'Holiday vocabulary, traditions, and festive conversations' },
-    { icon: '🎉', title: 'New Year\'s Resolutions', description: 'Goals, aspirations, and future tense practice' },
-    { icon: '✈️', title: 'Travel & Adventure', description: 'Vacation stories, travel vocabulary, and future trip planning' },
-    { icon: '🍽️', title: 'Food & Cooking', description: 'Recipes, restaurants, and culinary conversations' },
-  ];
+  const THEME_ICONS = ['🎄', '🎉', '✈️', '🍽️'];
+  const pastThemes = p('themes', { returnObjects: true }).map((theme, index) => ({
+    ...theme,
+    icon: THEME_ICONS[index],
+  }));
 
-  const whoShouldJoin = [
-    { lead: 'Intermediate learners', text: 'who want more speaking practice between 1-on-1 lessons' },
-    { lead: 'Advanced students', text: 'looking to maintain fluency and learn from other learners' },
-    { lead: 'Anyone who loves Ukrainian', text: 'and wants a supportive community to practice with' },
-  ];
+  const whoShouldJoin = p('join', { returnObjects: true });
 
   return (
     <div className="svc-page page-transition">
       <PageHero
-        crumbs={[{ name: 'Services', url: '/special-projects' }, { name: 'Speaking Club' }]}
-        eyebrow="Group conversation practice"
+        crumbs={[{ name: s('services'), url: '/special-projects' }, { name: p('crumb') }]}
+        eyebrow={p('eyebrow')}
         uk="Розмова"
         title={
           <>
-            Ukrainian <em>Speaking Club.</em>
+            {p('title')} <em>{p('titleAccent')}</em>
           </>
         }
-        lede="Small group conversation practice for Ukrainian learners. Practice speaking Ukrainian in a relaxed, supportive environment with other learners at your level. Themed topics, real conversations, and friendly corrections."
+        lede={p('lede')}
         aside={
           <div className="svc-ledger">
-            <span className="svc-ledger__label">Each session</span>
+            <span className="svc-ledger__label">{p('ledgerLabel')}</span>
             <dl>
               <div>
                 <dt>3–4</dt>
-                <dd>Students max</dd>
+                <dd>{p('ledgerStudents')}</dd>
               </div>
               <div>
                 <dt>60</dt>
-                <dd>Minutes of guided conversation</dd>
+                <dd>{p('ledgerMinutes')}</dd>
               </div>
               <div>
                 <dt>
                   <em>$12</em>
                 </dt>
-                <dd>Per session</dd>
+                <dd>{p('ledgerPrice')}</dd>
               </div>
             </dl>
           </div>
@@ -89,10 +74,10 @@ const SpeakingClub = () => {
       >
         <div className="svc-actions">
           <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">
-            Follow on Instagram for Updates <FiArrowUpRight />
+            {p('followInstagram')} <FiArrowUpRight />
           </a>
           <Link to="/contact" className="btn-outline">
-            Ask About Next Session
+            {p('askNext')}
           </Link>
         </div>
       </PageHero>
@@ -101,9 +86,9 @@ const SpeakingClub = () => {
       <section className="page-section">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">The format</p>
+            <p className="eyebrow">{p('formatEyebrow')}</p>
             <h2>
-              How it <em className="display-italic">works.</em>
+              {p('formatTitle')} <em className="display-italic">{p('formatAccent')}</em>
             </h2>
           </motion.header>
 
@@ -125,9 +110,9 @@ const SpeakingClub = () => {
       <section className="page-section page-section--tint">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">From the archive</p>
+            <p className="eyebrow">{p('themesEyebrow')}</p>
             <h2>
-              Past session <em className="display-italic">themes.</em>
+              {p('themesTitle')} <em className="display-italic">{p('themesAccent')}</em>
             </h2>
           </motion.header>
 
@@ -151,9 +136,9 @@ const SpeakingClub = () => {
         <div className="section-shell">
           <div className="split">
             <motion.header {...reveal} className="split__aside section-head">
-              <p className="eyebrow">Is it for you?</p>
+              <p className="eyebrow">{p('joinEyebrow')}</p>
               <h2>
-                Who should <em className="display-italic">join?</em>
+                {p('joinTitle')} <em className="display-italic">{p('joinAccent')}</em>
               </h2>
             </motion.header>
 
@@ -170,8 +155,7 @@ const SpeakingClub = () => {
               </ol>
 
               <p className="svc-note">
-                <strong>Note:</strong> The Speaking Club is best for students with at least basic Ukrainian (A2 level or
-                higher). Complete beginners should start with 1-on-1 lessons first.
+                <strong>{p('noteLabel')}</strong> {p('note')}
               </p>
             </motion.div>
           </div>
@@ -185,18 +169,17 @@ const SpeakingClub = () => {
             До зустрічі!
           </p>
           <h2>
-            Interested in <em className="display-italic">joining?</em>
+            {p('closingTitle')} <em className="display-italic">{p('closingAccent')}</em>
           </h2>
           <p className="closing__sub">
-            I announce upcoming Speaking Club sessions on Instagram! Follow me there for dates, times, and sign-up links —
-            or message me directly to get on the list.
+            {p('closingSub')}
           </p>
           <div className="closing__actions">
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              Follow on Instagram for Updates <FiArrowRight />
+              {p('followInstagram')} <FiArrowRight />
             </a>
             <Link to="/contact" className="btn-outline">
-              Ask About Next Session
+              {p('askNext')}
             </Link>
           </div>
         </motion.div>

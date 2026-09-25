@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { FiPlay, FiPause, FiVolume2, FiVolumeX, FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
-import { dataabout, meta, worktimeline, skills, services, funFacts, favouriteWords } from '../data/content';
 import TrustBadges from '../components/TrustBadges';
 import LazyImage from '../components/LazyImage';
 import PageHero from '../components/PageHero';
@@ -17,12 +16,20 @@ const VIDEO_URL = '/media/alina-intro.mp4';
 const PORTRAIT_URL = '/media/alina-about.jpeg';
 
 // Content strings use *word* for emphasis
-const emphasise = (text) =>
+const emphasise = (text, className) =>
   clean(text)
     .split(/\*(.+?)\*/)
-    .map((part, i) => (i % 2 ? <em key={i}>{part}</em> : part));
+    .map((part, i) =>
+      i % 2 ? (
+        <em key={i} className={className}>
+          {part}
+        </em>
+      ) : (
+        part
+      )
+    );
 
-const languages = skills.filter((s) => s.level);
+const list = (value) => (Array.isArray(value) ? value : []);
 
 const About = () => {
   const { t } = useTranslation();
@@ -31,9 +38,12 @@ const About = () => {
   const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
-    document.title = `About | ${meta.title}`;
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    document.title = t('about.docTitle');
+  }, [t]);
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -51,14 +61,19 @@ const About = () => {
     setIsMuted(!isMuted);
   };
 
-  const paragraphs = dataabout.aboutme.split('\n\n');
+  const paragraphs = list(t('about.story.paragraphs', { returnObjects: true }));
+  const funFacts = list(t('about.funFacts.items', { returnObjects: true }));
+  const favouriteWords = list(t('about.favouriteWords.items', { returnObjects: true }));
+  const worktimeline = list(t('about.journey.items', { returnObjects: true }));
+  const languages = list(t('about.languages.items', { returnObjects: true }));
+  const services = list(t('about.offer.items', { returnObjects: true }));
 
   return (
     <div className="about-page page-transition">
       <SEOHead
-        title="About Alina Zelinska | Native Ukrainian Tutor | 5.0★ Rating"
-        description="Meet Alina Zelinska: native Ukrainian & Russian tutor from Ukraine, teaching online worldwide. 500+ students, 3,500+ lessons, perfect 5.0 rating, 100% attendance."
-        keywords="Alina Zelinska, Ukrainian tutor online, language teacher, native Ukrainian speaker"
+        title={t('about.seo.title')}
+        description={t('about.seo.description')}
+        keywords={t('about.seo.keywords')}
         schema={{
           '@context': 'https://schema.org',
           '@type': 'ProfilePage',
@@ -67,24 +82,20 @@ const About = () => {
       />
 
       <PageHero
-        crumbs={[{ name: 'About Me' }]}
-        eyebrow="About me · From Ukraine"
+        crumbs={[{ name: t('nav.about') }]}
+        eyebrow={t('about.hero.eyebrow')}
         uk="Слово"
         testId="about-title"
-        title={
-          <>
-            Hi, I’m Alina — a little <em>obsessed</em> with language.
-          </>
-        }
-        lede="Teacher, translator, poet, songwriter — and, let’s be honest, a total word nerd. Originally from Ukraine, teaching students all over the world online."
+        title={emphasise(t('about.hero.title'))}
+        lede={t('about.hero.lede')}
         aside={
           <figure className="about-portrait">
             <div className="about-portrait__frame">
-              <LazyImage src={PORTRAIT_URL} alt="Alina Zelinska" className="about-portrait__img" />
+              <LazyImage src={PORTRAIT_URL} alt={t('about.hero.portraitAlt')} className="about-portrait__img" />
             </div>
             <figcaption>
               <span lang="uk">Аліна Зелінська</span>
-              <small>since April 2022 · 3,500+ lessons</small>
+              <small>{t('about.hero.since')}</small>
             </figcaption>
           </figure>
         }
@@ -95,10 +106,8 @@ const About = () => {
         <div className="section-shell">
           <div className="split">
             <motion.header {...reveal} className="split__aside section-head">
-              <p className="eyebrow">My story</p>
-              <h2>
-                Words are my whole <em className="display-italic">personality.</em>
-              </h2>
+              <p className="eyebrow">{t('about.story.eyebrow')}</p>
+              <h2>{emphasise(t('about.story.title'), 'display-italic')}</h2>
               <p>{clean(t('about.subtitle'))}</p>
             </motion.header>
 
@@ -122,7 +131,7 @@ const About = () => {
         <div className="section-shell">
           <motion.header {...reveal} className="section-head section-head--split">
             <div>
-              <p className="eyebrow">Say hello</p>
+              <p className="eyebrow">{t('about.video.eyebrow')}</p>
               <h2>{clean(t('about.videoHeading'))}</h2>
             </div>
             <p>{clean(t('about.videoCaption'))}</p>
@@ -132,18 +141,18 @@ const About = () => {
             <video ref={videoRef} src={VIDEO_URL} playsInline muted={isMuted} loop onClick={togglePlay} />
 
             {!isPlaying && (
-              <button type="button" className="about-video__play" onClick={togglePlay} aria-label="Play video">
+              <button type="button" className="about-video__play" onClick={togglePlay} aria-label={t('about.video.play')}>
                 <FiPlay />
               </button>
             )}
 
             <div className="about-video__controls">
               {isPlaying && (
-                <button type="button" onClick={togglePlay} aria-label="Pause video">
+                <button type="button" onClick={togglePlay} aria-label={t('about.video.pause')}>
                   <FiPause />
                 </button>
               )}
-              <button type="button" onClick={toggleMute} aria-label={isMuted ? 'Unmute video' : 'Mute video'}>
+              <button type="button" onClick={toggleMute} aria-label={isMuted ? t('about.video.unmute') : t('about.video.mute')}>
                 {isMuted ? <FiVolumeX /> : <FiVolume2 />}
               </button>
             </div>
@@ -155,13 +164,13 @@ const About = () => {
       <section className="page-section">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">Off the record</p>
+            <p className="eyebrow">{t('about.funFacts.eyebrow')}</p>
             <h2>{clean(t('about.funFacts.title'))}</h2>
           </motion.header>
 
           <ol className="facts">
             {funFacts.map((fact, index) => (
-              <motion.li key={fact.text} {...stagger(index % 2)}>
+              <motion.li key={index} {...stagger(index % 2)}>
                 <span className="num">{String(index + 1).padStart(2, '0')}</span>
                 <p>{fact.text}</p>
                 <span className="facts__icon" aria-hidden="true">
@@ -178,7 +187,7 @@ const About = () => {
         <div className="section-shell">
           <motion.header {...reveal} className="section-head section-head--split">
             <div>
-              <p className="eyebrow">Lexicon</p>
+              <p className="eyebrow">{t('about.favouriteWords.eyebrow')}</p>
               <h2>{clean(t('about.favouriteWords.title'))}</h2>
             </div>
             <p>{t('about.favouriteWords.subtitle')}</p>
@@ -190,7 +199,8 @@ const About = () => {
                 <span className="words__lang">{item.language}</span>
                 <h3 lang="uk">{item.word}</h3>
                 <p className="words__tr">
-                  {item.transliteration} — <strong>{item.translation}</strong>
+                  {item.transliteration && <>{item.transliteration} — </>}
+                  <strong>{item.gloss}</strong>
                 </p>
                 <p className="words__note">{item.explanation}</p>
               </motion.article>
@@ -204,14 +214,14 @@ const About = () => {
         <div className="section-shell">
           <div className="split">
             <motion.header {...reveal} className="split__aside section-head">
-              <p className="eyebrow">Journey</p>
+              <p className="eyebrow">{t('about.journey.eyebrow')}</p>
               <h2 data-testid="work-timeline-title">{t('about.experience')}</h2>
-              <p>I love building things from scratch — whether that’s a business, a lesson plan, or a poem.</p>
+              <p>{t('about.journey.lede')}</p>
             </motion.header>
 
             <ol className="rule-list timeline">
               {worktimeline.map((work, index) => (
-                <motion.li key={work.where} {...stagger(index)} data-testid={`work-item-${index}`}>
+                <motion.li key={index} {...stagger(index)} data-testid={`work-item-${index}`}>
                   <span className="timeline__date">{work.date}</span>
                   <h3>{work.jobtitle}</h3>
                   <p className="timeline__where">{work.where}</p>
@@ -227,15 +237,15 @@ const About = () => {
       <section className="page-section page-section--tint">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">Fluency</p>
+            <p className="eyebrow">{t('about.languages.eyebrow')}</p>
             <h2 data-testid="skills-title">{t('about.skills')}</h2>
           </motion.header>
 
           <ul className="langs">
             {languages.map((skill, index) => (
-              <motion.li key={skill.name} {...stagger(index)} data-testid={`skill-item-${index}`}>
+              <motion.li key={index} {...stagger(index)} data-testid={`skill-item-${index}`}>
                 <span className="langs__name">{skill.name}</span>
-                <span className={`langs__level ${skill.level === 'Learning' ? 'is-learning' : ''}`}>
+                <span className={`langs__level ${skill.learning ? 'is-learning' : ''}`}>
                   {skill.level}
                 </span>
                 <span className="langs__bar" aria-hidden="true">
@@ -256,13 +266,13 @@ const About = () => {
       <section className="page-section">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">Work with me</p>
+            <p className="eyebrow">{t('about.offer.eyebrow')}</p>
             <h2 data-testid="services-title">{clean(t('about.services'))}</h2>
           </motion.header>
 
           <ol className="rule-list about-services">
             {services.map((service, index) => (
-              <motion.li key={service.title} {...stagger(index)} data-testid={`service-item-${index}`}>
+              <motion.li key={index} {...stagger(index)} data-testid={`service-item-${index}`}>
                 <span className="num">{String(index + 1).padStart(2, '0')}</span>
                 <h3>{service.title}</h3>
                 <p>{emphasise(service.description)}</p>
@@ -278,19 +288,14 @@ const About = () => {
           <p className="closing__uk" lang="uk">
             Не лише уроки.
           </p>
-          <h2>
-            Beyond <em className="display-italic">teaching.</em>
-          </h2>
-          <p className="closing__sub">
-            I also work on book translations, songwriting projects, and language learning app consulting. Want to see
-            what I’ve been working on?
-          </p>
+          <h2>{emphasise(t('about.closing.title'), 'display-italic')}</h2>
+          <p className="closing__sub">{t('about.closing.sub')}</p>
           <div className="closing__actions">
             <Link to="/special-projects" className="btn-primary">
-              Special projects <FiArrowRight />
+              {t('about.closing.projects')} <FiArrowRight />
             </Link>
             <Link to="/booking" className="btn-outline">
-              Book a lesson <FiArrowUpRight />
+              {t('about.closing.book')} <FiArrowUpRight />
             </Link>
           </div>
         </motion.div>

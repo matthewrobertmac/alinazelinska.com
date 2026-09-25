@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiArrowRight } from 'react-icons/fi';
@@ -15,77 +16,60 @@ const emphasise = (text) =>
   text.split(/\*(.+?)\*/).map((part, i) => (i % 2 ? <em key={i}>{part}</em> : part));
 
 const PoetryTranslation = () => {
+  const { t } = useTranslation();
+  const p = (k, o) => t(`services.poetry.${k}`, o);
+  const s = (k) => t(`services.shared.${k}`);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const breadcrumbItems = [
-    { name: 'Services', url: '/special-projects' },
-    { name: 'Poetry Translation' }
+    { name: s('services'), url: '/special-projects' },
+    { name: p('crumb') }
   ];
 
   const languagePairs = [
-    { from: 'Ukrainian', to: 'English', icon: '🇺🇦 → 🇬🇧' },
-    { from: 'Russian', to: 'English', icon: '🇷🇺 → 🇬🇧' },
-    { from: 'English', to: 'Ukrainian', icon: '🇬🇧 → 🇺🇦' },
-    { from: 'English', to: 'Russian', icon: '🇬🇧 → 🇷🇺' },
+    { from: 'uk', to: 'en' },
+    { from: 'ru', to: 'en' },
+    { from: 'en', to: 'uk' },
+    { from: 'en', to: 'ru' },
   ];
 
-  const process = [
-    { step: '1', title: 'Initial Read & Analysis', description: 'I read your poem multiple times, understanding not just the words but the emotion, rhythm, and deeper meaning.' },
-    { step: '2', title: 'First Draft', description: 'I translate the content while maintaining the poetic structure, meter, and emotional core.' },
-    { step: '3', title: 'Rhythm Matching', description: 'I refine the translation to match the original\'s rhythm, flow, and musicality — this is where poetry translation becomes an art.' },
-    { step: '4', title: 'Cultural Adaptation', description: 'I adapt cultural references and metaphors so they resonate in the target language without losing authenticity.' },
-    { step: '5', title: 'Final Polish', description: 'Multiple revisions until the translated poem gives the same chills as the original.' },
-  ];
-
-  const whatITranslate = [
-    'Personal poetry collections',
-    'Literary works for publication',
-    'Song lyrics with emotional depth',
-    'Romantic poems and love letters',
-    'Cultural and historical poetry',
-    'Modern experimental poetry',
-    'Children\'s poetry and rhymes',
-    'Memorial and tribute poems',
-  ];
-
-  const philosophy = [
-    'Poetry translation is sacred work. When someone trusts you with their poem, they’re trusting you with a piece of their soul. The words they chose, the rhythm they crafted, the emotions they poured in — all of it matters.',
-    'I don’t believe in literal translations. A word-for-word conversion kills the poetry. Instead, I ask: What is this poem trying to make you *feel*? What images does it paint? What music does it carry? Then I recreate that experience in the target language.',
-    'Sometimes that means changing a metaphor, adjusting a rhythm, or finding a phrase that doesn’t literally translate but *feels* right. Because at the end of the day, a translated poem should still give you chills.',
-  ];
+  const process = p('process', { returnObjects: true });
+  const whatITranslate = p('translate', { returnObjects: true });
+  const philosophy = p('philosophy', { returnObjects: true });
 
   return (
     <div className="svc-page page-transition">
       <SEOHead
-        title="Poetry Translation Services | Ukrainian, Russian, English | Alina Zelinska"
-        description="Professional poetry translation between Ukrainian, Russian, and English. I don't just translate words — I carry the feeling, rhythm, and soul of your poem across languages."
-        keywords="poetry translation, Ukrainian poetry translation, Russian poetry translation, literary translation, poem translator"
+        title={p('seo.title')}
+        description={p('seo.description')}
+        keywords={p('seo.keywords')}
         schema={breadcrumbSchema([
-          { name: 'Home', url: 'https://alinazelinska.com' },
-          { name: 'Services', url: 'https://alinazelinska.com/special-projects' },
-          { name: 'Poetry Translation', url: 'https://alinazelinska.com/services/poetry-translation' }
+          { name: s('home'), url: 'https://alinazelinska.com' },
+          { name: s('services'), url: 'https://alinazelinska.com/special-projects' },
+          { name: p('crumb'), url: 'https://alinazelinska.com/services/poetry-translation' }
         ])}
       />
 
       <PageHero
         crumbs={breadcrumbItems}
-        eyebrow="Poetry translation"
+        eyebrow={p('eyebrow')}
         uk="Вірш"
         title={
           <>
-            Poetry translation <em>services.</em>
+            {p('title')} <em>{p('titleAccent')}</em>
           </>
         }
-        lede="I don’t just translate words — I carry the feeling, the rhythm, and the soul of your poem across languages. Because a poem that doesn’t move you isn’t a poem anymore."
+        lede={p('lede')}
       >
         <p className="svc-pairs-line">
-          Ukrainian <span aria-hidden="true">↔</span> Russian <span aria-hidden="true">↔</span> English
+          {s('lang.uk')} <span aria-hidden="true">↔</span> {s('lang.ru')} <span aria-hidden="true">↔</span> {s('lang.en')}
         </p>
         <div className="svc-actions">
           <Link to="/contact" className="btn-primary">
-            Let’s Talk About Your Project <FiArrowRight />
+            {p('cta')} <FiArrowRight />
           </Link>
         </div>
       </PageHero>
@@ -95,9 +79,9 @@ const PoetryTranslation = () => {
         <div className="section-shell">
           <div className="split">
             <motion.header {...reveal} className="split__aside section-head">
-              <p className="eyebrow">How I think about it</p>
+              <p className="eyebrow">{p('philosophyEyebrow')}</p>
               <h2>
-                My translation <em className="display-italic">philosophy.</em>
+                {p('philosophyTitle')} <em className="display-italic">{p('philosophyAccent')}</em>
               </h2>
             </motion.header>
 
@@ -114,21 +98,21 @@ const PoetryTranslation = () => {
       <section className="page-section page-section--tint">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">Language pairs</p>
+            <p className="eyebrow">{p('pairsEyebrow')}</p>
             <h2>
-              Languages I <em className="display-italic">work in.</em>
+              {p('pairsTitle')} <em className="display-italic">{p('pairsAccent')}</em>
             </h2>
           </motion.header>
 
           <ul className="svc-pairs">
             {languagePairs.map((pair, index) => (
               <motion.li key={`${pair.from}-${pair.to}`} {...stagger(index % 2)}>
-                <span>{pair.from}</span>
+                <span>{s(`lang.${pair.from}`)}</span>
                 <span className="svc-pairs__arrow" aria-hidden="true">
                   <FiArrowRight />
                 </span>
-                <span className="sr-only">to</span>
-                <span className="svc-pairs__to">{pair.to}</span>
+                <span className="sr-only">{s('to')}</span>
+                <span className="svc-pairs__to">{s(`lang.${pair.to}`)}</span>
               </motion.li>
             ))}
           </ul>
@@ -140,16 +124,16 @@ const PoetryTranslation = () => {
         <div className="section-shell">
           <div className="split">
             <motion.header {...reveal} className="split__aside section-head">
-              <p className="eyebrow">Step by step</p>
+              <p className="eyebrow">{p('processEyebrow')}</p>
               <h2>
-                My translation <em className="display-italic">process.</em>
+                {p('processTitle')} <em className="display-italic">{p('processAccent')}</em>
               </h2>
             </motion.header>
 
             <ol className="rule-list svc-steps">
               {process.map((item, index) => (
-                <motion.li key={item.step} {...stagger(index)}>
-                  <span className="num">{pad(Number(item.step) - 1)}</span>
+                <motion.li key={item.title} {...stagger(index)}>
+                  <span className="num">{pad(index)}</span>
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </motion.li>
@@ -163,9 +147,9 @@ const PoetryTranslation = () => {
       <section className="page-section page-section--tint">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">Commissions</p>
+            <p className="eyebrow">{s('commissions')}</p>
             <h2>
-              What I <em className="display-italic">translate.</em>
+              {p('translateTitle')} <em className="display-italic">{p('translateAccent')}</em>
             </h2>
           </motion.header>
 
@@ -187,15 +171,14 @@ const PoetryTranslation = () => {
             Слово за словом.
           </p>
           <h2>
-            Have a poem that needs <em className="display-italic">translating?</em>
+            {p('closingTitle')} <em className="display-italic">{p('closingAccent')}</em>
           </h2>
           <p className="closing__sub">
-            Whether it’s a personal collection, a literary work for publication, or a single poem close to your heart —
-            I’ll treat it with the care and artistry it deserves.
+            {p('closingSub')}
           </p>
           <div className="closing__actions">
             <Link to="/contact" className="btn-primary">
-              Let’s Talk About Your Project <FiArrowRight />
+              {p('cta')} <FiArrowRight />
             </Link>
           </div>
         </motion.div>

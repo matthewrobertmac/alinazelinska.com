@@ -2,6 +2,7 @@ import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import FloatingBookButton from './components/FloatingBookButton';
@@ -28,11 +29,14 @@ const PoetryTranslation = lazy(() => import('./pages/services/PoetryTranslation'
 const CreativeWriting = lazy(() => import('./pages/services/CreativeWriting'));
 
 // Loading fallback component
-const PageLoader = () => (
-  <div className="page-loader" role="status" aria-label="Loading">
-    <span lang="uk">Хвилинку…</span>
-  </div>
-);
+const PageLoader = () => {
+  const { t, i18n } = useTranslation();
+  return (
+    <div className="page-loader" role="status" aria-label={t('widgets.loader.label')}>
+      <span lang={i18n.resolvedLanguage === 'ru' ? 'ru' : 'uk'}>{t('widgets.loader.text')}</span>
+    </div>
+  );
+};
 
 function AppRouter({ theme, toggleTheme }) {
   

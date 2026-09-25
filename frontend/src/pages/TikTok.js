@@ -3,37 +3,38 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { FaTiktok } from 'react-icons/fa';
 import { FiArrowUpRight, FiPlay } from 'react-icons/fi';
-import { meta } from '../data/content';
 import PageHero from '../components/PageHero';
 import SEOHead from '../components/SEOHead';
 import { accent, clean } from '../utils/text';
 import './tiktok.css';
 import { reveal, stagger } from '../utils/motion';
 
-// Videos from @movalina.study. Covers are self-hosted in public/media/tiktok/ so the
+// Videos from @movalina.study (captions: tiktok.videos.<id>). Covers are self-hosted in public/media/tiktok/ so the
 // grid appears instantly; TikTok's player loads only for the video someone plays.
 const videos = [
-  { id: '7588914741314096406', label: "Was it useful? Let me know if you need more phrases like that Follow me to learn…" },
-  { id: '7586343750364876054', label: "Ukrainian Speaking Lesson Dec 22 20:00 CET Small group (3–4 students) Level: A1–A2…" },
-  { id: '7585976441234328854', label: "Some more useful phrases for you Like and follow!" },
-  { id: '7581140573931851030', label: "What other phrases would you like to learn?" },
-  { id: '7561058641697066262', label: "Follow me to learn more Ukrainian Give me one compliment in comments in Ukrainian" },
-  { id: '7558833442746535190', label: "Follow me to learn more Ukrainian Give me one compliment for a date in Ukrainian in…" },
-  { id: '7555133090306313494', label: "Follow me to learn Ukrainian What filler words do you normally use?" },
-  { id: '7576672900434890006', label: "Write 1 Ukrainian winter word in comments! Or English one which you want to learn in…" },
-  { id: '7564815695691730198', label: "Let me know what I’ve forgotten to mention" },
-  { id: '7563726142662855958', label: "Follow me to learn Ukrainian easy and fun Do you know any other synonym?" },
-  { id: '7577058084200172822', label: "Follow me to learn Ukrainian faster Which one of these words do you use the most?" },
-  { id: '7571563031734390038', label: "Follow me to learn more Ukrainian language" },
-  { id: '7543332287581048086', label: "Guess which one I hate and which one wiuld you like to try? Follow for more ukrainian…" },
-  { id: '7583000875501669654', label: "Well, you don’t have to laugh while saying it, it’s just a bit unnatural for me Which…" },
-  { id: '7572624839064849687', label: "Follow me to learn Ukrainian together" },
-  { id: '7556675495782272259', label: "Follow me to learn more Ukrainian 1. Don’t drink alcohol, it’s harmful to your health.…" },
-  { id: '7565574108361002262', label: "Let me know if I missed anything" },
-  { id: '7567090474025078019', label: "Follow me to learn Ukrainian easily What’s the next holiday at your country?" },
+  '7588914741314096406',
+  '7586343750364876054',
+  '7585976441234328854',
+  '7581140573931851030',
+  '7561058641697066262',
+  '7558833442746535190',
+  '7555133090306313494',
+  '7576672900434890006',
+  '7564815695691730198',
+  '7563726142662855958',
+  '7577058084200172822',
+  '7571563031734390038',
+  '7543332287581048086',
+  '7583000875501669654',
+  '7572624839064849687',
+  '7556675495782272259',
+  '7565574108361002262',
+  '7567090474025078019',
 ];
 
-const TikTokVideo = ({ id, label }) => {
+const TikTokVideo = ({ id }) => {
+  const { t } = useTranslation();
+  const label = t(`tiktok.videos.${id}`);
   const [playing, setPlaying] = useState(false);
   const [ready, setReady] = useState(false);
 
@@ -44,8 +45,8 @@ const TikTokVideo = ({ id, label }) => {
           {!ready && (
             <div className="tt-embed__loading" role="status">
               <span className="tt-embed__spinner" aria-hidden="true" />
-              <p>Loading video…</p>
-              <small>TikTok can take a few seconds</small>
+              <p>{t('tiktok.player.loading')}</p>
+              <small>{t('tiktok.player.loadingHint')}</small>
             </div>
           )}
           <iframe
@@ -57,7 +58,7 @@ const TikTokVideo = ({ id, label }) => {
           />
         </>
       ) : (
-        <button type="button" className="tt-embed__poster" onClick={() => setPlaying(true)} aria-label={`Play video: ${label}`}>
+        <button type="button" className="tt-embed__poster" onClick={() => setPlaying(true)} aria-label={t('tiktok.player.play', { label })}>
           <img src={`/media/tiktok/${id}.jpg`} alt="" loading="lazy" width="360" height="640" />
           <span className="tt-embed__play" aria-hidden="true">
             <FiPlay />
@@ -72,7 +73,6 @@ const TikTok = () => {
   const { t } = useTranslation();
   
   useEffect(() => {
-    document.title = `TikTok | ${meta.title}`;
     window.scrollTo(0, 0);
   }, []);
 
@@ -103,16 +103,16 @@ const TikTok = () => {
   return (
     <div className="tiktok-page page-transition">
       <SEOHead
-        title="Learn Languages on TikTok | @movalina.study | Alina Zelinska"
-        description="Follow @movalina.study for bite-sized Ukrainian, Russian & English lessons on TikTok. Quick language tips, cultural insights, and fun educational content from Alina Zelinska."
-        keywords="Ukrainian TikTok, language learning TikTok, @movalina.study, Ukrainian lessons, Russian lessons TikTok"
+        title={t('tiktok.seo.title')}
+        description={t('tiktok.seo.description')}
+        keywords={t('tiktok.seo.keywords')}
       />
 
       <PageHero
         crumbs={[{ name: 'TikTok' }]}
         eyebrow={
           <>
-            <FaTiktok aria-hidden="true" /> Bite-sized lessons
+            <FaTiktok aria-hidden="true" /> {t('tiktok.eyebrow')}
           </>
         }
         uk="Дивись"
@@ -137,9 +137,9 @@ const TikTok = () => {
         <div className="section-shell">
           <motion.header {...reveal} className="section-head section-head--split">
             <div>
-              <p className="eyebrow">The feed</p>
+              <p className="eyebrow">{t('tiktok.feed.eyebrow')}</p>
               <h2>
-                Latest <em className="display-italic">episodes.</em>
+                {t('tiktok.feed.title')} <em className="display-italic">{t('tiktok.feed.titleAccent')}</em>
               </h2>
             </div>
             <p>{clean(t('tiktok.followHint'))}</p>
@@ -147,18 +147,18 @@ const TikTok = () => {
 
           {/* Covers load instantly; each player loads on click */}
           <div className="tt-grid">
-            {videos.map((video, index) => (
+            {videos.map((id, index) => (
               <motion.figure
-                key={video.id}
+                key={id}
                 {...stagger(index % 3)}
                 className="tt-item"
                 data-testid={`tiktok-video-${index}`}
               >
                 <figcaption className="tt-item__label">
                   <span className="num">{String(index + 1).padStart(2, '0')}</span>
-                  <span>Episode</span>
+                  <span>{t('tiktok.feed.episode')}</span>
                 </figcaption>
-                <TikTokVideo {...video} />
+                <TikTokVideo id={id} />
               </motion.figure>
             ))}
           </div>
@@ -184,7 +184,7 @@ const TikTok = () => {
         <div className="section-shell">
           <div className="split">
             <motion.header {...reveal} className="split__aside section-head">
-              <p className="eyebrow">Three channels in one</p>
+              <p className="eyebrow">{t('tiktok.topicsEyebrow')}</p>
               <h2>{accent(t('tiktok.whatYouLearn'))}</h2>
               <p>{clean(t('tiktok.subtitle'))}</p>
             </motion.header>

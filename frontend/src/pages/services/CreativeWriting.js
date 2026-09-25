@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
@@ -12,87 +13,52 @@ const pad = (i) => String(i + 1).padStart(2, '0');
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
 
 const CreativeWriting = () => {
+  const { t } = useTranslation();
+  const p = (k, o) => t(`services.creative.${k}`, o);
+  const s = (k) => t(`services.shared.${k}`);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const breadcrumbItems = [
-    { name: 'Services', url: '/special-projects' },
-    { name: 'Creative Writing' }
+    { name: s('services'), url: '/special-projects' },
+    { name: p('crumb') }
   ];
 
-  const services = [
-    {
-      icon: '📝',
-      title: 'Brand Copy & Content',
-      description: 'Website copy, about pages, service descriptions, taglines — words that make people stop scrolling and actually read. I write copy that sounds like a real human wrote it, because a real human did.',
-    },
-    {
-      icon: '📱',
-      title: 'Social Media Content',
-      description: 'Captions, carousel posts, video scripts, and content that actually gets engagement. Whether you need educational content, brand storytelling, or just posts that don\'t sound robotic — I\'ve got you.',
-    },
-    {
-      icon: '🎵',
-      title: 'Song Lyrics',
-      description: 'Original songs in Ukrainian, Russian, or English. From heartfelt ballads to catchy hooks, I write lyrics that tell stories and make people feel something.',
-    },
-    {
-      icon: '🌿',
-      title: 'Poetry & Literary Work',
-      description: 'Original poetry, creative essays, literary pieces — writing that moves people. I write in three languages and love projects that let me stretch creatively.',
-    },
-    {
-      icon: '✉️',
-      title: 'Ghostwriting',
-      description: 'Blog posts, articles, thought leadership pieces — I\'ll write in your voice, for your audience, with your message. You get the credit, I get the creative satisfaction.',
-    },
-    {
-      icon: '🌐',
-      title: 'Multilingual Projects',
-      description: 'Need content in multiple languages? I can write or adapt copy across Ukrainian, Russian, English, Spanish, and German — maintaining brand voice across cultures.',
-    },
-  ];
-
-  const style = [
-    'Warm and conversational (like we\'re having coffee)',
-    'Authentic and unpretentious (no corporate jargon)',
-    'Culturally aware (I bring multilingual perspective)',
-    'Story-driven (people remember stories, not facts)',
-    'Emotionally resonant (words should make you feel something)',
-    'Rhythmic and musical (even prose should have flow)',
-  ];
+  const services = p('items', { returnObjects: true });
+  const style = p('style', { returnObjects: true });
 
   return (
     <div className="svc-page page-transition">
       <SEOHead
-        title="Creative Writing & Ghostwriting Services | Alina Zelinska"
-        description="Multilingual creative writer and ghostwriter. Brand copy, social media content, song lyrics, poetry — words that stick and stories that sparkle."
-        keywords="creative writing, ghostwriter, multilingual copywriter, Ukrainian writer, brand storytelling"
+        title={p('seo.title')}
+        description={p('seo.description')}
+        keywords={p('seo.keywords')}
         schema={breadcrumbSchema([
-          { name: 'Home', url: 'https://alinazelinska.com' },
-          { name: 'Services', url: 'https://alinazelinska.com/special-projects' },
-          { name: 'Creative Writing', url: 'https://alinazelinska.com/services/creative-writing' }
+          { name: s('home'), url: 'https://alinazelinska.com' },
+          { name: s('services'), url: 'https://alinazelinska.com/special-projects' },
+          { name: p('crumb'), url: 'https://alinazelinska.com/services/creative-writing' }
         ])}
       />
 
       <PageHero
         crumbs={breadcrumbItems}
-        eyebrow="Creative writing & ghostwriting"
+        eyebrow={p('eyebrow')}
         uk="Перо"
         title={
           <>
-            Words that stick, stories that <em>sparkle.</em>
+            {p('title')} <em>{p('titleAccent')}</em>
           </>
         }
-        lede="From brand copy to original poetry, from social media captions to song lyrics — if it involves words, I’m genuinely in. I write in three languages and bring a multilingual ear to everything I create."
+        lede={p('lede')}
       >
         <div className="svc-actions">
           <Link to="/contact" className="btn-primary">
-            Get In Touch <FiArrowRight />
+            {s('getInTouch')} <FiArrowRight />
           </Link>
           <a href="mailto:zelinskayaalinaig@gmail.com" className="btn-outline">
-            Email Me Directly
+            {p('emailMe')}
           </a>
         </div>
       </PageHero>
@@ -101,9 +67,9 @@ const CreativeWriting = () => {
       <section className="page-section">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">Commissions</p>
+            <p className="eyebrow">{s('commissions')}</p>
             <h2>
-              What I <em className="display-italic">write.</em>
+              {p('writeTitle')} <em className="display-italic">{p('writeAccent')}</em>
             </h2>
           </motion.header>
 
@@ -124,9 +90,9 @@ const CreativeWriting = () => {
         <div className="section-shell">
           <div className="split">
             <motion.header {...reveal} className="split__aside section-head">
-              <p className="eyebrow">Voice</p>
+              <p className="eyebrow">{p('styleEyebrow')}</p>
               <h2>
-                My writing <em className="display-italic">style.</em>
+                {p('styleTitle')} <em className="display-italic">{p('styleAccent')}</em>
               </h2>
             </motion.header>
 
@@ -149,18 +115,17 @@ const CreativeWriting = () => {
             Напишімо щось гарне.
           </p>
           <h2>
-            Let’s create something <em className="display-italic">beautiful.</em>
+            {p('closingTitle')} <em className="display-italic">{p('closingAccent')}</em>
           </h2>
           <p className="closing__sub">
-            Whether you need a single piece or ongoing content creation, I’d love to hear about your project. Let’s make
-            something that actually sounds like you.
+            {p('closingSub')}
           </p>
           <div className="closing__actions">
             <Link to="/contact" className="btn-primary">
-              Get In Touch <FiArrowRight />
+              {s('getInTouch')} <FiArrowRight />
             </Link>
             <a href="mailto:zelinskayaalinaig@gmail.com" className="btn-outline">
-              Email Me Directly <FiArrowUpRight />
+              {p('emailMe')} <FiArrowUpRight />
             </a>
           </div>
         </motion.div>

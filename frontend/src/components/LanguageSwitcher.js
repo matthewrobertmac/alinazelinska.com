@@ -9,11 +9,11 @@ const languages = [
 ];
 
 const LanguageSwitcher = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const currentLang = languages.find((lang) => lang.code === i18n.language) || languages[0];
+  const currentLang = languages.find((lang) => lang.code === i18n.resolvedLanguage) || languages[0];
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -35,7 +35,7 @@ const LanguageSwitcher = () => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="lang-btn"
-        aria-label="Change language"
+        aria-label={t('language.change')}
         aria-expanded={isOpen}
         data-testid="language-switcher"
       >
@@ -49,7 +49,7 @@ const LanguageSwitcher = () => {
             <button
               key={lang.code}
               onClick={() => changeLanguage(lang.code)}
-              className={i18n.language === lang.code ? 'is-active' : ''}
+              className={i18n.resolvedLanguage === lang.code ? 'is-active' : ''}
               data-testid={`lang-${lang.code}`}
             >
               <span className="lang-menu__code">{lang.code.toUpperCase()}</span>

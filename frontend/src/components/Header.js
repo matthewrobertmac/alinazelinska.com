@@ -31,12 +31,13 @@ const Header = ({ theme, toggleTheme }) => {
     };
   }, [isMobileMenuOpen]);
 
+  // `id` keeps the data-testids stable whatever language is showing
   const navLinks = [
-    { path: '/about', label: t('nav.about') },
-    { path: '/testimonials', label: t('nav.testimonials') },
-    { path: '/tiktok', label: t('nav.tiktok') },
-    { path: '/faq', label: 'FAQ' },
-    { path: '/contact', label: t('nav.contact') },
+    { path: '/about', id: 'about me', label: t('nav.about') },
+    { path: '/testimonials', id: 'testimonials', label: t('nav.testimonials') },
+    { path: '/tiktok', id: 'tiktok', label: t('nav.tiktok') },
+    { path: '/faq', id: 'faq', label: t('nav.faq') },
+    { path: '/contact', id: 'say hello', label: t('nav.contact') },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -46,7 +47,7 @@ const Header = ({ theme, toggleTheme }) => {
   return (
     <header className={`site-header ${isScrolled ? 'is-scrolled' : ''} ${isMobileMenuOpen ? 'is-open' : ''}`}>
       <nav className="site-header__bar">
-        <Link to="/" className="wordmark" data-testid="logo-link" aria-label="Alina Zelinska — home">
+        <Link to="/" className="wordmark" data-testid="logo-link" aria-label={t('header.logoLabel')}>
           <span className="wordmark__a">Alina</span>
           <span className="wordmark__z">Zelinska</span>
         </Link>
@@ -56,7 +57,7 @@ const Header = ({ theme, toggleTheme }) => {
             <Link
               key={link.path}
               to={link.path}
-              data-testid={`nav-${link.label.toLowerCase()}`}
+              data-testid={`nav-${link.id}`}
               className={`nav-link ${isActive(link.path) ? 'is-active' : ''}`}
             >
               {link.label}
@@ -66,7 +67,7 @@ const Header = ({ theme, toggleTheme }) => {
 
         <div className="site-header__tools">
           <LanguageSwitcher />
-          <button onClick={toggleTheme} data-testid="theme-toggle" className="icon-btn icon-btn--desk" aria-label="Toggle theme">
+          <button onClick={toggleTheme} data-testid="theme-toggle" className="icon-btn icon-btn--desk" aria-label={t('header.toggleTheme')}>
             <ThemeIcon />
           </button>
           <Link to="/booking" className="header-cta" data-testid="nav-book">
@@ -77,7 +78,7 @@ const Header = ({ theme, toggleTheme }) => {
             onClick={() => setIsMobileMenuOpen((o) => !o)}
             data-testid="mobile-menu-toggle"
             className="burger"
-            aria-label="Toggle menu"
+            aria-label={t('header.toggleMenu')}
             aria-expanded={isMobileMenuOpen}
           >
             <span />
@@ -96,7 +97,11 @@ const Header = ({ theme, toggleTheme }) => {
             transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
           >
             <div className="mobile-menu__links">
-              {[{ path: '/', label: t('nav.home') }, ...navLinks, { path: '/booking', label: t('nav.booking') }].map(
+              {[
+                { path: '/', id: 'home', label: t('nav.home') },
+                ...navLinks,
+                { path: '/booking', id: 'book a lesson', label: t('nav.booking') },
+              ].map(
                 (link, i) => (
                   <motion.div
                     key={link.path}
@@ -106,7 +111,7 @@ const Header = ({ theme, toggleTheme }) => {
                   >
                     <Link
                       to={link.path}
-                      data-testid={`mobile-nav-${link.label.toLowerCase()}`}
+                      data-testid={`mobile-nav-${link.id}`}
                       className={isActive(link.path) ? 'is-active' : ''}
                     >
                       <span className="mobile-menu__num">{String(i + 1).padStart(2, '0')}</span>
@@ -117,7 +122,7 @@ const Header = ({ theme, toggleTheme }) => {
               )}
             </div>
             <div className="mobile-menu__foot">
-              <button onClick={toggleTheme} data-testid="theme-toggle-mobile" className="icon-btn" aria-label="Toggle theme">
+              <button onClick={toggleTheme} data-testid="theme-toggle-mobile" className="icon-btn" aria-label={t('header.toggleTheme')}>
                 <ThemeIcon />
               </button>
               <span lang="uk">Мова — це дім ✦</span>

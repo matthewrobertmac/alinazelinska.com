@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "home": "Головна",
+    "about": "Про мене",
+    "testimonials": "Відгуки",
+    "tiktok": "TikTok",
+    "faq": "Питання",
+    "booking": "Записатися на урок",
+    "contact": "Напишіть мені"
+  },
+  "header": {
+    "logoLabel": "Аліна Зелінська — на головну",
+    "toggleTheme": "Змінити тему",
+    "toggleMenu": "Відкрити меню"
+  },
+  "breadcrumb": {
+    "label": "Навігаційний ланцюжок"
+  },
+  "footer": {
+    "owner": "Аліна Зелінська",
+    "eyebrow": "Напишіть мені",
+    "mailLead": "Поговорімо про",
+    "mailAccent": "слова.",
+    "navLabel": "Нижнє меню",
+    "columns": {
+      "learn": "Вчитися",
+      "create": "Творити",
+      "alina": "Аліна"
+    },
+    "links": {
+      "ukrainianLessons": "Уроки української",
+      "russianLessons": "Уроки російської",
+      "speakingClub": "Розмовний клуб",
+      "poetryTranslation": "Переклад поезії",
+      "creativeWriting": "Творче письмо",
+      "specialProjects": "Особливі проєкти",
+      "successStories": "Історії успіху"
+    },
+    "rights": "Усі права захищено",
+    "tagline": "Зроблено зі слів, кави та щирої любові до мови ☕"
+  },
+  "language": {
+    "change": "Змінити мову",
+    "en": "English",
+    "uk": "Українська",
+    "ru": "Русский"
+  },
+  "seo": {
+    "defaultTitle": "Аліна Зелінська | Викладачка української",
+    "defaultDescription": "Вивчайте українську з Аліною Зелінською",
+    "siteName": "Аліна Зелінська — викладачка української"
+  }
+}

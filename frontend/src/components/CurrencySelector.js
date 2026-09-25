@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 import { useCurrency } from '../context/CurrencyContext';
 import './CurrencySelector.css';
 
 const CurrencySelector = ({ compact = false }) => {
+  const { t } = useTranslation();
   const { currency, changeCurrency, currencies, currencyInfo } = useCurrency();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -28,7 +30,7 @@ const CurrencySelector = ({ compact = false }) => {
         className={`currency-select__trigger ${isOpen ? 'is-open' : ''}`}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        aria-label="Change currency"
+        aria-label={t('widgets.currency.change')}
         data-testid="currency-selector"
       >
         <span className="currency-select__symbol">{currentInfo.symbol}</span>
@@ -55,7 +57,9 @@ const CurrencySelector = ({ compact = false }) => {
               >
                 <span className="currency-select__symbol">{info.symbol}</span>
                 <span className="currency-select__code">{code}</span>
-                <span className="currency-select__name">{info.name}</span>
+                <span className="currency-select__name">
+                  {t(`widgets.currency.names.${code}`, { defaultValue: info.name })}
+                </span>
               </button>
             );
           })}

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { FiType, FiX } from 'react-icons/fi';
 import './AccessibilityMenu.css';
 import { ease } from '../utils/motion';
 
 const AccessibilityMenu = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [fontSize, setFontSize] = useState('normal');
   const [highContrast, setHighContrast] = useState(false);
@@ -59,9 +61,9 @@ const AccessibilityMenu = () => {
   }, [isOpen]);
 
   const sizes = [
-    { key: 'small', label: 'Small text' },
-    { key: 'normal', label: 'Default text size' },
-    { key: 'large', label: 'Large text' },
+    { key: 'small', label: t('widgets.a11y.small') },
+    { key: 'normal', label: t('widgets.a11y.normal') },
+    { key: 'large', label: t('widgets.a11y.large') },
   ];
 
   return (
@@ -71,7 +73,7 @@ const AccessibilityMenu = () => {
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={`a11y__toggle ${isOpen ? 'is-open' : ''}`}
-        aria-label="Accessibility options"
+        aria-label={t('widgets.a11y.toggle')}
         aria-expanded={isOpen}
         aria-controls="a11y-panel"
         data-testid="accessibility-toggle"
@@ -85,7 +87,7 @@ const AccessibilityMenu = () => {
           <motion.div
             id="a11y-panel"
             role="dialog"
-            aria-label="Accessibility settings"
+            aria-label={t('widgets.a11y.panel')}
             initial={{ opacity: 0, y: reduce ? 0 : 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: reduce ? 0 : 10 }}
@@ -94,12 +96,12 @@ const AccessibilityMenu = () => {
             data-testid="accessibility-panel"
           >
             <div className="a11y__head">
-              <p className="eyebrow">Accessibility</p>
+              <p className="eyebrow">{t('widgets.a11y.title')}</p>
               <button
                 type="button"
                 className="a11y__close"
                 onClick={() => setIsOpen(false)}
-                aria-label="Close accessibility options"
+                aria-label={t('widgets.a11y.close')}
               >
                 <FiX aria-hidden="true" />
               </button>
@@ -107,7 +109,7 @@ const AccessibilityMenu = () => {
 
             {/* Font Size */}
             <div className="a11y__row">
-              <p className="a11y__label" id="a11y-size-label">Text size</p>
+              <p className="a11y__label" id="a11y-size-label">{t('widgets.a11y.textSize')}</p>
               <div className="a11y__sizes" role="group" aria-labelledby="a11y-size-label">
                 {sizes.map(({ key, label }) => (
                   <button
@@ -135,7 +137,7 @@ const AccessibilityMenu = () => {
                 className="a11y__switch-row"
                 data-testid="high-contrast-toggle"
               >
-                <span className="a11y__label">High contrast</span>
+                <span className="a11y__label">{t('widgets.a11y.highContrast')}</span>
                 <span className={`a11y__switch ${highContrast ? 'is-on' : ''}`} aria-hidden="true">
                   <span className="a11y__knob" />
                 </span>

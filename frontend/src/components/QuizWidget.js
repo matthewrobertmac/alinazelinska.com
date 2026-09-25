@@ -2,43 +2,26 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { FiCheck, FiArrowRight, FiRotateCcw } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { accent } from '../utils/text';
 import './QuizWidget.css';
 import { ease } from '../utils/motion';
 
 const QuizWidget = () => {
+  const { t } = useTranslation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showResult, setShowResult] = useState(false);
   const reduce = useReducedMotion();
 
+  const q = (id, values) => ({
+    q: t(`widgets.quiz.questions.${id}.title`),
+    options: values.map((value) => ({ value, label: t(`widgets.quiz.questions.${id}.options.${value}`) })),
+  });
   const questions = [
-    {
-      q: "What's your current level?",
-      options: [
-        { value: "beginner", label: "Complete beginner" },
-        { value: "heritage", label: "Heritage speaker (understand but can't speak)" },
-        { value: "intermediate", label: "I can have basic conversations" },
-        { value: "advanced", label: "Pretty fluent, want to polish" }
-      ]
-    },
-    {
-      q: "What's your main goal?",
-      options: [
-        { value: "family", label: "Connect with family" },
-        { value: "travel", label: "Travel & cultural exploration" },
-        { value: "work", label: "Professional / Business" },
-        { value: "heritage", label: "Reconnect with my roots" },
-        { value: "fun", label: "Personal interest / fun!" }
-      ]
-    },
-    {
-      q: "How much time can you dedicate per week?",
-      options: [
-        { value: "1hr", label: "1-2 hours (1 lesson)" },
-        { value: "3hr", label: "3-4 hours (2 lessons + practice)" },
-        { value: "5hr", label: "5+ hours (intensive learning)" }
-      ]
-    }
+    q('level', ['beginner', 'heritage', 'intermediate', 'advanced']),
+    q('goal', ['family', 'travel', 'work', 'heritage', 'fun']),
+    q('time', ['1hr', '3hr', '5hr']),
   ];
 
   const handleAnswer = (value) => {
@@ -59,26 +42,14 @@ const QuizWidget = () => {
   const getRecommendation = () => {
     const level = answers[0];
     const time = answers[2];
-
-    if (level === "beginner" && time === "5hr") {
-      return {
-        package: "Intensive Pack",
-        reason: "You're starting fresh and ready to commit! The Intensive Pack will give you momentum and structure.",
-        link: "/booking"
-      };
-    } else if (time === "1hr") {
-      return {
-        package: "Trial Lesson",
-        reason: "Perfect for dipping your toes in! Let's start with a trial to see how you learn best.",
-        link: "/booking"
-      };
-    } else {
-      return {
-        package: "Standard Lesson",
-        reason: "The sweet spot! Regular lessons with practice time — most students see great progress with this rhythm.",
-        link: "/booking"
-      };
-    }
+    let key = 'standard';
+    if (level === 'beginner' && time === '5hr') key = 'intensive';
+    else if (time === '1hr') key = 'trial';
+    return {
+      package: t(`widgets.quiz.packages.${key}.name`),
+      reason: t(`widgets.quiz.packages.${key}.reason`),
+      link: '/booking',
+    };
   };
 
   const resetQuiz = () => {
@@ -117,7 +88,7 @@ const QuizWidget = () => {
                   <span className="quiz__of">/ {pad(total)}</span>
                 </span>
                 <span className="quiz__pct">
-                  Question {currentQuestion + 1} of {total} · {Math.round(progress)}%
+                  {t('widgets.quiz.progress', { current: currentQuestion + 1, total })} · {Math.round(progress)}%
                 </span>
               </div>
               <div
@@ -126,7 +97,7 @@ const QuizWidget = () => {
                 aria-valuemin={0}
                 aria-valuemax={100}
                 aria-valuenow={Math.round(progress)}
-                aria-label={`Question ${currentQuestion + 1} of ${total}`}
+                aria-label={t('widgets.quiz.progress', { current: currentQuestion + 1, total })}
               >
                 <motion.div
                   className="quiz__fill"
@@ -176,10 +147,8 @@ const QuizWidget = () => {
             data-testid="quiz-result"
             aria-live="polite"
           >
-            <p className="eyebrow quiz__result-eyebrow">Your recommendation</p>
-            <h3 className="quiz__result-title">
-              Perfect! Here&rsquo;s what I <em className="display-italic">recommend</em>
-            </h3>
+            <p className="eyebrow quiz__result-eyebrow">{t('widgets.quiz.resultEyebrow')}</p>
+            <h3 className="quiz__result-title">{accent(t('widgets.quiz.resultTitle'))}</h3>
 
             <p className="quiz__package" data-testid="quiz-package">
               {recommendation.package}
@@ -187,7 +156,7 @@ const QuizWidget = () => {
             <p className="quiz__reason">{recommendation.reason}</p>
 
             {chosenLabels.length > 0 && (
-              <ul className="quiz__answers" aria-label="Your answers">
+              <ul className="quiz__answers" aria-label={t('widgets.quiz.answersLabel')}>
                 {chosenLabels.map((label) => (
                   <li key={label} className="chip">{label}</li>
                 ))}
@@ -196,7 +165,7 @@ const QuizWidget = () => {
 
             <div className="quiz__actions">
               <Link to={recommendation.link} className="btn-primary" data-testid="quiz-book-btn">
-                Book This Package
+                {t('widgets.quiz.book')}
                 <FiArrowRight aria-hidden="true" />
               </Link>
               <button
@@ -206,7 +175,7 @@ const QuizWidget = () => {
                 data-testid="quiz-retake-btn"
               >
                 <FiRotateCcw aria-hidden="true" />
-                Retake Quiz
+                {t('widgets.quiz.retake')}
               </button>
             </div>
           </motion.div>

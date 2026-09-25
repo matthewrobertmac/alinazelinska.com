@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { testimonials, meta, testimonialStats } from '../data/content';
+import { testimonials as testimonialImages } from '../data/content';
 import { FiArrowLeft, FiArrowRight, FiStar } from 'react-icons/fi';
 import PageHero from '../components/PageHero';
 import SEOHead from '../components/SEOHead';
@@ -29,8 +29,8 @@ const Avatar = ({ testimonial }) =>
     </span>
   );
 
-const Stars = () => (
-  <span className="voice__stars" aria-label="Rated 5 out of 5">
+const Stars = ({ label }) => (
+  <span className="voice__stars" aria-label={label}>
     {[...Array(5)].map((_, i) => (
       <FiStar key={i} aria-hidden="true" />
     ))}
@@ -39,13 +39,20 @@ const Stars = () => (
 
 const Testimonials = () => {
   const { t } = useTranslation();
+  const reviews = t('reviews.items', { returnObjects: true });
+  // Avatars stay in content.js; the words come from the active language, in the same order.
+  const testimonials = (Array.isArray(reviews) ? reviews : []).map((review, i) => ({
+    ...review,
+    img: testimonialImages[i]?.img,
+  }));
+  const stats = t('reviews.stats', { returnObjects: true });
+  const testimonialStats = Array.isArray(stats) ? stats : [];
   const [currentPage, setCurrentPage] = useState(0);
   const wallRef = useRef(null);
   const testimonialsPerPage = 6;
   const totalPages = Math.ceil(testimonials.length / testimonialsPerPage);
 
   useEffect(() => {
-    document.title = `Testimonials | ${meta.title}`;
     window.scrollTo(0, 0);
   }, []);
 
@@ -84,9 +91,9 @@ const Testimonials = () => {
   return (
     <div className="testimonials-page page-transition">
       <SEOHead
-        title="Student Testimonials | Alina Zelinska | 500+ Students, Perfect 5.0 Rating"
-        description="Read reviews from 500+ students who've learned Ukrainian, Russian, and English with Alina Zelinska. Perfect 5.0 rating across 3,500+ lessons delivered."
-        keywords="Alina Zelinska reviews, Ukrainian tutor testimonials, student reviews, 5 star tutor"
+        title={t('testimonials.seo.title')}
+        description={t('testimonials.seo.description')}
+        keywords={t('testimonials.seo.keywords')}
         schema={aggregateRatingSchema}
         hreflang={[
           { lang: 'en', url: 'https://alinazelinska.com/testimonials' },
@@ -97,8 +104,8 @@ const Testimonials = () => {
       />
 
       <PageHero
-        crumbs={[{ name: 'Student Love' }]}
-        eyebrow="Student love · italki reviews"
+        crumbs={[{ name: t('testimonials.crumb') }]}
+        eyebrow={t('testimonials.eyebrow')}
         uk="Відгуки"
         testId="testimonials-title"
         title={accent(t('testimonials.title'))}
@@ -129,15 +136,12 @@ const Testimonials = () => {
         <div className="section-shell">
           <motion.header {...reveal} className="section-head section-head--split">
             <div>
-              <p className="eyebrow">In their words</p>
+              <p className="eyebrow">{t('testimonials.wall.eyebrow')}</p>
               <h2>
-                Unedited, <em className="display-italic">unprompted.</em>
+                {t('testimonials.wall.title')} <em className="display-italic">{t('testimonials.wall.titleAccent')}</em>
               </h2>
             </div>
-            <p>
-              {testimonials.length} reviews from students of Ukrainian, Russian and English — every one of them a
-              five-star lesson.
-            </p>
+            <p>{t('testimonials.wall.text', { count: testimonials.length })}</p>
           </motion.header>
 
           <AnimatePresence mode="wait">
@@ -160,7 +164,7 @@ const Testimonials = () => {
                       <strong>{lead.name}</strong>
                       <small>{lead.lessons}</small>
                     </span>
-                    <Stars />
+                    <Stars label={t('testimonials.rated')} />
                   </figcaption>
                 </figure>
               )}
@@ -194,20 +198,24 @@ const Testimonials = () => {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <nav className="voice-pager" aria-label="Testimonial pages">
+            <nav className="voice-pager" aria-label={t('testimonials.pager.label')}>
               <button
                 type="button"
                 onClick={prevPage}
                 disabled={currentPage === 0}
                 data-testid="prev-page-btn"
                 className="voice-pager__btn"
-                aria-label="Previous page"
+                aria-label={t('testimonials.pager.prev')}
               >
                 <FiArrowLeft />
               </button>
 
               <span className="voice-pager__label" data-testid="page-indicator">
-                Page <b>{currentPage + 1}</b> of {totalPages}
+                <Trans
+                  i18nKey="testimonials.pager.page"
+                  values={{ current: currentPage + 1, total: totalPages }}
+                  components={{ b: <b /> }}
+                />
               </span>
 
               <button
@@ -216,7 +224,7 @@ const Testimonials = () => {
                 disabled={currentPage === totalPages - 1}
                 data-testid="next-page-btn"
                 className="voice-pager__btn"
-                aria-label="Next page"
+                aria-label={t('testimonials.pager.next')}
               >
                 <FiArrowRight />
               </button>

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { FiCalendar, FiX, FiArrowRight } from 'react-icons/fi';
 import './FloatingBookButton.css';
 import { ease } from '../utils/motion';
 
 const FloatingBookButton = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const location = useLocation();
@@ -60,7 +62,7 @@ const FloatingBookButton = () => {
           {/* Main button */}
           <Link to="/booking" className="float-book__cta" data-testid="floating-book-btn">
             <FiCalendar className="float-book__icon" aria-hidden="true" />
-            <span>Book a Lesson</span>
+            <span>{t('widgets.floatingBook.cta')}</span>
             <FiArrowRight className="float-book__arrow" aria-hidden="true" />
           </Link>
 
@@ -69,7 +71,7 @@ const FloatingBookButton = () => {
             type="button"
             onClick={handleDismiss}
             className="float-book__dismiss"
-            aria-label="Dismiss"
+            aria-label={t('widgets.floatingBook.dismiss')}
             data-testid="floating-book-dismiss"
           >
             <FiX aria-hidden="true" />

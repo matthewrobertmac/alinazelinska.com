@@ -10,6 +10,20 @@ import { accent, clean } from '../utils/text';
 import './contact.css';
 import { reveal, stagger } from '../utils/motion';
 
+// Content strings use *word* for the italic rose accent
+const emphasise = (text) =>
+  clean(text)
+    .split(/\*(.+?)\*/)
+    .map((part, i) =>
+      i % 2 ? (
+        <em key={i} className="display-italic">
+          {part}
+        </em>
+      ) : (
+        part
+      )
+    );
+
 const Contact = () => {
   const { t } = useTranslation();
 
@@ -28,7 +42,7 @@ const Contact = () => {
     {
       icon: <FiLinkedin />,
       title: t('contact.linkedinCard.label'),
-      value: 'Connect with me',
+      value: t('contact.linkedinCard.value'),
       link: contactInfo.linkedin,
       description: t('contact.linkedinCard.hint'),
     },
@@ -46,9 +60,9 @@ const Contact = () => {
   return (
     <div className="contact-page page-transition">
       <SEOHead
-        title="Contact Alina Zelinska | Ukrainian Tutor | 100% Response Rate"
-        description="Get in touch with Alina Zelinska for Ukrainian, Russian, or English lessons. Teaching online, worldwide. 100% response rate within hours."
-        keywords="contact Ukrainian tutor, book Ukrainian lessons, Alina Zelinska contact"
+        title={t('contact.seo.title')}
+        description={t('contact.seo.description')}
+        keywords={t('contact.seo.keywords')}
         hreflang={[
           { lang: 'en', url: 'https://alinazelinska.com/contact' },
           { lang: 'uk', url: 'https://alinazelinska.com/contact?lang=uk' },
@@ -58,8 +72,8 @@ const Contact = () => {
       />
 
       <PageHero
-        crumbs={[{ name: 'Say Hello' }]}
-        eyebrow="Contact · Online, worldwide"
+        crumbs={[{ name: t('nav.contact') }]}
+        eyebrow={t('contact.hero.eyebrow')}
         uk="Привіт"
         testId="contact-title"
         title={accent(t('contact.title'), { dash: true })}
@@ -77,10 +91,8 @@ const Contact = () => {
           <div className="split">
             <motion.header {...reveal} className="split__aside section-head contact-talk">
               <p className="eyebrow">{t('contact.info')}</p>
-              <h2>
-                Let’s <em className="display-italic">talk.</em>
-              </h2>
-              <p>Pick whichever feels most like you — every message lands with me, not an assistant.</p>
+              <h2>{emphasise(t('contact.talk.title'))}</h2>
+              <p>{t('contact.talk.text')}</p>
               <p className="contact-talk__uk" lang="uk">
                 Пишіть — я відповім.
               </p>
@@ -120,13 +132,13 @@ const Contact = () => {
         <div className="section-shell">
           <motion.header {...reveal} className="section-head section-head--split">
             <div>
-              <p className="eyebrow">Ways to work together</p>
+              <p className="eyebrow">{t('contact.together.eyebrow')}</p>
               <h2>{clean(t('contact.whatToExpect.title'))}</h2>
             </div>
             <p>
-              Lessons, translation, writing, consulting — a message is the start of every one of them.{' '}
+              {t('contact.together.text')}{' '}
               <Link to="/special-projects" className="link-underline contact-inline-link">
-                See special projects
+                {t('contact.together.link')}
               </Link>
               .
             </p>
@@ -155,16 +167,14 @@ const Contact = () => {
           <p className="closing__uk" lang="uk">
             До зустрічі.
           </p>
-          <h2>
-            Write to <em className="display-italic">me.</em>
-          </h2>
+          <h2>{emphasise(t('contact.closing.title'))}</h2>
           <p className="closing__sub">{clean(t('contact.bottomCta'))}</p>
           <div className="closing__actions">
             <a href={`mailto:${contactInfo.email}`} data-testid="email-cta-btn" className="btn-primary">
               {clean(t('contact.send'))} <FiArrowRight />
             </a>
             <Link to="/booking" className="btn-outline">
-              Book a lesson <FiArrowUpRight />
+              {t('contact.closing.book')} <FiArrowUpRight />
             </Link>
           </div>
         </motion.div>

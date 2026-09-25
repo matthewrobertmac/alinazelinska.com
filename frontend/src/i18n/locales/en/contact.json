@@ -1,0 +1,71 @@
+{
+  "contact": {
+    "title": "Say Hello — I'd love to hear from you! 👋",
+    "subtitle": "Whether you want to book a lesson, commission a translation, collaborate on something creative, or just say 'Привіт!' — I respond to every message. (My response rate is literally 100%.)",
+    "responseTime": "I typically respond within a few hours. My italki response rate is 100% — and I hold myself to the same standard here.",
+    "name": "Your Name",
+    "email": "Your Email",
+    "message": "Your Message",
+    "send": "Send Message",
+    "info": "Contact Information",
+    "followMe": "Follow Me",
+    "emailCard": {
+      "label": "Email",
+      "hint": "Drop me a message — I reply to every one 💌"
+    },
+    "linkedinCard": {
+      "label": "LinkedIn",
+      "hint": "Let's be professional about it 😄",
+      "value": "Connect with me"
+    },
+    "instagramCard": {
+      "label": "Instagram",
+      "hint": "Come see what I'm up to ✨"
+    },
+    "whatToExpect": {
+      "title": "Here's What We Can Do Together 💕",
+      "languageLessons": {
+        "icon": "📚",
+        "title": "Language Lessons",
+        "description": "One-on-one lessons in Ukrainian, Russian, or English — shaped around you, your pace, and your goals. I've delivered 3,500+ lessons across 30+ countries. Whether you're a total beginner, heritage speaker, or advanced learner — there's a lesson here for you."
+      },
+      "translation": {
+        "icon": "📝",
+        "title": "Translation Services",
+        "description": "I take poetry seriously — which means I won't just translate the words. I'll carry the feeling, the rhythm, and the soul of what you wrote."
+      },
+      "creativeWriting": {
+        "icon": "✨",
+        "title": "Creative Writing",
+        "description": "Captions, articles, brand stories, poems — if it involves words, I'm genuinely in. Let's make your content feel alive."
+      },
+      "consulting": {
+        "icon": "💻",
+        "title": "Consulting",
+        "description": "Building a language learning app, ed-tech platform, or content product? I bring 4 years of teaching experience and 3,500+ student interactions to the table. I can advise on curriculum design, user experience, content strategy, and what actually works for language learners."
+      }
+    },
+    "bottomCta": "So — what are we building together? 🌸",
+    "seo": {
+      "title": "Contact Alina Zelinska | Ukrainian Tutor | 100% Response Rate",
+      "description": "Get in touch with Alina Zelinska for Ukrainian, Russian, or English lessons. Teaching online, worldwide. 100% response rate within hours.",
+      "keywords": "contact Ukrainian tutor, book Ukrainian lessons, Alina Zelinska contact"
+    },
+    "hero": {
+      "eyebrow": "Contact · Online, worldwide"
+    },
+    "talk": {
+      "title": "Let’s *talk.*",
+      "text": "Pick whichever feels most like you — every message lands with me, not an assistant."
+    },
+    "together": {
+      "eyebrow": "Ways to work together",
+      "text": "Lessons, translation, writing, consulting — a message is the start of every one of them.",
+      "link": "See special projects"
+    },
+    "closing": {
+      "title": "Write to *me.*",
+      "book": "Book a lesson"
+    }
+  }
+}

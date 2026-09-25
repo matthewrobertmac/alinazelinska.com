@@ -1,0 +1,33 @@
+{
+  "testimonials": {
+    "seo": {
+      "title": "Student Testimonials | Alina Zelinska | 500+ Students, Perfect 5.0 Rating",
+      "description": "Read reviews from 500+ students who've learned Ukrainian, Russian, and English with Alina Zelinska. Perfect 5.0 rating across 3,500+ lessons delivered.",
+      "keywords": "Alina Zelinska reviews, Ukrainian tutor testimonials, student reviews, 5 star tutor"
+    },
+    "crumb": "Student Love",
+    "eyebrow": "Student love · italki reviews",
+    "title": "What My Students Say 💕",
+    "subtitle": "I could tell you about my perfect 5.0 rating across 3,500+ lessons — but honestly, my students say it better than I ever could.",
+    "verificationNote": "These are real, unedited reviews from italki — where Alina has maintained a perfect 5.0 rating across 3,500+ completed lessons.",
+    "rated": "Rated 5 out of 5",
+    "wall": {
+      "eyebrow": "In their words",
+      "title": "Unedited,",
+      "titleAccent": "unprompted.",
+      "text_one": "{{count}} review from students of Ukrainian, Russian and English — every one of them a five-star lesson.",
+      "text_other": "{{count}} reviews from students of Ukrainian, Russian and English — every one of them a five-star lesson."
+    },
+    "pager": {
+      "label": "Testimonial pages",
+      "prev": "Previous page",
+      "next": "Next page",
+      "page": "Page <b>{{current}}</b> of {{total}}"
+    },
+    "cta": {
+      "title": "Ready to write your own review? 😄",
+      "subtitle": "Book a trial lesson and let's see what we can build together.",
+      "button": "Book a Trial Lesson →"
+    }
+  }
+}

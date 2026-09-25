@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './PageHero.css';
 
 const Breadcrumb = ({ items }) => {
+  const { t } = useTranslation();
   return (
-    <nav className="breadcrumb" aria-label="Breadcrumb">
-      <Link to="/">Home</Link>
+    <nav className="breadcrumb" aria-label={t('breadcrumb.label')}>
+      <Link to="/">{t('nav.home')}</Link>
 
       {items.map((item, index) => (
         <React.Fragment key={index}>

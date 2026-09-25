@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FiVolume2, FiX } from 'react-icons/fi';
 import { floatingWords } from '../data/content';
@@ -59,6 +60,10 @@ const speak = (text) => {
 let nextId = 0;
 
 const FloatingWords = () => {
+  const { t, i18n } = useTranslation();
+  // English visitors get the transliteration too; Ukrainian and Russian readers already read Cyrillic.
+  const showTr = i18n.resolvedLanguage === 'en';
+  const gloss = (entry) => t(`widgets.lexicon.gloss.${entry.tr}`, { defaultValue: entry.en });
   const stageRef = useRef(null);
   const simRef = useRef(new Map());
   const inUseRef = useRef(new Set());
@@ -350,7 +355,7 @@ const FloatingWords = () => {
               onClick={(e) => toggleCatch(word, e)}
               role="button"
               tabIndex={-1}
-              aria-label={`${word.entry.uk} — ${word.entry.en}`}
+              aria-label={`${word.entry.uk} — ${gloss(word.entry)}`}
             >
               <span className="lex-uk" lang="uk">
                 {Array.from(word.entry.uk).map((ch, i) => (
@@ -369,9 +374,13 @@ const FloatingWords = () => {
                 ))}
               </span>
               <span className="lex-gloss">
-                <span className="lex-tr">{word.entry.tr}</span>
-                <span className="lex-dot">·</span>
-                <span className="lex-en">{word.entry.en}</span>
+                {showTr && (
+                  <>
+                    <span className="lex-tr">{word.entry.tr}</span>
+                    <span className="lex-dot">·</span>
+                  </>
+                )}
+                <span className="lex-en">{gloss(word.entry)}</span>
               </span>
               {isCaught && hasVoice && (
                 <button
@@ -381,7 +390,7 @@ const FloatingWords = () => {
                     e.stopPropagation();
                     speak(word.entry.uk);
                   }}
-                  aria-label={`Hear ${word.entry.uk}`}
+                  aria-label={t('widgets.lexicon.hear', { word: word.entry.uk })}
                 >
                   <FiVolume2 />
                 </button>
@@ -405,8 +414,8 @@ const FloatingWords = () => {
             transition={{ delay: 2.4, duration: 0.8 }}
           >
             <span className="lex-hint__dot" />
-            <span className="hidden sm:inline">Hover a word to read it — click to catch it in gold</span>
-            <span className="sm:hidden">Tap a drifting word to catch it</span>
+            <span className="hidden sm:inline">{t('widgets.lexicon.hintDesktop')}</span>
+            <span className="sm:hidden">{t('widgets.lexicon.hintMobile')}</span>
           </motion.p>
         )}
       </AnimatePresence>
@@ -422,9 +431,7 @@ const FloatingWords = () => {
           >
             <button type="button" className="lex-jar__toggle" onClick={() => setJarOpen((o) => !o)} aria-expanded={jarOpen}>
               <span className="lex-jar__count">{jar.length}</span>
-              <span>
-                {jar.length === 1 ? 'word' : 'words'} in your jar
-              </span>
+              <span>{t('widgets.lexicon.jar', { count: jar.length })}</span>
             </button>
             <AnimatePresence>
               {jarOpen && (
@@ -437,7 +444,7 @@ const FloatingWords = () => {
                 >
                   <div className="lex-jar__head">
                     <span className="eyebrow">Твій словник</span>
-                    <button type="button" onClick={() => setJarOpen(false)} aria-label="Close word jar">
+                    <button type="button" onClick={() => setJarOpen(false)} aria-label={t('widgets.lexicon.closeJar')}>
                       <FiX />
                     </button>
                   </div>
@@ -448,15 +455,20 @@ const FloatingWords = () => {
                           {entry.uk}
                         </button>
                         <span>
-                          <em>{entry.tr}</em> — {entry.en}
+                          {showTr && (
+                            <>
+                              <em>{entry.tr}</em> —{' '}
+                            </>
+                          )}
+                          {gloss(entry)}
                         </span>
                       </li>
                     ))}
                   </ul>
                   <div className="lex-jar__foot">
-                    <Link to="/booking">Learn to say them aloud →</Link>
+                    <Link to="/booking">{t('widgets.lexicon.learnAloud')}</Link>
                     <button type="button" onClick={clearJar}>
-                      Empty jar
+                      {t('widgets.lexicon.emptyJar')}
                     </button>
                   </div>
                 </motion.div>

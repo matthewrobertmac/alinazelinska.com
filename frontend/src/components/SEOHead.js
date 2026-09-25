@@ -1,15 +1,19 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 
 const SEOHead = ({
-  title = 'Alina Zelinska | Ukrainian Tutor',
-  description = 'Learn Ukrainian with Alina Zelinska',
+  title: titleProp,
+  description: descriptionProp,
   keywords = '',
   ogImage = 'https://alinazelinska.com/media/alina-portrait.jpg',
   schema = null,
   canonical = null,
   hreflang = null,
 }) => {
+  const { t } = useTranslation();
+  const title = titleProp || t('seo.defaultTitle');
+  const description = descriptionProp || t('seo.defaultDescription');
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://alinazelinska.com';
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
   const fullUrl = canonical || `${siteUrl}${currentPath}`;
@@ -28,7 +32,7 @@ const SEOHead = ({
       <meta property="og:image" content={ogImage} />
       <meta property="og:url" content={fullUrl} />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Alina Zelinska - Ukrainian Tutor" />
+      <meta property="og:site_name" content={t('seo.siteName')} />
 
       {/* Twitter Card Tags */}
       <meta name="twitter:card" content="summary_large_image" />

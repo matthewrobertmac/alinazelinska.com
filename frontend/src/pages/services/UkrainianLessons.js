@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
-import { meta, testimonials } from '../../data/content';
+import useReviews from './useReviews';
 import PageHero from '../../components/PageHero';
 import SEOHead from '../../components/SEOHead';
 import { ukrainianCourseSchema, breadcrumbSchema } from '../../utils/schemas';
@@ -13,111 +14,69 @@ const pad = (i) => String(i + 1).padStart(2, '0');
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
 
 const UkrainianLessons = () => {
+  const { t } = useTranslation();
+  const p = (k, o) => t(`services.ukrainian.${k}`, o);
+  const s = (k) => t(`services.shared.${k}`);
+
   useEffect(() => {
-    document.title = `Ukrainian Lessons | ${meta.title}`;
+    document.title = `${p('docTitle')} | ${s('siteTitle')}`;
+  }, [t]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Filter Ukrainian testimonials
-  const ukrainianTestimonials = testimonials.filter(t =>
-    t.lessons.toLowerCase().includes('ukrainian')
-  );
-
-  const learnerTypes = [
-    {
-      icon: '🌱',
-      title: 'Complete Beginners',
-      description: 'Starting from zero? Perfect! We\'ll begin with the Cyrillic alphabet, basic pronunciation, and essential phrases. Most students can introduce themselves and have simple conversations within 5-10 lessons.',
-    },
-    {
-      icon: '🏠',
-      title: 'Heritage Speakers',
-      description: 'Grew up hearing Ukrainian at home? I\'ll help you turn that passive understanding into active fluency. We\'ll formalize your grammar, expand your vocabulary, and build your confidence in speaking and writing.',
-    },
-    {
-      icon: '🚀',
-      title: 'Intermediate Learners',
-      description: 'Already know the basics? Let\'s take you to the next level. We\'ll work on complex grammar, natural conversation, idioms, and cultural nuances that textbooks don\'t teach.',
-    },
-    {
-      icon: '💼',
-      title: 'Professionals',
-      description: 'Need Ukrainian for work or relocation? I\'ll teach you professional vocabulary, business etiquette, email writing, and the practical language you\'ll actually use in real situations.',
-    },
-  ];
-
-  const whatYoullLearn = [
-    'Conversation skills from day one (not just memorization)',
-    'Grammar explained naturally through real examples',
-    'Ukrainian culture, history, and context',
-    'Reading and writing in Cyrillic script',
-    'Pronunciation coaching for authentic accent',
-    'Vocabulary tailored to YOUR life and interests',
-    'Common mistakes Ukrainian learners make (and how to avoid them)',
-    'Comparisons with Russian (if you\'re learning both)',
-  ];
-
-  const faq = [
-    {
-      q: 'How hard is Ukrainian to learn?',
-      a: 'For English speakers, Ukrainian is considered moderately difficult. The Cyrillic alphabet takes a few lessons to master, and the case system (7 cases!) can be challenging. But here\'s the good news: Ukrainian pronunciation is very consistent, the grammar follows logical patterns, and the language is beautiful to speak. With the right approach, you\'ll be surprised how quickly it clicks.',
-    },
-    {
-      q: 'Do I need to learn Cyrillic first?',
-      a: 'We learn it together from the start! I don\'t believe in spending weeks just on the alphabet. We learn Cyrillic while learning real words and phrases, so you\'re actually communicating from lesson one. Most students can read basic Cyrillic within 3-5 lessons.',
-    },
-    {
-      q: 'Is Ukrainian similar to Russian?',
-      a: 'Yes and no. They share the Cyrillic alphabet and some vocabulary (they\'re both Slavic languages), but they\'re distinct. Ukrainian has softer pronunciation, different grammar patterns, and unique vocabulary. If you speak Russian, learning Ukrainian is easier - but they\'re not mutually intelligible. Think Spanish and Portuguese.',
-    },
-  ];
+  const ukrainianTestimonials = useReviews('ukrainian');
+  const learnerTypes = p('learners', { returnObjects: true });
+  const whatYoullLearn = p('learn', { returnObjects: true });
+  const faq = p('faq', { returnObjects: true });
 
   return (
     <div className="svc-page page-transition">
       <SEOHead
-        title="Ukrainian Language Lessons | Native Speaker | Alina Zelinska | 5.0★"
-        description="Learn Ukrainian online with Alina, a native speaker from Ukraine. 500+ students, 3,500+ lessons, perfect 5.0 rating. Beginner to advanced, personalized 1-on-1 lessons."
-        keywords="Ukrainian lessons, learn Ukrainian online, Ukrainian tutor, native Ukrainian teacher, Ukrainian language course"
+        title={p('seo.title')}
+        description={p('seo.description')}
+        keywords={p('seo.keywords')}
         schema={{
           '@context': 'https://schema.org',
           '@graph': [
-            ukrainianCourseSchema,
+            { ...ukrainianCourseSchema, name: p('schema.name'), description: p('schema.description') },
             breadcrumbSchema([
-              { name: 'Home', url: 'https://alinazelinska.com' },
-              { name: 'Services', url: 'https://alinazelinska.com/special-projects' },
-              { name: 'Ukrainian Lessons', url: 'https://alinazelinska.com/services/ukrainian-lessons' }
+              { name: s('home'), url: 'https://alinazelinska.com' },
+              { name: s('services'), url: 'https://alinazelinska.com/special-projects' },
+              { name: p('crumb'), url: 'https://alinazelinska.com/services/ukrainian-lessons' }
             ])
           ]
         }}
       />
 
       <PageHero
-        crumbs={[{ name: 'Services', url: '/special-projects' }, { name: 'Ukrainian Lessons' }]}
-        eyebrow="Ukrainian language lessons"
+        crumbs={[{ name: s('services'), url: '/special-projects' }, { name: p('crumb') }]}
+        eyebrow={p('eyebrow')}
         uk="Мова"
         title={
           <>
-            Learn Ukrainian with a <em>native speaker.</em>
+            {p('title')} <em>{p('titleAccent')}</em>
           </>
         }
-        lede="One-on-one Ukrainian lessons designed around you, taught by a native speaker who makes grammar actually enjoyable."
+        lede={p('lede')}
         aside={
           <div className="svc-ledger">
-            <span className="svc-ledger__label">1-on-1 · online · all levels</span>
+            <span className="svc-ledger__label">{s('ledgerLabel')}</span>
             <dl>
               <div>
                 <dt>500+</dt>
-                <dd>Students</dd>
+                <dd>{s('ledgerStudents')}</dd>
               </div>
               <div>
                 <dt>3,500+</dt>
-                <dd>Lessons delivered</dd>
+                <dd>{s('ledgerLessons')}</dd>
               </div>
               <div>
                 <dt>
                   <em>5.0</em>
                 </dt>
-                <dd>Perfect rating</dd>
+                <dd>{s('ledgerRating')}</dd>
               </div>
             </dl>
           </div>
@@ -125,10 +84,10 @@ const UkrainianLessons = () => {
       >
         <div className="svc-actions">
           <Link to="/booking" className="btn-primary">
-            Book a Trial Lesson <FiArrowRight />
+            {s('bookTrial')} <FiArrowRight />
           </Link>
           <Link to="/contact" className="btn-outline">
-            Ask Me Anything
+            {s('askAnything')}
           </Link>
         </div>
       </PageHero>
@@ -138,12 +97,12 @@ const UkrainianLessons = () => {
         <div className="section-shell">
           <motion.header {...reveal} className="section-head section-head--split">
             <div>
-              <p className="eyebrow">Who it’s for</p>
+              <p className="eyebrow">{s('whoEyebrow')}</p>
               <h2>
-                Who this is <em className="display-italic">for.</em>
+                {s('whoTitle')} <em className="display-italic">{s('whoAccent')}</em>
               </h2>
             </div>
-            <p>From your very first Cyrillic letter to the vocabulary of your working day — lessons start wherever you are.</p>
+            <p>{p('whoIntro')}</p>
           </motion.header>
 
           <div className="svc-cards">
@@ -163,9 +122,9 @@ const UkrainianLessons = () => {
         <div className="section-shell">
           <div className="split">
             <motion.header {...reveal} className="split__aside section-head">
-              <p className="eyebrow">Inside the lessons</p>
+              <p className="eyebrow">{s('learnEyebrow')}</p>
               <h2>
-                What you’ll <em className="display-italic">learn.</em>
+                {s('learnTitle')} <em className="display-italic">{s('learnAccent')}</em>
               </h2>
             </motion.header>
 
@@ -185,9 +144,9 @@ const UkrainianLessons = () => {
       <section className="page-section">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">In their words</p>
+            <p className="eyebrow">{s('quotesEyebrow')}</p>
             <h2>
-              What Ukrainian students <em className="display-italic">say.</em>
+              {p('quotesTitle')} <em className="display-italic">{p('quotesAccent')}</em>
             </h2>
           </motion.header>
 
@@ -208,7 +167,7 @@ const UkrainianLessons = () => {
 
           <motion.div {...reveal} className="svc-more">
             <Link to="/testimonials" className="btn-outline">
-              Read All Testimonials <FiArrowUpRight />
+              {s('readAllTestimonials')} <FiArrowUpRight />
             </Link>
           </motion.div>
         </div>
@@ -218,9 +177,9 @@ const UkrainianLessons = () => {
       <section className="page-section page-section--tint">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">Good questions</p>
+            <p className="eyebrow">{s('faqEyebrow')}</p>
             <h2>
-              Ukrainian learning <em className="display-italic">FAQ.</em>
+              {p('faqTitle')} <em className="display-italic">{p('faqAccent')}</em>
             </h2>
           </motion.header>
 
@@ -242,14 +201,14 @@ const UkrainianLessons = () => {
             Почнімо?
           </p>
           <h2>
-            Ready to start learning <em className="display-italic">Ukrainian?</em>
+            {p('closingTitle')} <em className="display-italic">{p('closingAccent')}</em>
           </h2>
           <p className="closing__sub">
-            Join 500+ students who've discovered that Ukrainian can be approachable, engaging, and genuinely fun to learn.
+            {p('closingSub')}
           </p>
           <div className="closing__actions">
             <Link to="/booking" className="btn-primary">
-              Book Your Trial Lesson <FiArrowRight />
+              {s('bookYourTrial')} <FiArrowRight />
             </Link>
           </div>
         </motion.div>

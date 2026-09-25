@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { FiCheck, FiCreditCard, FiClock, FiArrowRight, FiHome, FiInstagram, FiMail, FiAlertCircle } from 'react-icons/fi';
 import { FaPaypal } from 'react-icons/fa';
-import { meta } from '../data/content';
 import { useCurrency } from '../context/CurrencyContext';
 import CurrencySelector from '../components/CurrencySelector';
 import PageHero from '../components/PageHero';
@@ -13,6 +12,20 @@ import './booking.css';
 import { ease, reveal, stagger } from '../utils/motion';
 
 const PAYPAL_EMAIL = 'zelinskayaalinaig@gmail.com';
+
+// Content strings mark emphasis with *word*; `Tag` picks the element (italic accent or bold)
+const emphasise = (text, Tag = 'em', className) =>
+  clean(text)
+    .split(/\*(.+?)\*/)
+    .map((part, i) =>
+      i % 2 ? (
+        <Tag key={i} className={className}>
+          {part}
+        </Tag>
+      ) : (
+        part
+      )
+    );
 
 const Booking = () => {
   const { t } = useTranslation();
@@ -26,7 +39,7 @@ const Booking = () => {
   const prices = getPackagePrices();
 
   useEffect(() => {
-    document.title = `${t('nav.booking')} | ${meta.title}`;
+    document.title = t('booking.docTitle');
     window.scrollTo(0, 0);
 
     // Handle PayPal return
@@ -61,7 +74,7 @@ const Booking = () => {
 
     const pkg = packages.find(p => p.id === packageId);
     if (!pkg) {
-      setError('Package not found');
+      setError(t('booking.notFound'));
       setLoading(null);
       return;
     }
@@ -86,6 +99,7 @@ const Booking = () => {
   if (paymentStatus === 'success') {
     return (
       <div className="booking-page booking-success page-transition">
+        <SEOHead title={t('booking.docTitle')} description={t('booking.seo.description')} />
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -118,9 +132,9 @@ const Booking = () => {
   return (
     <div className="booking-page page-transition">
       <SEOHead
-        title="Book Ukrainian Lessons | Alina Zelinska | Trial from €15"
-        description="Book personalized Ukrainian lessons with Alina Zelinska. Trial lesson €15, Standard €30, Intensive pack €120. Perfect 5.0 rating, 500+ students worldwide."
-        keywords="book Ukrainian lessons, Ukrainian tutor booking, learn Ukrainian online, Ukrainian language course"
+        title={t('booking.seo.title')}
+        description={t('booking.seo.description')}
+        keywords={t('booking.seo.keywords')}
         hreflang={[
           { lang: 'en', url: 'https://alinazelinska.com/booking' },
           { lang: 'uk', url: 'https://alinazelinska.com/booking?lang=uk' },
@@ -130,8 +144,8 @@ const Booking = () => {
       />
 
       <PageHero
-        crumbs={[{ name: 'Book a Lesson' }]}
-        eyebrow="Book a lesson · Online, worldwide"
+        crumbs={[{ name: t('nav.booking') }]}
+        eyebrow={t('booking.hero.eyebrow')}
         uk="Урок"
         testId="booking-title"
         title={accent(t('booking.title'))}
@@ -152,18 +166,13 @@ const Booking = () => {
         <div className="section-shell">
           <motion.div {...reveal} className="booking-connect">
             <div className="booking-connect__marker">
-              <span className="booking-step__label">Step</span>
+              <span className="booking-step__label">{t('booking.step')}</span>
               <span className="booking-step__num">01</span>
             </div>
             <div className="booking-connect__body">
-              <p className="eyebrow">Before you book</p>
-              <h2>
-                Let’s <em className="display-italic">connect</em> first.
-              </h2>
-              <p className="booking-connect__text">
-                Please <strong>message me first</strong> before making a payment so we can schedule your lesson
-                together and make sure the timing works perfectly for both of us!
-              </p>
+              <p className="eyebrow">{t('booking.connect.eyebrow')}</p>
+              <h2>{emphasise(t('booking.connect.title'), 'em', 'display-italic')}</h2>
+              <p className="booking-connect__text">{emphasise(t('booking.connect.text'), 'strong')}</p>
               <div className="booking-connect__actions">
                 <a
                   href="https://www.instagram.com/alin.a.zelinska/"
@@ -171,10 +180,10 @@ const Booking = () => {
                   rel="noopener noreferrer"
                   className="btn-primary"
                 >
-                  <FiInstagram /> Message on Instagram
+                  <FiInstagram /> {t('booking.connect.instagram')}
                 </a>
                 <a href="mailto:zelinskayaalinaig@gmail.com" className="btn-outline">
-                  <FiMail /> Send Email
+                  <FiMail /> {t('booking.connect.email')}
                 </a>
               </div>
             </div>
@@ -187,18 +196,18 @@ const Booking = () => {
         <div className="section-shell">
           <motion.header {...reveal} className="section-head section-head--split booking-packages-head">
             <div>
-              <p className="eyebrow">Step 02 · Choose your format</p>
+              <p className="eyebrow">{t('booking.choose.eyebrow')}</p>
               <h2>{clean(t('booking.selectPackage'))}</h2>
             </div>
             <div className="booking-pay">
               <div className="booking-pay__row">
-                <span className="field-label">Currency</span>
+                <span className="field-label">{t('booking.choose.currency')}</span>
                 <CurrencySelector />
               </div>
               <p className="booking-pay__methods">
                 <FaPaypal aria-hidden="true" />
                 <FiCreditCard aria-hidden="true" />
-                <span>Pay with PayPal or Card</span>
+                <span>{t('booking.choose.payWith')}</span>
               </p>
             </div>
           </motion.header>
@@ -228,7 +237,7 @@ const Booking = () => {
                 >
                   <div className="booking-pkg__top">
                     <span className="num">{String(index + 1).padStart(2, '0')}</span>
-                    {pkg.popular && <span className="chip">Most Popular</span>}
+                    {pkg.popular && <span className="chip">{t('booking.popular')}</span>}
                     <span className="booking-pkg__radio" aria-hidden="true">
                       <FiCheck />
                     </span>
@@ -290,7 +299,7 @@ const Booking = () => {
       <section className="page-section">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">Step 03 · Your first lesson</p>
+            <p className="eyebrow">{t('booking.expectEyebrow')}</p>
             <h2>{clean(t('booking.whatToExpect.title'))}</h2>
           </motion.header>
 

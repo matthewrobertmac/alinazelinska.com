@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloatingWords from '../components/FloatingWords';
 import QuizWidget from '../components/QuizWidget';
 import SEOHead from '../components/SEOHead';
-import { introdata, whoITeach, testimonials, floatingWords, contactInfo } from '../data/content';
+import { introdata, floatingWords, contactInfo } from '../data/content';
 import { personSchema, organizationSchema, aggregateRatingSchema } from '../utils/schemas';
 import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
 import { FaTiktok } from 'react-icons/fa';
@@ -13,14 +13,13 @@ import { clean } from '../utils/text';
 import './home.css';
 import { ease, reveal } from '../utils/motion';
 
-const stats = [
-  { value: '5.0', label: 'rating, every lesson' },
-  { value: '3,500+', label: 'lessons taught' },
-  { value: '500+', label: 'students' },
-  { value: '30+', label: 'countries' },
-];
+// Indices into reviews.items (same order as the testimonials page)
+const FEATURED = [0, 8, 9];
 
-const featuredQuotes = [0, 8, 9].map((i) => testimonials[i]);
+const asArray = (value) => (Array.isArray(value) ? value : []);
+
+const em = { em: <em /> };
+const emItalic = { em: <em className="display-italic" /> };
 
 const RotatingLine = ({ lines }) => {
   const [index, setIndex] = useState(0);
@@ -46,8 +45,7 @@ const RotatingLine = ({ lines }) => {
   );
 };
 
-const CircleBadge = () => {
-  const text = 'Perfect 5.0 rating ✦ 3,500+ lessons ✦ 500+ students ✦ ';
+const CircleBadge = ({ text }) => {
   return (
     <div className="circle-badge" aria-hidden="true">
       <svg viewBox="0 0 200 200" className="spin-slow">
@@ -65,14 +63,37 @@ const CircleBadge = () => {
   );
 };
 
+// The hero's last line glows: gradient on the words, trailing punctuation left plain.
+const GradientLine = ({ text }) => {
+  const [, words, punct] = text.match(/^(.*?)([.!?…]*)$/s);
+  return (
+    <>
+      <span className="gradient-text">{words}</span>
+      {punct}
+    </>
+  );
+};
+
 const Home = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [quote, setQuote] = useState(0);
 
+  const reviews = asArray(t('reviews.items', { returnObjects: true }));
+  const featuredQuotes = FEATURED.map((i) => reviews[i]).filter(Boolean);
+  const stats = asArray(t('home.stats', { returnObjects: true }));
+  const heroLines = asArray(t('home.hero.title', { returnObjects: true }));
+  const rotatingLines = asArray(t('home.intro.animated', { returnObjects: true }));
+  const teachItems = asArray(t('home.whoITeach.items', { returnObjects: true }));
+  const gloss = (w) => t(`widgets.lexicon.gloss.${w.tr}`, { defaultValue: w.en });
+  const showTransliteration = i18n.resolvedLanguage === 'en';
+  const quoteCount = featuredQuotes.length;
+  const current = featuredQuotes[quote % Math.max(quoteCount, 1)];
+
   useEffect(() => {
-    const id = setInterval(() => setQuote((q) => (q + 1) % featuredQuotes.length), 7000);
+    if (quoteCount < 2) return undefined;
+    const id = setInterval(() => setQuote((q) => (q + 1) % quoteCount), 7000);
     return () => clearInterval(id);
-  }, []);
+  }, [quoteCount]);
 
   const offerings = [
     { key: 'conversationalUkrainian', to: '/services/ukrainian-lessons', tag: 'Українська' },
@@ -88,9 +109,9 @@ const Home = () => {
   return (
     <div className="home-page relative page-transition">
       <SEOHead
-        title="Alina Zelinska | Native Ukrainian Tutor Online | 5.0★ Rating"
-        description="Learn Ukrainian with Alina Zelinska, a native Ukrainian tutor teaching online worldwide. 500+ students, 5.0★ rating, 3,500+ lessons. Book your first lesson today."
-        keywords="Ukrainian tutor, learn Ukrainian online, Ukrainian lessons, native Ukrainian teacher, Ukrainian language, Ukrainian course"
+        title={t('home.seo.title')}
+        description={t('home.seo.description')}
+        keywords={t('home.seo.keywords')}
         schema={{
           '@context': 'https://schema.org',
           '@graph': [personSchema, organizationSchema, aggregateRatingSchema],
@@ -116,25 +137,19 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease, delay: 0.2 }}
             >
-              Ukrainian · Russian · English — online, worldwide
+              {t('home.hero.eyebrow')}
             </motion.p>
 
             <h1 className="hero__title" data-testid="hero-title">
-              {['Learn Ukrainian', 'like a love', 'language.'].map((line, i) => (
-                <span key={line} className="hero__line">
+              {heroLines.map((line, i) => (
+                <span key={i} className="hero__line">
                   <motion.span
-                    className={`block ${i > 0 ? 'display-italic' : ''}`}
+                    className={`block ${i >= heroLines.length - 2 ? 'display-italic' : ''}`}
                     initial={{ y: '110%' }}
                     animate={{ y: 0 }}
                     transition={{ duration: 1.2, ease, delay: 0.35 + i * 0.12 }}
                   >
-                    {i === 2 ? (
-                      <>
-                        <span className="gradient-text">language</span>.
-                      </>
-                    ) : (
-                      line
-                    )}
+                    {i === heroLines.length - 1 ? <GradientLine text={line} /> : line}
                   </motion.span>
                 </span>
               ))}
@@ -147,9 +162,11 @@ const Home = () => {
               className="hero__lede"
             >
               <p>
-                I’m <strong>Alina Zelinska</strong> — native tutor, poet and translator.
+                {t('home.hero.ledePrefix')}
+                <strong>{t('home.hero.ledeName')}</strong>
+                {t('home.hero.ledeSuffix')}
               </p>
-              <RotatingLine lines={introdata.animated} />
+              {rotatingLines.length > 0 && <RotatingLine key={i18n.resolvedLanguage} lines={rotatingLines} />}
             </motion.div>
 
             <motion.div
@@ -159,7 +176,7 @@ const Home = () => {
               transition={{ duration: 1, ease, delay: 1.05 }}
             >
               <Link to="/booking" className="btn-primary" data-testid="book-lesson-btn">
-                Book your first lesson
+                {t('home.hero.bookFirst')}
                 <FiArrowRight />
               </Link>
               <Link to="/testimonials" className="btn-outline" data-testid="view-testimonials-btn">
@@ -174,7 +191,7 @@ const Home = () => {
               transition={{ duration: 1.2, delay: 1.3 }}
             >
               {stats.map((s) => (
-                <div key={s.label}>
+                <div key={s.value}>
                   <dt>{s.value}</dt>
                   <dd>{s.label}</dd>
                 </div>
@@ -190,9 +207,9 @@ const Home = () => {
           >
             <div className="arch">
               <div className="arch__glow" />
-              <img src={introdata.image} alt="Alina Zelinska" data-testid="hero-image" fetchPriority="high" />
+              <img src={introdata.image} alt={t('home.hero.portraitAlt')} data-testid="hero-image" fetchPriority="high" />
             </div>
-            <CircleBadge />
+            <CircleBadge text={t('home.badge')} />
             <motion.div
               className="hero__note"
               initial={{ opacity: 0, x: -16, rotate: -6 }}
@@ -200,21 +217,21 @@ const Home = () => {
               transition={{ duration: 1, ease, delay: 1.6 }}
             >
               <span lang="uk">Привіт!</span>
-              <small>pryvit — hello</small>
+              <small>{t('home.hero.noteGloss')}</small>
             </motion.div>
           </motion.figure>
         </div>
       </section>
 
       {/* ─── Lexicon marquee ──────────────────────────────── */}
-      <section className="lexicon-band" aria-label="Ukrainian words">
+      <section className="lexicon-band" aria-label={t('home.lexiconLabel')}>
         <div className="marquee">
           {[0, 1].map((copy) => (
             <div className="marquee__track" key={copy} aria-hidden={copy === 1}>
               {marqueeWords.map((w) => (
                 <span key={w.uk} className="lexicon-band__item">
                   <span lang="uk">{w.uk}</span>
-                  <em>{w.en}</em>
+                  <em>{gloss(w)}</em>
                   <span className="lexicon-band__star">✦</span>
                 </span>
               ))}
@@ -226,15 +243,14 @@ const Home = () => {
       {/* ─── Manifesto ────────────────────────────────────── */}
       <section className="manifesto">
         <motion.div {...reveal} className="manifesto__inner">
-          <p className="eyebrow">How I teach</p>
+          <p className="eyebrow">{t('home.manifesto.eyebrow')}</p>
           <p className="manifesto__text">
-            My lessons aren’t lectures. They’re <em>conversations</em> — full of culture, stories, humour and
-            real life, built around <em>your</em> pace, <em>your</em> interests and <em>your</em> goals.
+            <Trans i18nKey="home.manifesto.text" components={em} />
           </p>
           <div className="manifesto__sign">
-            <span className="manifesto__signature">Alina</span>
+            <span className="manifesto__signature">{t('home.manifesto.signature')}</span>
             <Link to="/about" className="link-underline">
-              Read my story <FiArrowUpRight className="inline" />
+              {t('home.manifesto.readStory')} <FiArrowUpRight className="inline" />
             </Link>
           </div>
         </motion.div>
@@ -244,7 +260,7 @@ const Home = () => {
       <section className="offer">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">What’s in my world</p>
+            <p className="eyebrow">{t('home.whatIOffer.eyebrow')}</p>
             <h2>{clean(t('home.whatIOffer.title'))}</h2>
             <p>{clean(t('home.whatIOffer.subtitle'))}</p>
           </motion.header>
@@ -280,16 +296,16 @@ const Home = () => {
         <div className="section-shell">
           <motion.header {...reveal} className="section-head section-head--split">
             <div>
-              <p className="eyebrow">Who I teach</p>
+              <p className="eyebrow">{t('home.whoITeach.eyebrow')}</p>
               <h2>{t('home.whoITeach.title')}</h2>
             </div>
             <p>{t('home.whoITeach.subtitle')}</p>
           </motion.header>
 
           <div className="teach__grid">
-            {whoITeach.map((item, i) => (
+            {teachItems.map((item, i) => (
               <motion.article
-                key={item.title}
+                key={i}
                 className="teach__card"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -319,27 +335,31 @@ const Home = () => {
               exit={{ opacity: 0, y: -20, filter: 'blur(6px)' }}
               transition={{ duration: 0.9, ease }}
             >
-              <blockquote>{featuredQuotes[quote].text}</blockquote>
-              <figcaption>
-                <strong>{featuredQuotes[quote].name}</strong>
-                <span>{featuredQuotes[quote].lessons}</span>
-              </figcaption>
+              {current && (
+                <>
+                  <blockquote>{current.text}</blockquote>
+                  <figcaption>
+                    <strong>{current.name}</strong>
+                    <span>{current.lessons}</span>
+                  </figcaption>
+                </>
+              )}
             </motion.figure>
           </AnimatePresence>
           <div className="voices__controls">
             <div className="voices__dots">
               {featuredQuotes.map((q, i) => (
                 <button
-                  key={q.name}
+                  key={i}
                   type="button"
                   onClick={() => setQuote(i)}
                   className={i === quote ? 'is-active' : ''}
-                  aria-label={`Show review from ${q.name}`}
+                  aria-label={t('home.voices.showReview', { name: q.name })}
                 />
               ))}
             </div>
             <Link to="/testimonials" className="link-underline">
-              All reviews <FiArrowUpRight className="inline" />
+              {t('home.voices.allReviews')} <FiArrowUpRight className="inline" />
             </Link>
           </div>
         </div>
@@ -349,11 +369,11 @@ const Home = () => {
       <section className="quiz-section">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">Thirty seconds</p>
+            <p className="eyebrow">{t('home.quiz.eyebrow')}</p>
             <h2>
-              Find your <em className="display-italic">perfect</em> package
+              <Trans i18nKey="home.quiz.title" components={emItalic} />
             </h2>
-            <p>Not sure where to start? Answer three questions and I’ll recommend the best way in.</p>
+            <p>{t('home.quiz.subtitle')}</p>
           </motion.header>
           <motion.div {...reveal} className="quiz-frame">
             <QuizWidget />
@@ -366,10 +386,10 @@ const Home = () => {
         <motion.div {...reveal} className="tiktok-band__inner">
           <div>
             <p className="eyebrow">
-              <FaTiktok /> Bite-sized lessons
+              <FaTiktok /> {t('home.tiktok.eyebrow')}
             </p>
             <h2>
-              Come learn with me <em className="display-italic">on TikTok</em>
+              <Trans i18nKey="home.tiktok.title" components={emItalic} />
             </h2>
             <p>{t('home.tiktok.subtitle')}</p>
           </div>
@@ -398,14 +418,12 @@ const Home = () => {
             Давай почнемо.
           </p>
           <h2>
-            Let’s <em className="display-italic">begin.</em>
+            <Trans i18nKey="home.closing.title" components={emItalic} />
           </h2>
-          <p className="closing__sub">
-            One conversation is all it takes. Book a trial lesson, or just say hello — I reply to every message.
-          </p>
+          <p className="closing__sub">{t('home.closing.sub')}</p>
           <div className="closing__actions">
             <Link to="/booking" className="btn-primary">
-              Book a lesson <FiArrowRight />
+              {t('home.closing.book')} <FiArrowRight />
             </Link>
             <Link to="/contact" className="btn-outline" data-testid="contact-me-btn">
               {clean(t('home.getInTouch'))}
