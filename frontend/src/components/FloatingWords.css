@@ -1,5 +1,41 @@
 /* ─── The Living Lexicon ──────────────────────────────────── */
 
+/* Theme colours: each word takes tone a or b */
+.lexicon,
+.lex-theme {
+  --lex-a: var(--color-accent);
+  --lex-b: var(--color-accent-hover);
+}
+
+[data-lex-theme='ukraine'] {
+  --lex-a: #2f64a8;
+  --lex-b: #c18a14;
+}
+
+[data-lex-theme='languages'] {
+  --lex-a: var(--color-gold);
+  --lex-b: var(--color-accent);
+}
+
+[data-lex-theme='travel'] {
+  --lex-a: #2e7d78;
+  --lex-b: var(--color-gold);
+}
+
+[data-theme='dark'] [data-lex-theme='ukraine'] {
+  --lex-a: #86ade6;
+  --lex-b: #f2cd6b;
+}
+
+[data-theme='dark'] [data-lex-theme='travel'] {
+  --lex-a: #7cc6bf;
+  --lex-b: var(--color-gold-bright);
+}
+
+.lex-word[data-tone='b'] {
+  color: var(--lex-b);
+}
+
 .lexicon {
   position: absolute;
   inset: 0;
@@ -20,7 +56,7 @@
   font-size: var(--size);
   line-height: 1;
   white-space: nowrap;
-  color: var(--color-accent);
+  color: var(--lex-a);
   opacity: var(--rest);
   filter: blur(var(--blur));
   cursor: pointer;
@@ -214,5 +250,58 @@
 @media (max-width: 899px) {
   .lexicon {
     display: none;
+  }
+}
+
+/* Theme label: names the current theme; click for the next one */
+.lex-theme {
+  position: absolute;
+  top: 6.75rem;
+  right: 2.5rem;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.95rem 0.5rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  background: color-mix(in srgb, var(--color-surface) 78%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.lex-theme:hover,
+.lex-theme:focus-visible {
+  color: var(--color-text);
+  border-color: var(--lex-a);
+}
+
+.lex-theme__dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--lex-a) 50%, var(--lex-b) 50%);
+  transition: background 0.6s ease;
+}
+
+.lex-theme__label {
+  color: var(--color-muted);
+}
+
+.lex-theme__name {
+  color: var(--lex-a);
+  animation: lex-theme-in 0.6s var(--ease-out);
+}
+
+@keyframes lex-theme-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
   }
 }

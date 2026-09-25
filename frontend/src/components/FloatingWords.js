@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiVolume2 } from 'react-icons/fi';
-import { floatingWords } from '../data/content';
+import { floatingWordThemes } from '../data/content';
 import './FloatingWords.css';
 
 /*
@@ -25,6 +25,10 @@ import './FloatingWords.css';
 // Breathing room between a word and the copy it avoids
 const KEEP_OUT_PAD = 36;
 const DESKTOP = '(min-width: 900px)';
+
+// Themes take turns: love, Ukraine, languages, travel. Each has its own pair of colours (CSS).
+const THEMES = Object.keys(floatingWordThemes);
+const THEME_MS = 40000;
 
 const rand = (min, max) => min + Math.random() * (max - min);
 
@@ -55,13 +59,14 @@ const insideKeepOut = (k, x, y, halfW, height) =>
   !!k && x + halfW > k.left && x - halfW < k.right && y + height / 2 > k.top && y - height / 2 < k.bottom;
 const insideAny = (zones, x, y, halfW, height) => zones.some((k) => insideKeepOut(k, x, y, halfW, height));
 
-const Lexicon = ({ avoidRefs }) => {
+const Lexicon = ({ avoidRefs, theme }) => {
   const { t, i18n } = useTranslation();
   // English visitors get the transliteration too; Ukrainian and Russian readers already read Cyrillic.
   const showTr = i18n.resolvedLanguage === 'en';
   const gloss = (entry) => t(`widgets.lexicon.gloss.${entry.tr}`, { defaultValue: entry.en });
   const stageRef = useRef(null);
   const simRef = useRef(new Map());
+  const themeRef = useRef(theme);
   // Keep-out rectangles (copy, portrait) in stage coordinates, padded
   const keepOutRef = useRef([]);
   const inUseRef = useRef(new Set());
@@ -84,8 +89,9 @@ const Lexicon = ({ avoidRefs }) => {
   }, []);
 
   const pickEntry = useCallback(() => {
-    const available = floatingWords.filter((w) => !inUseRef.current.has(w.uk));
-    const pool = available.length ? available : floatingWords;
+    const words = floatingWordThemes[themeRef.current] || floatingWordThemes[THEMES[0]];
+    const available = words.filter((w) => !inUseRef.current.has(w.uk));
+    const pool = available.length ? available : words;
     const entry = pool[Math.floor(Math.random() * pool.length)];
     inUseRef.current.add(entry.uk);
     return entry;
@@ -175,6 +181,16 @@ const Lexicon = ({ avoidRefs }) => {
       inUse.clear();
     };
   }, [makeWord]);
+
+  // A new theme: today's words dissolve one by one and the new theme's words form in their place.
+  useEffect(() => {
+    if (themeRef.current === theme) return undefined;
+    themeRef.current = theme;
+    const timers = [...simRef.current.entries()]
+      .filter(([, sim]) => sim.state !== 'caught')
+      .map(([id], i) => setTimeout(() => retire(id), i * 260));
+    return () => timers.forEach(clearTimeout);
+  }, [theme, retire]);
 
   // Measure the keep-out elements relative to the stage (layout only changes on resize).
   useEffect(() => {
@@ -434,7 +450,7 @@ const Lexicon = ({ avoidRefs }) => {
 
   return (
     <>
-      <div ref={stageRef} className="lexicon" aria-hidden="true">
+      <div ref={stageRef} className="lexicon" data-lex-theme={theme} aria-hidden="true">
         {words.map((word) => {
           const isCaught = caught.has(word.id);
           const size = sizeFor(word.z);
@@ -447,6 +463,7 @@ const Lexicon = ({ avoidRefs }) => {
                 if (s) s.el = el;
               }}
               className={`lex-word ${word.z > 0.55 ? 'is-near' : ''} ${isCaught ? 'is-caught' : ''}`}
+              data-tone={word.id % 2 ? 'a' : 'b'}
               style={{
                 '--size': `${size}px`,
                 '--blur': `${blur.toFixed(2)}px`,
@@ -513,7 +530,11 @@ const Lexicon = ({ avoidRefs }) => {
 
 // Rendered only where there's room beside the copy; phones and small tablets skip it entirely.
 const FloatingWords = ({ avoidRefs }) => {
+  const { t } = useTranslation();
   const [enabled, setEnabled] = useState(false);
+  const [themeIndex, setThemeIndex] = useState(0);
+  const [cycle, setCycle] = useState(0);
+
   useEffect(() => {
     const mq = window.matchMedia(DESKTOP);
     const update = () => setEnabled(mq.matches);
@@ -521,7 +542,40 @@ const FloatingWords = ({ avoidRefs }) => {
     mq.addEventListener?.('change', update);
     return () => mq.removeEventListener?.('change', update);
   }, []);
-  return enabled ? <Lexicon avoidRefs={avoidRefs} /> : null;
+
+  // Rotate themes; clicking the label moves on at once and restarts the clock.
+  useEffect(() => {
+    if (!enabled) return undefined;
+    const timer = setTimeout(() => setThemeIndex((i) => (i + 1) % THEMES.length), THEME_MS);
+    return () => clearTimeout(timer);
+  }, [enabled, themeIndex, cycle]);
+
+  if (!enabled) return null;
+  const theme = THEMES[themeIndex];
+  const nextTheme = THEMES[(themeIndex + 1) % THEMES.length];
+  const next = () => {
+    setThemeIndex((i) => (i + 1) % THEMES.length);
+    setCycle((c) => c + 1);
+  };
+
+  return (
+    <>
+      <Lexicon avoidRefs={avoidRefs} theme={theme} />
+      <button
+        type="button"
+        className="lex-theme"
+        data-lex-theme={theme}
+        onClick={next}
+        aria-label={t('widgets.lexicon.themes.next', { theme: t(`widgets.lexicon.themes.${nextTheme}`) })}
+      >
+        <span className="lex-theme__dot" aria-hidden="true" />
+        <span className="lex-theme__label">{t('widgets.lexicon.themes.label')}</span>
+        <span key={theme} className="lex-theme__name">
+          {t(`widgets.lexicon.themes.${theme}`)}
+        </span>
+      </button>
+    </>
+  );
 };
 
 export default FloatingWords;
