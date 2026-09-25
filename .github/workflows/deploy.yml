@@ -1,0 +1,41 @@
+# Build the frontend and deploy it to Cloudflare on every push to main.
+name: Deploy website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+# Never run two deploys at once; a newer push supersedes a queued one.
+concurrency:
+  group: deploy-website
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: |
+          corepack enable
+          yarn install --frozen-lockfile --non-interactive
+
+      - name: Build
+        run: yarn build
+
+      - name: Deploy to Cloudflare
+        run: npx --yes wrangler@4 deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

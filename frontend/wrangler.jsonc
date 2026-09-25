@@ -1,6 +1,7 @@
 // Cloudflare deploy for the static frontend: `npx craco build && npx wrangler deploy`
 {
   "name": "alinazelinska",
+  "account_id": "10749d6b4130085c8e0e721f3958854a",
   "compatibility_date": "2026-09-25",
   "workers_dev": true,
   "preview_urls": true,
