@@ -12,14 +12,18 @@ import './FloatingWords.css';
  * dissolve back into letters when their time is up. Hover a word to read it;
  * click to catch it in gold and hear it spoken.
  *
- * The stage is confined to the hero's portrait column (it clips at its edges), so
- * words never cross the headline or copy. Desktop only: below 900px it isn't rendered.
+ * The stage spans the whole hero (below the header) and floats above the portrait, but
+ * words steer around keep-out zones (the copy block and any other text, passed as
+ * `avoidRefs`) so they never cross the headline or text, and nudge apart from each other. They're born in visible free space, slide out along the
+ * nearest edge if they drift into a zone, and dissolve when they drift off-stage (a fresh
+ * word forms elsewhere). Desktop only: below 900px it isn't rendered.
  *
  * Positions are written straight to the DOM from a single rAF loop — React
  * only re-renders when a word is born, dies, or is caught.
  */
 
-const EDGE = 120;
+// Breathing room between a word and the copy it avoids
+const KEEP_OUT_PAD = 36;
 const DESKTOP = '(min-width: 900px)';
 
 const rand = (min, max) => min + Math.random() * (max - min);
@@ -43,13 +47,23 @@ const speak = (text) => {
 
 let nextId = 0;
 
-const Lexicon = () => {
+// Font size by depth: far words ~20px, the nearest ~64px
+const sizeFor = (z) => 20 + z * 44;
+
+// Is a word (centre x,y; half-width; height) overlapping the keep-out rectangle?
+const insideKeepOut = (k, x, y, halfW, height) =>
+  !!k && x + halfW > k.left && x - halfW < k.right && y + height / 2 > k.top && y - height / 2 < k.bottom;
+const insideAny = (zones, x, y, halfW, height) => zones.some((k) => insideKeepOut(k, x, y, halfW, height));
+
+const Lexicon = ({ avoidRefs }) => {
   const { t, i18n } = useTranslation();
   // English visitors get the transliteration too; Ukrainian and Russian readers already read Cyrillic.
   const showTr = i18n.resolvedLanguage === 'en';
   const gloss = (entry) => t(`widgets.lexicon.gloss.${entry.tr}`, { defaultValue: entry.en });
   const stageRef = useRef(null);
   const simRef = useRef(new Map());
+  // Keep-out rectangles (copy, portrait) in stage coordinates, padded
+  const keepOutRef = useRef([]);
   const inUseRef = useRef(new Set());
   const pointerRef = useRef({ x: -9999, y: -9999, px: 0, py: 0, sx: 0, sy: 0, active: false });
   const reducedMotion = useRef(
@@ -77,18 +91,35 @@ const Lexicon = () => {
     return entry;
   }, []);
 
+  // Where a word can be seen: below the faded top edge, above the fold, inside the stage.
+  const visibleBand = () => {
+    const stage = stageRef.current;
+    const w = stage?.clientWidth || window.innerWidth;
+    const h = stage?.clientHeight || window.innerHeight;
+    const top = 70;
+    const bottom = Math.min(h, window.innerHeight - (stage ? stage.getBoundingClientRect().top + window.scrollY : 0)) - 30;
+    return { w, h, top, bottom: Math.max(bottom, top + 100) };
+  };
+
   const makeWord = useCallback(
     (initial = false) => {
-      const stage = stageRef.current;
-      const w = stage?.clientWidth || window.innerWidth;
-      const h = stage?.clientHeight || window.innerHeight;
+      const { w, top, bottom } = visibleBand();
       const entry = pickEntry();
       // Bias toward the far plane so the near, large words stay rare and special.
-      const z = Math.pow(Math.random(), 1.6);
+      const z = Math.pow(Math.random(), 1.4);
       const id = ++nextId;
+      const halfW = (sizeFor(z) * Array.from(entry.uk).length * 0.3) / 2;
+      let x = rand(halfW + 8, w - halfW - 8);
+      let y = rand(top, bottom);
+      for (let tries = 0; tries < 60 && insideAny(keepOutRef.current, x, y, halfW + 12, sizeFor(z) + 12); tries++) {
+        x = rand(halfW + 8, w - halfW - 8);
+        y = rand(top, bottom);
+      }
       simRef.current.set(id, {
-        x: rand(0.04, 0.96) * w,
-        y: rand(0.08, 0.92) * h,
+        x,
+        y,
+        halfW,
+        halfH: sizeFor(z) * 0.6,
         ox: 0,
         oy: 0,
         z,
@@ -111,6 +142,8 @@ const Lexicon = () => {
         })),
       };
     },
+    // visibleBand only reads refs and the window
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [pickEntry]
   );
 
@@ -133,7 +166,7 @@ const Lexicon = () => {
 
   // Seed the stage.
   useEffect(() => {
-    const count = window.innerWidth < 1024 ? 7 : 9;
+    const count = window.innerWidth < 1200 ? 14 : 16;
     setWords(Array.from({ length: count }, () => makeWord(true)));
     const sims = simRef.current;
     const inUse = inUseRef.current;
@@ -142,6 +175,38 @@ const Lexicon = () => {
       inUse.clear();
     };
   }, [makeWord]);
+
+  // Measure the keep-out elements relative to the stage (layout only changes on resize).
+  useEffect(() => {
+    const stage = stageRef.current;
+    // Each entry is a ref or a CSS selector (for elements that don't take a ref)
+    const avoid = (avoidRefs || [])
+      .map((item) => (typeof item === 'string' ? document.querySelector(item) : item.current))
+      .filter(Boolean);
+    if (!stage || !avoid.length) return undefined;
+    const measure = () => {
+      const s = stage.getBoundingClientRect();
+      keepOutRef.current = avoid.map((el) => {
+        const r = el.getBoundingClientRect();
+        return {
+          left: r.left - s.left - KEEP_OUT_PAD,
+          right: r.right - s.left + KEEP_OUT_PAD,
+          top: r.top - s.top - KEEP_OUT_PAD,
+          bottom: r.bottom - s.top + KEEP_OUT_PAD,
+        };
+      });
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(stage);
+    avoid.forEach((el) => ro.observe(el));
+    // The copy, badge and note animate in on load; re-measure once they've settled.
+    const settles = [1200, 3200].map((ms) => setTimeout(measure, ms));
+    return () => {
+      ro.disconnect();
+      settles.forEach(clearTimeout);
+    };
+  }, [avoidRefs]);
 
   // The single animation loop.
   useEffect(() => {
@@ -174,8 +239,42 @@ const Lexicon = () => {
       p.sy += (p.py - p.sy) * 0.05 * dt;
 
       const t = now * 0.00012;
+
+      // Words gently nudge apart so they don't stack into an unreadable pile.
+      const live = [...simRef.current.values()].filter((s) => s.el && s.state !== 'caught' && s.state !== 'dissolving');
+      for (let i = 0; i < live.length; i++) {
+        for (let j = i + 1; j < live.length; j++) {
+          const a = live[i];
+          const b = live[j];
+          const ox = a.halfW + b.halfW + 10 - Math.abs(a.x - b.x);
+          const oy = a.halfH + b.halfH + 6 - Math.abs(a.y - b.y);
+          if (ox > 0 && oy > 0) {
+            // Separate along the axis that needs the smaller move
+            const push = Math.min(0.9, (ox < oy ? ox : oy) * 0.05) * dt;
+            if (ox < oy) {
+              const dir = a.x < b.x ? -1 : 1;
+              a.x += dir * push;
+              b.x -= dir * push;
+            } else {
+              const dir = a.y < b.y ? -1 : 1;
+              a.y += dir * push;
+              b.y -= dir * push;
+            }
+          }
+        }
+      }
+
       simRef.current.forEach((s, id) => {
         if (!s.el) return;
+        // Swap the size estimate for the word's real rendered size (layout ignores letter transforms)
+        if (!s.measured) {
+          const uk = s.el.querySelector('.lex-uk');
+          if (uk && uk.offsetWidth) {
+            s.halfW = uk.offsetWidth / 2;
+            s.halfH = uk.offsetHeight / 2;
+            s.measured = true;
+          }
+        }
 
         if (s.state === 'forming' && now >= s.born) {
           s.state = 'alive';
@@ -194,10 +293,10 @@ const Lexicon = () => {
           s.x += Math.cos(angle) * speed * dt + 0.06 * dt;
           s.y += Math.sin(angle) * speed * 0.7 * dt;
 
-          if (s.x > w + EDGE) s.x = -EDGE;
-          if (s.x < -EDGE) s.x = w + EDGE;
-          if (s.y > h + EDGE * 0.5) s.y = -EDGE * 0.5;
-          if (s.y < -EDGE * 0.5) s.y = h + EDGE * 0.5;
+          // Drifted off-stage: let it dissolve and form a fresh word somewhere visible.
+          if (s.state === 'alive' && (s.x > w + s.halfW || s.x < -s.halfW || s.y > h + s.halfH || s.y < -s.halfH)) {
+            retire(id);
+          }
         }
 
         // Words part around the cursor like reeds around a hand in water.
@@ -218,8 +317,44 @@ const Lexicon = () => {
         s.oy += (ty - s.oy) * 0.08 * dt;
 
         const depth = s.z - 0.35;
-        const px = s.x + s.ox - p.sx * depth * 40;
-        const py = s.y + s.oy - p.sy * depth * 28;
+        let px = s.x + s.ox - p.sx * depth * 40;
+        let py = s.y + s.oy - p.sy * depth * 28;
+
+        // Keep out of the zones, judged on where the word is actually drawn: slide it out by the
+        // nearest exit that doesn't lead into another zone. Drift is slow, so corrections are tiny
+        // and read as the word flowing along the edge.
+        if (s.state !== 'caught') {
+          const zones = keepOutRef.current;
+          for (let pass = 0; pass < 2; pass++) {
+            const k = zones.find((zone) => insideKeepOut(zone, px, py, s.halfW, s.halfH * 2));
+            if (!k) break;
+            const exits = [
+              { d: px + s.halfW - k.left, dx: -1, dy: 0 },
+              { d: k.right - (px - s.halfW), dx: 1, dy: 0 },
+              { d: py + s.halfH - k.top, dx: 0, dy: -1 },
+              { d: k.bottom - (py - s.halfH), dx: 0, dy: 1 },
+            ]
+              .map((e) => ({ ...e, d: e.d + 1 }))
+              .sort((a, b) => a.d - b.d);
+            const band = visibleBand();
+            const ok = (e) => {
+              const nx = px + e.dx * e.d;
+              const ny = py + e.dy * e.d;
+              return (
+                !insideAny(zones.filter((z) => z !== k), nx, ny, s.halfW, s.halfH * 2) &&
+                ny - s.halfH > band.top - 40 &&
+                ny + s.halfH < band.bottom + 40 &&
+                nx - s.halfW > -20 &&
+                nx + s.halfW < band.w + 20
+              );
+            };
+            const exit = exits.find(ok) || exits[0];
+            s.x += exit.dx * exit.d;
+            s.y += exit.dy * exit.d;
+            px += exit.dx * exit.d;
+            py += exit.dy * exit.d;
+          }
+        }
         s.el.style.transform = `translate3d(${px.toFixed(1)}px, ${py.toFixed(1)}px, 0) translate(-50%, -50%)`;
       });
 
@@ -302,8 +437,8 @@ const Lexicon = () => {
       <div ref={stageRef} className="lexicon" aria-hidden="true">
         {words.map((word) => {
           const isCaught = caught.has(word.id);
-          const size = 16 + word.z * 30;
-          const blur = Math.max(0, (0.3 - word.z) * 7);
+          const size = sizeFor(word.z);
+          const blur = Math.max(0, (0.25 - word.z) * 4);
           return (
             <div
               key={word.id}
@@ -315,7 +450,7 @@ const Lexicon = () => {
               style={{
                 '--size': `${size}px`,
                 '--blur': `${blur.toFixed(2)}px`,
-                '--rest': (0.2 + word.z * 0.45).toFixed(2),
+                '--rest': (0.42 + word.z * 0.48).toFixed(2),
                 zIndex: isCaught ? 40 : Math.round(word.z * 20),
               }}
               onPointerEnter={(e) => e.pointerType !== 'touch' && setHover(word.id, true)}
@@ -377,7 +512,7 @@ const Lexicon = () => {
 };
 
 // Rendered only where there's room beside the copy; phones and small tablets skip it entirely.
-const FloatingWords = () => {
+const FloatingWords = ({ avoidRefs }) => {
   const [enabled, setEnabled] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia(DESKTOP);
@@ -386,7 +521,7 @@ const FloatingWords = () => {
     mq.addEventListener?.('change', update);
     return () => mq.removeEventListener?.('change', update);
   }, []);
-  return enabled ? <Lexicon /> : null;
+  return enabled ? <Lexicon avoidRefs={avoidRefs} /> : null;
 };
 
 export default FloatingWords;

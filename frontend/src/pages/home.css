@@ -153,23 +153,25 @@
   color: var(--color-muted);
 }
 
-/* The portrait column; its floating words are clipped to it so they never cross the copy */
+/* Floating words: the whole hero, starting below the fixed header */
+.hero > .lexicon {
+  top: 6.5rem;
+  /* Above the portrait; the copy is kept clear by the keep-out zone */
+  z-index: 20;
+  /* Words fade out as they rise toward the header rather than being cut off */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 5rem);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 5rem);
+}
+
+/* The portrait column */
 .hero__visual {
   position: relative;
   display: grid;
   justify-items: center;
+}
+
+.hero__portrait {
   pointer-events: auto;
-}
-
-.hero__visual .lexicon {
-  inset: -2rem 0;
-}
-
-@media (min-width: 1024px) {
-  /* Reach up into the hero's padding and out to the right edge of the page */
-  .hero__visual .lexicon {
-    inset: -6rem -12rem -4rem 0;
-  }
 }
 
 /* Arched portrait — a nod to Ukrainian church windows */
