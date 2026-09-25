@@ -6,12 +6,40 @@
     "tiktok": "TikTok",
     "faq": "Вопросы",
     "booking": "Записаться на урок",
-    "contact": "Напишите мне"
+    "contact": "Напишите мне",
+    "main": [
+      {
+        "to": "/services/ukrainian-for-russian-speakers",
+        "label": "Украинский для русскоязычных"
+      },
+      {
+        "to": "/services/english-lessons",
+        "label": "Английский"
+      },
+      {
+        "to": "/booking",
+        "label": "Цены"
+      },
+      {
+        "to": "/testimonials",
+        "label": "Отзывы"
+      },
+      {
+        "to": "/learn",
+        "label": "Полезное"
+      },
+      {
+        "to": "/about",
+        "label": "Обо мне"
+      }
+    ]
   },
   "header": {
     "logoLabel": "Алина Зелинская — на главную",
     "toggleTheme": "Сменить тему",
-    "toggleMenu": "Открыть меню"
+    "toggleMenu": "Открыть меню",
+    "cta": "Записаться",
+    "a11y": "Настройки доступности"
   },
   "breadcrumb": {
     "label": "Навигационная цепочка"
@@ -22,22 +50,86 @@
     "mailLead": "Поговорим о",
     "mailAccent": "словах.",
     "navLabel": "Нижнее меню",
-    "columns": {
-      "learn": "Учиться",
-      "create": "Творить",
-      "alina": "Алина"
-    },
-    "links": {
-      "ukrainianLessons": "Уроки украинского",
-      "russianLessons": "Уроки русского",
-      "speakingClub": "Разговорный клуб",
-      "poetryTranslation": "Перевод поэзии",
-      "creativeWriting": "Творческое письмо",
-      "specialProjects": "Особые проекты",
-      "successStories": "Истории успеха"
-    },
     "rights": "Все права защищены",
-    "tagline": "Сделано из слов, кофе и огромной любви к языку ☕"
+    "tagline": "Онлайн-уроки украинского и английского — из Украины для всего мира.",
+    "a11y": "Доступность",
+    "columns": [
+      {
+        "title": "Уроки",
+        "links": [
+          {
+            "to": "/services/ukrainian-for-russian-speakers",
+            "label": "Украинский для русскоязычных"
+          },
+          {
+            "to": "/services/ukrainian-lessons",
+            "label": "Уроки украинского и экзамен"
+          },
+          {
+            "to": "/services/english-lessons",
+            "label": "Английский для взрослых"
+          },
+          {
+            "to": "/services/speaking-club",
+            "label": "Разговорный клуб"
+          },
+          {
+            "to": "/services/writing-translation",
+            "label": "Перевод и тексты"
+          },
+          {
+            "to": "/services/russian-lessons",
+            "label": "Уроки русского"
+          }
+        ]
+      },
+      {
+        "title": "Полезное",
+        "links": [
+          {
+            "to": "/learn",
+            "label": "Статьи"
+          },
+          {
+            "to": "/free-guide",
+            "label": "Бесплатное пособие"
+          },
+          {
+            "to": "/tiktok",
+            "label": "Видео в TikTok"
+          },
+          {
+            "to": "/faq",
+            "label": "Вопросы и ответы"
+          }
+        ]
+      },
+      {
+        "title": "Алина",
+        "links": [
+          {
+            "to": "/about",
+            "label": "Обо мне"
+          },
+          {
+            "to": "/testimonials",
+            "label": "Отзывы"
+          },
+          {
+            "href": "italki",
+            "label": "Проверенные отзывы на italki"
+          },
+          {
+            "to": "/booking",
+            "label": "Цены и запись"
+          },
+          {
+            "to": "/contact",
+            "label": "Контакты"
+          }
+        ]
+      }
+    ]
   },
   "language": {
     "change": "Сменить язык",

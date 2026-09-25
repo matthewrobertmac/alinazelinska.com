@@ -20,6 +20,13 @@ const listFrom = (name) =>
   [...routingSource.match(new RegExp(`export const ${name} = \\[([^\\]]*)\\]`))[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
 const ROUTES = listFrom('ROUTES');
 const LANGS = listFrom('LANGS');
+const NOINDEX = listFrom('NOINDEX');
+// Articles exist only in the languages they were written for
+const articleBlock = routingSource.match(/export const ARTICLES = \{([^}]*)\}/)[1];
+const ARTICLES = [...articleBlock.matchAll(/'([^']+)':\s*\[([^\]]*)\]/g)].map(([, slug, langs]) => ({
+  path: `/learn/${slug}`,
+  langs: [...langs.matchAll(/'([^']+)'/g)].map((m) => m[1]),
+}));
 const SITE_URL = routingSource.match(/SITE_URL = '([^']+)'/)[1];
 const localize = (path, lng) => (lng === 'en' ? path : path === '/' ? `/${lng}` : `/${lng}${path}`);
 const outFile = (url) => join(build, url === '/' ? 'index.html' : `${url.slice(1)}.html`);
@@ -52,7 +59,8 @@ await context.route('**/*', (route) =>
 );
 
 const pages = [];
-for (const lng of LANGS) for (const path of ROUTES) pages.push({ lng, path, url: localize(path, lng) });
+for (const lng of LANGS) for (const path of ROUTES) pages.push({ lng, path, url: localize(path, lng), langs: LANGS });
+for (const { path, langs } of ARTICLES) for (const lng of langs) pages.push({ lng, path, url: localize(path, lng), langs });
 
 const render = async ({ url }) => {
   const page = await context.newPage();
@@ -105,12 +113,13 @@ for (const { url, html } of results) {
 
 // Sitemap: every page in every language, each cross-linked to its translations
 const today = new Date().toISOString().slice(0, 10);
-const alternates = (path) =>
-  [...LANGS.map((l) => [l, localize(path, l)]), ['x-default', path]]
+const alternates = (path, langs) =>
+  [...langs.map((l) => [l, localize(path, l)]), ['x-default', localize(path, langs.includes('en') ? 'en' : langs[0])]]
     .map(([l, u]) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${SITE_URL}${u === '/' ? '/' : u}"/>`)
     .join('\n');
 const urls = pages
-  .map(({ path, url }) => `  <url>\n    <loc>${SITE_URL}${url === '/' ? '/' : url}</loc>\n    <lastmod>${today}</lastmod>\n${alternates(path)}\n  </url>`)
+  .filter(({ path }) => !NOINDEX.includes(path))
+  .map(({ path, url, langs }) => `  <url>\n    <loc>${SITE_URL}${url === '/' ? '/' : url}</loc>\n    <lastmod>${today}</lastmod>\n${alternates(path, langs)}\n  </url>`)
   .join('\n');
 await writeFile(
   join(build, 'sitemap.xml'),
@@ -118,4 +127,4 @@ await writeFile(
 );
 
 for (const { url, title } of results.sort((a, b) => a.url.localeCompare(b.url))) console.log(`  ${url.padEnd(34)} ${title}`);
-console.log(`Prerendered ${results.length} pages; sitemap has ${pages.length} URLs.`);
+console.log(`Prerendered ${results.length} pages; sitemap has ${pages.filter(({ path }) => !NOINDEX.includes(path)).length} URLs.`);

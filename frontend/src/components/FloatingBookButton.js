@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { FiCalendar, FiX, FiArrowRight } from 'react-icons/fi';
 import './FloatingBookButton.css';
 import { ease } from '../utils/motion';
+import { PRICES } from '../data/pricing';
 
 const FloatingBookButton = () => {
   const { t } = useTranslation();
@@ -60,9 +61,9 @@ const FloatingBookButton = () => {
           className="float-book"
         >
           {/* Main button */}
-          <Link to="/booking" className="float-book__cta" data-testid="floating-book-btn">
+          <Link to="/booking#package-trial" className="float-book__cta" data-testid="floating-book-btn">
             <FiCalendar className="float-book__icon" aria-hidden="true" />
-            <span>{t('widgets.floatingBook.cta')}</span>
+            <span>{t('widgets.floatingBook.cta', { price: `€${PRICES.trial.price}` })}</span>
             <FiArrowRight className="float-book__arrow" aria-hidden="true" />
           </Link>
 

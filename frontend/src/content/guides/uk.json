@@ -1,0 +1,141 @@
+{
+  "file": "20-english-mistakes-ukrainians-make.pdf",
+  "title": "20 помилок в англійській, які роблять українці",
+  "subtitle": "…і як їх виправити. Посібник для друку з поясненнями українською від викладачки з України.",
+  "intro": [
+    "Ці помилки я чую найчастіше, коли українці говорять англійською. Вони не означають, що з вашою англійською щось не так: просто українська граматика «підказує» інакше, і мозок переносить знайомі схеми в нову мову.",
+    "Прочитайте кожен приклад уголос у правильному варіанті. Коли фраза звучить для вас природно кілька разів поспіль, стара звичка поступово відходить."
+  ],
+  "labels": {
+    "a": "Не так",
+    "b": "Так"
+  },
+  "sections": [
+    {
+      "h2": "Часи та дієслова",
+      "intro": "Англійський час залежить не лише від того, коли відбулася дія.",
+      "items": [
+        {
+          "a": "I am agree.",
+          "b": "I agree.",
+          "note": "Agree — це вже дієслово, тому am не потрібне. Так само: I don’t agree."
+        },
+        {
+          "a": "I live here since 2020.",
+          "b": "I have lived here since 2020.",
+          "note": "Дія почалася в минулому й триває досі — це Present Perfect (або I’ve been living here since 2020)."
+        },
+        {
+          "a": "Yesterday I have seen him.",
+          "b": "I saw him yesterday.",
+          "note": "Коли названо конкретний час у минулому (yesterday, in 2019, last week), потрібен Past Simple."
+        },
+        {
+          "a": "When I will come, I will call you.",
+          "b": "When I come, I’ll call you.",
+          "note": "Після when, if, as soon as, before про майбутнє вживаємо Present Simple, без will."
+        },
+        {
+          "a": "I am knowing the answer.",
+          "b": "I know the answer.",
+          "note": "Дієслова стану (know, like, want, understand) зазвичай не вживаються в Continuous."
+        }
+      ]
+    },
+    {
+      "h2": "Артиклі, число й займенники",
+      "items": [
+        {
+          "a": "I am teacher.",
+          "b": "I am a teacher.",
+          "note": "Називаючи професію в однині, ставимо a/an. В українській артиклів немає, тому їх легко пропустити."
+        },
+        {
+          "a": "The life is beautiful.",
+          "b": "Life is beautiful.",
+          "note": "Про щось загальне й абстрактне (life, love, music) говоримо без the."
+        },
+        {
+          "a": "I like this film. He is very interesting.",
+          "b": "I like this film. It is very interesting.",
+          "note": "Предмети й явища — це it, навіть якщо українською слово чоловічого чи жіночого роду."
+        },
+        {
+          "a": "Can you give me an advice?",
+          "b": "Can you give me some advice?",
+          "note": "Advice, information, news — незлічувані: без a/an і без -s. Одна порада — a piece of advice."
+        },
+        {
+          "a": "The news are good.",
+          "b": "The news is good.",
+          "note": "News — однина, хоч і закінчується на -s."
+        }
+      ]
+    },
+    {
+      "h2": "Прийменники та порядок слів",
+      "items": [
+        {
+          "a": "It depends from you.",
+          "b": "It depends on you.",
+          "note": "Українське «залежить від» перекладається як depend on."
+        },
+        {
+          "a": "I’m married with Oksana.",
+          "b": "I’m married to Oksana.",
+          "note": "Be married to — «бути одруженим з»."
+        },
+        {
+          "a": "I listen music.",
+          "b": "I listen to music.",
+          "note": "Listen завжди потребує to перед тим, що слухаєте."
+        },
+        {
+          "a": "Where you work?",
+          "b": "Where do you work?",
+          "note": "У питанні потрібне допоміжне дієслово (do, does, did) перед підметом."
+        },
+        {
+          "a": "I don’t know where is the station.",
+          "b": "I don’t know where the station is.",
+          "note": "Усередині речення питання «розгортається» у звичайний порядок: підмет, потім дієслово."
+        }
+      ]
+    },
+    {
+      "h2": "Кальки та слова-пастки",
+      "intro": "Слова, які звучать знайомо, але означають інше.",
+      "items": [
+        {
+          "a": "Can I make a photo?",
+          "b": "Can I take a photo?",
+          "note": "Фото англійською take, а не make."
+        },
+        {
+          "a": "How is it in English?",
+          "b": "How do you say it in English?",
+          "note": "Це калька з «Як це англійською?». Ще варіант: What’s the English for…?"
+        },
+        {
+          "a": "I went to the magazine to buy bread.",
+          "b": "I went to the shop to buy bread.",
+          "note": "Magazine — це журнал. Магазин — shop або store."
+        },
+        {
+          "a": "She is very sympathetic, all the boys like her.",
+          "b": "She is very attractive, all the boys like her.",
+          "note": "Sympathetic означає «співчутливий». «Симпатична» — attractive, pretty або nice."
+        },
+        {
+          "a": "He is very accurate: his desk is always clean.",
+          "b": "He is very tidy: his desk is always clean.",
+          "note": "Accurate — «точний». «Акуратний» у значенні охайний — tidy або neat."
+        }
+      ]
+    }
+  ],
+  "outro": {
+    "title": "Помилки зникають у розмові",
+    "text": "Знати правило — половина справи; друга половина — багато разів сказати правильно, поки хтось уважно слухає. На пробному уроці я послухаю вашу англійську, покажу ваші власні «топ-помилки» і складу план, як їх позбутися."
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "title": "Ukrainian vs Russian: The Differences That Matter",
+  "description": "Ukrainian vs Russian, explained by a native Ukrainian tutor: alphabet, pronunciation, everyday words, grammar and false friends, with real examples.",
+  "h1": "Ukrainian vs Russian: the differences that actually matter",
+  "lede": "Ukrainian and Russian share an alphabet and a long, complicated history, but they are separate languages. Here are the Ukrainian vs Russian differences that really matter — letters, sounds, everyday words, grammar and false friends — whether you're starting Ukrainian from scratch or switching from Russian.",
+  "datePublished": "2026-09-25",
+  "readingMinutes": 7,
+  "service": "/services/ukrainian-for-russian-speakers",
+  "exampleLabels": { "a": "Russian", "b": "Ukrainian" },
+  "sections": [
+    {
+      "h2": "Are Ukrainian and Russian the same language?",
+      "blocks": [
+        { "p": "No. Ukrainian, Russian and Belarusian all belong to the East Slavic group, but they developed separately for centuries, each with its own standard language and its own literature. Ukrainian vocabulary has a lot in common with Belarusian and, in many places, with Polish — often more than with Russian." },
+        { "p": "In practice, a Russian speaker can guess many written Ukrainian words and follow slow, simple speech. Natural conversation is another story: everyday words are different, the sounds are different, and a whole set of words look familiar but mean something else. As a native Ukrainian who also teaches Russian, I hear the difference in every sentence." }
+      ]
+    },
+    {
+      "h2": "The alphabet: same Cyrillic, different letters",
+      "blocks": [
+        { "p": "Both languages use Cyrillic, but not the same set of letters." },
+        { "list": [
+          "**Only in Ukrainian:** і, ї, є, ґ — and the apostrophe, which works as a separator.",
+          "**Only in Russian:** ы, э, ъ, ё.",
+          "**И looks the same but sounds different.** In Russian it's a clear [i]; in Ukrainian it's a shorter, more relaxed sound, closer to the *i* in *sit*. Ukrainian writes the clear [i] with *і*.",
+          "**Е is different too.** Ukrainian *е* is a plain [e] as in *bed*; to get the Russian-style [ye], Ukrainian uses *є*."
+        ] },
+        { "example": { "a": "семья", "b": "сім'я", "note": "Family — Ukrainian uses an apostrophe where Russian uses ь." } },
+        { "example": { "a": "пьют", "b": "п'ють", "note": "They drink — the apostrophe again, plus a different vowel." } },
+        { "example": { "a": "дети", "b": "ді́ти", "note": "Children — Ukrainian і where Russian has е." } }
+      ]
+    },
+    {
+      "h2": "Pronunciation: why Ukrainian sounds so different",
+      "blocks": [
+        { "h3": "Г is a soft [h]" },
+        { "p": "Russian *г* is a hard [g]. Ukrainian *г* is a voiced, breathy [h]. For the hard [g], Ukrainian has a separate letter, *ґ*." },
+        { "example": { "a": "голова (galavá)", "b": "голова́ (holová)", "note": "Head — same spelling, a different first sound, and every о pronounced as o." } },
+        { "h3": "No akanye: o stays o" },
+        { "p": "In Russian, an unstressed *о* is pronounced close to [a]. Ukrainian keeps every vowel clear, stressed or not. This is one of the first things Ukrainians notice when someone speaks Ukrainian with a Russian accent." },
+        { "example": { "a": "молоко (malakó)", "b": "молоко́ (molokó)", "note": "Milk — Ukrainian pronounces all three o's." } },
+        { "h3": "Final consonants stay voiced" },
+        { "p": "Russian devoices voiced consonants at the end of a word; standard Ukrainian doesn't." },
+        { "example": { "a": "дуб (dup)", "b": "дуб (dub)", "note": "Oak — a clear [b] at the end in Ukrainian." } },
+        { "h3": "В can sound like a short [w]" },
+        { "example": { "a": "волк", "b": "вовк", "note": "Wolf — at the end of a syllable Ukrainian в sounds like a short English w, never like [f]." } }
+      ]
+    },
+    {
+      "h2": "Vocabulary: shared roots, different everyday words",
+      "blocks": [
+        { "p": "The most common words are often completely different. These are the ones you'll use in your first hour:" },
+        { "example": { "a": "спасибо", "b": "дя́кую", "note": "Thank you." } },
+        { "example": { "a": "да", "b": "так", "note": "Yes." } },
+        { "example": { "a": "сейчас", "b": "за́раз", "note": "Now." } },
+        { "example": { "a": "понимать", "b": "розумі́ти", "note": "To understand." } },
+        { "example": { "a": "хорошо", "b": "до́бре", "note": "Good, fine, OK." } },
+        { "example": { "a": "неделя", "b": "ти́ждень", "note": "Week." } },
+        { "p": "Even the months are different. Ukrainian uses old Slavic names — *сі́чень* (January), *лю́тий* (February), *бе́резень* (March) — while Russian uses Latin-based ones: январь, февраль, март." }
+      ]
+    },
+    {
+      "h2": "Grammar: the differences you'll notice first",
+      "blocks": [
+        { "h3": "The vocative case is alive in Ukrainian" },
+        { "p": "When Ukrainians address someone, the name or title changes form. Russian lost this case in the standard language." },
+        { "example": { "a": "Андрей, привет!", "b": "Андрі́ю, приві́т!", "note": "Hi, Andrii! — Андрій becomes Андрію when you call him." } },
+        { "example": { "a": "Друг, помоги!", "b": "Дру́же, допоможи́!", "note": "Friend, help! — друг becomes друже." } },
+        { "h3": "A one-word future tense" },
+        { "p": "Russian builds the imperfective future only with *буду*. Ukrainian has that too, but it also has a one-word form made from the infinitive plus an ending." },
+        { "example": { "a": "Я буду работать завтра.", "b": "Я працюва́тиму за́втра.", "note": "I'll be working tomorrow. Я буду працювати is also correct." } },
+        { "h3": "Past tense ends in -в" },
+        { "example": { "a": "он читал", "b": "він чита́в", "note": "He was reading — the masculine past tense ends in -в, not -л." } },
+        { "h3": "“I have” is often мати" },
+        { "example": { "a": "У меня есть вопрос.", "b": "Я ма́ю пита́ння.", "note": "I have a question. У мене є питання is also possible, but мати is far more common in Ukrainian than иметь in Russian." } },
+        { "h3": "Some nouns change gender" },
+        { "example": { "a": "сильная боль", "b": "си́льний біль", "note": "Strong pain — feminine in Russian, masculine in Ukrainian." } },
+        { "h3": "The little -ся can wander" },
+        { "example": { "a": "Как дела?", "b": "Як ся ма́єш?", "note": "How are you? In this common informal greeting ся stands before the verb. In standard writing it attaches to the verb: я вчу́ся (I study)." } }
+      ]
+    },
+    {
+      "h2": "False friends between Ukrainian and Russian",
+      "blocks": [
+        { "p": "These are the words that cause the funniest — and most confusing — mistakes. They look or sound almost the same, but mean something different." },
+        { "example": { "a": "неделя — week", "b": "неді́ля — Sunday", "note": "A Ukrainian week is тиждень." } },
+        { "example": { "a": "родина — homeland", "b": "роди́на — family", "note": "Homeland in Ukrainian is батьківщина." } },
+        { "example": { "a": "час — hour", "b": "час — time", "note": "An hour, and “o'clock”, is година." } },
+        { "example": { "a": "луна — moon", "b": "луна́ — echo", "note": "The moon in Ukrainian is мі́сяць, which also means month." } },
+        { "example": { "a": "питать — to nourish", "b": "пита́ти — to ask", "note": "Hence питання, a question." } },
+        { "example": { "a": "злодей — villain", "b": "зло́дій — thief", "note": "Same root, a much more everyday meaning in Ukrainian." } },
+        { "example": { "a": "лук — onion", "b": "лук — bow (the weapon)", "note": "An onion is цибу́ля." } },
+        { "example": { "a": "кит — whale", "b": "кіт — cat", "note": "Ukrainian кіт looks like Russian кит. A whale is кит in both languages." } }
+      ]
+    },
+    {
+      "h2": "Can a Russian speaker understand Ukrainian?",
+      "blocks": [
+        { "p": "Partly. Written Ukrainian on familiar topics is often readable, and slow, careful speech can be followed. But fast everyday conversation, jokes and the news are hard without study, because the most frequent words are the ones that differ most — and false friends make you confidently wrong." },
+        { "p": "It rarely works the other way round in the same way: most Ukrainians understand Russian well, because for much of the twentieth century Russian dominated schools, media and big cities in Ukraine. That's history, not proof that the languages are the same." }
+      ]
+    },
+    {
+      "h2": "Why the difference matters to Ukrainians",
+      "blocks": [
+        { "p": "For Ukrainians, language is closely tied to identity. In the nineteenth century the Russian Empire restricted Ukrainian publishing with the Valuev Circular (1863) and the Ems Decree (1876), and Ukrainian was pushed aside again in Soviet times. Since 2022, many Ukrainians who grew up speaking Russian have switched to Ukrainian in everyday life." },
+        { "p": "So if you're learning for Ukrainian friends, family or work, speaking Ukrainian — even imperfectly — means a lot. Calling Ukrainian a dialect of Russian is simply wrong, and it hurts." },
+        { "tip": "If you already speak Russian, don't lean on it. Learn the differences deliberately — sounds, everyday words, false friends — and practise until the Ukrainian forms come first. That's exactly how I build my [Ukrainian for Russian speakers](/services/ukrainian-for-russian-speakers) lessons." }
+      ]
+    }
+  ],
+  "faq": [
+    { "q": "Is Ukrainian a dialect of Russian?", "a": "No. Ukrainian is a separate East Slavic language with its own standard, grammar, vocabulary and literature. It shares a lot with Russian, but also with Belarusian and Polish." },
+    { "q": "Is Ukrainian easier to learn if I speak Russian?", "a": "Yes, you start with a big advantage: the alphabet, many roots and the logic of cases are familiar. The challenge is unlearning Russian habits — pronunciation, everyday words and false friends — so they don't slip into your Ukrainian." },
+    { "q": "Should I learn Ukrainian or Russian first?", "a": "Learn the language you actually need. If your goal is Ukraine, Ukrainian family or Ukrainian friends, start with Ukrainian directly; learning Russian first only gives you habits to unlearn." },
+    { "q": "Do Ukrainian and Russian use the same alphabet?", "a": "Both use Cyrillic, but not the same letters. Ukrainian has і, ї, є, ґ and the apostrophe; Russian has ы, э, ъ and ё. Some shared letters, like и and е, are pronounced differently." }
+  ],
+  "related": ["how-to-learn-ukrainian", "ukrainian-words-without-english-equivalent"]
+}

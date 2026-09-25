@@ -1,44 +1,28 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Link } from '../i18n/routing';
 import { useTranslation } from 'react-i18next';
-import { AnimatePresence, motion } from 'framer-motion';
-import { FiVolume2, FiX } from 'react-icons/fi';
+import { FiVolume2 } from 'react-icons/fi';
 import { floatingWords } from '../data/content';
 import './FloatingWords.css';
-import { ease } from '../utils/motion';
 
 /*
  * The Living Lexicon
  *
- * Ukrainian words condense out of scattered letters, drift through the hero at
+ * Ukrainian words condense out of scattered letters, drift around the portrait at
  * different depths (parallax + depth-of-field), part around the cursor, and
  * dissolve back into letters when their time is up. Hover a word to read it;
- * click to catch it in gold, hear it spoken, and keep it in your word jar.
+ * click to catch it in gold and hear it spoken.
+ *
+ * The stage is confined to the hero's portrait column (it clips at its edges), so
+ * words never cross the headline or copy. Desktop only: below 900px it isn't rendered.
  *
  * Positions are written straight to the DOM from a single rAF loop — React
  * only re-renders when a word is born, dies, or is caught.
  */
 
-const JAR_KEY = 'alina_word_jar';
-const EDGE = 160;
+const EDGE = 120;
+const DESKTOP = '(min-width: 900px)';
 
 const rand = (min, max) => min + Math.random() * (max - min);
-
-const readJar = () => {
-  try {
-    return JSON.parse(localStorage.getItem(JAR_KEY)) || [];
-  } catch {
-    return [];
-  }
-};
-
-const writeJar = (jar) => {
-  try {
-    localStorage.setItem(JAR_KEY, JSON.stringify(jar));
-  } catch {
-    // Storage unavailable — the jar just won't persist.
-  }
-};
 
 const findUkrainianVoice = () => {
   if (typeof window === 'undefined' || !window.speechSynthesis) return null;
@@ -59,7 +43,7 @@ const speak = (text) => {
 
 let nextId = 0;
 
-const FloatingWords = () => {
+const Lexicon = () => {
   const { t, i18n } = useTranslation();
   // English visitors get the transliteration too; Ukrainian and Russian readers already read Cyrillic.
   const showTr = i18n.resolvedLanguage === 'en';
@@ -74,10 +58,7 @@ const FloatingWords = () => {
 
   const [words, setWords] = useState([]);
   const [caught, setCaught] = useState(() => new Set());
-  const [jar, setJar] = useState(readJar);
-  const [jarOpen, setJarOpen] = useState(false);
   const [hasVoice, setHasVoice] = useState(false);
-  const [hintVisible, setHintVisible] = useState(true);
   const [blooms, setBlooms] = useState([]);
 
   useEffect(() => {
@@ -152,7 +133,7 @@ const FloatingWords = () => {
 
   // Seed the stage.
   useEffect(() => {
-    const count = window.innerWidth < 640 ? 8 : window.innerWidth < 1024 ? 11 : 15;
+    const count = window.innerWidth < 1024 ? 7 : 9;
     setWords(Array.from({ length: count }, () => makeWord(true)));
     const sims = simRef.current;
     const inUse = inUseRef.current;
@@ -296,7 +277,6 @@ const FloatingWords = () => {
     event.stopPropagation();
     const s = simRef.current.get(word.id);
     if (!s) return;
-    setHintVisible(false);
 
     if (s.state === 'caught') {
       s.state = 'alive';
@@ -315,26 +295,14 @@ const FloatingWords = () => {
     addBloom(event.clientX - r.left, event.clientY - r.top);
     setCaught((prev) => new Set(prev).add(word.id));
     if (hasVoice) speak(word.entry.uk);
-    setJar((prev) => {
-      if (prev.some((e) => e.uk === word.entry.uk)) return prev;
-      const next = [...prev, word.entry];
-      writeJar(next);
-      return next;
-    });
-  };
-
-  const clearJar = () => {
-    setJar([]);
-    writeJar([]);
-    setJarOpen(false);
   };
 
   return (
     <>
-      <div ref={stageRef} className="lexicon">
+      <div ref={stageRef} className="lexicon" aria-hidden="true">
         {words.map((word) => {
           const isCaught = caught.has(word.id);
-          const size = 17 + word.z * 38;
+          const size = 16 + word.z * 30;
           const blur = Math.max(0, (0.3 - word.z) * 7);
           return (
             <div
@@ -404,81 +372,21 @@ const FloatingWords = () => {
         ))}
       </div>
 
-      <AnimatePresence>
-        {hintVisible && (
-          <motion.p
-            className="lex-hint"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
-            transition={{ delay: 2.4, duration: 0.8 }}
-          >
-            <span className="lex-hint__dot" />
-            <span className="hidden sm:inline">{t('widgets.lexicon.hintDesktop')}</span>
-            <span className="sm:hidden">{t('widgets.lexicon.hintMobile')}</span>
-          </motion.p>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {jar.length > 0 && (
-          <motion.div
-            className="lex-jar"
-            initial={{ opacity: 0, y: 16, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16 }}
-            transition={{ duration: 0.6, ease }}
-          >
-            <button type="button" className="lex-jar__toggle" onClick={() => setJarOpen((o) => !o)} aria-expanded={jarOpen}>
-              <span className="lex-jar__count">{jar.length}</span>
-              <span>{t('widgets.lexicon.jar', { count: jar.length })}</span>
-            </button>
-            <AnimatePresence>
-              {jarOpen && (
-                <motion.div
-                  className="lex-jar__panel"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.35 }}
-                >
-                  <div className="lex-jar__head">
-                    <span className="eyebrow">Твій словник</span>
-                    <button type="button" onClick={() => setJarOpen(false)} aria-label={t('widgets.lexicon.closeJar')}>
-                      <FiX />
-                    </button>
-                  </div>
-                  <ul>
-                    {jar.map((entry) => (
-                      <li key={entry.uk}>
-                        <button type="button" onClick={() => speak(entry.uk)} disabled={!hasVoice} lang="uk">
-                          {entry.uk}
-                        </button>
-                        <span>
-                          {showTr && (
-                            <>
-                              <em>{entry.tr}</em> —{' '}
-                            </>
-                          )}
-                          {gloss(entry)}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="lex-jar__foot">
-                    <Link to="/booking">{t('widgets.lexicon.learnAloud')}</Link>
-                    <button type="button" onClick={clearJar}>
-                      {t('widgets.lexicon.emptyJar')}
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
+};
+
+// Rendered only where there's room beside the copy; phones and small tablets skip it entirely.
+const FloatingWords = () => {
+  const [enabled, setEnabled] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(DESKTOP);
+    const update = () => setEnabled(mq.matches);
+    update();
+    mq.addEventListener?.('change', update);
+    return () => mq.removeEventListener?.('change', update);
+  }, []);
+  return enabled ? <Lexicon /> : null;
 };
 
 export default FloatingWords;

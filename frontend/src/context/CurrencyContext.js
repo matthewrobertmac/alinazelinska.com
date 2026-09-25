@@ -2,11 +2,13 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const CurrencyContext = createContext(null);
 
-// Base prices in EUR
+import { PRICES } from '../data/pricing';
+
+// Base prices in EUR (from data/pricing.js)
 const BASE_PRICES_EUR = {
-  trial: 15,      // 30-minute trial
-  standard: 30,   // 60-minute lesson
-  intensive: 120, // 5 x 60-minute lessons
+  trial: PRICES.trial.price,
+  standard: PRICES.standard.price,
+  intensive: PRICES.intensive.price,
 };
 
 // Exchange rates (EUR as base)
@@ -37,57 +39,22 @@ const CURRENCY_INFO = {
   CNY: { symbol: '¥', name: 'Chinese Yuan', locale: 'zh-CN' },
 };
 
-// Country to currency mapping
-const COUNTRY_CURRENCY = {
-  US: 'USD', CA: 'CAD', GB: 'GBP', AU: 'AUD',
-  DE: 'EUR', FR: 'EUR', IT: 'EUR', ES: 'EUR', NL: 'EUR', BE: 'EUR', AT: 'EUR', PT: 'EUR', IE: 'EUR', FI: 'EUR',
-  UA: 'UAH', PL: 'PLN', CH: 'CHF', JP: 'JPY', CN: 'CNY',
-};
-
 export const CurrencyProvider = ({ children }) => {
   const [currency, setCurrency] = useState('EUR');
-  const [country, setCountry] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     detectUserCurrency();
   }, []);
 
-  const detectUserCurrency = async () => {
-    // Check localStorage first
-    const savedCurrency = localStorage.getItem('preferred_currency');
-    if (savedCurrency && CURRENCY_INFO[savedCurrency]) {
-      setCurrency(savedCurrency);
-      setLoading(false);
-      return;
-    }
-
-    // Try to detect from browser/geolocation
+  // PayPal charges in EUR, so EUR is shown by default. A visitor can pick another currency to see an
+  // approximate conversion; no IP lookup, so no third-party request.
+  const detectUserCurrency = () => {
     try {
-      // Use free IP geolocation API
-      const response = await fetch('https://ipapi.co/json/');
-      if (response.ok) {
-        const data = await response.json();
-        const detectedCountry = data.country_code;
-        setCountry(detectedCountry);
-        
-        const detectedCurrency = COUNTRY_CURRENCY[detectedCountry] || 'EUR';
-        setCurrency(detectedCurrency);
-        localStorage.setItem('preferred_currency', detectedCurrency);
-      }
-    } catch (error) {
-      console.log('Could not detect location, defaulting to EUR');
-      // Fallback: try to detect from browser language
-      const browserLang = navigator.language || navigator.userLanguage;
-      if (browserLang.startsWith('en-US')) setCurrency('USD');
-      else if (browserLang.startsWith('en-GB')) setCurrency('GBP');
-      else if (browserLang.startsWith('uk')) setCurrency('UAH');
-      else if (browserLang.startsWith('pl')) setCurrency('PLN');
-      else if (browserLang.startsWith('ja')) setCurrency('JPY');
-      else if (browserLang.startsWith('zh')) setCurrency('CNY');
-    } finally {
-      setLoading(false);
-    }
+      const savedCurrency = localStorage.getItem('preferred_currency');
+      if (savedCurrency && CURRENCY_INFO[savedCurrency]) setCurrency(savedCurrency);
+    } catch {}
+    setLoading(false);
   };
 
   const changeCurrency = (newCurrency) => {
@@ -107,7 +74,8 @@ export const CurrencyProvider = ({ children }) => {
     const info = CURRENCY_INFO[currency];
     
     // Round to 2 decimal places, or 0 for JPY
-    const decimals = currency === 'JPY' ? 0 : 2;
+    // Whole numbers: EUR prices are round, and other currencies are approximate anyway
+    const decimals = 0;
     const rounded = Math.round(converted * Math.pow(10, decimals)) / Math.pow(10, decimals);
     
     return new Intl.NumberFormat(info.locale, {
@@ -142,7 +110,7 @@ export const CurrencyProvider = ({ children }) => {
     <CurrencyContext.Provider
       value={{
         currency,
-        country,
+        isApproximate: currency !== 'EUR',
         loading,
         changeCurrency,
         convertPrice,

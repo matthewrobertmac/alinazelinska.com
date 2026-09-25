@@ -1,127 +1,82 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from '../i18n/routing';
 import { useTranslation, Trans } from 'react-i18next';
-import { motion, AnimatePresence } from 'framer-motion';
-import FloatingWords from '../components/FloatingWords';
-import QuizWidget from '../components/QuizWidget';
-import SEOHead from '../components/SEOHead';
-import { introdata, floatingWords, contactInfo } from '../data/content';
-import { personSchema, organizationSchema, aggregateRatingSchema } from '../utils/schemas';
+import { motion } from 'framer-motion';
 import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
-import { FaTiktok } from 'react-icons/fa';
-import { clean } from '../utils/text';
+import FloatingWords from '../components/FloatingWords';
+import SEOHead from '../components/SEOHead';
+import PriceTable from '../components/blocks/PriceTable';
+import ReviewStrip from '../components/blocks/ReviewStrip';
+import VideoIntro from '../components/blocks/VideoIntro';
+import GuideCTA from '../components/blocks/GuideCTA';
+import { introdata } from '../data/content';
+import { PRICES, perLesson } from '../data/pricing';
+import { personSchema, websiteSchema } from '../utils/schemas';
+import { ease, reveal, stagger } from '../utils/motion';
 import './home.css';
-import { ease, reveal } from '../utils/motion';
-
-// Indices into reviews.items (same order as the testimonials page)
-const FEATURED = [0, 8, 9];
 
 const asArray = (value) => (Array.isArray(value) ? value : []);
+const eur = (value) => `€${value}`;
 
-const em = { em: <em /> };
+// The cheapest honest "from" price for each kind of offer (see data/pricing.js)
+const FROM = {
+  lesson: Math.min(perLesson('standard'), perLesson('intensive')),
+  club: perLesson('speakingClub'),
+};
+
+const TRIAL = { price: eur(PRICES.trial.price), minutes: PRICES.trial.minutes };
+
 const emItalic = { em: <em className="display-italic" /> };
 
-const RotatingLine = ({ lines }) => {
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setIndex((i) => (i + 1) % lines.length), 3800);
-    return () => clearInterval(id);
-  }, [lines.length]);
-  return (
-    <span className="rotating-line" aria-live="polite">
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={index}
-          initial={{ opacity: 0, y: 14, filter: 'blur(8px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, y: -14, filter: 'blur(8px)' }}
-          transition={{ duration: 0.7, ease }}
-          className="block"
-        >
-          {lines[index]}
-        </motion.span>
-      </AnimatePresence>
+// Headline strings mark their accent as *words*
+const emphasise = (text) =>
+  String(text)
+    .split(/\*(.+?)\*/)
+    .map((part, i) => (i % 2 ? <em key={i}>{part}</em> : part));
+
+const CircleBadge = ({ text }) => (
+  <div className="circle-badge" aria-hidden="true">
+    <svg viewBox="0 0 200 200" className="spin-slow">
+      <defs>
+        <path id="badge-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
+      </defs>
+      <text>
+        <textPath href="#badge-circle" startOffset="0">
+          {text}
+        </textPath>
+      </text>
+    </svg>
+    <span className="circle-badge__core">
+      5.0<small>★</small>
     </span>
-  );
-};
+  </div>
+);
 
-const CircleBadge = ({ text }) => {
-  return (
-    <div className="circle-badge" aria-hidden="true">
-      <svg viewBox="0 0 200 200" className="spin-slow">
-        <defs>
-          <path id="badge-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
-        </defs>
-        <text>
-          <textPath href="#badge-circle" startOffset="0">
-            {text}
-          </textPath>
-        </text>
-      </svg>
-      <span className="circle-badge__core">5.0<small>★</small></span>
-    </div>
-  );
-};
-
-// The hero's last line glows: gradient on the words, trailing punctuation left plain.
-const GradientLine = ({ text }) => {
-  const [, words, punct] = text.match(/^(.*?)([.!?…]*)$/s);
-  return (
-    <>
-      <span className="gradient-text">{words}</span>
-      {punct}
-    </>
-  );
-};
-
+// Each language leads with its own audience's offer; the order and copy live in home.json
 const Home = () => {
   const { t, i18n } = useTranslation();
-  const [quote, setQuote] = useState(0);
+  const lng = i18n.resolvedLanguage;
 
-  const reviews = asArray(t('reviews.items', { returnObjects: true }));
-  const featuredQuotes = FEATURED.map((i) => reviews[i]).filter(Boolean);
   const stats = asArray(t('home.stats', { returnObjects: true }));
   const heroLines = asArray(t('home.hero.title', { returnObjects: true }));
-  const rotatingLines = asArray(t('home.intro.animated', { returnObjects: true }));
-  const teachItems = asArray(t('home.whoITeach.items', { returnObjects: true }));
-  const gloss = (w) => t(`widgets.lexicon.gloss.${w.tr}`, { defaultValue: w.en });
-  const showTransliteration = i18n.resolvedLanguage === 'en';
-  const quoteCount = featuredQuotes.length;
-  const current = featuredQuotes[quote % Math.max(quoteCount, 1)];
-
-  useEffect(() => {
-    if (quoteCount < 2) return undefined;
-    const id = setInterval(() => setQuote((q) => (q + 1) % quoteCount), 7000);
-    return () => clearInterval(id);
-  }, [quoteCount]);
-
-  const offerings = [
-    { key: 'conversationalUkrainian', to: '/services/ukrainian-lessons', tag: 'Українська' },
-    { key: 'professionalUkrainian', to: '/services/ukrainian-lessons', tag: 'Ділова мова' },
-    { key: 'examPrep', to: '/services/ukrainian-lessons', tag: 'Структура' },
-    { key: 'russianLessons', to: '/services/russian-lessons', tag: 'Русский' },
-    { key: 'poetryTranslation', to: '/services/poetry-translation', tag: 'Поезія' },
-    { key: 'creativeWriting', to: '/services/creative-writing', tag: 'Слово' },
-  ];
-
-  const marqueeWords = floatingWords.slice(0, 18);
+  const offers = asArray(t('home.offers.items', { returnObjects: true }));
+  const reviewIndices = asArray(t('home.reviews.indices', { returnObjects: true }));
+  const extra = t('home.offers.extra', { returnObjects: true }) || {};
 
   return (
-    <div className="home-page relative page-transition">
+    <div className="home-page relative page-transition" data-lang={lng}>
       <SEOHead
         title={t('home.seo.title')}
-        description={t('home.seo.description')}
-        keywords={t('home.seo.keywords')}
+        description={t('home.seo.description', TRIAL)}
         schema={{
           '@context': 'https://schema.org',
-          '@graph': [personSchema, organizationSchema, aggregateRatingSchema],
+          '@graph': [personSchema, websiteSchema],
         }}
       />
 
       {/* ─── Hero ─────────────────────────────────────────── */}
       <section className="hero">
         <div className="hero__aura" aria-hidden="true" />
-        <FloatingWords />
 
         <div className="hero__inner">
           <div className="hero__copy">
@@ -138,12 +93,12 @@ const Home = () => {
               {heroLines.map((line, i) => (
                 <span key={i} className="hero__line">
                   <motion.span
-                    className={`block ${i >= heroLines.length - 2 ? 'display-italic' : ''}`}
+                    className="block"
                     initial={{ y: '110%' }}
                     animate={{ y: 0 }}
                     transition={{ duration: 1.2, ease, delay: 0.35 + i * 0.12 }}
                   >
-                    {i === heroLines.length - 1 ? <GradientLine text={line} /> : line}
+                    {emphasise(line)}{' '}
                   </motion.span>
                 </span>
               ))}
@@ -152,7 +107,7 @@ const Home = () => {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease, delay: 0.9 }}
+              transition={{ duration: 1, ease, delay: 0.8 }}
               className="hero__lede"
             >
               <p>
@@ -160,29 +115,29 @@ const Home = () => {
                 <strong>{t('home.hero.ledeName')}</strong>
                 {t('home.hero.ledeSuffix')}
               </p>
-              {rotatingLines.length > 0 && <RotatingLine key={i18n.resolvedLanguage} lines={rotatingLines} />}
+              <p className="hero__proof">{t('home.hero.proof')}</p>
             </motion.div>
 
             <motion.div
               className="hero__actions"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease, delay: 1.05 }}
+              transition={{ duration: 1, ease, delay: 0.95 }}
             >
               <Link to="/booking" className="btn-primary" data-testid="book-lesson-btn">
-                {t('home.hero.bookFirst')}
+                {t('home.hero.bookTrial', TRIAL)}
                 <FiArrowRight />
               </Link>
-              <Link to="/testimonials" className="btn-outline" data-testid="view-testimonials-btn">
-                {clean(t('home.viewTestimonials'))}
-              </Link>
+              <a href="#prices" className="btn-outline" data-testid="see-prices-btn">
+                {t('home.hero.seePrices')}
+              </a>
             </motion.div>
 
             <motion.dl
               className="hero__stats"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1.2, delay: 1.3 }}
+              transition={{ duration: 1.2, delay: 1.2 }}
             >
               {stats.map((s) => (
                 <div key={s.value}>
@@ -193,44 +148,30 @@ const Home = () => {
             </motion.dl>
           </div>
 
-          <motion.figure
-            className="hero__portrait"
-            initial={{ opacity: 0, y: 40, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.6, ease, delay: 0.4 }}
-          >
-            <div className="arch">
-              <div className="arch__glow" />
-              <img src={introdata.image} alt={t('home.hero.portraitAlt')} data-testid="hero-image" fetchPriority="high" />
-            </div>
-            <CircleBadge text={t('home.badge')} />
-            <motion.div
-              className="hero__note"
-              initial={{ opacity: 0, x: -16, rotate: -6 }}
-              animate={{ opacity: 1, x: 0, rotate: -4 }}
-              transition={{ duration: 1, ease, delay: 1.6 }}
+          <div className="hero__visual">
+            <FloatingWords />
+            <motion.figure
+              className="hero__portrait"
+              initial={{ opacity: 0, y: 40, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1.6, ease, delay: 0.4 }}
             >
-              <span lang="uk">Привіт!</span>
-              <small>{t('home.hero.noteGloss')}</small>
-            </motion.div>
-          </motion.figure>
-        </div>
-      </section>
-
-      {/* ─── Lexicon marquee ──────────────────────────────── */}
-      <section className="lexicon-band" aria-label={t('home.lexiconLabel')}>
-        <div className="marquee">
-          {[0, 1].map((copy) => (
-            <div className="marquee__track" key={copy} aria-hidden={copy === 1}>
-              {marqueeWords.map((w) => (
-                <span key={w.uk} className="lexicon-band__item">
-                  <span lang="uk">{w.uk}</span>
-                  <em>{gloss(w)}</em>
-                  <span className="lexicon-band__star">✦</span>
-                </span>
-              ))}
-            </div>
-          ))}
+              <div className="arch">
+                <div className="arch__glow" />
+                <img src={introdata.image} alt={t('home.hero.portraitAlt')} data-testid="hero-image" fetchPriority="high" />
+              </div>
+              <CircleBadge text={t('home.badge')} />
+              <motion.div
+                className="hero__note"
+                initial={{ opacity: 0, x: -16, rotate: -6 }}
+                animate={{ opacity: 1, x: 0, rotate: -4 }}
+                transition={{ duration: 1, ease, delay: 1.5 }}
+              >
+                <span lang={t('home.hero.noteLang')}>{t('home.hero.note')}</span>
+                <small>{t('home.hero.noteGloss')}</small>
+              </motion.div>
+            </motion.figure>
+          </div>
         </div>
       </section>
 
@@ -239,7 +180,7 @@ const Home = () => {
         <motion.div {...reveal} className="manifesto__inner">
           <p className="eyebrow">{t('home.manifesto.eyebrow')}</p>
           <p className="manifesto__text">
-            <Trans i18nKey="home.manifesto.text" components={em} />
+            <Trans i18nKey="home.manifesto.text" components={{ em: <em /> }} />
           </p>
           <div className="manifesto__sign">
             <span className="manifesto__signature">{t('home.manifesto.signature')}</span>
@@ -250,166 +191,115 @@ const Home = () => {
         </motion.div>
       </section>
 
-      {/* ─── What I offer ─────────────────────────────────── */}
-      <section className="offer">
-        <div className="section-shell">
-          <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">{t('home.whatIOffer.eyebrow')}</p>
-            <h2>{clean(t('home.whatIOffer.title'))}</h2>
-            <p>{clean(t('home.whatIOffer.subtitle'))}</p>
-          </motion.header>
-
-          <ol className="offer__list">
-            {offerings.map((o, i) => (
-              <motion.li
-                key={o.key}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.9, ease, delay: i * 0.06 }}
-              >
-                <Link to={o.to} className="offer__row" data-testid={`service-card-${i}`}>
-                  <span className="offer__num">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="offer__title">{t(`home.whatIOffer.${o.key}.title`)}</span>
-                  <span className="offer__desc">{t(`home.whatIOffer.${o.key}.description`)}</span>
-                  <span className="offer__tag" lang="uk">
-                    {o.tag}
-                  </span>
-                  <span className="offer__arrow">
-                    <FiArrowUpRight />
-                  </span>
-                </Link>
-              </motion.li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* ─── Who I teach ──────────────────────────────────── */}
-      <section className="teach">
+      {/* ─── Offers ───────────────────────────────────────── */}
+      <section className="offers page-section page-section--flush-top" id="lessons">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head section-head--split">
             <div>
-              <p className="eyebrow">{t('home.whoITeach.eyebrow')}</p>
-              <h2>{t('home.whoITeach.title')}</h2>
+              <p className="eyebrow">{t('home.offers.eyebrow')}</p>
+              <h2>{emphasise(t('home.offers.title'))}</h2>
             </div>
-            <p>{t('home.whoITeach.subtitle')}</p>
+            <p>{t('home.offers.subtitle')}</p>
           </motion.header>
 
-          <div className="teach__grid">
-            {teachItems.map((item, i) => (
-              <motion.article
-                key={i}
-                className="teach__card"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 1, ease, delay: i * 0.1 }}
-              >
-                <span className="teach__numeral">{['I', 'II', 'III', 'IV'][i]}</span>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
+          <div className="offers__grid">
+            {offers.map((o, i) => (
+              <motion.article key={o.to} className="offer-card" {...stagger(i)}>
+                <Link to={o.to} className="offer-card__link" data-testid={`service-card-${i}`}>
+                  <span className="offer-card__top">
+                    <span className="offer-card__num">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="offer-card__tag" aria-hidden="true">
+                      {o.tag}
+                    </span>
+                  </span>
+                  <h3>{o.title}</h3>
+                  <p className="offer-card__who">{o.who}</p>
+                  <p className="offer-card__text">{o.text}</p>
+                  <span className="offer-card__foot">
+                    <span className="offer-card__price">{t('home.offers.from', { price: eur(FROM[o.price] || FROM.lesson) })}</span>
+                    <span className="offer-card__more">
+                      {t('home.offers.more')} <FiArrowUpRight aria-hidden="true" />
+                    </span>
+                  </span>
+                </Link>
               </motion.article>
             ))}
           </div>
+
+          {extra.to && (
+            <motion.p {...reveal} className="offers__extra">
+              {extra.text}{' '}
+              <Link to={extra.to} className="link-underline">
+                {extra.link} <FiArrowUpRight className="inline" />
+              </Link>
+            </motion.p>
+          )}
         </div>
       </section>
 
-      {/* ─── Testimonial ──────────────────────────────────── */}
-      <section className="voices">
-        <div className="voices__inner">
-          <span className="voices__mark" aria-hidden="true">
-            “
-          </span>
-          <AnimatePresence mode="wait">
-            <motion.figure
-              key={quote}
-              initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: -20, filter: 'blur(6px)' }}
-              transition={{ duration: 0.9, ease }}
-            >
-              {current && (
-                <>
-                  <blockquote>{current.text}</blockquote>
-                  <figcaption>
-                    <strong>{current.name}</strong>
-                    <span>{current.lessons}</span>
-                  </figcaption>
-                </>
-              )}
-            </motion.figure>
-          </AnimatePresence>
-          <div className="voices__controls">
-            <div className="voices__dots">
-              {featuredQuotes.map((q, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => setQuote(i)}
-                  className={i === quote ? 'is-active' : ''}
-                  aria-label={t('home.voices.showReview', { name: q.name })}
-                />
-              ))}
-            </div>
-            <Link to="/testimonials" className="link-underline">
-              {t('home.voices.allReviews')} <FiArrowUpRight className="inline" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Quiz ─────────────────────────────────────────── */}
-      <section className="quiz-section">
+      {/* ─── Prices ───────────────────────────────────────── */}
+      <section className="page-section page-section--tint" id="prices">
         <div className="section-shell">
           <motion.header {...reveal} className="section-head">
-            <p className="eyebrow">{t('home.quiz.eyebrow')}</p>
-            <h2>
-              <Trans i18nKey="home.quiz.title" components={emItalic} />
-            </h2>
-            <p>{t('home.quiz.subtitle')}</p>
+            <p className="eyebrow">{t('home.prices.eyebrow')}</p>
+            <h2>{emphasise(t('home.prices.title'))}</h2>
+            <p>{t('home.prices.subtitle', TRIAL)}</p>
           </motion.header>
-          <motion.div {...reveal} className="quiz-frame">
-            <QuizWidget />
+          <motion.div {...reveal}>
+            <PriceTable />
           </motion.div>
         </div>
       </section>
 
-      {/* ─── TikTok ───────────────────────────────────────── */}
-      <section className="tiktok-band">
-        <motion.div {...reveal} className="tiktok-band__inner">
-          <div>
-            <p className="eyebrow">
-              <FaTiktok /> {t('home.tiktok.eyebrow')}
-            </p>
-            <h2>
-              <Trans i18nKey="home.tiktok.title" components={emItalic} />
-            </h2>
-            <p>{t('home.tiktok.subtitle')}</p>
-          </div>
-          <div className="tiktok-band__actions">
-            <Link to="/tiktok" className="btn-primary" data-testid="tiktok-gallery-btn">
-              {clean(t('home.tiktok.viewVideos'))}
-              <FiArrowRight />
+      {/* ─── Reviews ──────────────────────────────────────── */}
+      <section className="page-section">
+        <div className="section-shell">
+          <motion.header {...reveal} className="section-head">
+            <p className="eyebrow">{t('home.reviews.eyebrow')}</p>
+            <h2>{emphasise(t('home.reviews.title'))}</h2>
+          </motion.header>
+          <motion.div {...reveal}>
+            <ReviewStrip indices={reviewIndices.length ? reviewIndices : undefined} />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ─── Video ────────────────────────────────────────── */}
+      <section className="page-section page-section--tint">
+        <div className="section-shell home-video">
+          <motion.header {...reveal} className="section-head">
+            <p className="eyebrow">{t('home.video.eyebrow')}</p>
+            <h2>{emphasise(t('home.video.title'))}</h2>
+            <p>{t('home.video.text')}</p>
+          </motion.header>
+          <motion.div {...reveal}>
+            <VideoIntro />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ─── Free guide + learning hub ────────────────────── */}
+      <section className="page-section home-learn-section">
+        <div className="section-shell home-learn">
+          <motion.div {...reveal}>
+            <GuideCTA />
+          </motion.div>
+          <motion.aside {...reveal} className="home-learn__teaser">
+            <p className="eyebrow">{t('home.learn.eyebrow')}</p>
+            <h2>{t('home.learn.title')}</h2>
+            <p>{t('home.learn.text')}</p>
+            <Link to="/learn" className="link-underline" data-testid="learn-link">
+              {t('home.learn.link')} <FiArrowUpRight className="inline" />
             </Link>
-            <a
-              href={contactInfo.tiktok}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="tiktok-band__handle link-underline"
-              data-testid="follow-tiktok-btn"
-            >
-              @movalina.study
-            </a>
-          </div>
-        </motion.div>
+          </motion.aside>
+        </div>
       </section>
 
       {/* ─── Closing ──────────────────────────────────────── */}
-      <section className="closing">
+      <section className={`closing ${lng === 'en' ? '' : 'closing--long'}`}>
         <motion.div {...reveal} className="closing__inner">
-          <p className="closing__uk" lang="uk">
-            Почнімо.
+          <p className="closing__uk" lang={t('home.closing.wordLang')}>
+            {t('home.closing.word')}
           </p>
           <h2>
             <Trans i18nKey="home.closing.title" components={emItalic} />
@@ -417,10 +307,10 @@ const Home = () => {
           <p className="closing__sub">{t('home.closing.sub')}</p>
           <div className="closing__actions">
             <Link to="/booking" className="btn-primary">
-              {t('home.closing.book')} <FiArrowRight />
+              {t('home.hero.bookTrial', TRIAL)} <FiArrowRight />
             </Link>
             <Link to="/contact" className="btn-outline" data-testid="contact-me-btn">
-              {clean(t('home.getInTouch'))}
+              {t('home.closing.contact')}
             </Link>
           </div>
         </motion.div>

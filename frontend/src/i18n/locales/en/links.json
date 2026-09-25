@@ -1,0 +1,22 @@
+{
+  "links": {
+    "seo": {
+      "title": "Alina Zelinska — Links",
+      "description": "Book a trial lesson, get the free guide, read reviews and find Alina Zelinska on Instagram and TikTok."
+    },
+    "photoAlt": "Alina Zelinska, Ukrainian tutor",
+    "name": "Alina Zelinska",
+    "bio": "Native Ukrainian tutor from Ukraine. Ukrainian, English and Russian lessons online.",
+    "proof": "5.0 rating · 3,500+ lessons · 500+ students",
+    "trial": "Book a {{price}} trial lesson",
+    "guide": "Free guide: your first 100 Ukrainian words",
+    "services": [
+      { "to": "/services/ukrainian-lessons", "label": "Ukrainian lessons" },
+      { "to": "/services/russian-lessons", "label": "Russian lessons" },
+      { "to": "/services/speaking-club", "label": "Ukrainian speaking club" }
+    ],
+    "reviews": "Student reviews",
+    "learn": "Free articles",
+    "email": "Email"
+  }
+}

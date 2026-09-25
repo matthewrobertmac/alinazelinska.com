@@ -1,0 +1,33 @@
+{
+  "guide": {
+    "seo": {
+      "title": "Your First 100 Ukrainian Words: Free PDF | Alina Zelinska",
+      "description": "A free printable guide to your first 100 Ukrainian words, with easy pronunciation, from a native tutor from Ukraine. Download the PDF, no sign-up."
+    },
+    "crumb": "Free guide",
+    "eyebrow": "Free printable guide",
+    "by": "Alina Zelinska",
+    "download": "Download the PDF",
+    "meta": "Free · A4 PDF, ready to print · no sign-up",
+    "noSignup": "No email, no sign-up — the whole guide, free.",
+    "preview": {
+      "eyebrow": "A look inside",
+      "title": "What's in the guide",
+      "more": "Also in the guide"
+    },
+    "closing": {
+      "title": "Say them out loud with me",
+      "sub": "Words stick when you use them. In a {{minutes}}-minute trial lesson ({{price}}) we'll put your first words into real sentences.",
+      "learn": "More free articles"
+    },
+    "pdf": {
+      "eyebrow": "Free guide",
+      "contents": "Contents",
+      "ctaEyebrow": "Your next step",
+      "cta": "Book a {{price}} trial lesson",
+      "ctaText": "{{minutes}} minutes, one-to-one, online. No commitment afterwards.",
+      "find": "Find me",
+      "footer": "Alina Zelinska · alinazelinska.com"
+    }
+  }
+}

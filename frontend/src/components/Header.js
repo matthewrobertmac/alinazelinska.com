@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLangPath } from '../i18n/routing';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiSun, FiMoon, FiArrowRight } from 'react-icons/fi';
+import { FiSun, FiMoon, FiArrowRight, FiType } from 'react-icons/fi';
 import LanguageSwitcher from './LanguageSwitcher';
+import { openA11y } from './AccessibilityMenu';
 import './Header.css';
 import { ease } from '../utils/motion';
 
@@ -31,16 +32,16 @@ const Header = ({ theme, toggleTheme }) => {
     };
   }, [isMobileMenuOpen]);
 
-  // `id` keeps the data-testids stable whatever language is showing
-  const navLinks = [
-    { path: '/about', id: 'about me', label: t('nav.about') },
-    { path: '/testimonials', id: 'testimonials', label: t('nav.testimonials') },
-    { path: '/tiktok', id: 'tiktok', label: t('nav.tiktok') },
-    { path: '/faq', id: 'faq', label: t('nav.faq') },
-    { path: '/contact', id: 'say hello', label: t('nav.contact') },
-  ];
+  // Each language has its own menu (common.json → nav.main), led by that audience's main offer.
+  // `id` (the path) keeps data-testids stable whatever language is showing.
+  const main = t('nav.main', { returnObjects: true });
+  const navLinks = (Array.isArray(main) ? main : []).map(({ to, label }) => ({
+    path: to,
+    id: to.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'home',
+    label,
+  }));
 
-  const isActive = (path) => currentPath === path;
+  const isActive = (path) => currentPath === path || (path !== '/' && currentPath.startsWith(`${path}/`));
 
   const ThemeIcon = theme === 'dark' ? FiSun : FiMoon;
 
@@ -67,11 +68,22 @@ const Header = ({ theme, toggleTheme }) => {
 
         <div className="site-header__tools">
           <LanguageSwitcher />
+          <button
+            type="button"
+            onClick={(e) => openA11y(e.currentTarget)}
+            data-testid="a11y-open"
+            className="icon-btn icon-btn--desk"
+            aria-label={t('header.a11y')}
+            aria-haspopup="dialog"
+            aria-controls="a11y-panel"
+          >
+            <FiType />
+          </button>
           <button onClick={toggleTheme} data-testid="theme-toggle" className="icon-btn icon-btn--desk" aria-label={t('header.toggleTheme')}>
             <ThemeIcon />
           </button>
           <Link to="/booking" className="header-cta" data-testid="nav-book">
-            {t('nav.booking')}
+            {t('header.cta')}
             <FiArrowRight />
           </Link>
           <button
@@ -100,7 +112,7 @@ const Header = ({ theme, toggleTheme }) => {
               {[
                 { path: '/', id: 'home', label: t('nav.home') },
                 ...navLinks,
-                { path: '/booking', id: 'book a lesson', label: t('nav.booking') },
+                { path: '/booking', id: 'book a lesson', label: t('header.cta') },
               ].map(
                 (link, i) => (
                   <motion.div
@@ -122,9 +134,24 @@ const Header = ({ theme, toggleTheme }) => {
               )}
             </div>
             <div className="mobile-menu__foot">
-              <button onClick={toggleTheme} data-testid="theme-toggle-mobile" className="icon-btn" aria-label={t('header.toggleTheme')}>
-                <ThemeIcon />
-              </button>
+              <div className="mobile-menu__tools">
+                <button onClick={toggleTheme} data-testid="theme-toggle-mobile" className="icon-btn" aria-label={t('header.toggleTheme')}>
+                  <ThemeIcon />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    setIsMobileMenuOpen(false);
+                    openA11y(e.currentTarget);
+                  }}
+                  data-testid="a11y-open-mobile"
+                  className="icon-btn"
+                  aria-label={t('header.a11y')}
+                  aria-haspopup="dialog"
+                >
+                  <FiType />
+                </button>
+              </div>
               <span lang="uk">Мова — це дім ✦</span>
             </div>
           </motion.div>

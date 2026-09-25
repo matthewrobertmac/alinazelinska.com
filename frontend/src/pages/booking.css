@@ -1,170 +1,117 @@
 /* ─── Booking ─────────────────────────────────────────────── */
 
-.booking-reassure {
-  max-width: 34rem;
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-style: italic;
-  line-height: 1.35;
-  color: var(--color-accent);
-}
-
-.booking-trust {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
-  max-width: 40rem;
-  margin-top: 1.75rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--color-border);
-}
-
-.booking-trust li {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-
-.booking-trust li::before {
-  content: '';
-  flex-shrink: 0;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--color-gold);
-}
-
-.booking-step-section {
-  padding-top: 4.5rem;
-}
-
-@media (min-width: 900px) {
-  .booking-step-section {
-    padding-top: 6rem;
-  }
-}
-
-/* Step marker */
-.booking-step__label {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--color-muted);
-}
-
-.booking-step__num {
-  font-family: var(--font-display);
-  font-size: clamp(4.5rem, 12vw, 8rem);
-  font-style: italic;
-  font-weight: 300;
-  line-height: 0.85;
-  letter-spacing: -0.04em;
-  color: var(--color-gold);
-}
-
-/* Step 01 — connect first */
-.booking-connect {
+/* Prices at a glance, inside the hero */
+.booking-glance {
   display: grid;
-  gap: 1.5rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--color-border-strong);
+  gap: 0.5rem;
+  max-width: 46rem;
 }
 
-@media (min-width: 900px) {
-  .booking-connect {
-    grid-template-columns: 14rem 1fr;
-    gap: 4rem;
-  }
-}
-
-.booking-connect__marker {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-}
-
-@media (min-width: 900px) {
-  .booking-connect__marker {
-    flex-direction: column;
-    align-items: flex-start;
+@media (min-width: 700px) {
+  .booking-glance {
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.75rem;
   }
 }
 
-.booking-connect h2 {
-  margin: 1.1rem 0 1.25rem;
-  font-size: clamp(2.6rem, 6vw, 4.6rem);
+.booking-glance__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0.1rem 0.75rem;
+  padding: 0.8rem 2.4rem 0.8rem 1.1rem;
+  color: var(--color-text);
+  text-decoration: none;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 1rem;
+  transition: border-color 0.3s ease, background 0.3s ease;
 }
 
-.booking-connect h2 em {
+.booking-glance__item:hover,
+.booking-glance__item:focus-visible {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.booking-glance__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.booking-glance__price {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1;
   color: var(--color-accent);
 }
 
-.booking-connect__text {
-  max-width: 40rem;
-  font-size: 1.12rem;
-  line-height: 1.75;
-  color: var(--color-text-secondary);
+.booking-glance__meta {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  color: var(--color-muted);
 }
 
-.booking-connect__text strong {
-  font-weight: 600;
-  color: var(--color-text);
-  background-image: linear-gradient(var(--color-accent-soft), var(--color-accent-soft));
-  background-size: 100% 0.5em;
-  background-position: 0 88%;
-  background-repeat: no-repeat;
+.booking-glance__arrow {
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-muted);
 }
 
-.booking-connect__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.85rem;
-  margin-top: 2rem;
+@media (min-width: 700px) {
+  .booking-glance__item {
+    grid-template-columns: 1fr;
+    padding: 1rem 1.1rem;
+  }
+  .booking-glance__price {
+    margin-top: 0.35rem;
+    font-size: 2rem;
+  }
+  .booking-glance__arrow {
+    top: 1.1rem;
+    transform: none;
+  }
 }
 
-/* Step 02 — packages */
-.booking-pay {
-  display: grid;
-  gap: 1rem;
-  justify-items: start;
+.booking-packages-section.page-section {
+  padding: 3rem 0 4.5rem;
 }
 
 @media (min-width: 900px) {
-  .booking-pay {
-    justify-items: end;
+  .booking-packages-section.page-section {
+    padding: 4.5rem 0 6rem;
   }
+}
+
+/* Currency: EUR is the price; the selector only adds an approximate conversion */
+.booking-pay {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.booking-pay__note {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
 }
 
 .booking-pay__row {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .booking-pay__row .field-label {
   margin: 0;
-}
-
-.booking-pay__methods {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
-}
-
-.booking-pay__methods svg {
-  width: 1.1rem;
-  height: 1.1rem;
-  color: var(--color-muted);
 }
 
 .booking-error {
@@ -263,7 +210,7 @@
   border-color: var(--color-accent);
 }
 
-.booking-pkg h3 {
+.booking-pkg__name {
   margin-top: 1.75rem;
   font-size: clamp(2rem, 3vw, 2.5rem);
 }
@@ -303,17 +250,19 @@
   color: var(--color-accent);
 }
 
-.booking-pkg__per {
+.booking-pkg__approx {
   font-family: var(--font-display);
   font-size: 1.15rem;
   font-style: italic;
   color: var(--color-text-secondary);
 }
 
-.booking-pkg__eur {
+.booking-pkg__saving {
   flex-basis: 100%;
-  font-size: 0.8rem;
-  color: var(--color-muted);
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-accent);
 }
 
 .booking-pkg__desc {
@@ -360,7 +309,48 @@
   animation: loader-breathe 1.2s var(--ease-soft) infinite alternate;
 }
 
-/* Step 03 — what to expect */
+/* After the packages: what happens next */
+.booking-after {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-top: 2rem;
+}
+
+.booking-after__next {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  max-width: 36rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--color-text);
+}
+
+.booking-after__next svg {
+  flex-shrink: 0;
+  margin-top: 0.3rem;
+  color: var(--color-accent);
+}
+
+.booking-after__methods {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.booking-after__methods svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--color-muted);
+}
+
+/* How it works */
 .booking-expect {
   list-style: none;
   display: grid;
@@ -391,20 +381,9 @@
   }
 }
 
-.booking-expect__head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-}
-
 .booking-expect .num {
   font-size: 2.6rem;
   line-height: 1;
-}
-
-.booking-expect__icon {
-  font-size: 1.1rem;
-  opacity: 0.7;
 }
 
 .booking-expect h3 {
@@ -456,5 +435,94 @@
   margin-bottom: 2.25rem;
   font-size: 1.08rem;
   line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+/* Questions first — the optional path */
+.booking-questions {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 4rem;
+  padding: 2rem 1.75rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-card);
+}
+
+@media (min-width: 900px) {
+  .booking-questions {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 3rem;
+    padding: 2.5rem 2.75rem;
+  }
+}
+
+.booking-questions h2 {
+  margin: 0.8rem 0 0.8rem;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.booking-questions h2 em {
+  color: var(--color-accent);
+}
+
+.booking-questions p:not(.eyebrow) {
+  max-width: 36rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.booking-questions__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Booking FAQ — native <details>, so answers are in the HTML */
+.booking-faq {
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.booking-faq__item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.booking-faq__item summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 1.4rem 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.25;
+  list-style: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.booking-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.booking-faq__item summary:hover,
+.booking-faq__item[open] summary {
+  color: var(--color-accent);
+}
+
+.booking-faq__item summary svg {
+  transition: transform 0.4s var(--ease-out);
+}
+
+.booking-faq__item[open] summary svg {
+  transform: rotate(45deg);
+}
+
+.booking-faq__item p {
+  max-width: 40rem;
+  padding-bottom: 1.6rem;
+  font-size: 1.02rem;
+  line-height: 1.75;
   color: var(--color-text-secondary);
 }

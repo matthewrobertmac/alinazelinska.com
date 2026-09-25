@@ -4,19 +4,6 @@
       "label": "Loading",
       "text": "Хвилинку…"
     },
-    "landing": {
-      "dialogLabel": "Welcome",
-      "subtitle": "Ukrainian · Russian · English Language Tutor",
-      "videoLabel": "Introduction video from Alina Zelinska",
-      "play": "Play introduction video",
-      "tapToPlay": "Tap to play",
-      "mute": "Mute video",
-      "unmute": "Unmute video",
-      "caption": "A short hello from Alina",
-      "enter": "Enter website",
-      "start": "Start learning",
-      "hint": "Or watch the full intro video"
-    },
     "a11y": {
       "toggle": "Accessibility options",
       "panel": "Accessibility settings",
@@ -29,7 +16,7 @@
       "highContrast": "High contrast"
     },
     "floatingBook": {
-      "cta": "Book a Lesson",
+      "cta": "Book a {{price}} trial",
       "dismiss": "Dismiss"
     },
     "currency": {
@@ -65,66 +52,8 @@
         "note": "every lesson since 2022"
       }
     },
-    "quiz": {
-      "progress": "Question {{current}} of {{total}}",
-      "questions": {
-        "level": {
-          "title": "What's your current level?",
-          "options": {
-            "beginner": "Complete beginner",
-            "heritage": "Heritage speaker (understand but can't speak)",
-            "intermediate": "I can have basic conversations",
-            "advanced": "Pretty fluent, want to polish"
-          }
-        },
-        "goal": {
-          "title": "What's your main goal?",
-          "options": {
-            "family": "Connect with family",
-            "travel": "Travel & cultural exploration",
-            "work": "Professional / Business",
-            "heritage": "Reconnect with my roots",
-            "fun": "Personal interest / fun!"
-          }
-        },
-        "time": {
-          "title": "How much time can you dedicate per week?",
-          "options": {
-            "1hr": "1-2 hours (1 lesson)",
-            "3hr": "3-4 hours (2 lessons + practice)",
-            "5hr": "5+ hours (intensive learning)"
-          }
-        }
-      },
-      "resultEyebrow": "Your recommendation",
-      "resultTitle": "Perfect! Here’s what I recommend",
-      "packages": {
-        "intensive": {
-          "name": "Intensive Pack",
-          "reason": "You're starting fresh and ready to commit! The Intensive Pack will give you momentum and structure."
-        },
-        "trial": {
-          "name": "Trial Lesson",
-          "reason": "Perfect for dipping your toes in! Let's start with a trial to see how you learn best."
-        },
-        "standard": {
-          "name": "Standard Lesson",
-          "reason": "The sweet spot! Regular lessons with practice time — most students see great progress with this rhythm."
-        }
-      },
-      "answersLabel": "Your answers",
-      "book": "Book This Package",
-      "retake": "Retake Quiz"
-    },
     "lexicon": {
-      "hintDesktop": "Hover a word to read it — click to catch it in gold",
-      "hintMobile": "Tap a drifting word to catch it",
-      "jar_one": "word in your jar",
-      "jar_other": "words in your jar",
-      "closeJar": "Close word jar",
       "hear": "Hear {{word}}",
-      "learnAloud": "Learn to say them aloud →",
-      "emptyJar": "Empty jar",
       "gloss": {
         "pryvit": "hello",
         "svit": "world",

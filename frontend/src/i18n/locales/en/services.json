@@ -1,369 +1,470 @@
 {
   "services": {
     "shared": {
-      "siteTitle": "Alina Zelinska | Ukrainian & Russian Tutor, Translator & Poet",
-      "home": "Home",
-      "services": "Services",
-      "bookTrial": "Book a Trial Lesson",
-      "bookYourTrial": "Book Your Trial Lesson",
-      "askAnything": "Ask Me Anything",
-      "readAllTestimonials": "Read All Testimonials",
-      "getInTouch": "Get In Touch",
-      "ledgerLabel": "1-on-1 · online · all levels",
-      "ledgerStudents": "Students",
-      "ledgerLessons": "Lessons delivered",
-      "ledgerRating": "Perfect rating",
-      "whoEyebrow": "Who it’s for",
-      "whoTitle": "Who this is",
-      "whoAccent": "for.",
-      "learnEyebrow": "Inside the lessons",
-      "learnTitle": "What you’ll",
-      "learnAccent": "learn.",
-      "quotesEyebrow": "In their words",
+      "bookTrial": "Book a trial lesson",
+      "askQuestion": "Ask a question",
       "faqEyebrow": "Good questions",
-      "commissions": "Commissions",
-      "to": "to",
-      "lang": {
-        "uk": "Ukrainian",
-        "ru": "Russian",
-        "en": "English"
+      "relatedEyebrow": "Keep exploring",
+      "relatedTitle": "You might *also like.*",
+      "ledger": {
+        "label": "One-to-one · online · all levels",
+        "items": [
+          { "value": "3,500+", "label": "lessons taught since 2022" },
+          { "value": "500+", "label": "students from 30+ countries" },
+          { "value": "5.0", "label": "rating on italki", "accent": true }
+        ]
+      },
+      "related": {
+        "ukrainian": { "title": "Ukrainian lessons", "text": "One-to-one lessons for beginners, heritage speakers and exam preparation." },
+        "ufrs": { "title": "Ukrainian for Russian speakers", "text": "Switching from Russian to Ukrainian, calmly and without shame." },
+        "english": { "title": "English lessons", "text": "English for Ukrainian and Russian speakers, with speaking from day one." },
+        "russian": { "title": "Russian lessons", "text": "Practical, conversational Russian for foreigners." },
+        "club": { "title": "Speaking club", "text": "Small-group Ukrainian conversation practice, {{club}} per session." },
+        "writing": { "title": "Translation & writing", "text": "Poetry, song lyrics and literary translation." },
+        "about": { "title": "About Alina", "text": "Who I am, where I'm from and how I teach." },
+        "learn": { "title": "Free articles", "text": "Honest guides for learners, written by a native speaker." },
+        "testimonials": { "title": "Student reviews", "text": "What students say about our lessons." }
       }
     },
+
     "ukrainian": {
-      "docTitle": "Ukrainian Lessons",
-      "crumb": "Ukrainian Lessons",
+      "crumb": "Ukrainian lessons",
       "seo": {
-        "title": "Ukrainian Language Lessons | Native Speaker | Alina Zelinska | 5.0★",
-        "description": "Learn Ukrainian online with Alina, a native speaker from Ukraine. 500+ students, 3,500+ lessons, perfect 5.0 rating. Beginner to advanced, personalized 1-on-1 lessons.",
-        "keywords": "Ukrainian lessons, learn Ukrainian online, Ukrainian tutor, native Ukrainian teacher, Ukrainian language course"
+        "title": "Ukrainian Lessons Online, One-to-One | Alina Zelinska",
+        "description": "Private Ukrainian lessons online with a native tutor from Ukraine: beginners, heritage speakers, exam prep. 5.0 rating, 3,500+ lessons. Trial {{trial}}."
       },
-      "schema": {
-        "name": "Ukrainian Language Lessons",
-        "description": "Personalized one-on-one Ukrainian language lessons with a native speaker. From complete beginner to advanced fluency."
+      "schema": { "name": "Ukrainian lessons online" },
+      "eyebrow": "One-to-one with a native speaker from Ukraine",
+      "title": "Ukrainian lessons online, *built around you.*",
+      "lede": "Private Ukrainian lessons online with Alina Zelinska, a native speaker from Ukraine. Whether you're starting from the alphabet, reconnecting with your family's language or preparing for the state language exam, every lesson is planned around what you actually need to say.",
+      "sections": [
+        {
+          "kind": "cards",
+          "eyebrow": "Who it's for",
+          "title": "Ukrainian for beginners, heritage speakers *and everyone in between.*",
+          "intro": "Lessons start wherever you are — your first Cyrillic letter or your fiftieth conversation.",
+          "items": [
+            { "title": "Complete beginners", "text": "We start with the alphabet and the sounds, and use real phrases from the first lesson — so you're reading and speaking, not memorising lists." },
+            { "title": "Heritage speakers", "text": "You understand your grandparents but freeze when it's your turn to answer? We turn passive Ukrainian into confident speech and fill in the grammar and spelling you never learned formally." },
+            { "title": "Moving, working, loving", "text": "Relocating to Ukraine, working with Ukrainian colleagues or getting to know your partner's family — we focus on the situations you'll really be in." },
+            { "title": "State language exam", "text": "Preparing for the Ukrainian state language proficiency exam? We work through the format, practise each type of task and close the gaps in grammar." }
+          ]
+        },
+        {
+          "kind": "checks",
+          "eyebrow": "Inside the lessons",
+          "title": "What *we work on.*",
+          "items": [
+            "Ukrainian conversation practice in every lesson, not just exercises",
+            "Grammar explained with real examples: cases, verb aspects, endings",
+            "Reading and writing in Cyrillic, step by step",
+            "Pronunciation: the sounds English doesn't have, like и, ї and the soft sign",
+            "Vocabulary for your life — work, family, travel, hobbies",
+            "Notes and new words after every lesson",
+            "How people really talk, not only textbook phrases",
+            "The differences from Russian, if you already know some"
+          ]
+        },
+        {
+          "kind": "rows",
+          "eyebrow": "How it works",
+          "title": "Three steps *to your first lesson.*",
+          "items": [
+            { "title": "A trial lesson", "text": "{{trialMinutes}} minutes for {{trial}}. We meet, talk about your goals, and I check your level — no commitment afterwards." },
+            { "title": "A plan for you", "text": "I suggest what to focus on first and how often to meet, whether that's once a week or a more intensive stretch before a trip or an exam." },
+            { "title": "Regular lessons", "text": "60-minute video lessons at times that suit you, with notes after each one so nothing gets lost between lessons." }
+          ]
+        }
+      ],
+      "prices": {
+        "eyebrow": "Prices",
+        "title": "Simple, *transparent prices.*",
+        "intro": "Start with a {{trialMinutes}}-minute trial for {{trial}}. After that, pay per lesson or save {{packSaving}}% with the five-lesson pack."
       },
-      "eyebrow": "Ukrainian language lessons",
-      "title": "Learn Ukrainian with a",
-      "titleAccent": "native speaker.",
-      "lede": "One-on-one Ukrainian lessons designed around you, taught by a native speaker who makes grammar actually enjoyable.",
-      "whoIntro": "From your very first Cyrillic letter to the vocabulary of your working day — lessons start wherever you are.",
-      "learners": [
-        {
-          "title": "Complete Beginners",
-          "description": "Starting from zero? Perfect! We'll begin with the Cyrillic alphabet, basic pronunciation, and essential phrases. Most students can introduce themselves and have simple conversations within 5-10 lessons."
-        },
-        {
-          "title": "Heritage Speakers",
-          "description": "Grew up hearing Ukrainian at home? I'll help you turn that passive understanding into active fluency. We'll formalize your grammar, expand your vocabulary, and build your confidence in speaking and writing."
-        },
-        {
-          "title": "Intermediate Learners",
-          "description": "Already know the basics? Let's take you to the next level. We'll work on complex grammar, natural conversation, idioms, and cultural nuances that textbooks don't teach."
-        },
-        {
-          "title": "Professionals",
-          "description": "Need Ukrainian for work or relocation? I'll teach you professional vocabulary, business etiquette, email writing, and the practical language you'll actually use in real situations."
-        }
-      ],
-      "learn": [
-        "Conversation skills from day one (not just memorization)",
-        "Grammar explained naturally through real examples",
-        "Ukrainian culture, history, and context",
-        "Reading and writing in Cyrillic script",
-        "Pronunciation coaching for authentic accent",
-        "Vocabulary tailored to YOUR life and interests",
-        "Common mistakes Ukrainian learners make (and how to avoid them)",
-        "Comparisons with Russian (if you're learning both)"
-      ],
-      "quotesTitle": "What Ukrainian students",
-      "quotesAccent": "say.",
-      "faqTitle": "Ukrainian learning",
-      "faqAccent": "FAQ.",
-      "faq": [
-        {
-          "q": "How hard is Ukrainian to learn?",
-          "a": "For English speakers, Ukrainian is considered moderately difficult. The Cyrillic alphabet takes a few lessons to master, and the case system (7 cases!) can be challenging. But here's the good news: Ukrainian pronunciation is very consistent, the grammar follows logical patterns, and the language is beautiful to speak. With the right approach, you'll be surprised how quickly it clicks."
-        },
-        {
-          "q": "Do I need to learn Cyrillic first?",
-          "a": "We learn it together from the start! I don't believe in spending weeks just on the alphabet. We learn Cyrillic while learning real words and phrases, so you're actually communicating from lesson one. Most students can read basic Cyrillic within 3-5 lessons."
-        },
-        {
-          "q": "Is Ukrainian similar to Russian?",
-          "a": "Yes and no. They share the Cyrillic alphabet and some vocabulary (they're both Slavic languages), but they're distinct. Ukrainian has softer pronunciation, different grammar patterns, and unique vocabulary. If you speak Russian, learning Ukrainian is easier - but they're not mutually intelligible. Think Spanish and Portuguese."
-        }
-      ],
-      "closingTitle": "Ready to start learning",
-      "closingAccent": "Ukrainian?",
-      "closingSub": "Join 500+ students who've discovered that Ukrainian can be approachable, engaging, and genuinely fun to learn."
-    },
-    "russian": {
-      "docTitle": "Russian Lessons",
-      "crumb": "Russian Lessons",
-      "seo": {
-        "title": "Russian Language Lessons | Native Speaker | Alina Zelinska | 5.0★",
-        "description": "Learn Russian online with a native speaker. 500+ students, 3,500+ lessons, perfect 5.0 rating. From beginner to advanced, personalized 1-on-1 Russian lessons.",
-        "keywords": "Russian lessons, learn Russian online, Russian tutor, native Russian teacher, Russian language course"
+      "reviews": { "eyebrow": "Student reviews", "title": "What Ukrainian students *say.*" },
+      "faq": {
+        "title": "Questions about *Ukrainian lessons.*",
+        "items": [
+          { "q": "How hard is Ukrainian for English speakers?", "a": "It takes steady work, but it's very learnable. Cyrillic usually takes a few lessons, and pronunciation is consistent — words are read the way they're written. The seven cases take the longest, so we introduce them gradually through phrases you actually use." },
+          { "q": "Do I need to know the alphabet before the first lesson?", "a": "No. We learn Cyrillic together through real words, so you're reading short phrases within the first few lessons." },
+          { "q": "I understand Ukrainian but can't speak it. Can you help?", "a": "Yes — this is very common among heritage speakers. We focus on speaking, add the grammar and spelling you missed, and gently correct the habits picked up at home, so you feel at ease with family and in Ukraine." },
+          { "q": "Can you help me prepare for the Ukrainian state language exam?", "a": "Yes. We go through the exam format and practise the kinds of tasks it includes, along with the grammar and vocabulary they require. Tell me your exam date and level in the trial lesson and I'll suggest a plan." },
+          { "q": "How often should I have lessons?", "a": "Once or twice a week works well for most people. Regularity matters more than long sessions — the five-lesson pack is an easy way to keep a steady rhythm." }
+        ]
       },
-      "schema": {
-        "name": "Russian Language Lessons",
-        "description": "Personalized one-on-one Russian language lessons with a native speaker."
-      },
-      "eyebrow": "Russian language lessons",
-      "title": "Learn Russian from a",
-      "titleAccent": "native speaker.",
-      "lede": "Master Russian with personalised lessons from someone who grew up speaking it — and knows exactly what makes it click for English speakers.",
-      "whoIntro": "From the Cyrillic alphabet to Pushkin in the original — lessons start wherever you are.",
-      "learners": [
-        {
-          "title": "Complete Beginners",
-          "description": "Never studied Russian before? Let's start from the beginning. We'll tackle the Cyrillic alphabet, master pronunciation, and build your foundation with practical, usable Russian from day one."
-        },
-        {
-          "title": "Intermediate Learners",
-          "description": "Already know the basics but stuck in the intermediate plateau? I'll help you break through. We'll work on complex grammar, natural conversation, idioms, and the cultural context that makes Russian come alive."
-        },
-        {
-          "title": "Business Russian",
-          "description": "Need Russian for professional purposes? I'll teach you business vocabulary, formal register, email etiquette, and the language skills you need for meetings, presentations, and professional relationships."
-        },
-        {
-          "title": "Literature & Culture",
-          "description": "Want to read Pushkin, Dostoevsky, or Akhmatova in the original? I'll help you develop the literary Russian skills to appreciate Russian literature and poetry as it was meant to be read."
-        }
-      ],
-      "learn": [
-        "Pronunciation guides from a native speaker",
-        "Grammar that actually makes sense (I promise)",
-        "Real conversational Russian (not textbook Russian)",
-        "Russian idioms, slang, and expressions",
-        "Cultural context and etiquette",
-        "Reading and writing in Cyrillic",
-        "Vocabulary for your specific goals",
-        "Common mistakes English speakers make (and how to fix them)"
-      ],
-      "quotesTitle": "What Russian students",
-      "quotesAccent": "say.",
-      "faqTitle": "Russian learning",
-      "faqAccent": "FAQ.",
-      "faq": [
-        {
-          "q": "Is Russian harder than Ukrainian?",
-          "a": "They're about the same difficulty level for English speakers. Russian has 6 cases (vs Ukrainian's 7), but Russian has some pronunciation challenges that Ukrainian doesn't have. Both are beautiful, both are worth learning, and both become approachable with the right teacher."
-        },
-        {
-          "q": "What's different about learning from a native speaker?",
-          "a": "I don't just know the textbook version - I know how people actually speak. I can teach you the idioms, the slang, the cultural references, and the subtle differences between formal and casual speech that only native speakers truly understand. Plus, my pronunciation is authentic, not learned."
-        },
-        {
-          "q": "Will I understand Russian speakers after your lessons?",
-          "a": "Absolutely. I teach real, practical Russian - not just grammar exercises. We'll work on listening comprehension, watch videos, listen to music, and practice understanding different accents and speaking speeds. Most students can understand basic conversations within 20-30 lessons."
-        }
-      ],
-      "closingTitle": "Ready to master",
-      "closingAccent": "Russian?",
-      "closingSub": "Join 500+ students learning with a native speaker who makes Russian actually make sense."
-    },
-    "speakingClub": {
-      "docTitle": "Ukrainian Speaking Club",
-      "crumb": "Speaking Club",
-      "eyebrow": "Group conversation practice",
-      "title": "Ukrainian",
-      "titleAccent": "Speaking Club.",
-      "lede": "Small group conversation practice for Ukrainian learners. Practice speaking Ukrainian in a relaxed, supportive environment with other learners at your level. Themed topics, real conversations, and friendly corrections.",
-      "ledgerLabel": "Each session",
-      "ledgerStudents": "Students max",
-      "ledgerMinutes": "Minutes of guided conversation",
-      "ledgerPrice": "Per session",
-      "followInstagram": "Follow on Instagram for Updates",
-      "askNext": "Ask About Next Session",
-      "formatEyebrow": "The format",
-      "formatTitle": "How it",
-      "formatAccent": "works.",
-      "features": [
-        {
-          "title": "Small Groups",
-          "description": "3-4 students max — small enough to get real speaking time, big enough for dynamic conversation"
-        },
-        {
-          "title": "60 Minutes",
-          "description": "Full hour of guided conversation practice with themed topics and real-time corrections"
-        },
-        {
-          "title": "Just $12",
-          "description": "Affordable group practice to supplement your 1-on-1 lessons or practice independently"
-        },
-        {
-          "title": "Themed Sessions",
-          "description": "Each session has a topic: holidays, travel, food, current events — always something interesting to talk about"
-        }
-      ],
-      "themesEyebrow": "From the archive",
-      "themesTitle": "Past session",
-      "themesAccent": "themes.",
-      "themes": [
-        {
-          "title": "Christmas Edition",
-          "description": "Holiday vocabulary, traditions, and festive conversations"
-        },
-        {
-          "title": "New Year's Resolutions",
-          "description": "Goals, aspirations, and future tense practice"
-        },
-        {
-          "title": "Travel & Adventure",
-          "description": "Vacation stories, travel vocabulary, and future trip planning"
-        },
-        {
-          "title": "Food & Cooking",
-          "description": "Recipes, restaurants, and culinary conversations"
-        }
-      ],
-      "joinEyebrow": "Is it for you?",
-      "joinTitle": "Who should",
-      "joinAccent": "join?",
-      "join": [
-        {
-          "lead": "Intermediate learners",
-          "text": "who want more speaking practice between 1-on-1 lessons"
-        },
-        {
-          "lead": "Advanced students",
-          "text": "looking to maintain fluency and learn from other learners"
-        },
-        {
-          "lead": "Anyone who loves Ukrainian",
-          "text": "and wants a supportive community to practice with"
-        }
-      ],
-      "noteLabel": "Note:",
-      "note": "The Speaking Club is best for students with at least basic Ukrainian (A2 level or higher). Complete beginners should start with 1-on-1 lessons first.",
-      "closingTitle": "Interested in",
-      "closingAccent": "joining?",
-      "closingSub": "I announce upcoming Speaking Club sessions on Instagram! Follow me there for dates, times, and sign-up links — or message me directly to get on the list.",
-      "seo": {
-        "title": "Ukrainian Speaking Club | Small-Group Conversation Practice | Alina Zelinska",
-        "description": "Practise speaking Ukrainian in small online groups of 3–4 learners, led by native speaker Alina Zelinska. 60-minute themed sessions for A2 level and up — $12 per session.",
-        "keywords": "Ukrainian speaking club, Ukrainian conversation practice, Ukrainian group lessons online, practise speaking Ukrainian"
+      "closing": {
+        "kicker": "Почнімо?",
+        "title": "Ready to start *speaking Ukrainian?*",
+        "sub": "Book a {{trialMinutes}}-minute trial for {{trial}}. We'll talk about your goals, I'll check your level and suggest a plan — no commitment afterwards."
       }
     },
-    "poetry": {
-      "crumb": "Poetry Translation",
+
+    "ufrs": {
+      "crumb": "Ukrainian for Russian speakers",
       "seo": {
-        "title": "Poetry Translation Services | Ukrainian, Russian, English | Alina Zelinska",
-        "description": "Professional poetry translation between Ukrainian, Russian, and English. I don't just translate words — I carry the feeling, rhythm, and soul of your poem across languages.",
-        "keywords": "poetry translation, Ukrainian poetry translation, Russian poetry translation, literary translation, poem translator"
+        "title": "Ukrainian for Russian Speakers | Alina Zelinska",
+        "description": "Switch from Russian to Ukrainian calmly and without shame: surzhyk, false friends, pronunciation. Native tutor from Ukraine, 5.0 rating. Trial {{trial}}."
       },
-      "eyebrow": "Poetry translation",
-      "title": "Poetry translation",
-      "titleAccent": "services.",
-      "lede": "I don’t just translate words — I carry the feeling, the rhythm, and the soul of your poem across languages. Because a poem that doesn’t move you isn’t a poem anymore.",
-      "cta": "Let’s Talk About Your Project",
-      "philosophyEyebrow": "How I think about it",
-      "philosophyTitle": "My translation",
-      "philosophyAccent": "philosophy.",
-      "philosophy": [
-        "Poetry translation is sacred work. When someone trusts you with their poem, they’re trusting you with a piece of their soul. The words they chose, the rhythm they crafted, the emotions they poured in — all of it matters.",
-        "I don’t believe in literal translations. A word-for-word conversion kills the poetry. Instead, I ask: What is this poem trying to make you *feel*? What images does it paint? What music does it carry? Then I recreate that experience in the target language.",
-        "Sometimes that means changing a metaphor, adjusting a rhythm, or finding a phrase that doesn’t literally translate but *feels* right. Because at the end of the day, a translated poem should still give you chills."
-      ],
-      "pairsEyebrow": "Language pairs",
-      "pairsTitle": "Languages I",
-      "pairsAccent": "work in.",
-      "processEyebrow": "Step by step",
-      "processTitle": "My translation",
-      "processAccent": "process.",
-      "process": [
+      "schema": { "name": "Ukrainian for Russian speakers" },
+      "eyebrow": "Switching from Russian to Ukrainian",
+      "title": "Ukrainian for Russian speakers — *calmly, without shame.*",
+      "lede": "If you grew up speaking Russian and want to switch to Ukrainian — at work, at home or in your own head — you're not starting from zero. You already understand a lot. My Ukrainian lessons for Russian speakers help you actually speak it: naturally, correctly, and without feeling that everyone is waiting for a mistake.",
+      "sections": [
         {
-          "title": "Initial Read & Analysis",
-          "description": "I read your poem multiple times, understanding not just the words but the emotion, rhythm, and deeper meaning."
+          "kind": "cards",
+          "eyebrow": "Why a separate approach",
+          "title": "Russian helps you understand — *and trips you up when you speak.*",
+          "intro": "The languages are close enough to feel easy and different enough to catch you out. That's why switching needs its own plan.",
+          "items": [
+            { "title": "You understand more than you think", "text": "Most Russian speakers understand everyday Ukrainian almost immediately. We build on that instead of starting with the alphabet." },
+            { "title": "The similar words are the hard part", "text": "Calques, false friends and surzhyk feel natural because they sound almost right. We learn to notice them — and replace them." },
+            { "title": "It's habit, not ability", "text": "Switching is about practice in a safe place. We speak Ukrainian from the first minute, at a pace that feels comfortable." }
+          ]
         },
         {
-          "title": "First Draft",
-          "description": "I translate the content while maintaining the poetic structure, meter, and emotional core."
+          "kind": "rows",
+          "eyebrow": "Ukrainian vs Russian",
+          "title": "The traps Russian speakers *fall into.*",
+          "intro": "These aren't signs of a poor education — they're what happens when two close languages meet. Once you see them, they're easy to fix.",
+          "items": [
+            { "title": "Surzhyk", "text": "Russian words and endings slipping into Ukrainian sentences, often without noticing.", "example": { "wrong": "Я не понімаю", "right": "Я не розумію" } },
+            { "title": "Calques", "text": "Phrases translated word for word from Russian that sound almost right — but aren't.", "example": { "wrong": "приймати участь", "right": "брати участь" } },
+            { "title": "False friends", "text": "Words that exist in both languages with different meanings: «неділя» is Sunday, not a week; «час» is time, not an hour.", "example": { "wrong": "Побачимося через неділю", "right": "Побачимося через тиждень" } },
+            { "title": "The vocative case", "text": "Ukrainian has a special form for addressing people, and it's the first thing native speakers notice.", "example": { "wrong": "Олена, привіт!", "right": "Олено, привіт!" } },
+            { "title": "Pronunciation", "text": "«и» isn't «ы», «г» is soft and breathy, «в» at the end of a word sounds close to a short «у», and «щ» is «шч». Small things that make you sound natural." }
+          ]
         },
         {
-          "title": "Rhythm Matching",
-          "description": "I refine the translation to match the original's rhythm, flow, and musicality — this is where poetry translation becomes an art."
-        },
-        {
-          "title": "Cultural Adaptation",
-          "description": "I adapt cultural references and metaphors so they resonate in the target language without losing authenticity."
-        },
-        {
-          "title": "Final Polish",
-          "description": "Multiple revisions until the translated poem gives the same chills as the original."
+          "kind": "cards",
+          "eyebrow": "Switching in real life",
+          "title": "Switch from Russian to Ukrainian *where it matters to you.*",
+          "items": [
+            { "title": "At work", "text": "Meetings, emails, calls and presentations — we start with the vocabulary you need most often." },
+            { "title": "In the family", "text": "Speaking Ukrainian with your children or partner, reading together, answering the questions kids ask." },
+            { "title": "In your own head", "text": "Thinking, counting and texting in Ukrainian — the last step, and the one that makes the switch feel like yours." },
+            { "title": "Before an exam", "text": "If you need the state language proficiency exam, we can add exam practice to your plan." }
+          ]
         }
       ],
-      "translateTitle": "What I",
-      "translateAccent": "translate.",
-      "translate": [
-        "Personal poetry collections",
-        "Literary works for publication",
-        "Song lyrics with emotional depth",
-        "Romantic poems and love letters",
-        "Cultural and historical poetry",
-        "Modern experimental poetry",
-        "Children's poetry and rhymes",
-        "Memorial and tribute poems"
-      ],
-      "closingTitle": "Have a poem that needs",
-      "closingAccent": "translating?",
-      "closingSub": "Whether it’s a personal collection, a literary work for publication, or a single poem close to your heart — I’ll treat it with the care and artistry it deserves."
+      "prices": {
+        "eyebrow": "Prices",
+        "title": "A sensible way *to start.*",
+        "intro": "Begin with a {{trialMinutes}}-minute trial for {{trial}}. For switching, the {{packLessons}}-lesson pack works well: {{packLesson}} per lesson ({{packSaving}}% off) and five focused sessions on the traps that matter most for you."
+      },
+      "reviews": { "eyebrow": "Student reviews", "title": "What students *say.*" },
+      "faq": {
+        "title": "Questions about *switching to Ukrainian.*",
+        "items": [
+          { "q": "I've spoken Russian all my life. Is it too late to switch?", "a": "Not at all. You already understand most of what you hear, and that's a huge head start. What's left is speaking practice and learning to notice the Russian habits — both are very doable at any age." },
+          { "q": "I'm embarrassed to speak Ukrainian badly. Is that normal?", "a": "Completely. Many people feel that way, and that's exactly why these lessons are a calm, private space. No one is judging you here — mistakes are simply the material we work with." },
+          { "q": "What is surzhyk, and is it a problem?", "a": "Surzhyk is a mix of Ukrainian and Russian. It isn't a crime, but if you want to speak clean Ukrainian, it helps to know where it creeps in. We learn to notice it and replace it with natural Ukrainian words." },
+          { "q": "How long does switching take?", "a": "It depends on how much Ukrainian you already hear and how often you speak. The five-lesson pack is a good start: by the end you'll know your own typical mistakes and how to fix them." },
+          { "q": "Are the lessons in Ukrainian or Russian?", "a": "In Ukrainian from the start, at a pace that's comfortable for you. If a rule needs explaining, I can switch to Russian for a moment — whatever helps you move forward." }
+        ]
+      },
+      "closing": {
+        "kicker": "Своя мова",
+        "title": "Make Ukrainian *your own.*",
+        "sub": "Book a {{trialMinutes}}-minute trial for {{trial}}. We'll talk about where you want to use Ukrainian and make a calm, realistic plan."
+      }
     },
-    "creative": {
-      "crumb": "Creative Writing",
+
+    "english": {
+      "crumb": "English lessons",
       "seo": {
-        "title": "Creative Writing & Ghostwriting Services | Alina Zelinska",
-        "description": "Multilingual creative writer and ghostwriter. Brand copy, social media content, song lyrics, poetry — words that stick and stories that sparkle.",
-        "keywords": "creative writing, ghostwriter, multilingual copywriter, Ukrainian writer, brand storytelling"
+        "title": "English Lessons for Ukrainian Speakers | Alina Zelinska",
+        "description": "English lessons online with a tutor who speaks Ukrainian and Russian and knows where you get stuck. Adults, speaking-first. 5.0 rating. Trial {{trial}}."
       },
-      "eyebrow": "Creative writing & ghostwriting",
-      "title": "Words that stick, stories that",
-      "titleAccent": "sparkle.",
-      "lede": "From brand copy to original poetry, from social media captions to song lyrics — if it involves words, I’m genuinely in. I write in three languages and bring a multilingual ear to everything I create.",
-      "emailMe": "Email Me Directly",
-      "writeTitle": "What I",
-      "writeAccent": "write.",
-      "items": [
+      "schema": { "name": "English lessons for Ukrainian and Russian speakers" },
+      "eyebrow": "English with a teacher who speaks your language",
+      "title": "English lessons for Ukrainian *and Russian speakers.*",
+      "lede": "English lessons for Ukrainian speakers — and Russian speakers — with a teacher from Ukraine who has walked the same path. I know exactly where you'll stumble, I can explain a tricky rule in your own language when it helps, and we speak from the very first lesson.",
+      "sections": [
         {
-          "title": "Brand Copy & Content",
-          "description": "Website copy, about pages, service descriptions, taglines — words that make people stop scrolling and actually read. I write copy that sounds like a real human wrote it, because a real human did."
+          "kind": "cards",
+          "eyebrow": "Why learn with me",
+          "title": "An English tutor who *speaks Ukrainian and Russian.*",
+          "intro": "Most of the lesson happens in English. But you're never lost, never embarrassed and never stuck on a rule that just won't click.",
+          "items": [
+            { "title": "I speak your language", "text": "When a rule doesn't make sense in English, I explain it in Ukrainian or Russian in a sentence — and we get back to speaking." },
+            { "title": "I know your typical mistakes", "text": "Articles, tenses, prepositions, word order — the mistakes Ukrainian and Russian speakers make come from our own grammar. I know them from the inside." },
+            { "title": "No judgement", "text": "Many adults still carry a fear of speaking from school. Here, mistakes are part of the process: we fix them calmly and move on." },
+            { "title": "Speaking first", "text": "Every lesson is built around talking — about your work, your plans, your life — with grammar exactly where it helps you speak better." }
+          ]
         },
         {
-          "title": "Social Media Content",
-          "description": "Captions, carousel posts, video scripts, and content that actually gets engagement. Whether you need educational content, brand storytelling, or just posts that don't sound robotic — I've got you."
+          "kind": "rows",
+          "eyebrow": "Typical mistakes",
+          "title": "Where Ukrainian speakers *stumble in English.*",
+          "intro": "These come straight from Ukrainian and Russian grammar — which is why a teacher who knows both can untangle them faster.",
+          "items": [
+            { "title": "Articles", "text": "Ukrainian and Russian have no «a» or «the», so they're easy to leave out — or to put everywhere.", "example": { "wrong": "I bought new phone.", "right": "I bought a new phone." } },
+            { "title": "Tenses", "text": "There's no Present Perfect in our languages, so «since» and «for» get used with the wrong tense.", "example": { "wrong": "I live here since 2022.", "right": "I've lived here since 2022." } },
+            { "title": "Prepositions", "text": "We translate «від», «на» and «в» literally — or leave a preposition out when English needs one.", "example": { "wrong": "It depends from the weather.", "right": "It depends on the weather." } },
+            { "title": "Word-for-word phrases", "text": "«Я згоден» and «я согласен» look like they need «am» — they don't.", "example": { "wrong": "I am agree.", "right": "I agree." } },
+            { "title": "False friends", "text": "Words that look familiar but mean something else: «магазин» isn't a magazine, «симпатичний» isn't sympathetic.", "example": { "wrong": "Let's go to the magazine.", "right": "Let's go to the shop." } },
+            { "title": "Pronunciation", "text": "th, w and v, and the short and long vowels in ship and sheep — sounds Ukrainian doesn't separate. We practise them until they stop feeling strange." }
+          ]
         },
         {
-          "title": "Song Lyrics",
-          "description": "Original songs in Ukrainian, Russian, or English. From heartfelt ballads to catchy hooks, I write lyrics that tell stories and make people feel something."
-        },
-        {
-          "title": "Poetry & Literary Work",
-          "description": "Original poetry, creative essays, literary pieces — writing that moves people. I write in three languages and love projects that let me stretch creatively."
-        },
-        {
-          "title": "Ghostwriting",
-          "description": "Blog posts, articles, thought leadership pieces — I'll write in your voice, for your audience, with your message. You get the credit, I get the creative satisfaction."
-        },
-        {
-          "title": "Multilingual Projects",
-          "description": "Need content in multiple languages? I can write or adapt copy across Ukrainian, Russian, English, Spanish, and German — maintaining brand voice across cultures."
+          "kind": "cards",
+          "eyebrow": "Your goal",
+          "title": "English for work, relocation *or simply confidence.*",
+          "items": [
+            { "title": "For work", "text": "Interviews, emails, meetings and calls with colleagues — the English your job actually asks of you." },
+            { "title": "For life abroad", "text": "The doctor, the landlord, your child's school, paperwork — everyday situations where you want to feel calm, not lost." },
+            { "title": "Starting again", "text": "Studied English at school and forgot it? We rebuild the basics quickly and get you speaking again — adults are welcome at any level." },
+            { "title": "Before an exam", "text": "We build the foundation any exam needs: grammar, vocabulary, writing and, above all, speaking with confidence." }
+          ]
         }
       ],
-      "styleEyebrow": "Voice",
-      "styleTitle": "My writing",
-      "styleAccent": "style.",
-      "style": [
-        "Warm and conversational (like we're having coffee)",
-        "Authentic and unpretentious (no corporate jargon)",
-        "Culturally aware (I bring multilingual perspective)",
-        "Story-driven (people remember stories, not facts)",
-        "Emotionally resonant (words should make you feel something)",
-        "Rhythmic and musical (even prose should have flow)"
+      "prices": {
+        "eyebrow": "Prices",
+        "title": "Clear prices, *no surprises.*",
+        "intro": "Start with a {{trialMinutes}}-minute trial for {{trial}} — we'll talk, I'll check your level and suggest a plan. Then pay per lesson or save {{packSaving}}% with the five-lesson pack."
+      },
+      "reviews": { "eyebrow": "Student reviews", "title": "What my students *say.*" },
+      "faq": {
+        "title": "Questions about *English lessons.*",
+        "items": [
+          { "q": "Will the lessons be in English or in my language?", "a": "Mostly in English — that's how you learn to speak. But when a rule or word isn't clear, I explain it in Ukrainian or Russian, so you never spend a lesson feeling lost." },
+          { "q": "I forgot everything from school. Can I still start?", "a": "Of course. We start exactly where you are, even from the basics, and you'll be speaking simple English from the first lesson." },
+          { "q": "I'm afraid of speaking. What if I make mistakes?", "a": "That's the most common feeling, and it's the reason these lessons exist. Mistakes are expected and welcome — I correct them calmly and explain why, without judgement." },
+          { "q": "Can you help with English for work or moving abroad?", "a": "Yes. Tell me about your job or your situation, and we'll practise the conversations, emails and vocabulary you really need." },
+          { "q": "Do you prepare students for IELTS or other exams?", "a": "We can work on the skills every exam relies on — grammar, vocabulary, writing and speaking. Tell me which exam and when in the trial lesson, and I'll tell you honestly how I can help." },
+          { "q": "How often should we meet?", "a": "Twice a week is ideal if you want to start speaking soon; once a week works for steady progress. The five-lesson pack helps keep that rhythm." }
+        ]
+      },
+      "closing": {
+        "kicker": "Let's talk",
+        "title": "Start speaking English *with confidence.*",
+        "sub": "Book a {{trialMinutes}}-minute trial for {{trial}}. We'll talk about your goals — in English, and a little in your language if you need it."
+      }
+    },
+
+    "russian": {
+      "crumb": "Russian lessons",
+      "seo": {
+        "title": "Russian Tutor Online, Native Speaker | Alina Zelinska",
+        "description": "Practical Russian lessons online for beginners and conversation, with a native speaker from Ukraine. 5.0 rating, 3,500+ lessons. Trial {{trial}}."
+      },
+      "schema": { "name": "Russian lessons online" },
+      "eyebrow": "Practical Russian for foreigners",
+      "title": "A native-speaker Russian tutor online, *practical from day one.*",
+      "lede": "I grew up in Ukraine speaking both Ukrainian and Russian, and I teach Russian the way people use it today — for conversation, work, travel and family. Patient, clear lessons for beginners and for anyone who wants to finally start speaking.",
+      "sections": [
+        {
+          "kind": "cards",
+          "eyebrow": "Who it's for",
+          "title": "Russian lessons for beginners *and conversation.*",
+          "intro": "Lessons are one-to-one, so we start wherever you are and focus on what you'll use.",
+          "items": [
+            { "title": "Complete beginners", "text": "Cyrillic, sounds and everyday phrases from the first lesson — calm and step by step." },
+            { "title": "Conversational Russian", "text": "You know some grammar but freeze when speaking? We practise real conversations until talking feels natural." },
+            { "title": "Work and family", "text": "Colleagues, clients or a partner's family who speak Russian — we focus on the situations you're really in." },
+            { "title": "Past the plateau", "text": "Intermediate and stuck? We work on the grammar that holds you back and widen your vocabulary through conversation." }
+          ]
+        },
+        {
+          "kind": "checks",
+          "eyebrow": "Inside the lessons",
+          "title": "What *we work on.*",
+          "items": [
+            "Speaking practice in every lesson",
+            "Grammar explained simply: cases, verbs of motion, aspect",
+            "Reading and writing in Cyrillic",
+            "Clear pronunciation and stress",
+            "Everyday vocabulary for your own goals",
+            "Formal and informal speech — when to use which",
+            "Listening to natural speed and real accents",
+            "Notes and new words after every lesson"
+          ]
+        },
+        {
+          "kind": "rows",
+          "eyebrow": "How it works",
+          "title": "Three steps *to your first lesson.*",
+          "items": [
+            { "title": "A trial lesson", "text": "{{trialMinutes}} minutes for {{trial}}. We talk about your goals and I check your level." },
+            { "title": "A plan for you", "text": "I suggest what to focus on and how often to meet." },
+            { "title": "Regular lessons", "text": "60-minute video lessons at times that suit you, with notes after each one." }
+          ]
+        }
       ],
-      "closingTitle": "Let’s create something",
-      "closingAccent": "beautiful.",
-      "closingSub": "Whether you need a single piece or ongoing content creation, I’d love to hear about your project. Let’s make something that actually sounds like you."
+      "prices": {
+        "eyebrow": "Prices",
+        "title": "Simple, *transparent prices.*",
+        "intro": "Start with a {{trialMinutes}}-minute trial for {{trial}}. After that, pay per lesson or save {{packSaving}}% with the five-lesson pack."
+      },
+      "reviews": { "eyebrow": "Student reviews", "title": "What Russian students *say.*" },
+      "faq": {
+        "title": "Questions about *Russian lessons.*",
+        "items": [
+          { "q": "Is Russian hard to learn?", "a": "It takes patience — cases and verbs of motion need time — but with clear explanations and regular speaking practice it becomes very manageable." },
+          { "q": "Why learn Russian with a Ukrainian?", "a": "I speak Russian natively and teach it as a practical tool for communication. You get a patient teacher who explains clearly — and if you're curious about Ukrainian too, I teach that as well." },
+          { "q": "Do you teach complete beginners?", "a": "Yes. We start with Cyrillic and simple phrases and build from there, at your pace." },
+          { "q": "How soon will I be able to hold a conversation?", "a": "Everyone moves at a different pace, but speaking regularly is what makes the difference — so we speak in every lesson, from the very first one." },
+          { "q": "How do online lessons work?", "a": "We meet by video call at a time that suits you. All you need is a laptop or phone and headphones." }
+        ]
+      },
+      "closing": {
+        "kicker": "Почнімо?",
+        "title": "Ready to start *speaking Russian?*",
+        "sub": "Book a {{trialMinutes}}-minute trial for {{trial}}. We'll talk about your goals and I'll suggest a plan — no commitment afterwards."
+      }
+    },
+
+    "speakingClub": {
+      "crumb": "Speaking club",
+      "instagram": "See dates on Instagram",
+      "askNext": "Ask about the next session",
+      "seo": {
+        "title": "Ukrainian Speaking Club Online | Alina Zelinska",
+        "description": "Practise speaking Ukrainian in a small online group of 3–4 learners, led by native tutor Alina Zelinska. 60-minute themed sessions, A2+. {{club}} per session."
+      },
+      "schema": { "name": "Ukrainian speaking club online" },
+      "eyebrow": "Small-group conversation practice",
+      "title": "Ukrainian speaking club *online.*",
+      "lede": "An online Ukrainian conversation group for learners at A2 level and up: {{clubMinutes}} minutes of real conversation with three or four people, a new topic each time and gentle corrections along the way.",
+      "ledger": {
+        "label": "Each session",
+        "items": [
+          { "value": "3–4", "label": "students at most" },
+          { "value": "{{clubMinutes}}", "label": "minutes of guided conversation" },
+          { "value": "{{club}}", "label": "per session", "accent": true }
+        ]
+      },
+      "sections": [
+        {
+          "kind": "cards",
+          "eyebrow": "The format",
+          "title": "A Ukrainian conversation group *that feels friendly.*",
+          "items": [
+            { "title": "Small groups", "text": "Three or four learners — enough to hear different voices, few enough for everyone to speak a lot." },
+            { "title": "Guided conversation", "text": "I bring the topic and the useful words, keep the conversation moving and correct gently, noting the mistakes worth remembering." },
+            { "title": "A new theme every time", "text": "Holidays, travel, food, plans — there's always something to talk about, and new vocabulary to go with it." },
+            { "title": "For A2 and up", "text": "You'll get the most from the club once you can hold a simple conversation." }
+          ]
+        },
+        {
+          "kind": "checks",
+          "eyebrow": "From past sessions",
+          "title": "Topics we've *talked about.*",
+          "items": [
+            "Christmas traditions and holiday vocabulary",
+            "New Year's resolutions — and the future tense",
+            "Travel stories and planning the next trip",
+            "Food, recipes and ordering in a restaurant"
+          ]
+        },
+        {
+          "kind": "rows",
+          "eyebrow": "Is it for you?",
+          "title": "Practise speaking Ukrainian *with others.*",
+          "items": [
+            { "title": "Intermediate learners", "text": "who want more speaking practice between one-to-one lessons." },
+            { "title": "Advanced learners", "text": "who want to keep their Ukrainian fluent and hear how others express themselves." },
+            { "title": "Anyone who loves Ukrainian", "text": "and wants a friendly group to practise with." }
+          ],
+          "note": "The club works best from A2 level. If you're just starting out, begin with one-to-one lessons — we'll get you ready for the group."
+        }
+      ],
+      "prices": {
+        "eyebrow": "Price",
+        "title": "Pay per *session.*",
+        "intro": "No subscription: {{club}} for a {{clubMinutes}}-minute session. Dates and sign-up links are announced on Instagram."
+      },
+      "reviews": { "eyebrow": "Student reviews", "title": "What learners say about *our conversations.*" },
+      "faq": {
+        "title": "Questions about *the speaking club.*",
+        "items": [
+          { "q": "What level do I need?", "a": "A2 or higher — you should be able to talk about yourself and hold a simple conversation. If you're not sure, message me and we'll check." },
+          { "q": "When are the sessions and how do I sign up?", "a": "I announce upcoming sessions on Instagram (@alin.a.zelinska) with the date, time and sign-up link. You can also message me to get on the list." },
+          { "q": "What happens in a session?", "a": "We warm up, talk through a theme in pairs and as a group, and finish with the most useful words and corrections from the conversation." },
+          { "q": "Can I combine the club with one-to-one lessons?", "a": "Yes, and it works well: in one-to-one lessons we work on your specific gaps, and in the club you practise using Ukrainian with other people." }
+        ]
+      },
+      "closing": {
+        "kicker": "До зустрічі!",
+        "title": "Join the next *conversation.*",
+        "sub": "Upcoming sessions are announced on Instagram — follow for dates and sign-up links, or message me to get on the list."
+      }
+    },
+
+    "writing": {
+      "crumb": "Translation & writing",
+      "cta": "Tell me about your project",
+      "email": "Email me",
+      "seo": {
+        "title": "Ukrainian Poetry Translation & Writing | Alina Zelinska",
+        "description": "Ukrainian poetry and literary translation, song lyrics and bilingual writing from poet and translator Alina Zelinska. Tell me about your project."
+      },
+      "schema": { "name": "Ukrainian poetry and literary translation" },
+      "eyebrow": "Translation & writing",
+      "title": "Ukrainian poetry translation *that still sounds like poetry.*",
+      "lede": "I'm a poet and translator working between Ukrainian, English and Russian. I translate poems, songs and books so they keep their meaning, rhythm and feeling — and I write original texts in all three languages.",
+      "ledger": {
+        "label": "At a glance",
+        "items": [
+          { "value": "3", "label": "languages I write and translate in: Ukrainian, English, Russian" },
+          { "value": "1", "label": "published book translation, Ukrainian → English", "accent": true }
+        ]
+      },
+      "sections": [
+        {
+          "kind": "cards",
+          "eyebrow": "What I do",
+          "title": "Literary translation, lyrics *and bilingual writing.*",
+          "items": [
+            { "title": "Poetry translation", "text": "Ukrainian to English literary translation — and any direction between Ukrainian, English and Russian. Single poems, personal collections, work for publication." },
+            { "title": "Song lyrics", "text": "Song lyrics translation that can still be sung: rhyme, rhythm and emotional punch carried over. I also write original lyrics in all three languages." },
+            { "title": "Books and essays", "text": "Longer literary and cultural texts, translated with care for terminology, context and the author's voice." },
+            { "title": "Bilingual ghostwriting", "text": "Texts in your voice for your website, posts or personal projects — in Ukrainian, English or Russian." }
+          ],
+          "note": "I also advise teams building Ukrainian or Russian learning apps on lesson content and learning design, drawing on 3,500+ lessons with real students."
+        },
+        {
+          "kind": "feature",
+          "eyebrow": "Featured translation",
+          "title": "A book I *translated.*",
+          "chip": "Ukrainian → English",
+          "name": "Management in Times of War",
+          "original": "Менеджмент у воєнний час",
+          "meta": [
+            { "label": "Translation", "value": "Ukrainian → English" },
+            { "label": "Status", "value": "Published" }
+          ],
+          "paragraphs": [
+            "A Ukrainian book on leadership and management in a crisis. The job was to carry every idea — and its urgency — into clear English: precise terminology, cultural context a foreign reader can follow, and the author's voice intact.",
+            "It's the kind of work I care about most: Ukrainian voices, heard beyond the language barrier."
+          ]
+        },
+        {
+          "kind": "rows",
+          "eyebrow": "Process",
+          "title": "How I *work.*",
+          "items": [
+            { "title": "Read and talk", "text": "You tell me about the text, its readers and where it will live. I read it closely — meaning, images, sound." },
+            { "title": "First draft", "text": "I translate meaning and form together, so the text works as a poem or song, not just as information." },
+            { "title": "Rhythm and sound", "text": "I read it aloud and refine the rhythm and music; for lyrics, I check that every line can be sung." },
+            { "title": "Your review", "text": "We go through the translation together, and I explain my choices and revise until it feels right." }
+          ]
+        }
+      ],
+      "faq": {
+        "title": "Questions about *translation and writing.*",
+        "items": [
+          { "q": "How much does a translation cost?", "a": "It depends on the length, the form and the deadline — a single poem is very different from a book. Send me the text or a sample and I'll reply with a quote." },
+          { "q": "Which languages do you work in?", "a": "Ukrainian, English and Russian, in any direction. Ukrainian is my native language, and I write poetry in all three." },
+          { "q": "Can you translate song lyrics so they can be sung?", "a": "Yes. I keep the syllable count, stresses and rhyme where possible. Sometimes the wording shifts slightly to fit the melody — I always explain those choices." },
+          { "q": "How long does it take?", "a": "It depends on the project. When I send you a quote, I'll include a realistic date." }
+        ]
+      },
+      "closing": {
+        "kicker": "Поговорімо?",
+        "title": "Have a text that needs *the right words?*",
+        "sub": "Tell me about your poem, song or book — the language, the length and your deadline — and I'll reply with how I'd approach it and a quote."
+      }
     }
   }
 }

@@ -1,33 +1,26 @@
 {
   "home": {
     "seo": {
-      "title": "Alina Zelinska | Native Ukrainian Tutor Online | 5.0★ Rating",
-      "description": "Learn Ukrainian with Alina Zelinska, a native Ukrainian tutor teaching online worldwide. 500+ students, 5.0★ rating, 3,500+ lessons. Book your first lesson today.",
-      "keywords": "Ukrainian tutor, learn Ukrainian online, Ukrainian lessons, native Ukrainian teacher, Ukrainian language, Ukrainian course"
+      "title": "Ukrainian Tutor Online — Learn Ukrainian | Alina Zelinska",
+      "description": "Learn Ukrainian online with a native tutor from Ukraine. Perfect 5.0 rating, 3,500+ lessons. Try a {{minutes}}-minute trial for {{price}} and start speaking."
     },
     "hero": {
-      "eyebrow": "Ukrainian · Russian · English — online, worldwide",
+      "eyebrow": "Ukrainian tutor online · Alina Zelinska",
       "title": [
         "Learn Ukrainian",
-        "like a love",
-        "language."
+        "online with a",
+        "*native tutor.*"
       ],
       "ledePrefix": "I’m ",
       "ledeName": "Alina Zelinska",
-      "ledeSuffix": " — native tutor, poet and translator.",
-      "bookFirst": "Book your first lesson",
-      "portraitAlt": "Alina Zelinska",
+      "ledeSuffix": " — a Ukrainian tutor from Ukraine, poet and translator. Private online lessons for beginners, heritage speakers and anyone who wants to finally speak Ukrainian, not just study it.",
+      "proof": "Perfect 5.0 rating from students in 30+ countries, verified on italki.",
+      "bookTrial": "Book a {{price}} trial",
+      "seePrices": "See prices",
+      "portraitAlt": "Alina Zelinska, Ukrainian tutor",
+      "note": "Привіт!",
+      "noteLang": "uk",
       "noteGloss": "pryvit — hello"
-    },
-    "intro": {
-      "animated": [
-        "I teach Ukrainian like it's a love language 🫶",
-        "I turn grammar into something you actually enjoy",
-        "I write poems in three languages (and counting!)",
-        "I make Russian click — even for total beginners",
-        "I've taught 3,500+ lessons to students in 30+ countries",
-        "I consult on language learning apps ✨"
-      ]
     },
     "stats": [
       {
@@ -48,86 +41,77 @@
       }
     ],
     "badge": "Perfect 5.0 rating ✦ 3,500+ lessons ✦ 500+ students ✦ ",
-    "lexiconLabel": "Ukrainian words",
-    "viewTestimonials": "See What Students Say →",
-    "getInTouch": "Say Hello →",
     "manifesto": {
       "eyebrow": "How I teach",
       "text": "My lessons aren’t lectures. They’re <em>conversations</em> — full of culture, stories, humour and real life, built around <em>your</em> pace, <em>your</em> interests and <em>your</em> goals.",
       "signature": "Alina",
       "readStory": "Read my story"
     },
-    "whatIOffer": {
-      "eyebrow": "What’s in my world",
-      "title": "What's In My World",
-      "subtitle": "Languages are my love language — let me share them with you ✨",
-      "conversationalUkrainian": {
-        "title": "Conversational Ukrainian",
-        "description": "Master everyday speaking with real dialogues, pronunciation perfection, and confidence in social situations. Learn colloquial phrases, idioms, and the rhythm of natural speech. Perfect for travelers, new residents, and anyone who wants to actually *sound* Ukrainian. Lessons adapt to your interests — whether that's food, culture, history, or just surviving small talk."
-      },
-      "professionalUkrainian": {
-        "title": "Professional & Business Ukrainian",
-        "description": "From formal emails to business meetings, pitch your ideas in Ukrainian with polish and precision. Ideal for professionals relocating to Ukraine, expats working with Ukrainian colleagues, or anyone building a career connection to Ukrainian-speaking markets. We cover terminology, etiquette, and the unwritten rules of professional Ukrainian culture."
-      },
-      "examPrep": {
-        "title": "Exam Prep & Structured Learning",
-        "description": "Preparing for the Ukrainian state language exam (for citizenship or public service), moving to Ukraine, or need a formal curriculum? I design structured lessons with clear milestones, grammar foundations, and steady progress. Every lesson builds on the last. You'll receive homework, progress tracking, and the confidence to sit any Ukrainian language exam."
-      },
-      "russianLessons": {
-        "title": "Russian Lessons",
-        "description": "Master Russian with a native speaker. From complete beginner to advanced fluency — personalized lessons that make Russian click."
-      },
-      "poetryTranslation": {
-        "title": "Poetry Translation",
-        "description": "I translate poetry between Ukrainian, Russian, and English — carrying not just the words but the rhythm, the feeling, and the soul of what was written. Because a poem that doesn't move you isn't a poem anymore."
-      },
-      "creativeWriting": {
-        "title": "Creative Writing",
-        "description": "From brand copy to original poetry, from social media content to song lyrics — if it involves words, I'm in. I write in three languages and bring a multilingual ear to everything I create."
-      }
-    },
-    "whoITeach": {
-      "eyebrow": "Who I teach",
-      "title": "There's a Lesson Here For You",
-      "subtitle": "Whether you're a complete beginner, a heritage speaker reconnecting with your roots, or polishing your skills for work or travel — my lessons adapt to you, not the other way around.",
+    "offers": {
+      "eyebrow": "Lessons",
+      "title": "Ukrainian lessons with a *native speaker*",
+      "subtitle": "One-to-one or in a small group, always online, always shaped around what you need Ukrainian for.",
+      "from": "from {{price}} per lesson",
+      "more": "Learn more",
       "items": [
         {
-          "title": "Total Beginners",
-          "description": "No experience needed. We start exactly where you are, at a pace that feels good."
+          "to": "/services/ukrainian-lessons",
+          "price": "lesson",
+          "tag": "Українська",
+          "title": "Ukrainian lessons",
+          "text": "Private lessons from your very first word to fluent conversation — including state language exam preparation.",
+          "who": "Beginners · Heritage speakers · Exam prep"
         },
         {
-          "title": "Heritage Speakers",
-          "description": "Grew up hearing Ukrainian or Russian at home but never learned formally? Let's make it official."
+          "to": "/services/speaking-club",
+          "price": "club",
+          "tag": "Розмова",
+          "title": "Speaking club",
+          "text": "Practise speaking Ukrainian in a small group of 3–4, with a new topic every session. For A2 level and up.",
+          "who": "Conversation · Small group · A2+"
         },
         {
-          "title": "Intermediate & Beyond",
-          "description": "You've got the basics. Now let's make you actually fluent — and confident."
-        },
-        {
-          "title": "Professionals & Travellers",
-          "description": "Need Ukrainian or Russian for work, relocation, or travel? I'll teach you the practical, real-world language that textbooks skip - from business emails to ordering coffee like a local."
+          "to": "/services/russian-lessons",
+          "price": "lesson",
+          "tag": "Русский",
+          "title": "Russian lessons",
+          "text": "Practical, conversational Russian for beginners and returning learners — clear explanations and real-life language.",
+          "who": "Beginners · Conversation · Travel & work"
         }
-      ]
+      ],
+      "extra": {
+        "text": "I also translate poetry and song lyrics and write in Ukrainian, English and Russian.",
+        "link": "Translation & writing",
+        "to": "/services/writing-translation"
+      }
     },
-    "voices": {
-      "showReview": "Show review from {{name}}",
-      "allReviews": "All reviews"
+    "prices": {
+      "eyebrow": "Prices",
+      "title": "Simple, *honest* prices",
+      "subtitle": "Start with a {{minutes}}-minute trial for {{price}}. After that, book single lessons or save with a 5-lesson pack."
     },
-    "quiz": {
-      "eyebrow": "Thirty seconds",
-      "title": "Find your <em>perfect</em> package",
-      "subtitle": "Not sure where to start? Answer three questions and I’ll recommend the best way in."
+    "reviews": {
+      "eyebrow": "Reviews",
+      "title": "What my *students* say",
+      "indices": [8, 4, 0]
     },
-    "tiktok": {
-      "eyebrow": "Bite-sized lessons",
-      "title": "Come learn with me <em>on TikTok</em>",
-      "subtitle": "I post bite-sized Ukrainian, Russian & English lessons that make learning feel like scrolling your favourite feed. Over 30+ countries already learning with me!",
-      "viewVideos": "Watch My Videos →"
+    "video": {
+      "eyebrow": "Say hello",
+      "title": "Meet me in *two minutes*",
+      "text": "Before you book, see how I speak, how I explain and what a lesson with me feels like."
+    },
+    "learn": {
+      "eyebrow": "Learn",
+      "title": "Free guides and articles",
+      "text": "Honest, practical articles on learning Ukrainian — from the differences between Ukrainian and Russian to the words English simply doesn’t have.",
+      "link": "Browse the articles"
     },
     "closing": {
+      "word": "Почнімо.",
+      "wordLang": "uk",
       "title": "Let’s <em>begin.</em>",
       "sub": "One conversation is all it takes. Book a trial lesson, or just say hello — I reply to every message.",
-      "book": "Book a lesson"
+      "contact": "Say hello"
     }
   }
 }

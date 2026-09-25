@@ -1,0 +1,109 @@
+{
+  "title": "How to Learn Ukrainian Online: A Native Tutor's Guide",
+  "description": "How to learn Ukrainian online, step by step: the alphabet, the sounds, the grammar to learn first, useful resources and when a tutor helps most.",
+  "h1": "How to learn Ukrainian online: a native tutor's honest guide",
+  "lede": "Whether you want to learn Ukrainian for your family, your partner, a move or simply because you care about the country, this is the route I recommend after more than 3,500 lessons with learners from over 30 countries.",
+  "datePublished": "2026-09-25",
+  "readingMinutes": 7,
+  "service": "/services/ukrainian-lessons",
+  "exampleLabels": { "a": "Ukrainian", "b": "English" },
+  "sections": [
+    {
+      "h2": "Start with why: it decides how you learn",
+      "blocks": [
+        { "p": "People come to Ukrainian for very different reasons, and the best first month looks different for each of them. A **heritage learner** often understands grandma perfectly but freezes when it's time to answer. A **partner of a Ukrainian** wants to follow the conversation at family dinners and, one day, joke with the in-laws. Someone **relocating to Ukraine** needs the pharmacy, the landlord and the bank before poetry. Volunteers and professionals need their own vocabulary from day one." },
+        { "p": "So before you download an app or buy a textbook, decide what you want Ukrainian *for*. It sounds obvious, but it changes which words you learn first, how much grammar you need early on, and whether you should focus on listening, speaking or reading." },
+        { "tip": "Finish this sentence and keep it somewhere you'll see it: “In three months I want to be able to…”. Make it concrete — “order in a café and chat with my partner's mum for five minutes” beats “be fluent”." }
+      ]
+    },
+    {
+      "h2": "The Ukrainian alphabet and pronunciation: weeks, not years",
+      "blocks": [
+        { "p": "Ukrainian uses the Cyrillic alphabet with 33 letters. It looks intimidating, but it's the quickest win you'll have. Some letters look and sound like English ones (А, К, М, О, Т), and a few are false friends: **В** is [v], **Н** is [n], **Р** is a rolled [r], **С** is [s], **У** is [u] and **Х** is a throaty [kh]." },
+        { "p": "These are the letters that deserve extra attention:" },
+        { "list": [
+          "**Г г** — a soft, voiced [h], breathier than the English one: *голова́* (holová, head).",
+          "**Ґ ґ** — the hard [g] of *go*: *ґа́нок* (gának, porch). It's rare, but it exists.",
+          "**И и** and **І і** — *і* is the *ee* in *see*; *и* is shorter and more relaxed, close to the *i* in *sit*. Compare *кит* (kyt, whale) and *кіт* (kit, cat).",
+          "**Ї ї** sounds like [yi] and **Є є** like [ye]: *ї́жа* (yízha, food), *Євро́па* (Yevrópa, Europe).",
+          "**Щ щ** is [shch], like the middle of *fresh cheese*: *ща́стя* (shchástya, happiness).",
+          "**Ь** — the soft sign has no sound of its own; it softens the consonant before it: *день* (den', day)."
+        ] },
+        { "p": "The good news: Ukrainian is largely written the way it sounds, and unstressed vowels keep their quality — an *о* stays an *о*. The tricky part is **stress**. It can fall on any syllable and sometimes moves when the word changes form, so learn it together with every new word from the very beginning." },
+        { "tip": "Use a dictionary that marks stress and shows every form of a word — for example Horokh (goroh.pp.ua). Say new words out loud, with the stress, before you write them down." }
+      ]
+    },
+    {
+      "h2": "Ukrainian grammar to learn first: cases and aspect",
+      "blocks": [
+        { "p": "Two features make Ukrainian grammar feel different from English: **cases** and **verbal aspect**. Neither has to be learnt all at once, and trying to memorise full tables in week one is the fastest way to lose motivation." },
+        { "h3": "Cases: seven of them, but not all at once" },
+        { "p": "In Ukrainian, nouns change their endings depending on their role in the sentence. There are seven cases, including the vocative, which you use when you call someone by name. Start with the ones you need to survive and add the rest as real sentences demand them." },
+        { "example": { "a": "Це ка́ва.", "b": "This is coffee.", "note": "Nominative — the dictionary form." } },
+        { "example": { "a": "Я п'ю ка́ву.", "b": "I'm drinking coffee.", "note": "Accusative — кава becomes каву when it's the object." } },
+        { "example": { "a": "Я живу́ в Ки́єві.", "b": "I live in Kyiv.", "note": "Locative — Київ becomes Києві after в / у (in)." } },
+        { "example": { "a": "Оле́но, приві́т!", "b": "Hi, Olena!", "note": "Vocative — Олена becomes Олено when you address her." } },
+        { "h3": "Aspect: in progress or done" },
+        { "p": "Most Ukrainian verbs come in pairs. The **imperfective** describes a process or a habit; the **perfective** describes one completed result. Think *чита́ти / прочита́ти* (to read / to read through), *писа́ти / написа́ти* (to write / to write down), *роби́ти / зроби́ти* (to do / to get done)." },
+        { "example": { "a": "Я чита́ла кни́жку ці́лий ве́чір.", "b": "I was reading a book all evening.", "note": "Imperfective — the process, no result promised." } },
+        { "example": { "a": "Я прочита́ла кни́жку за ве́чір.", "b": "I read the (whole) book in one evening.", "note": "Perfective — the book is finished." } },
+        { "p": "Learn verbs in pairs from the start and ask one question every time: *am I talking about the process or the result?* That habit alone clears up a lot of confusion later." }
+      ]
+    },
+    {
+      "h2": "How long does it take to learn Ukrainian?",
+      "blocks": [
+        { "p": "The honest answer: it depends on how many hours you put in, how regularly, and which languages you already know. If you speak Polish, Czech or Russian, you start with a real head start. If Ukrainian is your first Slavic language, expect it to take longer than Spanish or French would — the grammar is richer and far fewer words look familiar." },
+        { "p": "What I see again and again is that **consistency beats intensity**. Twenty minutes every day plus regular speaking practice moves you further than a heroic weekend followed by a silent month. Reading Cyrillic comes quickly; understanding fast, natural speech is the part that needs patience." }
+      ]
+    },
+    {
+      "h2": "Resources to learn Ukrainian online",
+      "blocks": [
+        { "list": [
+          "**An app for daily contact.** Duolingo has a Ukrainian course. It's good for building a habit and basic vocabulary, but it won't teach you to hold a conversation.",
+          "**Podcasts and lessons in English.** Ukrainian Lessons, created by Anna Ohoiko, explains grammar clearly for English speakers and has plenty of free material.",
+          "**A good dictionary** that shows stress and all word forms (see the tip above).",
+          "**Ukrainian music, films and YouTube** — with Ukrainian subtitles once you can read. Listen to the same song or scene many times rather than many things once.",
+          "**Your own sentence notebook.** Not lists of single words, but short sentences you would actually say, about your own life."
+        ] }
+      ]
+    },
+    {
+      "h2": "Learning Ukrainian with a tutor",
+      "blocks": [
+        { "p": "Apps and podcasts give you words. A tutor gives you **conversation, correction and a plan built around your reason for learning**. In my lessons we speak from the first session, at your level. I note your mistakes as we go, explain the pattern behind them, and send you the new words and phrases afterwards so nothing gets lost." },
+        { "p": "A tutor is especially useful for the things you can't get from an app: pronunciation feedback, understanding real speech, and the courage to speak in front of another person. If that's what you're missing, have a look at my [Ukrainian lessons online](/services/ukrainian-lessons) or try the [speaking club](/services/speaking-club) once you reach A2." }
+      ]
+    },
+    {
+      "h2": "Heritage speakers: when the Ukrainian at home was mixed with Russian",
+      "blocks": [
+        { "p": "Many heritage learners grew up hearing **surzhyk** — everyday speech that mixes Ukrainian and Russian — or both languages side by side. There's nothing to be ashamed of here. Your ear is already tuned to the language, which is a huge advantage. The work is mostly sorting out which words are standard Ukrainian and filling the gaps in grammar and vocabulary." },
+        { "example": { "a": "канє́шно", "b": "звича́йно / зві́сно", "aLabel": "Surzhyk", "bLabel": "Standard Ukrainian", "note": "“Of course” — канєшно is the Russian конечно in Ukrainian clothing." } },
+        { "example": { "a": "слі́дуюча зупи́нка", "b": "насту́пна зупи́нка", "aLabel": "Surzhyk", "bLabel": "Standard Ukrainian", "note": "“Next stop” — you'll hear the standard form on every Kyiv tram." } },
+        { "example": { "a": "У ме́не получи́лось!", "b": "У ме́не ви́йшло!", "aLabel": "Surzhyk", "bLabel": "Standard Ukrainian", "note": "“I did it!” / “It worked!”" } },
+        { "p": "If Russian is part of your background, read my guide to [Ukrainian vs Russian](/learn/ukrainian-vs-russian) — it shows the differences that trip people up most." }
+      ]
+    },
+    {
+      "h2": "Your first month: a simple plan",
+      "blocks": [
+        { "list": [
+          "**Week 1:** the alphabet and the sounds. Read signs, names and short words aloud. Learn survival phrases: *Приві́т* (hi), *Дя́кую* (thank you), *Будь ла́ска* (please / you're welcome), *Ви́бачте* (excuse me, sorry).",
+          "**Week 2:** introduce yourself — *Мене́ зва́ти…* (my name is…) — and learn the present tense of a handful of everyday verbs.",
+          "**Week 3:** say what you want and where you are, using the accusative and the locative.",
+          "**Week 4:** have your first real ten-minute conversation — with a tutor, a friend or a partner — and write down every word you were missing."
+        ], "ordered": true },
+        { "p": "After that, keep the rhythm: a little every day, and speaking every week. Ukrainian rewards people who keep showing up." }
+      ]
+    }
+  ],
+  "faq": [
+    { "q": "Is Ukrainian hard to learn for English speakers?", "a": "It takes more time than languages like Spanish or French, mainly because of the cases and the unfamiliar vocabulary. But the alphabet is quick to learn, spelling follows pronunciation closely, and with regular practice and speaking you make steady progress." },
+    { "q": "Can I really learn Ukrainian online?", "a": "Yes. Online lessons with a native tutor give you the same conversation and correction as face-to-face lessons, and you can combine them with apps, podcasts and Ukrainian media every day." },
+    { "q": "Should I learn Russian before Ukrainian?", "a": "No. Ukrainian and Russian are separate languages with different sounds, vocabulary and grammar. Learning Russian first would only give you habits you later have to unlearn. Start with Ukrainian directly." },
+    { "q": "Do I have to learn the Cyrillic alphabet?", "a": "Yes, and it's the easiest part. Most learners read slowly but confidently after a short period of daily practice, and reading Cyrillic opens up signs, subtitles and messages from friends." }
+  ],
+  "related": ["ukrainian-vs-russian", "ukrainian-words-without-english-equivalent"]
+}

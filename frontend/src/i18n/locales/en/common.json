@@ -6,12 +6,36 @@
     "tiktok": "TikTok",
     "faq": "FAQ",
     "booking": "Book a Lesson",
-    "contact": "Say Hello"
+    "contact": "Say Hello",
+    "main": [
+      {
+        "to": "/services/ukrainian-lessons",
+        "label": "Ukrainian lessons"
+      },
+      {
+        "to": "/booking",
+        "label": "Prices"
+      },
+      {
+        "to": "/testimonials",
+        "label": "Reviews"
+      },
+      {
+        "to": "/learn",
+        "label": "Learn"
+      },
+      {
+        "to": "/about",
+        "label": "About"
+      }
+    ]
   },
   "header": {
     "logoLabel": "Alina Zelinska — home",
     "toggleTheme": "Toggle theme",
-    "toggleMenu": "Toggle menu"
+    "toggleMenu": "Toggle menu",
+    "cta": "Book a lesson",
+    "a11y": "Accessibility settings"
   },
   "breadcrumb": {
     "label": "Breadcrumb"
@@ -22,22 +46,86 @@
     "mailLead": "Let’s talk",
     "mailAccent": "words.",
     "navLabel": "Footer",
-    "columns": {
-      "learn": "Learn",
-      "create": "Create",
-      "alina": "Alina"
-    },
-    "links": {
-      "ukrainianLessons": "Ukrainian lessons",
-      "russianLessons": "Russian lessons",
-      "speakingClub": "Speaking club",
-      "poetryTranslation": "Poetry translation",
-      "creativeWriting": "Creative writing",
-      "specialProjects": "Special projects",
-      "successStories": "Success stories"
-    },
     "rights": "All rights reserved",
-    "tagline": "Made with words, coffee, and a deep love of language ☕"
+    "tagline": "Online lessons in Ukrainian, English and Russian — from Ukraine, for everywhere.",
+    "a11y": "Accessibility",
+    "columns": [
+      {
+        "title": "Lessons",
+        "links": [
+          {
+            "to": "/services/ukrainian-lessons",
+            "label": "Ukrainian lessons"
+          },
+          {
+            "to": "/services/ukrainian-for-russian-speakers",
+            "label": "Ukrainian for Russian speakers"
+          },
+          {
+            "to": "/services/speaking-club",
+            "label": "Speaking club"
+          },
+          {
+            "to": "/services/russian-lessons",
+            "label": "Russian lessons"
+          },
+          {
+            "to": "/services/english-lessons",
+            "label": "English for Ukrainian speakers"
+          },
+          {
+            "to": "/services/writing-translation",
+            "label": "Translation & writing"
+          }
+        ]
+      },
+      {
+        "title": "Learn",
+        "links": [
+          {
+            "to": "/learn",
+            "label": "Articles"
+          },
+          {
+            "to": "/free-guide",
+            "label": "Free guide"
+          },
+          {
+            "to": "/tiktok",
+            "label": "TikTok lessons"
+          },
+          {
+            "to": "/faq",
+            "label": "FAQ"
+          }
+        ]
+      },
+      {
+        "title": "Alina",
+        "links": [
+          {
+            "to": "/about",
+            "label": "About me"
+          },
+          {
+            "to": "/testimonials",
+            "label": "Reviews"
+          },
+          {
+            "href": "italki",
+            "label": "Verified reviews on italki"
+          },
+          {
+            "to": "/booking",
+            "label": "Prices & booking"
+          },
+          {
+            "to": "/contact",
+            "label": "Contact"
+          }
+        ]
+      }
+    ]
   },
   "language": {
     "change": "Change language",

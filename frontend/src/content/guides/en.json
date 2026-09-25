@@ -1,0 +1,578 @@
+{
+  "file": "first-100-ukrainian-words.pdf",
+  "title": "Your first 100 Ukrainian words",
+  "subtitle": "A printable starter kit from a native Ukrainian tutor — with pronunciation",
+  "intro": [
+    "These are the words I would teach you in your first weeks: the ones you need to greet people, ask simple questions, order a coffee and find your way. Learn them in small groups, say each one out loud, and you will already be able to hold a tiny conversation.",
+    "The stressed vowel is shown in colour in the Ukrainian (дя́кую) and the stressed syllable is written in capitals in the pronunciation (DYA-ku-yu). Stress in Ukrainian is free, so learn it together with the word — it is the quickest way to sound natural."
+  ],
+  "labels": {
+    "a": "Ukrainian",
+    "tr": "Say it",
+    "b": "English"
+  },
+  "sections": [
+    {
+      "h2": "Greetings and politeness",
+      "intro": "The words you will use in every single conversation.",
+      "items": [
+        {
+          "a": "приві́т",
+          "tr": "pry-VIT",
+          "b": "hi",
+          "note": "informal"
+        },
+        {
+          "a": "до́брий день",
+          "tr": "DOB-ryi den",
+          "b": "hello, good afternoon",
+          "note": "polite, any time of day"
+        },
+        {
+          "a": "до́брого ра́нку",
+          "tr": "DOB-ro-ho RAN-ku",
+          "b": "good morning"
+        },
+        {
+          "a": "до́брий ве́чір",
+          "tr": "DOB-ryi VE-chir",
+          "b": "good evening"
+        },
+        {
+          "a": "до поба́чення",
+          "tr": "do po-BA-chen-nya",
+          "b": "goodbye"
+        },
+        {
+          "a": "бува́й",
+          "tr": "bu-VAI",
+          "b": "bye",
+          "note": "informal"
+        },
+        {
+          "a": "дя́кую",
+          "tr": "DYA-ku-yu",
+          "b": "thank you"
+        },
+        {
+          "a": "будь ла́ска",
+          "tr": "bud LAS-ka",
+          "b": "please; you’re welcome"
+        },
+        {
+          "a": "ви́бачте",
+          "tr": "VY-bach-te",
+          "b": "sorry, excuse me",
+          "note": "polite; to a friend: ви́бач"
+        },
+        {
+          "a": "так",
+          "tr": "tak",
+          "b": "yes"
+        },
+        {
+          "a": "ні",
+          "tr": "ni",
+          "b": "no"
+        },
+        {
+          "a": "до́бре",
+          "tr": "DOB-re",
+          "b": "good, OK"
+        },
+        {
+          "a": "як спра́ви?",
+          "tr": "yak SPRA-vy",
+          "b": "how are you?"
+        },
+        {
+          "a": "ду́же приє́мно",
+          "tr": "DU-zhe pry-YEM-no",
+          "b": "nice to meet you"
+        }
+      ]
+    },
+    {
+      "h2": "People and family",
+      "items": [
+        {
+          "a": "я",
+          "tr": "ya",
+          "b": "I"
+        },
+        {
+          "a": "ти",
+          "tr": "ty",
+          "b": "you",
+          "note": "informal, one person"
+        },
+        {
+          "a": "ви",
+          "tr": "vy",
+          "b": "you",
+          "note": "polite or plural"
+        },
+        {
+          "a": "він",
+          "tr": "vin",
+          "b": "he"
+        },
+        {
+          "a": "вона́",
+          "tr": "vo-NA",
+          "b": "she"
+        },
+        {
+          "a": "ми",
+          "tr": "my",
+          "b": "we"
+        },
+        {
+          "a": "ма́ма",
+          "tr": "MA-ma",
+          "b": "mum"
+        },
+        {
+          "a": "та́то",
+          "tr": "TA-to",
+          "b": "dad"
+        },
+        {
+          "a": "брат",
+          "tr": "brat",
+          "b": "brother"
+        },
+        {
+          "a": "сестра́",
+          "tr": "ses-TRA",
+          "b": "sister"
+        },
+        {
+          "a": "друг / по́друга",
+          "tr": "druh / PO-dru-ha",
+          "b": "friend",
+          "note": "male / female"
+        },
+        {
+          "a": "дити́на",
+          "tr": "dy-TY-na",
+          "b": "child"
+        },
+        {
+          "a": "сім’я́",
+          "tr": "sim-YA",
+          "b": "family"
+        }
+      ]
+    },
+    {
+      "h2": "Question words",
+      "intro": "Put one of these at the start and your voice up at the end.",
+      "items": [
+        {
+          "a": "що?",
+          "tr": "shcho",
+          "b": "what?"
+        },
+        {
+          "a": "хто?",
+          "tr": "khto",
+          "b": "who?"
+        },
+        {
+          "a": "де?",
+          "tr": "de",
+          "b": "where?"
+        },
+        {
+          "a": "куди́?",
+          "tr": "ku-DY",
+          "b": "where to?"
+        },
+        {
+          "a": "коли́?",
+          "tr": "ko-LY",
+          "b": "when?"
+        },
+        {
+          "a": "чому́?",
+          "tr": "cho-MU",
+          "b": "why?"
+        },
+        {
+          "a": "як?",
+          "tr": "yak",
+          "b": "how?"
+        },
+        {
+          "a": "скі́льки?",
+          "tr": "SKIL-ky",
+          "b": "how much? how many?"
+        }
+      ]
+    },
+    {
+      "h2": "Numbers and time",
+      "items": [
+        {
+          "a": "оди́н",
+          "tr": "o-DYN",
+          "b": "one"
+        },
+        {
+          "a": "два",
+          "tr": "dva",
+          "b": "two"
+        },
+        {
+          "a": "три",
+          "tr": "try",
+          "b": "three"
+        },
+        {
+          "a": "чоти́ри",
+          "tr": "cho-TY-ry",
+          "b": "four"
+        },
+        {
+          "a": "п’ять",
+          "tr": "pyat",
+          "b": "five"
+        },
+        {
+          "a": "шість",
+          "tr": "shist",
+          "b": "six"
+        },
+        {
+          "a": "сім",
+          "tr": "sim",
+          "b": "seven"
+        },
+        {
+          "a": "ві́сім",
+          "tr": "VI-sim",
+          "b": "eight"
+        },
+        {
+          "a": "де́в’ять",
+          "tr": "DEV-yat",
+          "b": "nine"
+        },
+        {
+          "a": "де́сять",
+          "tr": "DE-syat",
+          "b": "ten"
+        },
+        {
+          "a": "сього́дні",
+          "tr": "syo-HOD-ni",
+          "b": "today"
+        },
+        {
+          "a": "за́втра",
+          "tr": "ZAV-tra",
+          "b": "tomorrow"
+        },
+        {
+          "a": "вчо́ра",
+          "tr": "VCHO-ra",
+          "b": "yesterday"
+        },
+        {
+          "a": "за́раз",
+          "tr": "ZA-raz",
+          "b": "now"
+        },
+        {
+          "a": "день",
+          "tr": "den",
+          "b": "day"
+        },
+        {
+          "a": "ти́ждень",
+          "tr": "TYZH-den",
+          "b": "week"
+        }
+      ]
+    },
+    {
+      "h2": "Everyday verbs",
+      "intro": "Shown in the dictionary form (the infinitive).",
+      "items": [
+        {
+          "a": "бу́ти",
+          "tr": "BU-ty",
+          "b": "to be"
+        },
+        {
+          "a": "ма́ти",
+          "tr": "MA-ty",
+          "b": "to have",
+          "note": "the same word also means “mother”"
+        },
+        {
+          "a": "хоті́ти",
+          "tr": "kho-TI-ty",
+          "b": "to want"
+        },
+        {
+          "a": "могти́",
+          "tr": "moh-TY",
+          "b": "to be able to, can"
+        },
+        {
+          "a": "зна́ти",
+          "tr": "ZNA-ty",
+          "b": "to know"
+        },
+        {
+          "a": "розумі́ти",
+          "tr": "ro-zu-MI-ty",
+          "b": "to understand"
+        },
+        {
+          "a": "говори́ти",
+          "tr": "ho-vo-RY-ty",
+          "b": "to speak, to talk"
+        },
+        {
+          "a": "ї́сти",
+          "tr": "YIS-ty",
+          "b": "to eat"
+        },
+        {
+          "a": "пи́ти",
+          "tr": "PY-ty",
+          "b": "to drink"
+        },
+        {
+          "a": "іти́",
+          "tr": "i-TY",
+          "b": "to go (on foot)",
+          "note": "also spelled йти"
+        },
+        {
+          "a": "жи́ти",
+          "tr": "ZHY-ty",
+          "b": "to live"
+        },
+        {
+          "a": "люби́ти",
+          "tr": "lyu-BY-ty",
+          "b": "to love, to like"
+        },
+        {
+          "a": "роби́ти",
+          "tr": "ro-BY-ty",
+          "b": "to do, to make"
+        },
+        {
+          "a": "працюва́ти",
+          "tr": "pra-tsyu-VA-ty",
+          "b": "to work"
+        }
+      ]
+    },
+    {
+      "h2": "Food and drink",
+      "items": [
+        {
+          "a": "вода́",
+          "tr": "vo-DA",
+          "b": "water"
+        },
+        {
+          "a": "ка́ва",
+          "tr": "KA-va",
+          "b": "coffee"
+        },
+        {
+          "a": "чай",
+          "tr": "chai",
+          "b": "tea"
+        },
+        {
+          "a": "хліб",
+          "tr": "khlib",
+          "b": "bread"
+        },
+        {
+          "a": "молоко́",
+          "tr": "mo-lo-KO",
+          "b": "milk"
+        },
+        {
+          "a": "сир",
+          "tr": "syr",
+          "b": "cheese",
+          "note": "also cottage cheese"
+        },
+        {
+          "a": "м’я́со",
+          "tr": "MYA-so",
+          "b": "meat"
+        },
+        {
+          "a": "я́блуко",
+          "tr": "YA-blu-ko",
+          "b": "apple"
+        },
+        {
+          "a": "борщ",
+          "tr": "borshch",
+          "b": "borshch"
+        },
+        {
+          "a": "варе́ники",
+          "tr": "va-RE-ny-ky",
+          "b": "dumplings (varenyky)"
+        },
+        {
+          "a": "смачно́го!",
+          "tr": "smach-NO-ho",
+          "b": "enjoy your meal!"
+        },
+        {
+          "a": "раху́нок",
+          "tr": "ra-KHU-nok",
+          "b": "the bill"
+        }
+      ]
+    },
+    {
+      "h2": "Places and getting around",
+      "items": [
+        {
+          "a": "дім",
+          "tr": "dim",
+          "b": "home, house"
+        },
+        {
+          "a": "ву́лиця",
+          "tr": "VU-ly-tsya",
+          "b": "street"
+        },
+        {
+          "a": "мі́сто",
+          "tr": "MIS-to",
+          "b": "city, town"
+        },
+        {
+          "a": "магази́н",
+          "tr": "ma-ha-ZYN",
+          "b": "shop"
+        },
+        {
+          "a": "апте́ка",
+          "tr": "ap-TE-ka",
+          "b": "pharmacy"
+        },
+        {
+          "a": "вокза́л",
+          "tr": "vok-ZAL",
+          "b": "railway station"
+        },
+        {
+          "a": "квито́к",
+          "tr": "kvy-TOK",
+          "b": "ticket"
+        },
+        {
+          "a": "ліво́руч",
+          "tr": "li-VO-ruch",
+          "b": "on the left"
+        },
+        {
+          "a": "право́руч",
+          "tr": "pra-VO-ruch",
+          "b": "on the right"
+        },
+        {
+          "a": "пря́мо",
+          "tr": "PRYA-mo",
+          "b": "straight ahead"
+        }
+      ]
+    },
+    {
+      "h2": "Describing things and feelings",
+      "items": [
+        {
+          "a": "до́брий",
+          "tr": "DOB-ryi",
+          "b": "good, kind"
+        },
+        {
+          "a": "га́рний",
+          "tr": "HAR-nyi",
+          "b": "beautiful, nice"
+        },
+        {
+          "a": "вели́кий",
+          "tr": "ve-LY-kyi",
+          "b": "big"
+        },
+        {
+          "a": "мали́й",
+          "tr": "ma-LYI",
+          "b": "small"
+        },
+        {
+          "a": "смачни́й",
+          "tr": "smach-NYI",
+          "b": "tasty"
+        },
+        {
+          "a": "щасли́вий",
+          "tr": "shchas-LY-vyi",
+          "b": "happy"
+        },
+        {
+          "a": "вто́млений",
+          "tr": "VTOM-le-nyi",
+          "b": "tired"
+        },
+        {
+          "a": "холо́дно",
+          "tr": "kho-LOD-no",
+          "b": "(it’s) cold"
+        }
+      ]
+    },
+    {
+      "h2": "Small words that hold it all together",
+      "items": [
+        {
+          "a": "і / та",
+          "tr": "i / ta",
+          "b": "and"
+        },
+        {
+          "a": "але́",
+          "tr": "a-LE",
+          "b": "but"
+        },
+        {
+          "a": "тут",
+          "tr": "tut",
+          "b": "here"
+        },
+        {
+          "a": "там",
+          "tr": "tam",
+          "b": "there"
+        },
+        {
+          "a": "ду́же",
+          "tr": "DU-zhe",
+          "b": "very"
+        }
+      ]
+    }
+  ],
+  "outro": {
+    "title": "Now say them out loud — with someone who answers back",
+    "text": "A list gets you started; conversation makes the words stay. In a trial lesson we will use these words in real sentences, fix your pronunciation together, and plan your next steps in Ukrainian."
+  }
+}

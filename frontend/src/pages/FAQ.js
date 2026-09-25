@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiArrowUpRight, FiMail } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { FiArrowRight, FiArrowUpRight, FiMail } from 'react-icons/fi';
+import { Link } from '../i18n/routing';
+import { contactInfo } from '../data/content';
 import { useTranslation } from 'react-i18next';
 import PageHero from '../components/PageHero';
 import SEOHead from '../components/SEOHead';
@@ -23,7 +25,8 @@ const FAQ = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const faqs = t('faq.categories', { returnObjects: true });
+  const categories = t('faq.categories', { returnObjects: true });
+  const faqs = Array.isArray(categories) ? categories : [];
 
   const toggleQuestion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -45,7 +48,6 @@ const FAQ = () => {
       <SEOHead
         title={t('faq.seo.title')}
         description={t('faq.seo.description')}
-        keywords={t('faq.seo.keywords')}
         schema={generateFAQSchema(allFAQs)}
       />
 
@@ -95,7 +97,7 @@ const FAQ = () => {
                   const buttonId = `faq-button-${globalIndex}`;
 
                   return (
-                    <motion.li key={qIndex} {...stagger(qIndex)} className={isOpen ? 'is-open' : ''}>
+                    <motion.li key={faq.id || qIndex} id={faq.id} {...stagger(qIndex)} className={isOpen ? 'is-open' : ''}>
                       <h3>
                         <button
                           id={buttonId}
@@ -110,22 +112,19 @@ const FAQ = () => {
                         </button>
                       </h3>
 
-                      <AnimatePresence initial={false}>
-                        {isOpen && (
-                          <motion.div
-                            id={panelId}
-                            role="region"
-                            aria-labelledby={buttonId}
-                            className="faq-a"
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.5, ease }}
-                          >
-                            <p>{faq.a}</p>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                      {/* Answers stay in the DOM (prerendered HTML carries them); only the height animates */}
+                      <motion.div
+                        id={panelId}
+                        role="region"
+                        aria-labelledby={buttonId}
+                        aria-hidden={!isOpen}
+                        className="faq-a"
+                        initial={false}
+                        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+                        transition={{ duration: 0.5, ease }}
+                      >
+                        <p>{faq.a}</p>
+                      </motion.div>
                     </motion.li>
                   );
                 })}
@@ -147,16 +146,19 @@ const FAQ = () => {
           <p className="closing__sub">{t('faq.closing.sub')}</p>
           <div className="closing__actions">
             <a
-              href="https://www.instagram.com/alin.a.zelinska/"
+              href={contactInfo.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"
             >
               {t('faq.closing.instagram')} <FiArrowUpRight />
             </a>
-            <a href="mailto:zelinskayaalinaig@gmail.com" className="btn-outline">
+            <a href={`mailto:${contactInfo.email}`} className="btn-outline">
               {t('faq.closing.email')} <FiMail />
             </a>
+            <Link to="/booking" className="btn-outline">
+              {t('faq.closing.book')} <FiArrowRight />
+            </Link>
           </div>
         </motion.div>
       </section>

@@ -2,44 +2,18 @@ import React from 'react';
 import { Link } from '../i18n/routing';
 import { useTranslation } from 'react-i18next';
 import { FaTiktok, FaLinkedin, FaInstagram } from 'react-icons/fa';
-import { FiArrowUpRight } from 'react-icons/fi';
+import { FiArrowUpRight, FiType } from 'react-icons/fi';
 import { contactInfo } from '../data/content';
+import { openA11y } from './AccessibilityMenu';
 import './Footer.css';
 
 const Footer = () => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
-  const columns = [
-    {
-      title: t('footer.columns.learn'),
-      links: [
-        { path: '/services/ukrainian-lessons', label: t('footer.links.ukrainianLessons') },
-        { path: '/services/russian-lessons', label: t('footer.links.russianLessons') },
-        { path: '/services/speaking-club', label: t('footer.links.speakingClub') },
-        { path: '/booking', label: t('nav.booking') },
-      ],
-    },
-    {
-      title: t('footer.columns.create'),
-      links: [
-        { path: '/services/poetry-translation', label: t('footer.links.poetryTranslation') },
-        { path: '/services/creative-writing', label: t('footer.links.creativeWriting') },
-        { path: '/special-projects', label: t('footer.links.specialProjects') },
-      ],
-    },
-    {
-      title: t('footer.columns.alina'),
-      links: [
-        { path: '/about', label: t('nav.about') },
-        { path: '/testimonials', label: t('nav.testimonials') },
-        { path: '/success-stories', label: t('footer.links.successStories') },
-        { path: '/tiktok', label: t('nav.tiktok') },
-        { path: '/faq', label: t('nav.faq') },
-        { path: '/contact', label: t('nav.contact') },
-      ],
-    },
-  ];
+  // Columns differ per language (common.json → footer.columns); `href` names an external profile in contactInfo
+  const rawColumns = t('footer.columns', { returnObjects: true });
+  const columns = Array.isArray(rawColumns) ? rawColumns : [];
 
   const socials = [
     { href: contactInfo.tiktok, label: 'TikTok', Icon: FaTiktok },
@@ -64,14 +38,20 @@ const Footer = () => {
 
           <nav className="site-footer__cols" aria-label={t('footer.navLabel')}>
             {columns.map((col) => (
-              <div key={col.links[0].path}>
+              <div key={col.title}>
                 <h4>{col.title}</h4>
                 <ul>
                   {col.links.map((link) => (
-                    <li key={link.path}>
-                      <Link to={link.path} className="link-underline">
-                        {link.label}
-                      </Link>
+                    <li key={link.to || link.href}>
+                      {link.href ? (
+                        <a href={contactInfo[link.href]} target="_blank" rel="noopener noreferrer" className="link-underline">
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link to={link.to} className="link-underline">
+                          {link.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -91,6 +71,15 @@ const Footer = () => {
           </p>
           <p className="site-footer__tagline">{t('footer.tagline')}</p>
           <div className="site-footer__socials">
+            <button
+              type="button"
+              className="site-footer__a11y"
+              onClick={(e) => openA11y(e.currentTarget)}
+              aria-haspopup="dialog"
+              data-testid="a11y-open-footer"
+            >
+              <FiType aria-hidden="true" /> {t('footer.a11y')}
+            </button>
             {socials.map(({ href, label, Icon }) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
                 <Icon />

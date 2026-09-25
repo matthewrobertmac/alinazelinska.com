@@ -1,0 +1,22 @@
+# Retired addresses → their replacement (301, all languages)
+/success-stories /testimonials 301
+/special-projects /services/writing-translation 301
+/services/poetry-translation /services/writing-translation 301
+/services/creative-writing /services/writing-translation 301
+/login / 301
+/profile / 301
+/admin / 301
+/uk/success-stories /uk/testimonials 301
+/uk/special-projects /uk/services/writing-translation 301
+/uk/services/poetry-translation /uk/services/writing-translation 301
+/uk/services/creative-writing /uk/services/writing-translation 301
+/uk/login /uk 301
+/uk/profile /uk 301
+/uk/admin /uk 301
+/ru/success-stories /ru/testimonials 301
+/ru/special-projects /ru/services/writing-translation 301
+/ru/services/poetry-translation /ru/services/writing-translation 301
+/ru/services/creative-writing /ru/services/writing-translation 301
+/ru/login /ru 301
+/ru/profile /ru 301
+/ru/admin /ru 301

@@ -1,0 +1,49 @@
+{
+  "learn": {
+    "seo": {
+      "title": "Learn Ukrainian: Guides from a Native Tutor | Alina Zelinska",
+      "description": "How to learn Ukrainian, how it differs from Russian and the words English doesn't have: free guides by Alina Zelinska, a native tutor from Ukraine."
+    },
+    "crumb": "Learn",
+    "readTime": "{{minutes}} min read",
+    "hero": {
+      "eyebrow": "Articles & guides",
+      "title": "Learn Ukrainian —",
+      "titleAccent": "notes from a native tutor",
+      "lede": "Honest, practical guides to learning Ukrainian: where to start, what really separates it from Russian, and the words that make the language worth the effort. Written by me, from 3,500+ lessons of experience."
+    },
+    "hub": {
+      "read": "Read the article"
+    },
+    "closing": {
+      "title": "Ready to try it out loud?",
+      "sub": "Reading gets you started; speaking gets you there. Book a {{minutes}}-minute trial lesson for {{price}} and we'll make a plan that fits you.",
+      "service": "Ukrainian lessons",
+      "serviceTo": "/services/ukrainian-lessons"
+    },
+    "article": {
+      "eyebrow": "Learn",
+      "by": "By Alina Zelinska",
+      "contents": "In this article",
+      "faq": "Questions",
+      "tip": "Alina's tip",
+      "labelA": "Instead of",
+      "labelB": "Say",
+      "related": "Keep reading",
+      "trial": {
+        "eyebrow": "Learn with me",
+        "title": "Put this into practice",
+        "text": "In a {{minutes}}-minute trial lesson ({{price}}) we talk, I check your level and suggest a plan built around your goals. No commitment afterwards.",
+        "cta": "Book a {{price}} trial"
+      }
+    },
+    "services": {
+      "ukrainian-lessons": "Ukrainian lessons",
+      "ukrainian-for-russian-speakers": "Ukrainian for Russian speakers",
+      "english-lessons": "English lessons",
+      "russian-lessons": "Russian lessons",
+      "speaking-club": "Speaking club",
+      "writing-translation": "Writing & translation"
+    }
+  }
+}

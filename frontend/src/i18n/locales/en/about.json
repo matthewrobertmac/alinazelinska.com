@@ -1,120 +1,94 @@
 {
   "about": {
-    "title": "About Me",
-    "subtitle": "Hi, I'm Alina — 500+ students, 3,500+ lessons, and still as obsessed with language as day one 💕",
-    "videoHeading": "Meet Alina 👋",
-    "videoCaption": "Hit play — I promise I'm more fun on video 😄",
-    "experience": "My Journey So Far",
-    "skills": "Languages I Live In",
-    "services": "How I Can Help You ✨",
-    "docTitle": "About | Alina Zelinska | Ukrainian & Russian Tutor, Translator & Poet",
     "seo": {
-      "title": "About Alina Zelinska | Native Ukrainian Tutor | 5.0★ Rating",
-      "description": "Meet Alina Zelinska: native Ukrainian & Russian tutor from Ukraine, teaching online worldwide. 500+ students, 3,500+ lessons, perfect 5.0 rating, 100% attendance.",
-      "keywords": "Alina Zelinska, Ukrainian tutor online, language teacher, native Ukrainian speaker"
+      "title": "Alina Zelinska — Ukrainian Tutor, Translator & Poet",
+      "description": "Alina Zelinska (movAlina) is a native Ukrainian tutor from Ukraine teaching Ukrainian, English and Russian online. 3,500+ lessons, 500+ students, 5.0."
     },
     "hero": {
       "eyebrow": "About me · From Ukraine",
-      "title": "Hi, I’m Alina — a little *obsessed* with language.",
-      "lede": "Teacher, translator, poet, songwriter — and, let’s be honest, a total word nerd. Originally from Ukraine, teaching students all over the world online.",
-      "portraitAlt": "Alina Zelinska",
+      "title": "Alina Zelinska — Ukrainian tutor, translator and *poet*",
+      "lede": "I'm a native Ukrainian tutor from Ukraine. Since April 2022 I've taught 3,500+ one-to-one lessons of Ukrainian, English and Russian to 500+ students from 30+ countries.",
+      "portraitAlt": "Alina Zelinska, Ukrainian tutor",
       "since": "since April 2022 · 3,500+ lessons"
-    },
-    "story": {
-      "eyebrow": "My story",
-      "title": "Words are my whole *personality.*",
-      "paragraphs": [
-        "Language has been my world for as long as I can remember. I'm a teacher, translator, poet, songwriter, and - let's be honest - a total word nerd.",
-        "I'm originally from Ukraine. I speak Ukrainian and Russian natively, English fluently, and I'm working on Spanish and German because apparently four languages weren't enough for me.",
-        "Since April 2022, I've completed over 3,500 one-on-one lessons with more than 500 students from 30+ countries on italki - and I've maintained a perfect 5.0 rating with 100% attendance the entire time. Teaching isn't just what I do; it's what I genuinely love doing.",
-        "My lessons aren't lectures. They're conversations. I bring culture, stories, humour, and real-life context into every session because language is alive and learning it should feel that way. Whether you're a complete beginner or polishing your fluency, I build every lesson around you - your pace, your interests, your goals.",
-        "Outside of teaching, I write poetry in Ukrainian, Russian, and English - sometimes all in the same evening. I translate poems across languages, trying to carry not just the meaning but the feeling. I write songs. I create content. Words are genuinely my entire personality.",
-        "Before teaching, I co-founded an eco-friendly haircare brand (Eco.April.Shampoo) and a craft games platform (CraftGames.ua). I love building things from scratch - whether that's a business, a lesson plan, or a poem.",
-        "I also consult for language learning apps, bringing a real educator's perspective to product teams who want their tools to actually work for learners.",
-        "If you're looking for a teacher who cares about your progress as much as you do - or a creative collaborator who lives and breathes words - I'd love to hear from you."
-      ]
     },
     "video": {
       "eyebrow": "Say hello",
-      "play": "Play video",
-      "pause": "Pause video",
-      "mute": "Mute video",
-      "unmute": "Unmute video"
+      "title": "A two-minute *hello*"
     },
-    "funFacts": {
-      "title": "A Few Things About Me 🌸",
-      "eyebrow": "Off the record",
-      "items": [
-        { "icon": "🌙", "text": "I've written poems in Ukrainian, Russian, and English — sometimes all in the same evening" },
-        { "icon": "🌶️", "text": "I'm learning Spanish and German because I simply couldn't help myself" },
-        { "icon": "🎵", "text": "I'm a songwriter too — words are kind of my whole personality" },
-        { "icon": "🧴", "text": "I once co-founded an eco shampoo brand. Yes, really. I contain multitudes." },
-        { "icon": "🎮", "text": "I also co-founded a craft games company. See above re: multitudes." },
-        { "icon": "💡", "text": "I believe you can fall in love with a language before you even speak it" },
-        { "icon": "🗣️", "text": "I also speak German (yes, I'm collecting languages like some people collect stamps)" }
-      ]
+    "story": {
+      "eyebrow": "My story",
+      "title": "Why I *teach*",
+      "paragraphs": [
+        "Language has been my world for as long as I can remember. Ukrainian and Russian are my native languages, I speak English fluently, and I'm learning Spanish and German — so I know what it feels like to be the student.",
+        "My lessons are conversations, not lectures. I bring culture, stories, humour and real-life context into every session and build each lesson around you: your pace, your interests, your goals. On italki I've kept a perfect 5.0 rating with 100% attendance.",
+        "Outside lessons I write poetry in Ukrainian, Russian and English, translate poems between languages — trying to carry the feeling, not just the meaning — and write songs."
+      ],
+      "wordsLink": "12 Ukrainian words English doesn't have"
     },
-    "favouriteWords": {
-      "title": "Words I Love 🌸",
-      "subtitle": "Some words just feel like something — here are a few of mine:",
-      "eyebrow": "Lexicon",
-      "items": [
-        { "word": "Натхнення", "transliteration": "Natkhnennya", "gloss": "Inspiration", "explanation": "Doesn't it sound exactly like what it means?", "language": "Ukrainian" },
-        { "word": "Душа", "transliteration": "Dusha", "gloss": "Soul", "explanation": "Two syllables that hold so much. Every language needs this word.", "language": "Russian/Ukrainian" },
-        { "word": "Мрія", "transliteration": "Mriya", "gloss": "Dream", "explanation": "Also the name of Ukraine's legendary cargo plane. Words carry weight.", "language": "Ukrainian" },
-        { "word": "Тепло", "transliteration": "Teplo", "gloss": "Warmth", "explanation": "I genuinely think this is one of the most beautiful words in existence.", "language": "Russian/Ukrainian" },
-        { "word": "Поезія", "transliteration": "Poeziya", "gloss": "Poetry", "explanation": "It sounds like poetry should sound. I rest my case.", "language": "Ukrainian" }
-      ]
-    },
-    "journey": {
-      "eyebrow": "Journey",
-      "lede": "I love building things from scratch — whether that’s a business, a lesson plan, or a poem.",
+    "languages": {
+      "eyebrow": "Languages",
+      "title": "Languages I *speak*",
       "items": [
         {
-          "jobtitle": "Language Tutor",
-          "where": "italki",
-          "date": "Apr 2022 - Present",
-          "description": "3,500+ personalised lessons delivered to 500+ students across 30+ countries. Perfect 5.0 rating with 100% attendance rate. Teaching Ukrainian, Russian & English - one real conversation at a time."
+          "name": "Ukrainian",
+          "level": "Native"
         },
         {
-          "jobtitle": "Founder and Entrepreneur",
-          "where": "Eco.April.Shampoo",
-          "date": "Apr 2021 - Feb 2022",
-          "description": "Built an eco-friendly haircare brand from scratch. Yes, I really did that. Creativity takes many forms! 🧴"
+          "name": "Russian",
+          "level": "Native"
         },
         {
-          "jobtitle": "Co-founder and Entrepreneur",
-          "where": "CraftGames.ua",
-          "date": "Jul 2020 - Feb 2022",
-          "description": "Co-founded a craft games platform — because play and creativity go hand in hand. 🎮"
+          "name": "English",
+          "level": "Fluent"
+        },
+        {
+          "name": "Spanish",
+          "level": "Learning",
+          "learning": true
+        },
+        {
+          "name": "German",
+          "level": "Learning",
+          "learning": true
         }
       ]
     },
-    "languages": {
-      "eyebrow": "Fluency",
+    "career": "Before teaching, I co-founded an eco-friendly haircare brand, Eco.April.Shampoo, and a craft games platform, CraftGames.ua.",
+    "services": {
+      "eyebrow": "Work with me",
+      "title": "How I can *help*",
       "items": [
-        { "name": "Ukrainian", "level": "Native", "value": 100 },
-        { "name": "Russian", "level": "Native", "value": 100 },
-        { "name": "English", "level": "Fluent", "value": 100 },
-        { "name": "Spanish", "level": "Learning", "value": 65, "learning": true },
-        { "name": "German", "level": "Learning", "value": 40, "learning": true }
+        {
+          "to": "/services/ukrainian-lessons",
+          "label": "Ukrainian lessons",
+          "text": "One-to-one, from your first words to exam level."
+        },
+        {
+          "to": "/services/ukrainian-for-russian-speakers",
+          "label": "Ukrainian for Russian speakers",
+          "text": "Switch from Russian to Ukrainian with a clear plan."
+        },
+        {
+          "to": "/services/russian-lessons",
+          "label": "Russian lessons",
+          "text": "Practical, conversational Russian with a native speaker."
+        },
+        {
+          "to": "/services/writing-translation",
+          "label": "Translation & writing",
+          "text": "Poetry and literary translation, song lyrics, bilingual writing."
+        }
       ]
     },
-    "offer": {
-      "eyebrow": "Work with me",
-      "items": [
-        { "title": "Language Tutoring", "description": "Pick your language — Ukrainian, Russian, or English — and let's get to work! 🗣️" },
-        { "title": "Mobile App Consulting", "description": "Building a language learning app and want a real educator's brain in the room? I'd love to nerd out on this with you." },
-        { "title": "Social Media Ghostwriting", "description": "Want content that sounds authentic and actually connects with people? Let's write something your audience will remember 💬" },
-        { "title": "Poetry Translation", "description": "I'll carry your poem gently across languages — so it still sounds like *poetry* on the other side 🌙" },
-        { "title": "Creative Writing", "description": "Need a story told, a brand voice found, or a poem written from the heart? This is my favourite thing. Let's create. ✨" }
-      ]
+    "reviews": {
+      "eyebrow": "Student reviews",
+      "title": "What students *say*"
     },
     "closing": {
-      "title": "Beyond *teaching.*",
-      "sub": "I also work on book translations, songwriting projects, and language learning app consulting. Want to see what I’ve been working on?",
-      "projects": "Special projects",
-      "book": "Book a lesson"
+      "title": "Let's *begin*",
+      "sub": "Start with a 30-minute trial lesson — we'll talk about your goals and make a plan together.",
+      "book": "Book a trial lesson",
+      "contact": "Contact me"
     }
   }
 }

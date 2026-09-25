@@ -12,18 +12,35 @@ export const ROUTES = [
   '/',
   '/about',
   '/testimonials',
-  '/success-stories',
-  '/special-projects',
   '/faq',
   '/services/ukrainian-lessons',
+  '/services/ukrainian-for-russian-speakers',
+  '/services/english-lessons',
   '/services/russian-lessons',
   '/services/speaking-club',
-  '/services/poetry-translation',
-  '/services/creative-writing',
+  '/services/writing-translation',
+  '/learn',
+  '/free-guide',
   '/tiktok',
   '/booking',
   '/contact',
+  '/links',
 ];
+
+// Learning articles: slug → languages it's written in (each is written for that audience, not
+// translated one-to-one). Content lives in src/content/articles/<lang>/<slug>.json.
+export const ARTICLES = {
+  'how-to-learn-ukrainian': ['en'],
+  'ukrainian-vs-russian': ['en', 'ru'],
+  'ukrainian-words-without-english-equivalent': ['en'],
+  'english-mistakes-ukrainians-make': ['uk'],
+  'start-speaking-english-30-days': ['uk'],
+  'switch-to-ukrainian': ['uk', 'ru'],
+  'surzhyk-mistakes': ['ru'],
+};
+
+// Pages kept out of search results (still reachable)
+export const NOINDEX = ['/links'];
 
 // '/uk/about' → { lng: 'uk', path: '/about' }; '/about' → { lng: 'en', path: '/about' }
 export const splitLang = (pathname = '/') => {

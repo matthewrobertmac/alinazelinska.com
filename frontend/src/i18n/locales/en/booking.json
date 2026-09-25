@@ -1,96 +1,95 @@
 {
   "booking": {
-    "title": "Let's Make It Official 📅",
-    "subtitle": "Choose the format that works for you — every option comes with the same personalised attention that's earned me a 5.0 rating across 3,500+ lessons.",
-    "reassurance": "Not sure which to pick? The Trial Lesson is the perfect no-pressure place to start. I'd love to meet you! 🌸",
-    "selectPackage": "Select Your Package",
-    "features": "What's included:",
-    "bookNow": "Book Now →",
-    "perLesson": "per lesson",
-    "processing": "Processing...",
-    "success": "Payment Successful!",
-    "successMessage": "Thank you for booking! You will receive a confirmation email shortly with details on how to schedule your lesson.",
-    "backToHome": "Back to Home",
-    "error": "Payment Error",
-    "tryAgain": "Try Again",
-    "trustLine": "Trusted by 500+ students | 3,500+ lessons completed | Perfect 5.0 rating | 100% attendance rate",
-    "whatToExpect": {
-      "title": "Here's What to Expect",
-      "step1": {
-        "icon": "📋",
-        "title": "We talk about your goals",
-        "description": "Every first lesson starts with you. Where are you now? Where do you want to go? What do you actually enjoy?"
-      },
-      "step2": {
-        "icon": "🗺️",
-        "title": "I build a plan around your life",
-        "description": "No generic textbooks. Your lessons are shaped around your schedule, your interests, and the way you learn best."
-      },
-      "step3": {
-        "icon": "💬",
-        "title": "Every lesson feels like a conversation",
-        "description": "Not a lecture. Not a drill session. A real, engaging hour that leaves you feeling like you actually got somewhere."
-      }
+    "seo": {
+      "title": "Book a Ukrainian Lesson — Trial {{trial}} | Alina Zelinska",
+      "description": "Book online lessons with Alina Zelinska: trial {{trial}}, single lesson {{standard}}, 5-lesson pack {{intensive}}. Pay by PayPal or card. 5.0 rating, 3,500+ lessons.",
+      "serviceName": "Online Ukrainian, English and Russian lessons with Alina Zelinska",
+      "serviceDescription": "One-to-one online language lessons on Zoom or Google Meet with a native Ukrainian tutor: a 30-minute trial, 60-minute lessons and a 5-lesson pack."
     },
+    "docTitle": "Payment received | Alina Zelinska",
+    "hero": {
+      "eyebrow": "Book a lesson · Online, one-to-one",
+      "title": "Book your *lesson*",
+      "lede": "Choose a package and pay securely with PayPal or card. After payment I email you within 24 hours to pick a time that suits you.",
+      "pricesLabel": "Packages and prices"
+    },
+    "packagesLabel": "Lesson packages",
+    "currencyNote": "Prices in euros",
+    "currencyLabel": "Show approximately in",
+    "start": "Start here",
+    "perLessonSaving": "{{price}} per lesson · save {{saving}}%",
+    "cta": "Book & pay {{price}}",
+    "processing": "Opening PayPal…",
+    "features": "What's included",
     "packages": {
       "trial": {
-        "name": "Trial Lesson",
-        "duration": "30 minutes",
-        "description": "Your first step into a whole new language world. This relaxed 30-minute session is about getting to know each other — I'll learn about your goals, your background, and how you learn best. You'll leave with a clear, personalised learning plan and (hopefully!) a lot of excitement about what's ahead. Over 500 students have started exactly here.",
+        "name": "Trial lesson",
+        "meta": "{{minutes}} minutes · one-to-one",
+        "description": "A relaxed first meeting: we talk about your goals, I check your level, and you leave with a clear plan.",
         "features": [
-          "A relaxed getting-to-know-you session",
-          "We figure out how you learn best",
-          "You leave with a clear, personalised plan"
+          "Talk through your goals",
+          "A level check and a personal plan",
+          "No commitment afterwards"
         ]
       },
       "standard": {
-        "name": "Standard Lesson",
-        "duration": "60 minutes",
-        "description": "This is where the magic happens — and where most of my 3,500+ lessons have taken place. A full 60-minute immersive session tailored entirely to you. We'll work through conversation, grammar, vocabulary, and cultural context in a way that feels natural, not forced. You'll get homework that actually helps (I promise), regular progress check-ins, and you can message me between lessons anytime. This is the package my students keep coming back to, week after week.",
+        "name": "Single lesson",
+        "meta": "{{minutes}} minutes · one-to-one",
+        "description": "A full lesson built around your goals — conversation, grammar and vocabulary in context, with corrections as we go.",
         "features": [
-          "A full, immersive lesson session",
-          "Homework that actually helps (I promise)",
-          "Regular check-ins on your progress",
-          "Message me between lessons anytime"
+          "Built around your goals and interests",
+          "Notes and new words after every lesson",
+          "Homework if you want it"
         ]
       },
       "intensive": {
-        "name": "Intensive Pack",
-        "duration": "5 x 60 minutes",
-        "description": "For students who are serious about making fast, visible progress. Five dedicated 60-minute sessions with a curriculum built entirely around your goals — whether that's preparing for a trip, getting work-ready, or reaching the next level. You get priority booking (you always come first), unlimited messaging between sessions, and all learning materials included. This is the closest thing to having a personal language coach on call.",
+        "name": "5-lesson pack",
+        "meta": "{{lessons}} × {{minutes}} minutes · one-to-one",
+        "description": "Five full lessons with a plan and clear milestones — the best value for steady, visible progress.",
         "features": [
-          "5 full, dedicated lessons",
-          "A curriculum built entirely around you",
-          "Priority booking — you come first",
-          "Unlimited messaging between lessons",
-          "All learning materials included — no extras needed"
+          "A structured plan with clear milestones",
+          "Notes and new words after every lesson",
+          "Homework if you want it",
+          "All learning materials included"
         ]
       }
     },
-    "docTitle": "Book a Lesson | Alina Zelinska | Ukrainian & Russian Tutor, Translator & Poet",
-    "seo": {
-      "title": "Book Ukrainian Lessons | Alina Zelinska | Trial from €15",
-      "description": "Book personalized Ukrainian lessons with Alina Zelinska. Trial lesson €15, Standard €30, Intensive pack €120. Perfect 5.0 rating, 500+ students worldwide.",
-      "keywords": "book Ukrainian lessons, Ukrainian tutor booking, learn Ukrainian online, Ukrainian language course"
+    "payWith": "Secure payment with PayPal or card",
+    "next": "After payment I email you within 24 hours to pick a time that suits you.",
+    "steps": {
+      "eyebrow": "How it works",
+      "title": "Three simple *steps*",
+      "items": [
+        {
+          "title": "Choose and pay",
+          "text": "Pick a package above and pay with PayPal or a card. It takes a minute."
+        },
+        {
+          "title": "Pick a time",
+          "text": "Within 24 hours I email you to find a time that suits you, in your time zone, and send the Zoom or Google Meet link."
+        },
+        {
+          "title": "Meet me",
+          "text": "In the first lesson we talk about your goals, I check your level, and we plan the way forward together."
+        }
+      ]
     },
-    "hero": {
-      "eyebrow": "Book a lesson · Online, worldwide"
-    },
-    "step": "Step",
-    "connect": {
-      "eyebrow": "Before you book",
-      "title": "Let’s *connect* first.",
-      "text": "Please *message me first* before making a payment so we can schedule your lesson together and make sure the timing works perfectly for both of us!",
+    "questions": {
+      "eyebrow": "Optional",
+      "title": "Questions *first?*",
+      "text": "Not sure which package fits you? Message me on Instagram or by email and I'll help you choose. You don't need to — you can book straight away.",
       "instagram": "Message on Instagram",
-      "email": "Send Email"
+      "email": "Send an email"
     },
-    "choose": {
-      "eyebrow": "Step 02 · Choose your format",
-      "currency": "Currency",
-      "payWith": "Pay with PayPal or Card"
+    "faq": {
+      "eyebrow": "Before you book",
+      "title": "Good to *know*",
+      "all": "All questions"
     },
-    "popular": "Most Popular",
-    "notFound": "Package not found",
-    "expectEyebrow": "Step 03 · Your first lesson"
+    "success": "Payment received — thank you!",
+    "successMessage": "I'll email you within 24 hours to pick a time for your lesson. If you don't see my email, check your spam folder or message me on Instagram.",
+    "backToHome": "Back to home",
+    "error": "Payment error",
+    "notFound": "Package not found"
   }
 }

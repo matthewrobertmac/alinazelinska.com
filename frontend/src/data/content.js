@@ -1,78 +1,17 @@
 // Visible text lives in src/i18n/locales/<lang>/*.json. This file keeps only
-// non-text data: images, links, the floating-word list and review photos.
+// non-text data: images, links and the floating-word list.
 
 export const introdata = {
   image: "/media/alina-portrait.jpg",
 };
-
-export const testimonials = [
-  {
-    img: "/testimonials/doug_avatar.png",
-    text: "Alina is incredibly patient with newbies (such as myself) and provides a highly welcoming and calm approach to learning Russian. I learn new things every single lesson and I feel very confident in her teachings. She is a highly gifted instructor and I would recommend her to anyone wanting to learn the Russian language.",
-    name: "Doug",
-    lessons: "63 Russian Lessons",
-  },
-  {
-    img: "/testimonials/sean_avatar.png",
-    text: "I worked more on endings of words, which were quite difficult, but getting the hang of it, also working on adjectives in different cases!",
-    name: "Sean Davis",
-    lessons: "7 Ukrainian Lessons",
-  },
-  {
-    img: "/testimonials/john_avatar.png",
-    text: "I loved my lesson with Alina because as a beginner into a language that I know nothing about I feel like the challenge of learning Ukrainian is a lot more achievable now!",
-    name: "John Anthony Madrid",
-    lessons: "9 Ukrainian Lessons",
-  },
-  {
-    img: "/testimonials/poppy_avatar.png",
-    text: "I enjoyed my trial lesson with Alina today. I look forward to working with her in the future and learning more Ukrainian - Thank you!",
-    name: "poppy.pc.ccms",
-    lessons: "29 Ukrainian Lessons",
-  },
-  {
-    img: "/testimonials/ralph_avatar.png",
-    text: "Alina is very patient and encouraging, and quite flexible in adapting material to the lessons as we go along, and in sensing what would be good exercises for the next lesson. (We are focusing on the cases, several lessons for each case.)",
-    name: "Ralph",
-    lessons: "16 Ukrainian Lessons",
-  },
-  {
-    img: "/testimonials/saguaromedia_avatar.png",
-    text: "Alina is wonderful!!! I really enjoy our conversations. Learning a new and very different language from English is challenging but she makes it fun!",
-    name: "saguaromedia",
-    lessons: "9 Ukrainian Lessons",
-  },
-  {
-    img: "/testimonials/trey_avatar.png",
-    text: "This lesson was perfect for practicing speaking and I look forward to further lessons in the future. Alina is nice, patient, and willing to help with whatever questions you may have.",
-    name: "Trey Lines",
-    lessons: "54 Russian Lessons",
-  },
-  {
-    img: "/testimonials/ivan_avatar.png",
-    text: "It was a great and enjoyable conversation with her and I'm very motivated to improve my English speaking skill further.",
-    name: "Ivan Prince",
-    lessons: "21 English Lessons",
-  },
-  {
-    img: "/testimonials/josef_avatar.png",
-    text: "I've been taking weekly Ukrainian conversation practice lessons with Alina for several months now and have seen a real improvement in my conversation skills. She clearly takes an interest in her students and is excellent at guiding a conversation to help a student produce output and be creative with the language. Highly recommend!",
-    name: "Josef Chlachula",
-    lessons: "16 Ukrainian Lessons",
-  },
-  {
-    img: "/testimonials/gennadii_avatar.png",
-    text: "Best teacher ever! Every lesson is very useful and informative! Great trusting atmosphere, individual approach and excellent explanation of materials of any difficulty! Thank you! =)",
-    name: "Gennadii Selivanov",
-    lessons: "217 English Lessons",
-  },
-];
 
 export const contactInfo = {
   email: "zelinskayaalinaig@gmail.com",
   linkedin: "https://www.linkedin.com/in/alina-zelinska-60317a281/",
   instagram: "https://www.instagram.com/alin.a.zelinska/",
   tiktok: "https://www.tiktok.com/@movalina.study",
+  // Verified reviews and lesson history (the source of the 5.0 rating)
+  italki: "https://www.italki.com/en/teacher/13251889?lv=1",
 };
 
 // Words that drift through the home page hero — Ukrainian, a romanisation, and English

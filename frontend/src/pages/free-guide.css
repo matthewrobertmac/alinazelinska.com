@@ -1,0 +1,245 @@
+/* ─── Free guide ───────────────────────────────────────────── */
+
+.guide-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+
+.guide-meta {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* A paper cover for the PDF, tilted slightly like a printed sheet */
+.guide-cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 22rem;
+  aspect-ratio: 210 / 297;
+  margin: 0 auto;
+  padding: 2.25rem 2rem;
+  color: var(--color-text);
+  text-decoration: none;
+  background:
+    radial-gradient(60% 45% at 90% 8%, var(--glow-rose), transparent 70%),
+    radial-gradient(50% 40% at 0% 100%, var(--glow-gold), transparent 70%),
+    var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  box-shadow: 0 40px 80px -40px rgba(28, 20, 24, 0.45), var(--shadow-soft);
+  transform: rotate(2deg);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.guide-cover:hover {
+  transform: rotate(0deg) translateY(-6px);
+}
+
+.guide-cover__eyebrow {
+  padding-right: 3.5rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.guide-cover__title {
+  margin-top: auto;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 2.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.guide-cover__rule {
+  width: 3rem;
+  height: 1px;
+  margin: 1.25rem 0 0.9rem;
+  background: var(--color-gold);
+}
+
+.guide-cover__by {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.guide-cover__badge {
+  position: absolute;
+  top: 1.75rem;
+  right: 1.75rem;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border-radius: 999px;
+}
+
+@media (max-width: 1023px) {
+  .guide-cover {
+    max-width: 16rem;
+    padding: 1.75rem 1.5rem;
+  }
+}
+
+/* Preview */
+.guide-preview .section-head p:not(.eyebrow) {
+  margin-bottom: 0.9rem;
+}
+
+.guide-sheet {
+  max-width: 56rem;
+  padding: 2rem 1.5rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 800px) {
+  .guide-sheet {
+    padding: 2.75rem 3rem;
+  }
+}
+
+.guide-sheet h3 {
+  font-size: clamp(1.9rem, 4vw, 2.5rem);
+}
+
+.guide-sheet__intro {
+  margin-top: 0.5rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.guide-labels {
+  display: none;
+}
+
+.guide-rows {
+  list-style: none;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.guide-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2rem 1.25rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.guide-row__a {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.guide-row__b {
+  align-self: center;
+  line-height: 1.45;
+}
+
+.guide-row__tr {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+}
+
+.guide-row__note {
+  grid-column: 1 / -1;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}
+
+/* Wide screens: proper table columns */
+@media (min-width: 800px) {
+  .guide-labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1.75rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .guide-rows {
+    margin-top: 0.6rem;
+  }
+  .guide-rows--tr .guide-row,
+  .guide-sheet:has(.guide-rows--tr) .guide-labels {
+    grid-template-columns: 1.1fr 0.9fr 1fr;
+  }
+  .guide-rows--tr .guide-row__tr {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+  .guide-rows--tr .guide-row__b {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+
+/* The rest of the guide, as a table of contents */
+.guide-more {
+  max-width: 56rem;
+  margin-top: 4rem;
+}
+
+.guide-more__title {
+  margin-bottom: 1.25rem;
+  font-size: clamp(1.9rem, 4vw, 2.5rem);
+}
+
+.guide-more__list {
+  list-style: none;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.guide-more__list > li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.guide-more__list .num {
+  font-size: 1.35rem;
+}
+
+.guide-more__list h4 {
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+
+.guide-more__list p {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+.guide-more__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-top: 2.25rem;
+}
+
+.guide-page .stress {
+  color: var(--color-accent);
+}

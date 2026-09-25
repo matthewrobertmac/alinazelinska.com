@@ -79,6 +79,13 @@
   }
 }
 
+/* Two columns on phones: the third spans the row */
+@media (max-width: 639px) {
+  .site-footer__cols > div:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
 .site-footer__cols h4 {
   margin-bottom: 1.1rem;
   font-family: var(--font-body);
@@ -151,7 +158,29 @@
 
 .site-footer__socials {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 0.5rem;
+}
+
+.site-footer__a11y {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 2.5rem;
+  margin-right: 0.5rem;
+  padding: 0 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border-strong);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.site-footer__a11y:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 @media (min-width: 900px) {

@@ -1,0 +1,66 @@
+{
+  "widgets": {
+    "prices": {
+      "start": "Start here",
+      "perLesson": "{{price}} per lesson · save {{saving}}%",
+      "plans": {
+        "trial": {
+          "name": "Trial lesson",
+          "meta": "{{minutes}} minutes, one-to-one",
+          "cta": "Book a trial",
+          "points": [
+            "Meet me and talk through your goals",
+            "I check your level and suggest a plan",
+            "No commitment afterwards"
+          ]
+        },
+        "standard": {
+          "name": "Single lesson",
+          "meta": "{{minutes}} minutes, one-to-one",
+          "cta": "Book a lesson",
+          "points": [
+            "Built around your goals and interests",
+            "Notes and new words after every lesson",
+            "Book whenever it suits you"
+          ]
+        },
+        "intensive": {
+          "name": "5-lesson pack",
+          "meta": "{{lessons}} × {{minutes}} minutes",
+          "cta": "Get the pack",
+          "points": [
+            "A structured plan with clear milestones",
+            "Homework if you want it",
+            "Best value for steady progress"
+          ]
+        },
+        "speakingClub": {
+          "name": "Speaking club",
+          "meta": "{{minutes}} minutes, 3–4 students",
+          "cta": "Join the club",
+          "points": [
+            "Real conversation in a small group",
+            "A new topic every session",
+            "For A2 level and up"
+          ]
+        }
+      }
+    },
+    "reviewStrip": {
+      "rated": "Rated 5 out of 5",
+      "italki": "Verified reviews on italki",
+      "all": "Read all reviews"
+    },
+    "video": {
+      "play": "Play Alina's 2-minute video introduction",
+      "length": "2 min",
+      "caption": "A two-minute hello from me — how I teach and what our lessons feel like."
+    },
+    "guide": {
+      "eyebrow": "Free guide",
+      "title": "Your first 100 Ukrainian words",
+      "text": "A printable guide to the words and phrases you'll use every day — with pronunciation, from a native speaker.",
+      "cta": "Get the free guide"
+    }
+  }
+}

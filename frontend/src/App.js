@@ -1,13 +1,11 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import FloatingBookButton from './components/FloatingBookButton';
 import AccessibilityMenu from './components/AccessibilityMenu';
-import { LandingPage, shouldShowLanding } from './components/LandingPage';
 import { CurrencyProvider } from './context/CurrencyContext';
 import i18n from './i18n';
 import { LANGS, DEFAULT_LANG, splitLang, localizePath, isBot } from './i18n/routing';
@@ -32,16 +30,19 @@ const Home = page('Home', () => import('./pages/Home'));
 const About = page('About', () => import('./pages/About'));
 const Testimonials = page('Testimonials', () => import('./pages/Testimonials'));
 const Contact = page('Contact', () => import('./pages/Contact'));
+const EnglishLessons = page('EnglishLessons', () => import('./pages/services/EnglishLessons'));
+const UkrainianForRussianSpeakers = page('UkrainianForRussianSpeakers', () => import('./pages/services/UkrainianForRussianSpeakers'));
+const WritingTranslation = page('WritingTranslation', () => import('./pages/services/WritingTranslation'));
+const LearnHub = page('LearnHub', () => import('./pages/learn/LearnHub'));
+const Article = page('Article', () => import('./pages/learn/Article'));
+const FreeGuide = page('FreeGuide', () => import('./pages/FreeGuide'));
+const Links = page('Links', () => import('./pages/Links'));
 const TikTok = page('TikTok', () => import('./pages/TikTok'));
 const Booking = page('Booking', () => import('./pages/Booking'));
 const FAQ = page('FAQ', () => import('./pages/FAQ'));
-const SuccessStories = page('SuccessStories', () => import('./pages/SuccessStories'));
-const SpecialProjects = page('SpecialProjects', () => import('./pages/SpecialProjects'));
 const UkrainianLessons = page('UkrainianLessons', () => import('./pages/services/UkrainianLessons'));
 const RussianLessons = page('RussianLessons', () => import('./pages/services/RussianLessons'));
 const SpeakingClub = page('SpeakingClub', () => import('./pages/services/SpeakingClub'));
-const PoetryTranslation = page('PoetryTranslation', () => import('./pages/services/PoetryTranslation'));
-const CreativeWriting = page('CreativeWriting', () => import('./pages/services/CreativeWriting'));
 
 // Loading fallback component
 const PageLoader = () => {
@@ -57,17 +58,20 @@ const pages = {
   '/': Home,
   '/about': About,
   '/testimonials': Testimonials,
-  '/success-stories': SuccessStories,
-  '/special-projects': SpecialProjects,
   '/faq': FAQ,
   '/services/ukrainian-lessons': UkrainianLessons,
+  '/services/ukrainian-for-russian-speakers': UkrainianForRussianSpeakers,
+  '/services/english-lessons': EnglishLessons,
   '/services/russian-lessons': RussianLessons,
   '/services/speaking-club': SpeakingClub,
-  '/services/poetry-translation': PoetryTranslation,
-  '/services/creative-writing': CreativeWriting,
+  '/services/writing-translation': WritingTranslation,
+  '/learn': LearnHub,
+  '/learn/:slug': Article,
+  '/free-guide': FreeGuide,
   '/tiktok': TikTok,
   '/booking': Booking,
   '/contact': Contact,
+  '/links': Links,
 };
 
 // Keeps i18n in step with the URL, which is the source of truth for language.
@@ -108,18 +112,21 @@ const LanguageSync = () => {
 };
 
 export const preloadCurrentPage = () => {
-  const Page = pages[splitLang(window.location.pathname).path];
+  const { path } = splitLang(window.location.pathname);
+  const Page = pages[path] || (path.startsWith('/learn/') ? pages['/learn/:slug'] : null);
   return Page ? Page.preload().catch(() => {}) : Promise.resolve();
 };
 
 const prefixes = LANGS.map((lang) => localizePath('', lang));
 
 function AppRouter({ theme, toggleTheme }) {
+  // The link-in-bio page is a standalone card: no site header, footer or floating CTA
+  const bare = splitLang(useLocation().pathname).path === '/links';
   return (
     <>
       <LanguageSync />
-      <Header theme={theme} toggleTheme={toggleTheme} />
-      <FloatingBookButton />
+      {!bare && <Header theme={theme} toggleTheme={toggleTheme} />}
+      {!bare && <FloatingBookButton />}
       <AccessibilityMenu />
       <Suspense fallback={<PageLoader />}>
         <Routes>
@@ -135,24 +142,19 @@ function AppRouter({ theme, toggleTheme }) {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
-      <Footer />
+      {!bare && <Footer />}
     </>
   );
 }
 
 function App() {
   const [theme, setTheme] = useState('light');
-  const [showLanding, setShowLanding] = useState(false);
 
   useEffect(() => {
     // Check for saved theme preference or default to 'light'
     const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
     document.documentElement.setAttribute('data-theme', savedTheme);
-    
-    // The splash greets first-time visitors on the home page only — never deep links or crawlers
-    const onHome = splitLang(window.location.pathname).path === '/';
-    setShowLanding(onHome && !isBot() && shouldShowLanding());
   }, []);
 
   const toggleTheme = () => {
@@ -162,24 +164,14 @@ function App() {
     localStorage.setItem('theme', newTheme);
   };
 
-  const handleEnterSite = () => {
-    setShowLanding(false);
-  };
-
   return (
     <HelmetProvider>
         <CurrencyProvider>
-          <AnimatePresence mode="wait">
-            {showLanding ? (
-              <LandingPage key="landing" onEnter={handleEnterSite} />
-            ) : (
-              <Router key="main">
-                <div className="App min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-all duration-300">
-                  <AppRouter theme={theme} toggleTheme={toggleTheme} />
-                </div>
-              </Router>
-            )}
-          </AnimatePresence>
+          <Router>
+            <div className="App min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-all duration-300">
+              <AppRouter theme={theme} toggleTheme={toggleTheme} />
+            </div>
+          </Router>
         </CurrencyProvider>
     </HelmetProvider>
   );

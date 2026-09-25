@@ -1,0 +1,307 @@
+/* ─── Shared conversion blocks: prices, reviews, video, guide ─── */
+
+/* Price table */
+.price-table {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 860px) {
+  .price-table--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .price-table--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.price-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.price-card.is-highlight {
+  border-color: var(--color-accent);
+  box-shadow: 0 30px 60px -34px var(--glow-rose);
+}
+
+.price-card__badge {
+  position: absolute;
+  top: -0.8rem;
+  left: 1.75rem;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border-radius: 999px;
+}
+
+.price-card h3 {
+  font-size: 1.7rem;
+}
+
+.price-card__meta {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.price-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 1.25rem 0 0.25rem;
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.price-card__price small {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  letter-spacing: 0;
+}
+
+.price-card__saving {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.price-card ul {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+  margin: 1.25rem 0 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.93rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.price-card li {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.price-card li svg {
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  color: var(--color-accent);
+}
+
+.price-card .btn-primary,
+.price-card .btn-outline {
+  margin-top: auto;
+  white-space: normal;
+  text-align: center;
+}
+
+/* Review strip */
+.review-strip__grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 860px) {
+  .review-strip__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.review-card__stars {
+  display: flex;
+  gap: 0.2rem;
+  color: var(--color-gold);
+}
+
+.review-card__stars svg {
+  fill: currentColor;
+}
+
+.review-card blockquote {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.45;
+}
+
+.review-card figcaption {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.review-card figcaption strong {
+  display: block;
+  font-weight: 600;
+}
+
+.review-card figcaption small {
+  color: var(--color-muted);
+}
+
+.review-card__avatar {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border-radius: 50%;
+}
+
+.review-strip__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  margin-top: 1.75rem;
+  font-weight: 600;
+}
+
+/* Intro video */
+.video-intro {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.video-intro__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: #110c0f;
+  box-shadow: var(--shadow-soft);
+}
+
+.video-intro__frame video,
+.video-intro__poster,
+.video-intro__poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-intro__poster {
+  position: relative;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: none;
+}
+
+.video-intro__play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  font-size: 1.6rem;
+  color: #1c0e14;
+  background: rgba(255, 248, 245, 0.94);
+  border-radius: 50%;
+  box-shadow: 0 0 0 12px rgba(255, 248, 245, 0.2);
+  transition: transform 0.5s var(--ease-out), background 0.3s ease;
+}
+
+.video-intro__play svg {
+  margin-left: 0.2rem;
+}
+
+.video-intro__poster:hover .video-intro__play,
+.video-intro__poster:focus-visible .video-intro__play {
+  background: #f08ba6;
+  transform: scale(1.06);
+}
+
+.video-intro__len {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff8f5;
+  background: rgba(17, 12, 15, 0.6);
+  border-radius: 999px;
+}
+
+.video-intro figcaption {
+  margin-top: 0.9rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* Free guide banner */
+.guide-cta {
+  display: grid;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 2rem;
+  background: var(--color-accent-soft);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+  border-radius: var(--radius-card);
+}
+
+@media (min-width: 860px) {
+  .guide-cta {
+    grid-template-columns: auto 1fr auto;
+    gap: 2rem;
+    padding: 2.25rem 2.5rem;
+  }
+}
+
+.guide-cta__icon {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 1.3rem;
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border-radius: 50%;
+}
+
+.guide-cta h3 {
+  margin: 0.5rem 0 0.35rem;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+}
+
+.guide-cta p:not(.eyebrow) {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.guide-cta .btn-primary {
+  white-space: normal;
+  text-align: center;
+}
