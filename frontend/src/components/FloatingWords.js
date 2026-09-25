@@ -450,7 +450,7 @@ const Lexicon = ({ avoidRefs }) => {
               style={{
                 '--size': `${size}px`,
                 '--blur': `${blur.toFixed(2)}px`,
-                '--rest': (0.42 + word.z * 0.48).toFixed(2),
+                '--rest': (0.32 + word.z * 0.4).toFixed(2),
                 zIndex: isCaught ? 40 : Math.round(word.z * 20),
               }}
               onPointerEnter={(e) => e.pointerType !== 'touch' && setHover(word.id, true)}
